@@ -64,6 +64,16 @@ const I18N = {
     recAvoid: "AVOID — overvalued or deteriorating fundamentals",
     recDisclaimer: "Educational output based on sample data. Not investment advice.",
 
+    // Sector specialization
+    sectorFilter: "Sector",
+    allSectors: "All sectors",
+    sectorEnvironment: "Sector Environment",
+    sectorKpis: "Sector KPIs",
+    guide: "What to Look At",
+    tailwind: "Tailwind",
+    neutral: "Neutral",
+    headwind: "Headwind",
+
     langButton: "日本語",
   },
   ja: {
@@ -119,6 +129,16 @@ const I18N = {
     recHold: "中立 — 適正評価またはシグナルが混在",
     recAvoid: "回避 — 割高またはファンダメンタル悪化",
     recDisclaimer: "サンプルデータに基づく学習用の出力です。投資助言ではありません。",
+
+    // Sector specialization
+    sectorFilter: "セクター",
+    allSectors: "全セクター",
+    sectorEnvironment: "セクター市場環境",
+    sectorKpis: "セクター特化指標",
+    guide: "見るべきポイント解説",
+    tailwind: "追い風",
+    neutral: "中立",
+    headwind: "逆風",
 
     langButton: "English",
   },

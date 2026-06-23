@@ -13,6 +13,7 @@
       <p id="appSubtitle">Long-term · Fundamental · Contrarian</p>
     </div>
     <div class="controls">
+      <select id="sectorSelect" aria-label="sector"></select>
       <select id="stockSelect" aria-label="stock"></select>
       <button class="lang-btn" id="langBtn">English</button>
     </div>
@@ -23,9 +24,14 @@
   <main class="grid">
     <section class="card" id="overview"></section>
     <section class="card" id="contrarian"></section>
+    <!-- セクター特化パネル (defense 等のセクターでのみ表示) -->
+    <section class="card full" id="sectorEnvironment" hidden></section>
+    <section class="card full" id="sectorKpis" hidden></section>
     <section class="card full" id="metrics"></section>
     <section class="card" id="valuation"></section>
     <section class="card" id="factors"></section>
+    <!-- 見るべきポイント解説 -->
+    <section class="card full" id="guide"></section>
     <section class="card full" id="recommendation">
       <h2>✅ <span id="recTitle">Recommendation</span></h2>
       <span class="pill amber" id="recPill"></span>
@@ -35,9 +41,10 @@
 
   <footer>US Stock Analyzer · Demo build</footer>
 
-  <!-- 読み込み順: データ → 翻訳 → ロジック -->
+  <!-- 読み込み順: データ → 翻訳 → セクター設定 → ロジック -->
   <script src="data.js"></script>
   <script src="i18n.js"></script>
+  <script src="sectors.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

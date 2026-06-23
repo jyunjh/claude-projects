@@ -7,7 +7,14 @@
  */
 
 let currentLang = localStorage.getItem("lang") || "ja";
-let currentTicker = "PFE"; // 逆張り例から開始 (start on a contrarian example)
+let currentSector = "defense"; // 防衛セクター特化から開始 (start specialized on defense)
+let currentTicker = "LMT";
+
+// セクターでフィルタした銘柄リスト ("all" は全件)
+function stocksInSector(sectorKey) {
+  const all = Object.values(SAMPLE_STOCKS);
+  return sectorKey === "all" ? all : all.filter((s) => s.sectorKey === sectorKey);
+}
 
 const t = (key) => I18N[currentLang][key] || key;
 const localized = (obj) => (obj ? obj[currentLang] : "");
@@ -96,19 +103,54 @@ function render() {
   document.getElementById("recDisclaimer").textContent = t("recDisclaimer");
   document.getElementById("recTitle").textContent = t("recommendation");
 
+  renderSectorSelector();
   renderSelector();
   renderOverview(stock);
   renderMetrics(stock);
   renderValuation(stock);
   renderContrarian(stock);
   renderFactors(stock);
+  renderSectorPanels(stock);
+  renderGuide(stock);
   renderRecommendation(stock);
+}
+
+// 利用可能なセクター一覧 (データから動的に生成)
+function availableSectors() {
+  const keys = [...new Set(Object.values(SAMPLE_STOCKS).map((s) => s.sectorKey))];
+  return keys;
+}
+
+function renderSectorSelector() {
+  const sel = document.getElementById("sectorSelect");
+  sel.innerHTML = "";
+  // 全セクター
+  const allOpt = document.createElement("option");
+  allOpt.value = "all";
+  allOpt.textContent = t("allSectors");
+  if (currentSector === "all") allOpt.selected = true;
+  sel.appendChild(allOpt);
+  // 個別セクター
+  availableSectors().forEach((key) => {
+    const opt = document.createElement("option");
+    opt.value = key;
+    // 特化セクター名は SECTORS から、無ければ代表銘柄の sector ラベルを使う
+    const label = SECTORS[key] ? localized(SECTORS[key].name) : sectorLabelFromData(key);
+    opt.textContent = SECTORS[key] ? `★ ${label}` : label;
+    if (key === currentSector) opt.selected = true;
+    sel.appendChild(opt);
+  });
+}
+
+function sectorLabelFromData(key) {
+  const s = stocksInSector(key)[0];
+  return s ? localized(s.sector) : key;
 }
 
 function renderSelector() {
   const sel = document.getElementById("stockSelect");
   sel.innerHTML = "";
-  Object.values(SAMPLE_STOCKS).forEach((s) => {
+  stocksInSector(currentSector).forEach((s) => {
     const opt = document.createElement("option");
     opt.value = s.ticker;
     opt.textContent = `${s.ticker} — ${localized(s.name)}`;
@@ -215,6 +257,71 @@ function renderFactors(stock) {
     </table>`;
 }
 
+/* セクター特化パネル: 市場環境 + 特化KPI (defense 等のみ表示) */
+function renderSectorPanels(stock) {
+  const cfg = SECTORS[stock.sectorKey];
+  const envEl = document.getElementById("sectorEnvironment");
+  const kpiEl = document.getElementById("sectorKpis");
+
+  // 特化設定が無いセクターはパネルを隠す
+  if (!cfg) {
+    envEl.hidden = true;
+    kpiEl.hidden = true;
+    return;
+  }
+  envEl.hidden = false;
+  kpiEl.hidden = false;
+
+  const statusClass = { tailwind: "green", neutral: "amber", headwind: "red" };
+  envEl.innerHTML = `
+    <h2>🌐 ${localized(cfg.name)} · ${t("sectorEnvironment")}</h2>
+    <table>
+      <tbody>
+        ${cfg.environment.map((e) => `
+          <tr>
+            <td style="width:30%"><strong>${localized(e.label)}</strong></td>
+            <td style="width:14%"><span class="pill ${statusClass[e.status]}" style="font-size:0.78rem">${t(e.status)}</span></td>
+            <td><div>${localized(e.reading)}</div><div style="color:var(--text-dim);font-size:0.82rem">${localized(e.why)}</div></td>
+          </tr>`).join("")}
+      </tbody>
+    </table>`;
+
+  // 特化KPI
+  const d = stock.defense || {};
+  kpiEl.innerHTML = `
+    <h2>🛡️ ${localized(cfg.name)} · ${t("sectorKpis")}</h2>
+    <div class="metrics">
+      ${cfg.kpis.map((k) => {
+        const v = d[k.key];
+        let display, cls = "";
+        if (k.unit === "tag") {
+          const lvl = v || "medium";
+          return `<div class="metric"><div class="label">${localized(k.label)}</div>
+            <div class="value"><span class="tag ${lvl}">${t(lvl)}</span></div></div>`;
+        } else if (k.unit === "x") { display = `${fmt(v, 2)}x`; }
+        else if (k.unit === "y") { display = `${fmt(v, 1)}`; }
+        else { display = `${fmt(v, 0)}%`; }
+        if (k.good && k.good(v)) cls = "good";
+        else if (k.bad && k.bad(v)) cls = "bad";
+        return `<div class="metric"><div class="label">${localized(k.label)}</div>
+          <div class="value ${cls}">${display}</div></div>`;
+      }).join("")}
+    </div>`;
+}
+
+/* 見るべきポイント解説: 共通 + セクター特化 (折りたたみ) */
+function renderGuide(stock) {
+  const cfg = SECTORS[stock.sectorKey];
+  const items = [...(cfg ? cfg.guide : []), ...COMMON_GUIDE];
+  document.getElementById("guide").innerHTML = `
+    <h2>📖 ${t("guide")}</h2>
+    ${items.map((g) => `
+      <details class="guide-item">
+        <summary>${localized(g.term)}</summary>
+        <p>${localized(g.desc)}</p>
+      </details>`).join("")}`;
+}
+
 function renderRecommendation(stock) {
   const rec = recommendation(stock);
   document.getElementById("recPill").className = `pill ${rec.pill}`;
@@ -223,6 +330,15 @@ function renderRecommendation(stock) {
 
 /* ---------- イベント (events) ---------- */
 function init() {
+  document.getElementById("sectorSelect").addEventListener("change", (e) => {
+    currentSector = e.target.value;
+    // 選択中の銘柄が新セクターに無ければ、そのセクターの先頭銘柄に切り替える
+    const list = stocksInSector(currentSector);
+    if (!list.some((s) => s.ticker === currentTicker)) {
+      currentTicker = list[0].ticker;
+    }
+    render();
+  });
   document.getElementById("stockSelect").addEventListener("change", (e) => {
     currentTicker = e.target.value;
     render();

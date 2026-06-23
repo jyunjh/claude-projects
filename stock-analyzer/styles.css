@@ -120,6 +120,33 @@ th { color: var(--text-dim); font-weight: 600; font-size: 0.8rem; text-transform
 .tag.medium { background: rgba(251,191,36,0.15); color: var(--amber); }
 .tag.low { background: rgba(148,163,184,0.15); color: var(--text-dim); }
 
+/* ---- Guide accordion ---- */
+.guide-item {
+  background: var(--bg-card-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+}
+.guide-item summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text);
+  list-style: none;
+  position: relative;
+  padding-right: 22px;
+}
+.guide-item summary::-webkit-details-marker { display: none; }
+.guide-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 4px;
+  color: var(--accent);
+  font-weight: 700;
+}
+.guide-item[open] summary::after { content: "−"; }
+.guide-item p { margin-top: 8px; color: var(--text-dim); font-size: 0.88rem; }
+
 footer { margin-top: 24px; color: var(--text-dim); font-size: 0.8rem; text-align: center; }
 
 @media (max-width: 720px) {
