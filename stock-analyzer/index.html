@@ -15,6 +15,7 @@
     <div class="controls">
       <select id="sectorSelect" aria-label="sector"></select>
       <select id="stockSelect" aria-label="stock"></select>
+      <button class="lang-btn" id="viewBtn">横比較 ⇄</button>
       <button class="lang-btn" id="langBtn">English</button>
     </div>
   </header>
@@ -22,6 +23,8 @@
   <div class="demo-notice" id="demoNotice"></div>
 
   <main class="grid">
+    <!-- 横比較ビュー (compare モードでのみ表示) -->
+    <section class="card full" id="compareView" style="display:none"></section>
     <section class="card" id="overview"></section>
     <section class="card" id="contrarian"></section>
     <!-- セクター特化パネル (defense 等のセクターでのみ表示) -->

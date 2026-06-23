@@ -74,6 +74,15 @@ const I18N = {
     neutral: "Neutral",
     headwind: "Headwind",
 
+    // Comparison view
+    viewDetail: "Detail",
+    viewCompare: "Compare ⇄",
+    compareTitle: "Side-by-Side Comparison",
+    compareMetric: "Metric",
+    compareBestHint: "★ = best value in the group for that metric (green).",
+    upsideShort: "Upside",
+    recShort: "Verdict",
+
     langButton: "日本語",
   },
   ja: {
@@ -139,6 +148,15 @@ const I18N = {
     tailwind: "追い風",
     neutral: "中立",
     headwind: "逆風",
+
+    // Comparison view
+    viewDetail: "個別分析",
+    viewCompare: "横比較 ⇄",
+    compareTitle: "グループ内 横比較",
+    compareMetric: "指標",
+    compareBestHint: "★ = その指標でグループ内ベストの値 (緑)。",
+    upsideShort: "上昇余地",
+    recShort: "判定",
 
     langButton: "English",
   },

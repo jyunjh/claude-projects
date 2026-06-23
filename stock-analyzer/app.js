@@ -9,6 +9,13 @@
 let currentLang = localStorage.getItem("lang") || "ja";
 let currentSector = "defense"; // 防衛セクター特化から開始 (start specialized on defense)
 let currentTicker = "LMT";
+let currentView = "detail"; // "detail" | "compare"
+
+// 個別分析ビューを構成するセクション (compare モードでは隠す)
+const DETAIL_SECTIONS = [
+  "overview", "contrarian", "sectorEnvironment", "sectorKpis",
+  "metrics", "valuation", "factors", "guide", "recommendation",
+];
 
 // セクターでフィルタした銘柄リスト ("all" は全件)
 function stocksInSector(sectorKey) {
@@ -102,6 +109,7 @@ function render() {
   document.getElementById("langBtn").textContent = t("langButton");
   document.getElementById("recDisclaimer").textContent = t("recDisclaimer");
   document.getElementById("recTitle").textContent = t("recommendation");
+  document.getElementById("viewBtn").textContent = currentView === "detail" ? t("viewCompare") : t("viewDetail");
 
   renderSectorSelector();
   renderSelector();
@@ -113,6 +121,18 @@ function render() {
   renderSectorPanels(stock);
   renderGuide(stock);
   renderRecommendation(stock);
+  renderCompare();
+  applyView();
+}
+
+// ビュー切り替え: 個別分析セクション群 ⇄ 横比較ビューの表示制御
+function applyView() {
+  const compare = currentView === "compare";
+  DETAIL_SECTIONS.forEach((id) => {
+    // detail モードでは inline display を消し、セクターパネルの hidden 属性を尊重する
+    document.getElementById(id).style.display = compare ? "none" : "";
+  });
+  document.getElementById("compareView").style.display = compare ? "" : "none";
 }
 
 // 利用可能なセクター一覧 (データから動的に生成)
@@ -322,6 +342,90 @@ function renderGuide(stock) {
       </details>`).join("")}`;
 }
 
+/* グループ内 横比較ビュー */
+function renderCompare() {
+  const stocks = stocksInSector(currentSector);
+  const cfg = SECTORS[currentSector]; // 防衛など特化セクターのみ
+
+  // 比較する行 (dir: "up"=高いほど良い, "down"=低いほど良い, "info"=優劣なし)
+  const rows = [
+    { label: t("price"), dir: "info", val: (s) => ({ n: s.price, d: usd(s.price) }) },
+    { label: t("fairValue"), dir: "info", val: (s) => ({ n: s.fairValue, d: usd(s.fairValue) }) },
+    { label: t("upsideShort"), dir: "up", val: (s) => { const u = upsidePct(s); return { n: u, d: pct(u) }; } },
+    { label: t("pe"), dir: "down", val: (s) => peVal(s.metrics.pe) },
+    { label: t("forwardPe"), dir: "down", val: (s) => peVal(s.metrics.forwardPe) },
+    { label: t("evEbitda"), dir: "down", val: (s) => ({ n: s.metrics.evEbitda, d: fmt(s.metrics.evEbitda) }) },
+    { label: t("divYield"), dir: "up", val: (s) => ({ n: s.metrics.divYield, d: `${fmt(s.metrics.divYield, 2)}%` }) },
+    { label: t("roe"), dir: "up", val: (s) => ({ n: s.metrics.roe, d: `${fmt(s.metrics.roe, 1)}%` }) },
+    { label: t("revenueGrowth"), dir: "up", val: (s) => ({ n: s.metrics.revenueGrowth, d: `${fmt(s.metrics.revenueGrowth, 1)}%` }) },
+    { label: t("fcfYield"), dir: "up", val: (s) => ({ n: s.metrics.fcfYield, d: `${fmt(s.metrics.fcfYield, 1)}%` }) },
+    { label: t("debtToEquity"), dir: "down", val: (s) => ({ n: s.metrics.debtToEquity, d: fmt(s.metrics.debtToEquity, 2) }) },
+    { label: t("fundamentalScore"), dir: "up", val: (s) => { const f = fundamentalScore(s); return { n: f, d: `${f}/100` }; } },
+    { label: t("marketSentiment"), dir: "info", val: (s) => ({ n: s.sentiment.sentimentScore, d: `${s.sentiment.sentimentScore}/100` }) },
+    { label: t("gap"), dir: "up", val: (s) => { const g = Math.round(contrarianVerdict(s).gap); return { n: g, d: `${g > 0 ? "+" : ""}${g}` }; } },
+  ];
+
+  // 防衛セクター特化のKPI行を追加
+  if (cfg) {
+    rows.push(
+      { label: localize2(cfg, "bookToBill", "Book-to-Bill", "受注/売上比率"), dir: "up", val: (s) => ({ n: s.defense.bookToBill, d: `${fmt(s.defense.bookToBill, 2)}x` }) },
+      { label: currentLang === "ja" ? "受注残高(年)" : "Backlog (yrs)", dir: "up", val: (s) => ({ n: s.defense.backlogYears, d: fmt(s.defense.backlogYears, 1) }) },
+      { label: currentLang === "ja" ? "海外売上比率" : "International %", dir: "up", val: (s) => ({ n: s.defense.internationalPct, d: `${s.defense.internationalPct}%` }) },
+    );
+  }
+
+  // 各行で最良値のインデックスを求める
+  rows.forEach((row) => {
+    if (row.dir === "info") { row.best = []; return; }
+    const vals = stocks.map((s) => row.val(s).n);
+    const target = row.dir === "up" ? Math.max(...vals) : Math.min(...vals);
+    row.best = vals.map((v, i) => (v === target && isFinite(v) ? i : -1)).filter((i) => i >= 0);
+  });
+
+  const header = `<th>${t("compareMetric")}</th>` +
+    stocks.map((s) => `<th>${s.ticker}<div style="font-weight:400;color:var(--text-dim);font-size:0.75rem">${localized(s.name)}</div></th>`).join("");
+
+  const body = rows.map((row) => {
+    const cells = stocks.map((s, i) => {
+      const cell = row.val(s);
+      const isBest = row.best.includes(i);
+      return `<td class="${isBest ? "best" : ""}">${isBest ? "★ " : ""}${cell.d}</td>`;
+    }).join("");
+    return `<tr><td class="metric-name">${row.label}</td>${cells}</tr>`;
+  }).join("");
+
+  // 判定行 (コントラリアン / 投資判断) — ピルで表示、優劣ハイライトなし
+  const verdictRow = (label, fn) =>
+    `<tr><td class="metric-name">${label}</td>${stocks.map((s) => `<td>${fn(s)}</td>`).join("")}</tr>`;
+  const contrarianCell = (s) => { const v = contrarianVerdict(s); return `<span class="pill ${v.type}" style="font-size:0.72rem">${t(v.key).split(":")[0]}</span>`; };
+  const recCell = (s) => { const r = recommendation(s); return `<span class="pill ${r.pill}" style="font-size:0.72rem">${t(r.key).split(/[—-]/)[0].trim()}</span>`; };
+
+  document.getElementById("compareView").innerHTML = `
+    <h2>📋 ${t("compareTitle")}${cfg ? " · " + localized(cfg.name) : ""}</h2>
+    <p style="color:var(--text-dim);font-size:0.82rem;margin-bottom:12px">${t("compareBestHint")}</p>
+    <div style="overflow-x:auto">
+      <table class="compare">
+        <thead><tr>${header}</tr></thead>
+        <tbody>
+          ${body}
+          ${verdictRow(t("contrarian"), contrarianCell)}
+          ${verdictRow(t("recShort"), recCell)}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+// PER の特殊処理: 0 や負値は N/A 扱い (ランキングから除外)
+function peVal(pe) {
+  return pe > 0 ? { n: pe, d: fmt(pe) } : { n: Infinity, d: "—" };
+}
+
+// セクターKPIラベルの簡易ローカライズ補助
+function localize2(cfg, key, en, ja) {
+  const k = cfg.kpis.find((x) => x.key === key);
+  return k ? localized(k.label) : currentLang === "ja" ? ja : en;
+}
+
 function renderRecommendation(stock) {
   const rec = recommendation(stock);
   document.getElementById("recPill").className = `pill ${rec.pill}`;
@@ -341,6 +445,10 @@ function init() {
   });
   document.getElementById("stockSelect").addEventListener("change", (e) => {
     currentTicker = e.target.value;
+    render();
+  });
+  document.getElementById("viewBtn").addEventListener("click", () => {
+    currentView = currentView === "detail" ? "compare" : "detail";
     render();
   });
   document.getElementById("langBtn").addEventListener("click", () => {

@@ -120,6 +120,24 @@ th { color: var(--text-dim); font-weight: 600; font-size: 0.8rem; text-transform
 .tag.medium { background: rgba(251,191,36,0.15); color: var(--amber); }
 .tag.low { background: rgba(148,163,184,0.15); color: var(--text-dim); }
 
+/* ---- Comparison table ---- */
+table.compare { min-width: 520px; }
+table.compare th, table.compare td { text-align: center; white-space: nowrap; }
+table.compare th:first-child,
+table.compare td.metric-name {
+  text-align: left;
+  position: sticky;
+  left: 0;
+  background: var(--bg-card);
+  color: var(--text-dim);
+  font-weight: 600;
+}
+table.compare td.best {
+  color: var(--green);
+  font-weight: 700;
+  background: rgba(52, 211, 153, 0.1);
+}
+
 /* ---- Guide accordion ---- */
 .guide-item {
   background: var(--bg-card-2);
