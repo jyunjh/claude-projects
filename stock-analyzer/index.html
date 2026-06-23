@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>US Stock Analyzer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1 id="appTitle">US Stock Analyzer</h1>
+      <p id="appSubtitle">Long-term · Fundamental · Contrarian</p>
+    </div>
+    <div class="controls">
+      <select id="stockSelect" aria-label="stock"></select>
+      <button class="lang-btn" id="langBtn">English</button>
+    </div>
+  </header>
+
+  <div class="demo-notice" id="demoNotice"></div>
+
+  <main class="grid">
+    <section class="card" id="overview"></section>
+    <section class="card" id="contrarian"></section>
+    <section class="card full" id="metrics"></section>
+    <section class="card" id="valuation"></section>
+    <section class="card" id="factors"></section>
+    <section class="card full" id="recommendation">
+      <h2>✅ <span id="recTitle">Recommendation</span></h2>
+      <span class="pill amber" id="recPill"></span>
+      <p class="verdict-text" id="recDisclaimer"></p>
+    </section>
+  </main>
+
+  <footer>US Stock Analyzer · Demo build</footer>
+
+  <!-- 読み込み順: データ → 翻訳 → ロジック -->
+  <script src="data.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
