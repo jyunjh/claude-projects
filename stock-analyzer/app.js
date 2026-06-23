@@ -98,7 +98,7 @@ function render() {
   document.documentElement.lang = currentLang;
   document.getElementById("appTitle").textContent = t("appTitle");
   document.getElementById("appSubtitle").textContent = t("appSubtitle");
-  document.getElementById("demoNotice").textContent = t("demoNotice");
+  document.getElementById("demoNotice").textContent = t("demoNotice").replace("{date}", DATA_AS_OF);
   document.getElementById("langBtn").textContent = t("langButton");
   document.getElementById("recDisclaimer").textContent = t("recDisclaimer");
   document.getElementById("recTitle").textContent = t("recommendation");

@@ -6,7 +6,12 @@
  *
  * 後で無料API (Financial Modeling Prep / Alpha Vantage 等) に差し替えできるよう、
  * データ構造を実際のAPIに近い形にしています。
+ *
+ * 防衛セクターの数値は 2026年6月時点の公開情報を基にしたスナップショットです
+ * (株価・PER・受注残など)。あくまで学習用の参考値です。
  */
+
+const DATA_AS_OF = "2026-06"; // 防衛セクターデータの基準時点
 
 const SAMPLE_STOCKS = {
   AAPL: {
@@ -136,16 +141,17 @@ const SAMPLE_STOCKS = {
     sectorKey: "defense",
     name: { en: "Lockheed Martin", ja: "ロッキード・マーティン" },
     sector: { en: "Defense", ja: "防衛" },
-    price: 468.0,
-    fairValue: 505.0,
-    marketCap: 110,
+    price: 493.6, // 2026-06-22
+    fairValue: 570.0, // アナリスト目標 ~$625 を割り引いた保守的推定
+    marketCap: 115,
     metrics: {
-      pe: 17.2, forwardPe: 16.1, evEbitda: 12.4, pb: 18.5, psales: 1.6,
-      divYield: 2.7, roe: 78.0, revenueGrowth: 5.1,
-      grossMargin: 12.4, netMargin: 9.4, debtToEquity: 2.1, fcfYield: 5.2,
+      pe: 23.9, forwardPe: 21.8, evEbitda: 15.1, pb: 18.5, psales: 1.6,
+      divYield: 2.8, roe: 78.0, revenueGrowth: 3.0,
+      grossMargin: 12.4, netMargin: 9.4, debtToEquity: 2.5, fcfYield: 5.0,
     },
-    defense: { bookToBill: 1.05, backlogYears: 2.3, govRevenuePct: 73, internationalPct: 27, programConcentration: "high" },
-    sentiment: { analystRating: "Hold", sentimentScore: 58, shortInterest: 1.0 },
+    defense: { bookToBill: 1.00, backlogYears: 2.4, govRevenuePct: 73, internationalPct: 27, programConcentration: "high" },
+    // 52週高値$692→$493と約29%下落 (弱気センチメント)
+    sentiment: { analystRating: "Hold", sentimentScore: 45, shortInterest: 1.1 },
     criticalFactors: [
       { factor: { en: "F-35 program (orders & sustainment)", ja: "F-35プログラム (受注・維持整備)" }, impact: "high", probability: 75 },
       { factor: { en: "Missiles & hypersonics demand", ja: "ミサイル・極超音速の需要" }, impact: "high", probability: 70 },
@@ -157,16 +163,18 @@ const SAMPLE_STOCKS = {
     sectorKey: "defense",
     name: { en: "RTX Corp. (Raytheon)", ja: "RTX (レイセオン)" },
     sector: { en: "Defense", ja: "防衛" },
-    price: 121.0,
-    fairValue: 128.0,
-    marketCap: 161,
+    price: 187.0, // 2026-06-17
+    fairValue: 195.0, // 高PERで上値は限定的との見方
+    marketCap: 249,
     metrics: {
-      pe: 22.4, forwardPe: 19.8, evEbitda: 14.1, pb: 2.3, psales: 2.0,
-      divYield: 2.1, roe: 7.5, revenueGrowth: 8.2,
-      grossMargin: 19.5, netMargin: 8.0, debtToEquity: 0.72, fcfYield: 4.0,
+      pe: 34.6, forwardPe: 26.6, evEbitda: 18.5, pb: 3.0, psales: 3.0,
+      divYield: 1.9, roe: 10.0, revenueGrowth: 8.2,
+      grossMargin: 19.5, netMargin: 8.5, debtToEquity: 0.72, fcfYield: 3.5,
     },
-    defense: { bookToBill: 1.22, backlogYears: 3.6, govRevenuePct: 45, internationalPct: 43, programConcentration: "medium" },
-    sentiment: { analystRating: "Buy", sentimentScore: 66, shortInterest: 0.9 },
+    // 受注残高$271B (商業$162B/防衛$109B, 前年比+18.5%), Q1'26 book-to-bill 1.14
+    defense: { bookToBill: 1.14, backlogYears: 3.3, govRevenuePct: 45, internationalPct: 43, programConcentration: "medium" },
+    // 昨年+50%上昇、PER34.6と過熱気味 (強いセンチメント)
+    sentiment: { analystRating: "Buy", sentimentScore: 75, shortInterest: 0.9 },
     criticalFactors: [
       { factor: { en: "Air-defense (Patriot/NASAMS) demand", ja: "防空システム (Patriot/NASAMS) 需要" }, impact: "high", probability: 78 },
       { factor: { en: "Commercial aero recovery (Pratt)", ja: "民間航空エンジンの回復 (Pratt)" }, impact: "medium", probability: 65 },
@@ -178,16 +186,18 @@ const SAMPLE_STOCKS = {
     sectorKey: "defense",
     name: { en: "Northrop Grumman", ja: "ノースロップ・グラマン" },
     sector: { en: "Defense", ja: "防衛" },
-    price: 478.0,
-    fairValue: 510.0,
-    marketCap: 70,
+    price: 507.5, // 2026-06-23
+    fairValue: 600.0, // 記録的受注残・低PERで25%程度の割安との指摘
+    marketCap: 74,
     metrics: {
-      pe: 18.6, forwardPe: 17.0, evEbitda: 12.9, pb: 5.1, psales: 1.7,
-      divYield: 1.6, roe: 28.0, revenueGrowth: 6.3,
-      grossMargin: 20.1, netMargin: 9.2, debtToEquity: 0.95, fcfYield: 4.4,
+      pe: 16.3, forwardPe: 15.0, evEbitda: 11.2, pb: 5.0, psales: 1.7,
+      divYield: 1.77, roe: 28.0, revenueGrowth: 6.0,
+      grossMargin: 20.1, netMargin: 9.2, debtToEquity: 0.95, fcfYield: 5.0,
     },
-    defense: { bookToBill: 1.00, backlogYears: 2.1, govRevenuePct: 84, internationalPct: 16, programConcentration: "high" },
-    sentiment: { analystRating: "Hold", sentimentScore: 49, shortInterest: 1.1 },
+    // 記録的受注残$96B (売上2年超), B-21プログラム進行
+    defense: { bookToBill: 1.00, backlogYears: 2.3, govRevenuePct: 84, internationalPct: 16, programConcentration: "high" },
+    // 直近30日で-19% (好決算にもかかわらず売られ、割安・弱気センチメント=逆張り候補)
+    sentiment: { analystRating: "Hold", sentimentScore: 38, shortInterest: 1.2 },
     criticalFactors: [
       { factor: { en: "B-21 Raider program ramp/margins", ja: "B-21レイダーの量産・採算" }, impact: "high", probability: 60 },
       { factor: { en: "Space systems growth", ja: "宇宙システムの成長" }, impact: "high", probability: 68 },
@@ -199,16 +209,17 @@ const SAMPLE_STOCKS = {
     sectorKey: "defense",
     name: { en: "General Dynamics", ja: "ゼネラル・ダイナミクス" },
     sector: { en: "Defense", ja: "防衛" },
-    price: 288.0,
-    fairValue: 300.0,
-    marketCap: 78,
+    price: 339.2, // 2026-06-01
+    fairValue: 365.0,
+    marketCap: 91,
     metrics: {
-      pe: 19.4, forwardPe: 17.6, evEbitda: 13.2, pb: 3.6, psales: 1.7,
-      divYield: 2.0, roe: 18.5, revenueGrowth: 7.0,
-      grossMargin: 15.5, netMargin: 8.5, debtToEquity: 0.55, fcfYield: 4.8,
+      pe: 21.4, forwardPe: 19.0, evEbitda: 14.0, pb: 3.6, psales: 1.7,
+      divYield: 1.94, roe: 18.5, revenueGrowth: 7.0,
+      grossMargin: 15.5, netMargin: 8.5, debtToEquity: 0.27, fcfYield: 4.5,
     },
-    defense: { bookToBill: 1.10, backlogYears: 2.6, govRevenuePct: 66, internationalPct: 22, programConcentration: "medium" },
-    sentiment: { analystRating: "Buy", sentimentScore: 63, shortInterest: 0.8 },
+    // Q1'26 受注$26.6B, book-to-bill 2:1, 受注残$131B, 34年連続増配
+    defense: { bookToBill: 1.30, backlogYears: 2.6, govRevenuePct: 66, internationalPct: 22, programConcentration: "medium" },
+    sentiment: { analystRating: "Buy", sentimentScore: 62, shortInterest: 0.8 },
     criticalFactors: [
       { factor: { en: "Submarine (Columbia/Virginia) demand", ja: "潜水艦 (Columbia/Virginia) 需要" }, impact: "high", probability: 80 },
       { factor: { en: "Gulfstream business-jet cycle", ja: "ガルフストリーム機の需要サイクル" }, impact: "medium", probability: 60 },

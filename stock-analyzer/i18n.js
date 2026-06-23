@@ -7,7 +7,7 @@ const I18N = {
     appTitle: "US Stock Analyzer",
     appSubtitle: "Long-term · Fundamental · Contrarian",
     selectStock: "Select a stock",
-    demoNotice: "Demo data — for learning only, not real market data.",
+    demoNotice: "Sample data based on public info as of {date} — for learning only, not investment advice.",
 
     // Sections
     overview: "Overview",
@@ -80,7 +80,7 @@ const I18N = {
     appTitle: "米国株アナライザー",
     appSubtitle: "長期 · ファンダメンタル · コントラリアン",
     selectStock: "銘柄を選択",
-    demoNotice: "デモ用データです — 学習目的のみ。実際の市場データではありません。",
+    demoNotice: "{date} 時点の公開情報を基にしたサンプルデータです — 学習目的のみ。投資助言ではありません。",
 
     overview: "概要",
     valuation: "バリュエーション",
