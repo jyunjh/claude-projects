@@ -27,6 +27,8 @@ A browser-based US stock analysis dashboard built around a long-term, fundamenta
 
 > 仕様: モデル `gemini-2.5-flash` / Gemini API をブラウザから直接ストリーミング呼び出し。無料枠（1日250回程度）で利用可能。学習用であり投資助言ではありません。
 
+**自動フォールバック**: `gemini-2.5-flash` を優先利用し、無料枠の上限（HTTP 429）に達したらチャットに通知して `gemini-2.5-flash-lite`（1日約1,000回）へ自動切替。flash が回復したら自動で flash 優先に戻します（指数バックオフで無駄な再試行を抑制）。
+
 ### 最新データの取得 / Live data
 
 1. [Financial Modeling Prep](https://site.financialmodelingprep.com/developer/docs) で**無料APIキー**を取得

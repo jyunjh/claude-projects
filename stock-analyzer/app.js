@@ -699,7 +699,11 @@ function sendChat() {
 
   const stock = getStock(currentTicker);
   const system = mentorSystemPrompt(currentLang, buildAnalysisContext(stock));
-  const apiMessages = chatMessages.slice(0, -1).map((m) => ({ role: m.role, content: m.content }));
+  // API履歴は user/assistant のみ (note は除外)。末尾の空アシスタントも除く。
+  const apiMessages = chatMessages
+    .filter((m) => m.role === "user" || m.role === "assistant")
+    .slice(0, -1)
+    .map((m) => ({ role: m.role, content: m.content }));
 
   streamMentorChat({
     system,
@@ -709,6 +713,12 @@ function sendChat() {
       const el = document.getElementById("chatStreaming");
       if (el) { el.textContent = assistant.content; el.parentElement.scrollTop = el.parentElement.scrollHeight; }
     },
+    onNotice: (type, a, b) => {
+      let text = "";
+      if (type === "switch") text = t("chatSwitched").replace("{from}", a).replace("{to}", b);
+      else if (type === "recovered") text = t("chatRecovered").replace("{model}", a);
+      if (text) insertChatNote(text);
+    },
     onDone: () => { chatBusy = false; renderChat(); },
     onError: (err) => {
       assistant.content = `⚠️ ${t("chatError")}${err && err !== "NO_KEY" ? "（" + err + "）" : ""}`;
@@ -716,6 +726,13 @@ function sendChat() {
       renderChat();
     },
   });
+}
+
+// ストリーミング中のアシスタント吹き出しの直前に、通知ノートを差し込む
+function insertChatNote(text) {
+  const idx = Math.max(0, chatMessages.length - 1);
+  chatMessages.splice(idx, 0, { role: "note", content: text });
+  renderChat();
 }
 
 function renderRecommendation(stock) {

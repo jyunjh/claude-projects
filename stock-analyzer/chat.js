@@ -5,14 +5,29 @@
  * 相談できる機能。投資哲学(長期・ファンダメンタル・コントラリアン)と
  * 添付フレームワーク(EPIC/ASPIRE/TIER/ENTER/ADViCE)に基づいて助言する。
  *
+ * モデル戦略:
+ *   - 通常は高品質な gemini-2.5-flash を優先利用。
+ *   - 無料枠の上限(429)に当たったら gemini-2.5-flash-lite に自動フォールバックし、
+ *     チャットに切り替えを通知。flash が回復したら自動で flash 優先に戻す。
+ *
  * Gemini API は無料枠が手厚く、カード登録不要で使えるため採用。
  * APIキーはブラウザの localStorage に保存(個人利用向け)。
  * キー取得(無料): https://aistudio.google.com/apikey
  */
 
-// 無料枠で使えるモデル。必要なら gemini-2.5-flash-lite (1日1000回) 等に変更可。
-const MENTOR_MODEL = "gemini-2.5-flash";
-const GEMINI_API = `https://generativelanguage.googleapis.com/v1beta/models/${MENTOR_MODEL}:streamGenerateContent`;
+const PRIMARY_MODEL = "gemini-2.5-flash";       // 優先(高品質)
+const FALLBACK_MODEL = "gemini-2.5-flash-lite"; // 上限時のフォールバック(無料枠が大きい)
+
+// flash が429になったら一定時間 lite を使い、cooldown 経過後に flash を再試行する。
+let flashCooldownUntil = 0; // この時刻まで flash をスキップ
+let flashFailStreak = 0;    // 連続失敗数 (バックオフ用)
+
+function geminiUrl(model) {
+  return `https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent`;
+}
+function shortName(model) {
+  return model.replace("gemini-2.5-", ""); // "flash" / "flash-lite"
+}
 
 function getAiKey() {
   return (localStorage.getItem("geminiKey") || "").trim();
@@ -54,63 +69,94 @@ This is an educational coaching tool using sample/snapshot data. Make clear when
 ${contextText}`;
 }
 
+// 1モデルにストリーミング送信。{ ok, status?, message? } を返す。
+async function streamOnce(model, key, body, onDelta) {
+  const res = await fetch(`${geminiUrl(model)}?alt=sse&key=${encodeURIComponent(key)}`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body,
+  });
+
+  if (!res.ok) {
+    let detail = "";
+    try { detail = (await res.json()).error?.message || ""; } catch (e) { /* ignore */ }
+    return { ok: false, status: res.status, message: `HTTP ${res.status}${detail ? " — " + detail : ""}` };
+  }
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const parts = buffer.split("\n");
+    buffer = parts.pop(); // 未完の行は次回へ
+    for (const line of parts) {
+      const s = line.trim();
+      if (!s.startsWith("data:")) continue;
+      const data = s.slice(5).trim();
+      if (!data) continue;
+      try {
+        const chunk = JSON.parse(data);
+        const text = chunk.candidates?.[0]?.content?.parts?.map((p) => p.text || "").join("") || "";
+        if (text) onDelta(text);
+      } catch (e) { /* 部分JSONは無視 */ }
+    }
+  }
+  return { ok: true };
+}
+
 /*
- * メッセージをストリーミング送信 (Gemini streamGenerateContent + SSE)。
- * onDelta(text) でトークンが届くたび、onDone() 完了時、onError(msg) で失敗時。
+ * メッセージを送信。flash優先 → 429ならlite自動フォールバック → flash回復で自動復帰。
+ * onDelta(text), onDone(), onError(msg), onNotice(type, a, b) コールバック。
+ *   onNotice("switch", from, to) … flashが上限でliteに切替
+ *   onNotice("recovered", model) … flashが回復して優先利用に復帰
  */
-async function streamMentorChat({ system, messages, onDelta, onDone, onError }) {
+async function streamMentorChat({ system, messages, onDelta, onDone, onError, onNotice }) {
   const key = getAiKey();
   if (!key) { onError("NO_KEY"); return; }
 
-  // 会話履歴を Gemini 形式に変換 (assistant -> model)
   const contents = messages.map((m) => ({
     role: m.role === "assistant" ? "model" : "user",
     parts: [{ text: m.content }],
   }));
+  const body = JSON.stringify({
+    system_instruction: { parts: [{ text: system }] },
+    contents,
+    generationConfig: { maxOutputTokens: 2048 },
+  });
 
   try {
-    const res = await fetch(`${GEMINI_API}?alt=sse&key=${encodeURIComponent(key)}`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        system_instruction: { parts: [{ text: system }] },
-        contents,
-        generationConfig: { maxOutputTokens: 2048 },
-      }),
-    });
+    const cooldownActive = Date.now() < flashCooldownUntil;
 
-    if (!res.ok) {
-      let detail = "";
-      try { detail = (await res.json()).error?.message || ""; } catch (e) { /* ignore */ }
-      onError(`HTTP ${res.status}${detail ? " — " + detail : ""}`);
-      return;
-    }
-
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder();
-    let buffer = "";
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buffer += decoder.decode(value, { stream: true });
-
-      // SSE: "data: {json}" 行を拾う
-      const parts = buffer.split("\n");
-      buffer = parts.pop(); // 未完の行は次回へ
-      for (const line of parts) {
-        const s = line.trim();
-        if (!s.startsWith("data:")) continue;
-        const data = s.slice(5).trim();
-        if (!data) continue;
-        try {
-          const chunk = JSON.parse(data);
-          const text = chunk.candidates?.[0]?.content?.parts?.map((p) => p.text || "").join("") || "";
-          if (text) onDelta(text);
-        } catch (e) { /* 部分JSONは無視 */ }
+    // 1) cooldown中でなければ flash を試す
+    if (!cooldownActive) {
+      const r = await streamOnce(PRIMARY_MODEL, key, body, onDelta);
+      if (r.ok) {
+        if (flashFailStreak > 0 && onNotice) onNotice("recovered", shortName(PRIMARY_MODEL));
+        flashFailStreak = 0;
+        flashCooldownUntil = 0;
+        onDone();
+        return;
+      }
+      if (r.status === 429) {
+        // 上限: バックオフして cooldown を設定し、lite にフォールバック
+        flashFailStreak++;
+        const cd = Math.min(60_000 * 2 ** (flashFailStreak - 1), 30 * 60_000); // 1分→…→最大30分
+        flashCooldownUntil = Date.now() + cd;
+        if (onNotice) onNotice("switch", shortName(PRIMARY_MODEL), shortName(FALLBACK_MODEL));
+        // フォールバックへ続行
+      } else {
+        onError(r.message); // 429以外のflashエラーはフォールバックしない
+        return;
       }
     }
-    onDone();
+
+    // 2) フォールバック(lite)
+    const r2 = await streamOnce(FALLBACK_MODEL, key, body, onDelta);
+    if (r2.ok) { onDone(); return; }
+    onError(r2.message);
   } catch (e) {
     onError(String(e && e.message ? e.message : e));
   }

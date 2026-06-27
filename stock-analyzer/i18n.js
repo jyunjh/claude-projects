@@ -122,6 +122,8 @@ const I18N = {
     chatSuggest1: "Is this a genuine contrarian buy?",
     chatSuggest2: "What are the biggest risks to the thesis?",
     chatSuggest3: "What should I research next?",
+    chatSwitched: "⚡ {from} hit its free-tier limit — switched to {to} to keep going.",
+    chatRecovered: "✅ {model} recovered — back to using it by default.",
 
     langButton: "日本語",
   },
@@ -237,6 +239,8 @@ const I18N = {
     chatSuggest1: "これは本物の逆張り買い場？",
     chatSuggest2: "この投資仮説の最大のリスクは？",
     chatSuggest3: "次に何を調べるべき？",
+    chatSwitched: "⚡ {from} が無料枠の上限に達したため、{to} に切り替えて続行します。",
+    chatRecovered: "✅ {model} が回復したので、優先利用に戻しました。",
 
     langButton: "English",
   },
