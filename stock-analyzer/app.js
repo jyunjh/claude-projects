@@ -21,6 +21,9 @@ const DETAIL_SECTIONS = [
 let liveOverrides = {};
 // 過去株価のキャッシュ (ticker -> [{date, price}])。APIから遅延取得。
 let historyCache = {};
+// メンター相談チャットの履歴と状態
+let chatMessages = []; // [{role:"user"|"assistant", content}]
+let chatBusy = false;
 // データバーの一時メッセージ ("refreshing" | "error" | null)
 let dataMessage = null;
 
@@ -144,6 +147,7 @@ function render() {
   renderGuide(stock);
   renderRecommendation(stock);
   renderCompare();
+  renderChat();
   applyView();
   maybeLoadHistory(currentTicker);
 }
@@ -594,6 +598,143 @@ function localize2(cfg, key, en, ja) {
   return k ? localized(k.label) : currentLang === "ja" ? ja : en;
 }
 
+/* ---------- メンター相談チャット ---------- */
+
+// 現在の画面分析を、モデルに渡すテキストスナップショットに変換
+function buildAnalysisContext(stock) {
+  const m = stock.metrics;
+  const up = upsidePct(stock);
+  const fund = fundamentalScore(stock);
+  const v = contrarianVerdict(stock);
+  const rec = recommendation(stock);
+  const verdictText = { contrarianBuy: "contrarian opportunity (weak sentiment, solid fundamentals)", crowdedTrade: "crowded trade (strong sentiment, stretched fundamentals)", aligned: "sentiment and fundamentals aligned" };
+  const recText = { recBuy: "BUY", recHold: "HOLD", recAvoid: "AVOID" };
+
+  const lines = [
+    `Ticker: ${stock.ticker} — ${stock.name.en} | Sector: ${stock.sector.en}`,
+    `Price ${usd(stock.price)} | Analyst's fair-value estimate ${usd(stock.fairValue)} | Upside to fair value ${pct(up)}`,
+    `Valuation: P/E ${fmt(m.pe)}, fwd P/E ${fmt(m.forwardPe)}, EV/EBITDA ${fmt(m.evEbitda)}, P/B ${fmt(m.pb, 1)}, P/S ${fmt(m.psales, 1)}, dividend yield ${fmt(m.divYield, 2)}%`,
+    `Quality & growth: ROE ${fmt(m.roe, 1)}%, revenue growth ${fmt(m.revenueGrowth, 1)}%, net margin ${fmt(m.netMargin, 1)}%, debt/equity ${fmt(m.debtToEquity, 2)}, FCF yield ${fmt(m.fcfYield, 1)}%`,
+    `Market sentiment ${stock.sentiment.sentimentScore}/100 (analyst rating: ${stock.sentiment.analystRating}) vs fundamental score ${fund}/100 → ${verdictText[v.key]} (gap ${Math.round(v.gap)})`,
+    `Model's overall read: ${recText[rec.key]}`,
+  ];
+  if (stock.defense) {
+    const d = stock.defense;
+    lines.push(`Defense-sector KPIs: book-to-bill ${d.bookToBill}, backlog ${d.backlogYears} yrs of revenue, government revenue ${d.govRevenuePct}%, international ${d.internationalPct}%, flagship-program concentration ${d.programConcentration}`);
+  }
+  lines.push("Critical Factors (EPIC): " + stock.criticalFactors.map((f) => `${f.factor.en} [impact ${f.impact}, probability ${f.probability}%]`).join("; "));
+  lines.push(`Data status: ${stock._liveAt ? "live, as of " + new Date(stock._liveAt).toISOString().slice(0, 10) : "sample/snapshot data (not real-time)"}`);
+  return lines.join("\n");
+}
+
+function renderChat() {
+  document.getElementById("mentorTitle").textContent = t("mentorTitle");
+  document.getElementById("mentorSub").textContent = t("mentorSub");
+  document.getElementById("chatSend").textContent = chatBusy ? t("chatThinking") : t("chatSend");
+  document.getElementById("chatSend").disabled = chatBusy;
+  document.getElementById("chatInput").placeholder = t("chatPlaceholder");
+  document.getElementById("anthropicKeyToggle").textContent = `⚙️ ${t("aiSettings")}`;
+  document.getElementById("anthropicSaveBtn").textContent = t("saveKey");
+  document.getElementById("anthropicGetKey").textContent = t("aiGetKey");
+  document.getElementById("anthropicKeyInput").placeholder = t("aiKeyPlaceholder");
+  document.getElementById("mentorDisclaimer").textContent = t("mentorDisclaimer");
+
+  // 質問サジェスト
+  const sug = document.getElementById("chatSuggests");
+  sug.innerHTML = "";
+  ["chatSuggest1", "chatSuggest2", "chatSuggest3"].forEach((k) => {
+    const b = document.createElement("button");
+    b.className = "suggest-chip";
+    b.textContent = t(k);
+    b.addEventListener("click", () => { if (!chatBusy) { document.getElementById("chatInput").value = t(k); sendChat(); } });
+    sug.appendChild(b);
+  });
+
+  renderChatLog();
+}
+
+function renderChatLog() {
+  const log = document.getElementById("chatLog");
+  log.innerHTML = "";
+  if (chatMessages.length === 0) {
+    const w = document.createElement("div");
+    w.className = "chat-msg assistant";
+    w.textContent = t("chatWelcome");
+    log.appendChild(w);
+  }
+  chatMessages.forEach((msg, i) => {
+    const el = document.createElement("div");
+    el.className = `chat-msg ${msg.role}`;
+    // ストリーミング中の最後のアシスタントメッセージに目印を付ける
+    if (chatBusy && msg.role === "assistant" && i === chatMessages.length - 1) el.id = "chatStreaming";
+    el.textContent = msg.content || (chatBusy ? "…" : "");
+    log.appendChild(el);
+  });
+  log.scrollTop = log.scrollHeight;
+}
+
+function sendChat() {
+  const input = document.getElementById("chatInput");
+  const text = input.value.trim();
+  if (!text || chatBusy) return;
+
+  if (!getAiKey()) {
+    document.getElementById("anthropicKeyBox").open = true;
+    document.getElementById("anthropicKeyInput").focus();
+    const log = document.getElementById("chatLog");
+    const note = document.createElement("div");
+    note.className = "chat-msg note";
+    note.textContent = t("chatNoKey");
+    log.appendChild(note);
+    log.scrollTop = log.scrollHeight;
+    return;
+  }
+
+  chatMessages.push({ role: "user", content: text });
+  input.value = "";
+  const assistant = { role: "assistant", content: "" };
+  chatMessages.push(assistant);
+  chatBusy = true;
+  renderChat();
+
+  const stock = getStock(currentTicker);
+  const system = mentorSystemPrompt(currentLang, buildAnalysisContext(stock));
+  // API履歴は user/assistant のみ (note は除外)。末尾の空アシスタントも除く。
+  const apiMessages = chatMessages
+    .filter((m) => m.role === "user" || m.role === "assistant")
+    .slice(0, -1)
+    .map((m) => ({ role: m.role, content: m.content }));
+
+  streamMentorChat({
+    system,
+    messages: apiMessages,
+    onDelta: (chunk) => {
+      assistant.content += chunk;
+      const el = document.getElementById("chatStreaming");
+      if (el) { el.textContent = assistant.content; el.parentElement.scrollTop = el.parentElement.scrollHeight; }
+    },
+    onNotice: (type, a, b) => {
+      let text = "";
+      if (type === "switch") text = t("chatSwitched").replace("{from}", a).replace("{to}", b);
+      else if (type === "recovered") text = t("chatRecovered").replace("{model}", a);
+      if (text) insertChatNote(text);
+    },
+    onDone: () => { chatBusy = false; renderChat(); },
+    onError: (err) => {
+      assistant.content = `⚠️ ${t("chatError")}${err && err !== "NO_KEY" ? "（" + err + "）" : ""}`;
+      chatBusy = false;
+      renderChat();
+    },
+  });
+}
+
+// ストリーミング中のアシスタント吹き出しの直前に、通知ノートを差し込む
+function insertChatNote(text) {
+  const idx = Math.max(0, chatMessages.length - 1);
+  chatMessages.splice(idx, 0, { role: "note", content: text });
+  renderChat();
+}
+
 function renderRecommendation(stock) {
   const rec = recommendation(stock);
   document.getElementById("recPill").className = `pill ${rec.pill}`;
@@ -624,6 +765,19 @@ function init() {
   });
   document.getElementById("refreshBtn").addEventListener("click", updateLiveData);
   document.getElementById("saveKeyBtn").addEventListener("click", saveApiKey);
+
+  // メンターチャット
+  document.getElementById("chatSend").addEventListener("click", sendChat);
+  document.getElementById("chatInput").addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChat(); }
+  });
+  document.getElementById("anthropicSaveBtn").addEventListener("click", () => {
+    const inp = document.getElementById("anthropicKeyInput");
+    setAiKey(inp.value);
+    inp.value = "";
+    if (getAiKey()) document.getElementById("anthropicKeyBox").open = false;
+    renderChat();
+  });
   document.getElementById("langBtn").addEventListener("click", () => {
     currentLang = currentLang === "ja" ? "en" : "ja";
     localStorage.setItem("lang", currentLang);
