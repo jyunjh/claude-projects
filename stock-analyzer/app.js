@@ -13,12 +13,14 @@ let currentView = "detail"; // "detail" | "compare"
 
 // 個別分析ビューを構成するセクション (compare モードでは隠す)
 const DETAIL_SECTIONS = [
-  "overview", "contrarian", "sectorEnvironment", "sectorKpis",
+  "overview", "contrarian", "chart", "sectorEnvironment", "sectorKpis",
   "metrics", "valuation", "factors", "guide", "recommendation",
 ];
 
 // API取得した最新値の差分 (ticker -> patch)。サンプルに重ねて使う。
 let liveOverrides = {};
+// 過去株価のキャッシュ (ticker -> [{date, price}])。APIから遅延取得。
+let historyCache = {};
 // データバーの一時メッセージ ("refreshing" | "error" | null)
 let dataMessage = null;
 
@@ -137,11 +139,42 @@ function render() {
   renderValuation(stock);
   renderContrarian(stock);
   renderFactors(stock);
+  renderChart(stock);
   renderSectorPanels(stock);
   renderGuide(stock);
   renderRecommendation(stock);
   renderCompare();
   applyView();
+  maybeLoadHistory(currentTicker);
+}
+
+// キーがあり未取得なら、過去株価を遅延取得してチャートだけ再描画
+function maybeLoadHistory(ticker) {
+  if (!getApiKey() || historyCache[ticker]) return;
+  fetchPriceHistory(ticker)
+    .then((hist) => {
+      if (hist && hist.length > 1) {
+        historyCache[ticker] = hist;
+        // 取得中に銘柄が変わっていなければチャートを更新
+        if (ticker === currentTicker && currentView === "detail") renderChart(getStock(ticker));
+      }
+    })
+    .catch(() => { /* 失敗時はサンプル系列のまま */ });
+}
+
+// 決定論的なサンプル系列 (ticker をシードに、現在株価へ収束する週次52本)
+function sampleHistory(stock) {
+  const n = 52;
+  let seed = [...stock.ticker].reduce((a, c) => a + c.charCodeAt(0), 0) + 7;
+  const rand = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+  const prices = [stock.price];
+  for (let i = 1; i < n; i++) prices.push(prices[i - 1] * (1 + (rand() - 0.5) * 0.06));
+  prices.reverse(); // 末尾が現在株価
+  const today = Date.now();
+  return prices.map((p, i) => ({
+    date: new Date(today - (n - 1 - i) * 7 * 864e5).toISOString().slice(0, 10),
+    price: Math.round(p * 100) / 100,
+  }));
 }
 
 // ビュー切り替え: 個別分析セクション群 ⇄ 横比較ビューの表示制御
@@ -359,6 +392,56 @@ function renderGuide(stock) {
         <summary>${localized(g.term)}</summary>
         <p>${localized(g.desc)}</p>
       </details>`).join("")}`;
+}
+
+/* 株価チャート (SVG自前描画 / 適正価値ラインを重ねる) */
+function renderChart(stock) {
+  const live = !!historyCache[stock.ticker];
+  const hist = live ? historyCache[stock.ticker] : sampleHistory(stock);
+  const prices = hist.map((d) => d.price);
+  const fv = stock.fairValue;
+
+  const W = 760, H = 260, padL = 6, padR = 6, padT = 18, padB = 26;
+  const lo = Math.min(...prices, fv), hi = Math.max(...prices, fv);
+  const range = hi - lo || 1;
+  const X = (i) => padL + (i / (hist.length - 1)) * (W - padL - padR);
+  const Y = (p) => padT + (1 - (p - lo) / range) * (H - padT - padB);
+
+  const linePts = hist.map((d, i) => `${X(i).toFixed(1)},${Y(d.price).toFixed(1)}`).join(" ");
+  const areaPts = `${X(0).toFixed(1)},${(H - padB)} ${linePts} ${X(hist.length - 1).toFixed(1)},${(H - padB)}`;
+  const up = prices[prices.length - 1] >= prices[0];
+  const color = up ? "var(--green)" : "var(--red)";
+  const fvY = Y(fv).toFixed(1);
+
+  const seriesHi = Math.max(...prices), seriesLo = Math.min(...prices);
+  const cur = prices[prices.length - 1];
+  const firstDate = hist[0].date, lastDate = hist[hist.length - 1].date;
+  const sourceTag = live ? t("chartLive") : t("chartSample");
+
+  document.getElementById("chart").innerHTML = `
+    <h2>📈 ${t("priceChart")}
+      <span class="src-tag ${live ? "live" : ""}">${sourceTag}</span>
+    </h2>
+    <div class="chart-legend">
+      <span>${t("price")}: <strong>${usd(cur)}</strong></span>
+      <span style="color:var(--green)">${t("chartHigh")}: ${usd(seriesHi)}</span>
+      <span style="color:var(--red)">${t("chartLow")}: ${usd(seriesLo)}</span>
+      <span style="color:var(--amber)">— ${t("chartFairValue")}: ${usd(fv)}</span>
+    </div>
+    <svg viewBox="0 0 ${W} ${H}" class="price-chart" preserveAspectRatio="none" role="img">
+      <defs>
+        <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="${up ? "rgba(52,211,153,0.28)" : "rgba(248,113,113,0.28)"}"/>
+          <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+        </linearGradient>
+      </defs>
+      <polygon points="${areaPts}" fill="url(#grad)" />
+      <polyline points="${linePts}" fill="none" stroke="${color}" stroke-width="2"
+        stroke-linejoin="round" stroke-linecap="round" />
+      <line x1="${padL}" y1="${fvY}" x2="${W - padR}" y2="${fvY}"
+        stroke="var(--amber)" stroke-width="1.5" stroke-dasharray="6 5" opacity="0.85" />
+    </svg>
+    <div class="chart-axis"><span>${firstDate}</span><span>${lastDate}</span></div>`;
 }
 
 /* 最新データ更新バー (静的テキスト + ステータス) */

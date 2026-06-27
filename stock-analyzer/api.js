@@ -81,6 +81,19 @@ async function fetchLiveStock(ticker) {
   return patch;
 }
 
+/* 過去株価 (日次終値) を取得。古い順の [{date, price}] を返す */
+async function fetchPriceHistory(ticker, fromDays = 365) {
+  const key = getApiKey();
+  if (!key) throw new Error("NO_KEY");
+  const from = new Date(Date.now() - fromDays * 864e5).toISOString().slice(0, 10);
+  const arr = await fetchJson(`${FMP_BASE}/historical-price-eod/light?symbol=${ticker}&from=${from}&apikey=${key}`);
+  // API は新しい順。古い順に並べ替えて返す。
+  return arr
+    .filter((d) => isNum(d.price))
+    .map((d) => ({ date: d.date, price: d.price }))
+    .reverse();
+}
+
 /* 現在のセクターの全銘柄を並列で更新。{ ok: [...], failed: [...] } を返す */
 async function fetchLiveStocks(tickers) {
   const results = await Promise.allSettled(tickers.map((tk) => fetchLiveStock(tk)));
