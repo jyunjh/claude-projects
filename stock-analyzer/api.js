@@ -10,7 +10,8 @@
  * 無料キー取得: https://site.financialmodelingprep.com/developer/docs
  */
 
-const FMP_BASE = "https://financialmodelingprep.com/api/v3";
+// 新しい "stable" エンドポイント (v3レガシーは2025/8で廃止)
+const FMP_BASE = "https://financialmodelingprep.com/stable";
 
 function getApiKey() {
   return (localStorage.getItem("fmpKey") || "").trim();
@@ -38,24 +39,23 @@ async function fetchJson(url) {
 async function fetchLiveStock(ticker) {
   const key = getApiKey();
   if (!key) throw new Error("NO_KEY");
+  const q = (s) => `${FMP_BASE}/${s}?symbol=${ticker}&apikey=${key}`;
 
-  // --- 必須: 株価・時価総額・PER ---
-  const quote = (await fetchJson(`${FMP_BASE}/quote/${ticker}?apikey=${key}`))[0];
+  // --- 必須: 株価・時価総額 ---
+  const quote = (await fetchJson(q("quote")))[0];
   const patch = { metrics: {} };
   if (quote) {
     if (isNum(quote.price)) patch.price = round2(quote.price);
     if (isNum(quote.marketCap)) patch.marketCap = Math.round(quote.marketCap / 1e9); // 10億ドル単位
-    if (isNum(quote.pe) && quote.pe > 0) patch.metrics.pe = round2(quote.pe);
   }
 
   // --- 任意: 各種レシオ (失敗してもサンプル維持) ---
   try {
-    const r = (await fetchJson(`${FMP_BASE}/ratios-ttm/${ticker}?apikey=${key}`))[0];
+    const r = (await fetchJson(q("ratios-ttm")))[0];
     if (r) {
-      const dy = r.dividendYieldTTM ?? r.dividendYielTTM; // FMPの表記ゆれに対応
-      if (isNum(dy)) patch.metrics.divYield = round2(dy * 100);
-      if (isNum(r.returnOnEquityTTM)) patch.metrics.roe = round2(r.returnOnEquityTTM * 100);
-      if (isNum(r.debtEquityRatioTTM)) patch.metrics.debtToEquity = round2(r.debtEquityRatioTTM);
+      if (isNum(r.priceToEarningsRatioTTM) && r.priceToEarningsRatioTTM > 0) patch.metrics.pe = round2(r.priceToEarningsRatioTTM);
+      if (isNum(r.dividendYieldTTM)) patch.metrics.divYield = round2(r.dividendYieldTTM * 100);
+      if (isNum(r.debtToEquityRatioTTM)) patch.metrics.debtToEquity = round2(r.debtToEquityRatioTTM);
       if (isNum(r.priceToBookRatioTTM)) patch.metrics.pb = round2(r.priceToBookRatioTTM);
       if (isNum(r.priceToSalesRatioTTM)) patch.metrics.psales = round2(r.priceToSalesRatioTTM);
       if (isNum(r.netProfitMarginTTM)) patch.metrics.netMargin = round2(r.netProfitMarginTTM * 100);
@@ -65,11 +65,12 @@ async function fetchLiveStock(ticker) {
     /* レシオ取得失敗時はサンプル値を維持 */
   }
 
-  // --- 任意: EV/EBITDA・FCF利回り ---
+  // --- 任意: EV/EBITDA・ROE・FCF利回り ---
   try {
-    const m = (await fetchJson(`${FMP_BASE}/key-metrics-ttm/${ticker}?apikey=${key}`))[0];
+    const m = (await fetchJson(q("key-metrics-ttm")))[0];
     if (m) {
-      if (isNum(m.enterpriseValueOverEBITDATTM)) patch.metrics.evEbitda = round2(m.enterpriseValueOverEBITDATTM);
+      if (isNum(m.evToEBITDATTM)) patch.metrics.evEbitda = round2(m.evToEBITDATTM);
+      if (isNum(m.returnOnEquityTTM)) patch.metrics.roe = round2(m.returnOnEquityTTM * 100);
       if (isNum(m.freeCashFlowYieldTTM)) patch.metrics.fcfYield = round2(m.freeCashFlowYieldTTM * 100);
     }
   } catch (e) {
