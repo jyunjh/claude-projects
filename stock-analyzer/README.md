@@ -13,8 +13,19 @@ A browser-based US stock analysis dashboard built around a long-term, fundamenta
 - 📋 **グループ内 横比較** — 同セクター銘柄を一覧表で並べ、指標ごとに最良値を★でハイライト
 - 📖 **見るべきポイント解説** — 各指標の見方を折りたたみで解説
 - 🔄 **最新データ更新** — 無料API (Financial Modeling Prep) から株価・指標を取得（キー未設定/失敗時はサンプルにフォールバック）
+- 🧑‍🏫 **メンター相談（AIチャット）** — 画面の分析を見ながら、熟練ファンドマネージャー役のClaudeにリアルタイムで相談
 - ✅ **投資判断** — 上記を総合した BUY / HOLD / AVOID
 - 🌐 **日本語 / English** ワンクリック切り替え
+
+### メンター相談 / Mentor chat
+
+ダッシュボード下部のチャットで、現在表示中の銘柄分析について Claude に相談できます。Claudeは**長期・ファンダメンタル・コントラリアン**の投資哲学と添付フレームワーク（EPIC / バリュエーション相互チェック / TIER 等）に基づき、後輩アナリストを指導するように助言します。画面の数値（PER・乖離・重要ファクター等）を踏まえて回答します。
+
+1. [Anthropic Console](https://console.anthropic.com/) で **APIキー** を取得
+2. チャット下の「⚙️ AI設定」にキーを貼り付けて保存（localStorage に保存）
+3. 質問を入力するか、サジェストをクリック → ストリーミングで回答
+
+> 仕様: モデル `claude-opus-4-8` / Messages API をブラウザから直接ストリーミング呼び出し。学習用であり投資助言ではありません。
 
 ### 最新データの取得 / Live data
 
@@ -58,6 +69,7 @@ python3 -m http.server 8000
 | `i18n.js` | 日本語/英語の翻訳 |
 | `sectors.js` | セクター特化設定（市場環境・特化KPI・解説） |
 | `api.js` | 最新データ取得（無料API連携・フォールバック） |
+| `chat.js` | メンター相談（Anthropic Messages APIのストリーミング） |
 | `app.js` | 分析ロジックと描画 |
 
 ## 免責 / Disclaimer

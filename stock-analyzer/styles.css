@@ -240,6 +240,72 @@ table.compare td.best {
 .guide-item[open] summary::after { content: "−"; }
 .guide-item p { margin-top: 8px; color: var(--text-dim); font-size: 0.88rem; }
 
+/* ---- Mentor chat ---- */
+.mentor-sub { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 12px; }
+.chat-suggests { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.suggest-chip {
+  background: var(--bg-card-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 99px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.suggest-chip:hover { border-color: var(--accent); color: var(--accent); }
+.chat-log {
+  background: var(--bg-card-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  max-height: 380px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.chat-msg {
+  white-space: pre-wrap;
+  line-height: 1.6;
+  font-size: 0.9rem;
+  padding: 10px 13px;
+  border-radius: 12px;
+  max-width: 85%;
+}
+.chat-msg.user {
+  align-self: flex-end;
+  background: var(--accent);
+  color: #06283d;
+  font-weight: 500;
+}
+.chat-msg.assistant {
+  align-self: flex-start;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+.chat-msg.note {
+  align-self: center;
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  color: var(--amber);
+  font-size: 0.82rem;
+}
+.chat-input-row { display: flex; gap: 10px; align-items: flex-end; }
+.chat-input-row textarea {
+  flex: 1;
+  background: var(--bg-card-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+  min-height: 44px;
+}
+.chat-input-row textarea:focus { outline: none; border-color: var(--accent); }
+
 footer { margin-top: 24px; color: var(--text-dim); font-size: 0.8rem; text-align: center; }
 
 @media (max-width: 720px) {

@@ -106,6 +106,23 @@ const I18N = {
     chartLow: "Low",
     chartFairValue: "Fair value",
 
+    // Mentor chat
+    mentorTitle: "Mentor — Senior Portfolio Manager",
+    mentorSub: "Discuss this analysis in real time. Coaching grounded in long-term, fundamental, contrarian principles (EPIC / valuation cross-check / TIER).",
+    chatPlaceholder: "Ask about this stock… e.g. \"Is this a real contrarian setup?\"",
+    chatSend: "Send",
+    chatThinking: "Thinking…",
+    chatWelcome: "I'm looking at the same analysis you are. What would you like to think through — the valuation, the contrarian read, or what to research next?",
+    chatNoKey: "Add your Anthropic API key in ⚙️ AI settings, then ask.",
+    chatError: "Couldn't reach the model",
+    aiSettings: "AI settings (Anthropic API key)",
+    aiKeyPlaceholder: "Paste your Anthropic API key (sk-ant-…)",
+    aiGetKey: "Get a key ↗",
+    mentorDisclaimer: "Educational coaching on sample/snapshot data. Not investment advice.",
+    chatSuggest1: "Is this a genuine contrarian buy?",
+    chatSuggest2: "What are the biggest risks to the thesis?",
+    chatSuggest3: "What should I research next?",
+
     langButton: "日本語",
   },
   ja: {
@@ -203,6 +220,23 @@ const I18N = {
     chartHigh: "高値",
     chartLow: "安値",
     chartFairValue: "適正価値",
+
+    // Mentor chat
+    mentorTitle: "メンター相談（熟練ポートフォリオマネージャー）",
+    mentorSub: "この分析を見ながらリアルタイムで相談できます。長期・ファンダメンタル・コントラリアン（EPIC / バリュエーション相互チェック / TIER）に基づく指導。",
+    chatPlaceholder: "この銘柄について質問…例:「これは本物の逆張り局面？」",
+    chatSend: "送信",
+    chatThinking: "考え中…",
+    chatWelcome: "あなたと同じ分析画面を見ています。何を深掘りしましょうか — バリュエーション、コントラリアン判定、それとも次に調べるべきこと？",
+    chatNoKey: "⚙️ AI設定 に Anthropic APIキーを登録してから質問してください。",
+    chatError: "モデルに接続できませんでした",
+    aiSettings: "AI設定（Anthropic APIキー）",
+    aiKeyPlaceholder: "Anthropic APIキーを貼り付け (sk-ant-…)",
+    aiGetKey: "キーを取得 ↗",
+    mentorDisclaimer: "サンプル/スナップショットデータに基づく学習用の指導です。投資助言ではありません。",
+    chatSuggest1: "これは本物の逆張り買い場？",
+    chatSuggest2: "この投資仮説の最大のリスクは？",
+    chatSuggest3: "次に何を調べるべき？",
 
     langButton: "English",
   },
