@@ -83,6 +83,21 @@ const I18N = {
     upsideShort: "Upside",
     recShort: "Verdict",
 
+    // Live data update
+    refresh: "Update to latest",
+    refreshing: "Updating…",
+    dataSample: "Sample data",
+    dataLive: "Live · updated {time}",
+    dataPartial: "Live (partial) · {time}",
+    dataError: "Update failed — showing sample",
+    apiSettings: "API settings",
+    apiKeyPlaceholder: "Paste your free API key",
+    saveKey: "Save",
+    getKey: "Get a free key ↗",
+    keySaved: "API key saved",
+    noKeyMsg: "Enter a free API key, then press Update.",
+    liveNote: "Live update covers price & valuation multiples. Fair value, sentiment and critical factors stay your own estimates.",
+
     langButton: "日本語",
   },
   ja: {
@@ -157,6 +172,21 @@ const I18N = {
     compareBestHint: "★ = その指標でグループ内ベストの値 (緑)。",
     upsideShort: "上昇余地",
     recShort: "判定",
+
+    // Live data update
+    refresh: "最新に更新",
+    refreshing: "更新中…",
+    dataSample: "サンプルデータ",
+    dataLive: "最新 · {time} 更新",
+    dataPartial: "最新(一部) · {time}",
+    dataError: "更新失敗 — サンプル表示",
+    apiSettings: "API設定",
+    apiKeyPlaceholder: "無料APIキーを貼り付け",
+    saveKey: "保存",
+    getKey: "無料キーを取得 ↗",
+    keySaved: "APIキーを保存しました",
+    noKeyMsg: "無料APIキーを入力してから「更新」を押してください。",
+    liveNote: "最新更新の対象は株価とバリュエーション指標です。適正価値・センチメント・重要ファクターはあなた自身の推定値のまま保持されます。",
 
     langButton: "English",
   },

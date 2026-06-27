@@ -17,9 +17,27 @@ const DETAIL_SECTIONS = [
   "metrics", "valuation", "factors", "guide", "recommendation",
 ];
 
-// セクターでフィルタした銘柄リスト ("all" は全件)
+// API取得した最新値の差分 (ticker -> patch)。サンプルに重ねて使う。
+let liveOverrides = {};
+// データバーの一時メッセージ ("refreshing" | "error" | null)
+let dataMessage = null;
+
+// サンプル + 最新差分をマージした銘柄オブジェクトを返す
+function getStock(ticker) {
+  const base = SAMPLE_STOCKS[ticker];
+  const ov = liveOverrides[ticker];
+  if (!ov) return base;
+  return {
+    ...base,
+    ...ov,
+    metrics: { ...base.metrics, ...(ov.metrics || {}) },
+    _liveAt: ov._liveAt,
+  };
+}
+
+// セクターでフィルタした銘柄リスト ("all" は全件)。最新差分を反映。
 function stocksInSector(sectorKey) {
-  const all = Object.values(SAMPLE_STOCKS);
+  const all = Object.keys(SAMPLE_STOCKS).map(getStock);
   return sectorKey === "all" ? all : all.filter((s) => s.sectorKey === sectorKey);
 }
 
@@ -99,7 +117,7 @@ const bn = (n) => (n >= 1000 ? `$${(n / 1000).toFixed(2)}T` : `$${n}B`);
 /* ---------- レンダリング (rendering) ---------- */
 
 function render() {
-  const stock = SAMPLE_STOCKS[currentTicker];
+  const stock = getStock(currentTicker);
 
   // 静的UIテキスト
   document.documentElement.lang = currentLang;
@@ -110,6 +128,7 @@ function render() {
   document.getElementById("recDisclaimer").textContent = t("recDisclaimer");
   document.getElementById("recTitle").textContent = t("recommendation");
   document.getElementById("viewBtn").textContent = currentView === "detail" ? t("viewCompare") : t("viewDetail");
+  renderDataBar(stock);
 
   renderSectorSelector();
   renderSelector();
@@ -342,6 +361,72 @@ function renderGuide(stock) {
       </details>`).join("")}`;
 }
 
+/* 最新データ更新バー (静的テキスト + ステータス) */
+function renderDataBar(stock) {
+  document.getElementById("refreshLabel").textContent =
+    dataMessage === "refreshing" ? t("refreshing") : t("refresh");
+  document.getElementById("refreshBtn").disabled = dataMessage === "refreshing";
+  document.getElementById("keyToggle").textContent = `⚙️ ${t("apiSettings")}`;
+  document.getElementById("saveKeyBtn").textContent = t("saveKey");
+  document.getElementById("getKeyLink").textContent = t("getKey");
+  document.getElementById("liveNote").textContent = t("liveNote");
+  document.getElementById("apiKeyInput").placeholder = t("apiKeyPlaceholder");
+
+  // ステータス表示
+  const el = document.getElementById("dataStatus");
+  el.className = "data-status";
+  if (dataMessage === "refreshing") {
+    el.textContent = t("refreshing");
+  } else if (dataMessage === "error") {
+    el.textContent = t("dataError");
+    el.classList.add("error");
+  } else if (dataMessage === "keySaved") {
+    el.textContent = t("keySaved");
+    el.classList.add("live");
+  } else if (stock._liveAt) {
+    const time = new Date(stock._liveAt).toLocaleString(currentLang === "ja" ? "ja-JP" : "en-US");
+    el.textContent = t("dataLive").replace("{time}", time);
+    el.classList.add("live");
+  } else {
+    el.textContent = t("dataSample");
+  }
+}
+
+/* 「最新に更新」: 現在セクターの全銘柄をAPI取得し、サンプルに重ねる */
+async function updateLiveData() {
+  if (!getApiKey()) {
+    // キー未設定: 設定パネルを開いて促す
+    document.getElementById("keyBox").open = true;
+    document.getElementById("apiKeyInput").focus();
+    const el = document.getElementById("dataStatus");
+    el.className = "data-status error";
+    el.textContent = t("noKeyMsg");
+    return;
+  }
+  dataMessage = "refreshing";
+  render();
+  const tickers = stocksInSector(currentSector).map((s) => s.ticker);
+  try {
+    const { ok, failed } = await fetchLiveStocks(tickers);
+    Object.assign(liveOverrides, ok);
+    dataMessage = failed.length === tickers.length ? "error" : null;
+  } catch (e) {
+    dataMessage = "error";
+  }
+  render();
+}
+
+function saveApiKey() {
+  const input = document.getElementById("apiKeyInput");
+  setApiKey(input.value);
+  input.value = "";
+  if (getApiKey()) {
+    dataMessage = "keySaved";
+    document.getElementById("keyBox").open = false;
+  }
+  render();
+}
+
 /* グループ内 横比較ビュー */
 function renderCompare() {
   const stocks = stocksInSector(currentSector);
@@ -435,6 +520,7 @@ function renderRecommendation(stock) {
 /* ---------- イベント (events) ---------- */
 function init() {
   document.getElementById("sectorSelect").addEventListener("change", (e) => {
+    dataMessage = null;
     currentSector = e.target.value;
     // 選択中の銘柄が新セクターに無ければ、そのセクターの先頭銘柄に切り替える
     const list = stocksInSector(currentSector);
@@ -444,13 +530,17 @@ function init() {
     render();
   });
   document.getElementById("stockSelect").addEventListener("change", (e) => {
+    dataMessage = null;
     currentTicker = e.target.value;
     render();
   });
   document.getElementById("viewBtn").addEventListener("click", () => {
+    dataMessage = null;
     currentView = currentView === "detail" ? "compare" : "detail";
     render();
   });
+  document.getElementById("refreshBtn").addEventListener("click", updateLiveData);
+  document.getElementById("saveKeyBtn").addEventListener("click", saveApiKey);
   document.getElementById("langBtn").addEventListener("click", () => {
     currentLang = currentLang === "ja" ? "en" : "ja";
     localStorage.setItem("lang", currentLang);

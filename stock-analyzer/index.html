@@ -22,6 +22,21 @@
 
   <div class="demo-notice" id="demoNotice"></div>
 
+  <!-- 最新データ更新バー -->
+  <div class="data-bar">
+    <button id="refreshBtn" class="refresh-btn">🔄 <span id="refreshLabel"></span></button>
+    <span id="dataStatus" class="data-status"></span>
+    <details class="key-box" id="keyBox">
+      <summary id="keyToggle"></summary>
+      <div class="key-row">
+        <input id="apiKeyInput" type="password" autocomplete="off" />
+        <button id="saveKeyBtn" class="refresh-btn"></button>
+        <a id="getKeyLink" href="https://site.financialmodelingprep.com/developer/docs" target="_blank" rel="noopener"></a>
+      </div>
+      <p id="liveNote" class="key-note"></p>
+    </details>
+  </div>
+
   <main class="grid">
     <!-- 横比較ビュー (compare モードでのみ表示) -->
     <section class="card full" id="compareView" style="display:none"></section>
@@ -44,10 +59,11 @@
 
   <footer>US Stock Analyzer · Demo build</footer>
 
-  <!-- 読み込み順: データ → 翻訳 → セクター設定 → ロジック -->
+  <!-- 読み込み順: データ → 翻訳 → セクター設定 → API → ロジック -->
   <script src="data.js"></script>
   <script src="i18n.js"></script>
   <script src="sectors.js"></script>
+  <script src="api.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

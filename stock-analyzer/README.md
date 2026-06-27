@@ -12,8 +12,18 @@ A browser-based US stock analysis dashboard built around a long-term, fundamenta
 - 🛡️ **セクター特化分析** — セクター独自の市場環境と特化KPIで分析（現在は **防衛セクター** 対応）
 - 📋 **グループ内 横比較** — 同セクター銘柄を一覧表で並べ、指標ごとに最良値を★でハイライト
 - 📖 **見るべきポイント解説** — 各指標の見方を折りたたみで解説
+- 🔄 **最新データ更新** — 無料API (Financial Modeling Prep) から株価・指標を取得（キー未設定/失敗時はサンプルにフォールバック）
 - ✅ **投資判断** — 上記を総合した BUY / HOLD / AVOID
 - 🌐 **日本語 / English** ワンクリック切り替え
+
+### 最新データの取得 / Live data
+
+1. [Financial Modeling Prep](https://site.financialmodelingprep.com/developer/docs) で**無料APIキー**を取得
+2. アプリ右上の「⚙️ API設定」にキーを貼り付けて保存（ブラウザの localStorage に保存。1回だけ）
+3. 「🔄 最新に更新」を押すと、表示中セクターの銘柄の**株価・PER・時価総額・各種レシオ**が最新値に更新されます
+
+> 更新対象は市場データ（株価・バリュエーション指標）です。**適正価値・センチメント・重要ファクター**は、あなた自身の分析・推定値として保持されます（コントラリアン投資では、ここが腕の見せ所）。
+> キーが無い／取得に失敗した場合は、自動的にサンプルデータで表示します。
 
 ### 防衛セクター特化 / Defense specialization
 
@@ -47,6 +57,7 @@ python3 -m http.server 8000
 | `data.js` | サンプル銘柄データ |
 | `i18n.js` | 日本語/英語の翻訳 |
 | `sectors.js` | セクター特化設定（市場環境・特化KPI・解説） |
+| `api.js` | 最新データ取得（無料API連携・フォールバック） |
 | `app.js` | 分析ロジックと描画 |
 
 ## 免責 / Disclaimer
