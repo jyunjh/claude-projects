@@ -19,13 +19,13 @@ A browser-based US stock analysis dashboard built around a long-term, fundamenta
 
 ### メンター相談 / Mentor chat
 
-ダッシュボード下部のチャットで、現在表示中の銘柄分析について Claude に相談できます。Claudeは**長期・ファンダメンタル・コントラリアン**の投資哲学と添付フレームワーク（EPIC / バリュエーション相互チェック / TIER 等）に基づき、後輩アナリストを指導するように助言します。画面の数値（PER・乖離・重要ファクター等）を踏まえて回答します。
+ダッシュボード下部のチャットで、現在表示中の銘柄分析について AI に相談できます。AIは**長期・ファンダメンタル・コントラリアン**の投資哲学と添付フレームワーク（EPIC / バリュエーション相互チェック / TIER 等）に基づき、後輩アナリストを指導するように助言します。画面の数値（PER・乖離・重要ファクター等）を踏まえて回答します。
 
-1. [Anthropic Console](https://console.anthropic.com/) で **APIキー** を取得
+1. [Google AI Studio](https://aistudio.google.com/apikey) で **無料の Gemini APIキー** を取得（カード登録不要）
 2. チャット下の「⚙️ AI設定」にキーを貼り付けて保存（localStorage に保存）
 3. 質問を入力するか、サジェストをクリック → ストリーミングで回答
 
-> 仕様: モデル `claude-opus-4-8` / Messages API をブラウザから直接ストリーミング呼び出し。学習用であり投資助言ではありません。
+> 仕様: モデル `gemini-2.5-flash` / Gemini API をブラウザから直接ストリーミング呼び出し。無料枠（1日250回程度）で利用可能。学習用であり投資助言ではありません。
 
 ### 最新データの取得 / Live data
 
@@ -69,7 +69,7 @@ python3 -m http.server 8000
 | `i18n.js` | 日本語/英語の翻訳 |
 | `sectors.js` | セクター特化設定（市場環境・特化KPI・解説） |
 | `api.js` | 最新データ取得（無料API連携・フォールバック） |
-| `chat.js` | メンター相談（Anthropic Messages APIのストリーミング） |
+| `chat.js` | メンター相談（Gemini API のストリーミング） |
 | `app.js` | 分析ロジックと描画 |
 
 ## 免責 / Disclaimer

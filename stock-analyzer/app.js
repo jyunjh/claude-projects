@@ -678,7 +678,7 @@ function sendChat() {
   const text = input.value.trim();
   if (!text || chatBusy) return;
 
-  if (!getAnthropicKey()) {
+  if (!getAiKey()) {
     document.getElementById("anthropicKeyBox").open = true;
     document.getElementById("anthropicKeyInput").focus();
     const log = document.getElementById("chatLog");
@@ -756,9 +756,9 @@ function init() {
   });
   document.getElementById("anthropicSaveBtn").addEventListener("click", () => {
     const inp = document.getElementById("anthropicKeyInput");
-    setAnthropicKey(inp.value);
+    setAiKey(inp.value);
     inp.value = "";
-    if (getAnthropicKey()) document.getElementById("anthropicKeyBox").open = false;
+    if (getAiKey()) document.getElementById("anthropicKeyBox").open = false;
     renderChat();
   });
   document.getElementById("langBtn").addEventListener("click", () => {

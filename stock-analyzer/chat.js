@@ -1,23 +1,24 @@
 /*
- * メンター相談チャット (Mentor chat) — Anthropic Messages API
+ * メンター相談チャット (Mentor chat) — Google AI Studio (Gemini API)
  * ----------------------------------------------------
- * 画面の分析結果を見ながら、熟練ファンドマネージャー役のClaudeに
+ * 画面の分析結果を見ながら、熟練ファンドマネージャー役のAIに
  * 相談できる機能。投資哲学(長期・ファンダメンタル・コントラリアン)と
  * 添付フレームワーク(EPIC/ASPIRE/TIER/ENTER/ADViCE)に基づいて助言する。
  *
+ * Gemini API は無料枠が手厚く、カード登録不要で使えるため採用。
  * APIキーはブラウザの localStorage に保存(個人利用向け)。
- * ブラウザから直接 API を呼ぶため anthropic-dangerous-direct-browser-access を使用。
- * キー取得: https://console.anthropic.com/
+ * キー取得(無料): https://aistudio.google.com/apikey
  */
 
-const ANTHROPIC_API = "https://api.anthropic.com/v1/messages";
-const MENTOR_MODEL = "claude-opus-4-8";
+// 無料枠で使えるモデル。必要なら gemini-2.5-flash-lite (1日1000回) 等に変更可。
+const MENTOR_MODEL = "gemini-2.5-flash";
+const GEMINI_API = `https://generativelanguage.googleapis.com/v1beta/models/${MENTOR_MODEL}:streamGenerateContent`;
 
-function getAnthropicKey() {
-  return (localStorage.getItem("anthropicKey") || "").trim();
+function getAiKey() {
+  return (localStorage.getItem("geminiKey") || "").trim();
 }
-function setAnthropicKey(k) {
-  localStorage.setItem("anthropicKey", (k || "").trim());
+function setAiKey(k) {
+  localStorage.setItem("geminiKey", (k || "").trim());
 }
 
 // メンターのシステムプロンプト。現在の画面分析(contextText)を埋め込む。
@@ -54,28 +55,27 @@ ${contextText}`;
 }
 
 /*
- * メッセージをストリーミング送信。
- * onDelta(text) でトークンが届くたびに、onDone() 完了時、onError(msg) で失敗時。
+ * メッセージをストリーミング送信 (Gemini streamGenerateContent + SSE)。
+ * onDelta(text) でトークンが届くたび、onDone() 完了時、onError(msg) で失敗時。
  */
 async function streamMentorChat({ system, messages, onDelta, onDone, onError }) {
-  const key = getAnthropicKey();
+  const key = getAiKey();
   if (!key) { onError("NO_KEY"); return; }
 
+  // 会話履歴を Gemini 形式に変換 (assistant -> model)
+  const contents = messages.map((m) => ({
+    role: m.role === "assistant" ? "model" : "user",
+    parts: [{ text: m.content }],
+  }));
+
   try {
-    const res = await fetch(ANTHROPIC_API, {
+    const res = await fetch(`${GEMINI_API}?alt=sse&key=${encodeURIComponent(key)}`, {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "x-api-key": key,
-        "anthropic-version": "2023-06-01",
-        "anthropic-dangerous-direct-browser-access": "true",
-      },
+      headers: { "content-type": "application/json" },
       body: JSON.stringify({
-        model: MENTOR_MODEL,
-        max_tokens: 2048,
-        stream: true,
-        system,
-        messages,
+        system_instruction: { parts: [{ text: system }] },
+        contents,
+        generationConfig: { maxOutputTokens: 2048 },
       }),
     });
 
@@ -95,22 +95,18 @@ async function streamMentorChat({ system, messages, onDelta, onDone, onError }) 
       if (done) break;
       buffer += decoder.decode(value, { stream: true });
 
-      // SSE は "\n\n" 区切り。行単位で data: を拾う。
+      // SSE: "data: {json}" 行を拾う
       const parts = buffer.split("\n");
       buffer = parts.pop(); // 未完の行は次回へ
       for (const line of parts) {
         const s = line.trim();
         if (!s.startsWith("data:")) continue;
         const data = s.slice(5).trim();
-        if (!data || data === "[DONE]") continue;
+        if (!data) continue;
         try {
-          const ev = JSON.parse(data);
-          if (ev.type === "content_block_delta" && ev.delta?.type === "text_delta") {
-            onDelta(ev.delta.text);
-          } else if (ev.type === "error") {
-            onError(ev.error?.message || "stream error");
-            return;
-          }
+          const chunk = JSON.parse(data);
+          const text = chunk.candidates?.[0]?.content?.parts?.map((p) => p.text || "").join("") || "";
+          if (text) onDelta(text);
         } catch (e) { /* 部分JSONは無視 */ }
       }
     }
