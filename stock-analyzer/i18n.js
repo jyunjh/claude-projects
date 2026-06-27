@@ -98,6 +98,14 @@ const I18N = {
     noKeyMsg: "Enter a free API key, then press Update.",
     liveNote: "Live update covers price & valuation multiples. Fair value, sentiment and critical factors stay your own estimates.",
 
+    // Price chart
+    priceChart: "Price Chart (1Y)",
+    chartSample: "illustrative sample series",
+    chartLive: "live history",
+    chartHigh: "High",
+    chartLow: "Low",
+    chartFairValue: "Fair value",
+
     langButton: "日本語",
   },
   ja: {
@@ -187,6 +195,14 @@ const I18N = {
     keySaved: "APIキーを保存しました",
     noKeyMsg: "無料APIキーを入力してから「更新」を押してください。",
     liveNote: "最新更新の対象は株価とバリュエーション指標です。適正価値・センチメント・重要ファクターはあなた自身の推定値のまま保持されます。",
+
+    // Price chart
+    priceChart: "株価チャート（1年）",
+    chartSample: "サンプル系列（説明用）",
+    chartLive: "実データ",
+    chartHigh: "高値",
+    chartLow: "安値",
+    chartFairValue: "適正価値",
 
     langButton: "English",
   },

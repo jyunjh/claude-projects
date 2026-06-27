@@ -177,6 +177,42 @@ table.compare td.best {
   background: rgba(52, 211, 153, 0.1);
 }
 
+/* ---- Price chart ---- */
+.src-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: var(--bg-card-2);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 2px 9px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.src-tag.live { color: var(--green); border-color: rgba(52, 211, 153, 0.4); }
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+.price-chart {
+  width: 100%;
+  height: 240px;
+  display: block;
+  background: var(--bg-card-2);
+  border-radius: 10px;
+}
+.chart-axis {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin-top: 6px;
+}
+
 /* ---- Guide accordion ---- */
 .guide-item {
   background: var(--bg-card-2);
