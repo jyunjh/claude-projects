@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>US Stock Analyzer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1 id="appTitle">US Stock Analyzer</h1>
+      <p id="appSubtitle">Long-term · Fundamental · Contrarian</p>
+    </div>
+    <div class="controls">
+      <select id="sectorSelect" aria-label="sector"></select>
+      <select id="stockSelect" aria-label="stock"></select>
+      <button class="lang-btn" id="viewBtn">横比較 ⇄</button>
+      <button class="lang-btn" id="langBtn">English</button>
+    </div>
+  </header>
+
+  <div class="demo-notice" id="demoNotice"></div>
+
+  <!-- 最新データ更新バー -->
+  <div class="data-bar">
+    <button id="refreshBtn" class="refresh-btn">🔄 <span id="refreshLabel"></span></button>
+    <span id="dataStatus" class="data-status"></span>
+    <details class="key-box" id="keyBox">
+      <summary id="keyToggle"></summary>
+      <div class="key-row">
+        <input id="apiKeyInput" type="password" autocomplete="off" />
+        <button id="saveKeyBtn" class="refresh-btn"></button>
+        <a id="getKeyLink" href="https://site.financialmodelingprep.com/developer/docs" target="_blank" rel="noopener"></a>
+      </div>
+      <p id="liveNote" class="key-note"></p>
+    </details>
+  </div>
+
+  <main class="grid">
+    <!-- 横比較ビュー (compare モードでのみ表示) -->
+    <section class="card full" id="compareView" style="display:none"></section>
+    <section class="card" id="overview"></section>
+    <section class="card" id="contrarian"></section>
+    <!-- セクター特化パネル (defense 等のセクターでのみ表示) -->
+    <section class="card full" id="sectorEnvironment" hidden></section>
+    <section class="card full" id="sectorKpis" hidden></section>
+    <section class="card full" id="metrics"></section>
+    <section class="card" id="valuation"></section>
+    <section class="card" id="factors"></section>
+    <!-- 見るべきポイント解説 -->
+    <section class="card full" id="guide"></section>
+    <section class="card full" id="recommendation">
+      <h2>✅ <span id="recTitle">Recommendation</span></h2>
+      <span class="pill amber" id="recPill"></span>
+      <p class="verdict-text" id="recDisclaimer"></p>
+    </section>
+  </main>
+
+  <footer>US Stock Analyzer · Demo build</footer>
+
+  <!-- 読み込み順: データ → 翻訳 → セクター設定 → API → ロジック -->
+  <script src="data.js"></script>
+  <script src="i18n.js"></script>
+  <script src="sectors.js"></script>
+  <script src="api.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
