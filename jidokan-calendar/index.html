@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>児童館イベントカレンダー</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- 地図: Leaflet + OpenStreetMap（APIキー不要・無料） -->
+  <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+          crossorigin=""></script>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1>🗓️ 児童館イベントカレンダー</h1>
+      <p>近くの児童館の予定を、まとめて見やすく</p>
+    </div>
+    <div class="month-nav">
+      <button id="prevMonth" aria-label="前の月">◀</button>
+      <span id="monthLabel">—</span>
+      <button id="nextMonth" aria-label="次の月">▶</button>
+      <button id="todayBtn" class="ghost">今日</button>
+    </div>
+  </header>
+
+  <!-- データ状態バー（モード・最終更新日。app.js が内容を差し込む） -->
+  <div class="status-bar" id="statusBar"></div>
+
+  <!-- データ更新ツール（取り込み実行 / Gemini APIキー設定） -->
+  <div class="data-tools">
+    <button id="updateBtn" class="refresh-btn">🔄 最新に更新</button>
+    <span id="updateStatus" class="update-status"></span>
+    <details class="key-box" id="keyBox">
+      <summary>⚙️ API設定</summary>
+      <div class="key-row">
+        <input id="apiKeyInput" type="password" autocomplete="off" placeholder="Gemini APIキーを貼り付け" />
+        <button id="saveKeyBtn" class="ghost small">保存</button>
+        <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">無料キーを取得</a>
+      </div>
+      <p class="key-note">キーはこのブラウザ（localStorage）にのみ保存され、更新時にローカルサーバー経由で各館PDFの取り込み（Gemini）に使われます。更新は <code>serve.py</code> で起動している必要があります。</p>
+    </details>
+  </div>
+
+  <!-- 対象の児童館を選ぶ（地図 + リスト。普段は折りたたみ） -->
+  <details class="panel" id="centerPanel">
+    <summary>
+      <span>📍 対象の児童館を選ぶ</span>
+      <span class="summary-hint" id="selectedSummary"></span>
+    </summary>
+    <div class="panel-body">
+      <div class="map-side">
+        <div id="map"></div>
+        <div class="map-tools">
+          <button id="locateBtn" class="ghost">📡 現在地から探す</button>
+          <span class="ref-hint">または地図をクリック / 下で地名検索</span>
+        </div>
+        <div class="search-row">
+          <input id="placeInput" type="text" placeholder="地名・駅名で基準地を設定（例: 西葛西駅）" />
+          <button id="placeBtn" class="ghost">検索</button>
+        </div>
+        <div class="dist-row" id="distRow" hidden>
+          <label>基準地から <strong><span id="distVal">3</span> km</strong> 以内</label>
+          <input id="distSlider" type="range" min="1" max="20" value="3" />
+          <button id="clearRefBtn" class="ghost small">基準地を解除</button>
+        </div>
+      </div>
+      <div class="list-side">
+        <div class="list-head">
+          <button id="selectAll" class="ghost small">すべて選択</button>
+          <button id="selectNone" class="ghost small">すべて解除</button>
+        </div>
+        <ul id="centerList" class="center-list"></ul>
+      </div>
+    </div>
+  </details>
+
+  <!-- フィルタ行 -->
+  <div class="filter-bar">
+    <label class="filter-field">
+      対象年齢
+      <select id="ageSelect">
+        <option value="all">すべて</option>
+        <option value="0-2">乳児（0〜2歳）</option>
+        <option value="3-5">幼児（3〜5歳）</option>
+        <option value="6-12">小学生（6〜12歳）</option>
+      </select>
+    </label>
+    <div class="view-toggle">
+      <button id="viewCalendar" class="seg active">カレンダー</button>
+      <button id="viewList" class="seg">リスト</button>
+    </div>
+    <label class="filter-field check">
+      <input type="checkbox" id="hidePast" />
+      終了分を隠す
+    </label>
+    <span class="count-hint" id="countHint"></span>
+  </div>
+
+  <!-- 色の凡例（どの色がどの児童館か。表示中の館だけ並べる） -->
+  <div class="legend" id="legend" aria-label="児童館の凡例"></div>
+
+  <!-- カレンダー / リスト -->
+  <main>
+    <section id="calendarView">
+      <div class="weekday-head">
+        <span class="sun">日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span class="sat">土</span>
+      </div>
+      <div id="calendarGrid" class="calendar-grid"></div>
+    </section>
+    <section id="listView" hidden></section>
+  </main>
+
+  <!-- イベント詳細（モーダル風） -->
+  <div id="eventOverlay" class="overlay" hidden>
+    <div class="event-card" role="dialog" aria-modal="true">
+      <button id="eventClose" class="event-close" aria-label="閉じる">×</button>
+      <div id="eventBody"></div>
+    </div>
+  </div>
+
+  <footer>児童館イベントカレンダー ｜ イベントは各児童館が公開する予定表から取得した参考情報です。開催可否・内容・対象は変更される場合があるため、最新・正確な情報は必ず各館の公式情報でご確認ください。</footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
