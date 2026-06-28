@@ -48,15 +48,15 @@
     "color": "#a06cd5"
   },
   {
-    "id": "ichinoe",
-    "name": "共育プラザ一之江 子育てひろば",
+    "id": "seishincho",
+    "name": "清新町子育てひろば",
     "region": "江戸川区",
-    "address": "〒132-0024 東京都江戸川区一之江3-13-7",
-    "lat": 35.6845,
-    "lng": 139.881,
-    "officialUrl": "https://mommy-ichinoe.com/",
-    "sourcePage": "https://mommy-ichinoe.com/news/",
-    "pdfUrl": "https://mommy-ichinoe.com/news/886/",
+    "address": "〒134-0087 東京都江戸川区清新町1-4-2（清新町コミュニティ会館1F）",
+    "lat": 35.6588,
+    "lng": 139.8525,
+    "officialUrl": "https://www.city.edogawa.tokyo.jp/e047/kuseijoho/gaiyo/shisetsuguide/bunya/kosodate/hiroba/seisinchousapo30-4.html",
+    "sourcePage": "https://www.city.edogawa.tokyo.jp/e047/kuseijoho/gaiyo/shisetsuguide/bunya/kosodate/hiroba/seisinchousapo30-4.html",
+    "pdfUrl": "https://www.city.edogawa.tokyo.jp/documents/7200/seishincho7.pdf",
     "color": "#d6477f"
   }
 ]
