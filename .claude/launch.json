@@ -6,6 +6,12 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "8000", "--directory", "stock-analyzer"],
       "port": 8000
+    },
+    {
+      "name": "jidokan-calendar",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["jidokan-calendar/serve.py", "--port", "9000"],
+      "port": 9000
     }
   ]
 }

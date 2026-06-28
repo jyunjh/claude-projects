@@ -1,0 +1,62 @@
+[
+  {
+    "id": "kasai",
+    "name": "共育プラザ葛西 子育てひろば",
+    "region": "江戸川区",
+    "address": "〒134-0082 東京都江戸川区宇喜田町175番地",
+    "lat": 35.6735,
+    "lng": 139.8638,
+    "officialUrl": "https://mommy-kasai.com/",
+    "sourcePage": "https://mommy-kasai.com/news/",
+    "pdfUrl": "https://mommy-kasai.com/admin/wp-content/uploads/2026/06/7278e3b8abbf2d7f228fac3ba4c60073.pdf",
+    "color": "#4f86c6"
+  },
+  {
+    "id": "nagisa",
+    "name": "なぎさ子育てひろば",
+    "region": "江戸川区",
+    "address": "〒134-0085 東京都江戸川区南葛西7丁目（なぎさ健康サポートセンター内）",
+    "lat": 35.6438,
+    "lng": 139.8702,
+    "officialUrl": "https://mommy-kasai.com/",
+    "sourcePage": "https://mommy-kasai.com/news/",
+    "pdfUrl": "https://mommy-kasai.com/admin/wp-content/uploads/2026/06/314041c8fae80f51c1389f5d12bde312.pdf",
+    "color": "#e8804f"
+  },
+  {
+    "id": "horie",
+    "name": "堀江・臨海子育てひろば",
+    "region": "江戸川区",
+    "address": "東京都江戸川区南葛西・臨海町地域",
+    "lat": 35.647,
+    "lng": 139.859,
+    "officialUrl": "https://mommy-kasai.com/",
+    "sourcePage": "https://mommy-kasai.com/news/",
+    "pdfUrl": "https://mommy-kasai.com/admin/wp-content/uploads/2026/06/493907759852a09d2cd4d1d1446f0c1f.pdf",
+    "color": "#5cb85c"
+  },
+  {
+    "id": "nakakasai",
+    "name": "中葛西子育てひろば（共育プラザ一之江）",
+    "region": "江戸川区",
+    "address": "東京都江戸川区中葛西地域（運営: 共育プラザ一之江）",
+    "lat": 35.662,
+    "lng": 139.868,
+    "officialUrl": "https://mommy-ichinoe.com/",
+    "sourcePage": "https://mommy-ichinoe.com/news/",
+    "pdfUrl": "https://mommy-ichinoe.com/news/889/",
+    "color": "#a06cd5"
+  },
+  {
+    "id": "ichinoe",
+    "name": "共育プラザ一之江 子育てひろば",
+    "region": "江戸川区",
+    "address": "〒132-0024 東京都江戸川区一之江3-13-7",
+    "lat": 35.6845,
+    "lng": 139.881,
+    "officialUrl": "https://mommy-ichinoe.com/",
+    "sourcePage": "https://mommy-ichinoe.com/news/",
+    "pdfUrl": "https://mommy-ichinoe.com/news/886/",
+    "color": "#d6477f"
+  }
+]
