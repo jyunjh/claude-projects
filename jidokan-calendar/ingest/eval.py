@@ -34,12 +34,22 @@ _spec.loader.exec_module(ing)
 
 
 def norm(s):
-    return re.sub(r"[\s　・！!？?、。，,.（）()\-〜~0-9０-９]", "", (s or "")).lower()
+    return re.sub(r"[\s　・！!？?、。，,.（）()\-〜~0-9０-９①-⑨!-~]", "", (s or "")).lower()
 
 
 def title_match(a, b):
     a, b = norm(a), norm(b)
-    return bool(a and b and (a in b or b in a))
+    if not a or not b:
+        return False
+    if a in b or b in a:
+        return True
+    # 表記ゆれ対策: 先頭5文字以上が共通なら同一行事とみなす（例「にじいろのさかな制作」≒「〜を作ろう」）
+    common = 0
+    for x, y in zip(a, b):
+        if x != y:
+            break
+        common += 1
+    return common >= 5
 
 
 def date_match(gt, pred):
