@@ -345,8 +345,15 @@ def run_ingest(api_key, center=None, year=None, log=print):
                 log(f"    取得元を解決: {used}（{kind}）")
             else:
                 log(f"    形式: {kind}")
-            # 号の年月を判定し、曜日対応表を渡してカレンダーの日付ズレを防ぐ
-            py, pm = detect_period(mime, data, api_key, year, log=log)
+            # 号の年月を判定し、曜日対応表を渡してカレンダーの日付ズレを防ぐ。
+            # まずPDFのファイル名から月を読めれば、API呼び出し(=無料枠消費)を1回節約する。
+            py, pm = year, None
+            mfn = re.search(r"(?<!\d)(\d{1,2})\.pdf(?:$|[?#])", used or url)
+            if mfn and 1 <= int(mfn.group(1)) <= 12:
+                pm = int(mfn.group(1))
+                log(f"    対象月をURLから判定: {pm}月")
+            else:
+                py, pm = detect_period(mime, data, api_key, year, log=log)
             hint = weekday_table(py, pm) if pm else ""
             if pm:
                 log(f"    対象: {py}年{pm}月（曜日表を付与）")
