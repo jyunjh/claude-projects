@@ -186,6 +186,10 @@ header {
 }
 .legend .lg .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
 .legend .lg .lg-region { color: var(--text-dim); font-size: 0.76rem; }
+.legend a.lg { text-decoration: none; cursor: pointer; transition: border-color .15s; }
+.legend a.lg:hover { border-color: var(--accent); }
+.legend a.lg:hover .lg-ext { color: var(--accent); }
+.legend .lg-ext { color: var(--text-dim); font-size: 0.72rem; }
 
 /* ---- Ongoing (multi-day) events ---- */
 .ongoing {

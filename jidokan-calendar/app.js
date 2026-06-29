@@ -199,11 +199,9 @@ function syncCenterListChecks() {
 }
 
 /* ---------- 地図 ---------- */
+const NISHIKASAI = [35.6646, 139.8593]; // 西葛西駅（対象エリアの中心）
 function initMap() {
-  const center = state.centers.length
-    ? [avg(state.centers.map((c) => c.lat)), avg(state.centers.map((c) => c.lng))]
-    : [35.68, 139.76];
-  map = L.map("map").setView(center, 12);
+  map = L.map("map").setView(NISHIKASAI, 13);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "&copy; OpenStreetMap contributors",
     maxZoom: 19,
@@ -497,13 +495,20 @@ function renderOngoing(ranges) {
   }
 }
 
-// 表示中の児童館を「色 → 館名」の凡例として並べる
+// 表示中の児童館を「色 → 館名」の凡例として並べる。
+// クリックすると、その館の元の予定表ページ（sourcePage / officialUrl）を新規タブで開く。
 function renderLegend() {
   const el = document.getElementById("legend");
   const shown = state.centers.filter((c) => state.selected.has(c.id));
-  el.innerHTML = shown.map((c) =>
-    `<span class="lg"><span class="dot" style="background:${c.color}"></span>${esc(c.name)}<span class="lg-region">${esc(c.region)}</span></span>`
-  ).join("");
+  el.innerHTML = shown.map((c) => {
+    const href = c.sourcePage || c.officialUrl;
+    const inner =
+      `<span class="dot" style="background:${c.color}"></span>${esc(c.name)}` +
+      `<span class="lg-region">${esc(c.region)}</span>`;
+    return href
+      ? `<a class="lg" href="${esc(href)}" target="_blank" rel="noopener" title="${esc(c.name)}の元の予定表を開く">${inner}<span class="lg-ext">↗</span></a>`
+      : `<span class="lg">${inner}</span>`;
+  }).join("");
 }
 
 function renderCalendar(y, m, byDateMap) {
@@ -639,7 +644,6 @@ function fmtDateTime(iso) {
   return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日 ` +
     `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
 }
-function avg(arr) { return arr.reduce((a, b) => a + b, 0) / arr.length; }
 function esc(s) {
   return String(s ?? "").replace(/[&<>"']/g, (ch) =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
