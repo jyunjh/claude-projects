@@ -33,6 +33,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.parse
 import urllib.request
 import urllib.error
@@ -150,8 +151,9 @@ def _source_part(mime, data):
     return {"inline_data": {"mime_type": mime, "data": base64.b64encode(data).decode("ascii")}}
 
 
-def _gemini_call(parts, api_key, max_tokens, log):
-    """Gemini を1回呼び、本文テキストを返す（flash→lite フォールバック）。"""
+def _gemini_call(parts, api_key, max_tokens, log, retries=3):
+    """Gemini を呼び本文テキストを返す。
+    429(上限)/503(混雑)/通信エラーは指数バックオフで再試行し、flash→lite もフォールバック。"""
     body = json.dumps({
         "contents": [{"parts": parts}],
         "generationConfig": {"responseMimeType": "application/json",
@@ -160,27 +162,38 @@ def _gemini_call(parts, api_key, max_tokens, log):
     last_err = None
     for model in (PRIMARY_MODEL, FALLBACK_MODEL):
         url = f"{API_BASE}/{model}:generateContent?key={api_key}"
-        req = urllib.request.Request(url, data=body, headers={"Content-Type": "application/json"})
-        try:
-            with urllib.request.urlopen(req, timeout=180) as resp:
-                payload = json.loads(resp.read().decode("utf-8"))
-            cand = (payload.get("candidates") or [{}])[0]
-            finish = cand.get("finishReason")
-            text = "".join(p.get("text", "") for p in (cand.get("content") or {}).get("parts") or [])
-            log(f"    [{model}] finishReason={finish} / 応答 {len(text)} 文字")
-            if finish == "MAX_TOKENS":
-                raise RuntimeError("応答が途中で切れました(MAX_TOKENS)。maxOutputTokens を増やしてください。")
-            if not text.strip():
-                raise RuntimeError(f"空の応答(finishReason={finish})。")
-            return text
-        except urllib.error.HTTPError as e:
-            last_err = f"HTTP {e.code}"
-            if e.code == 429:
-                log(f"    {model} が上限(429)。{FALLBACK_MODEL} にフォールバックします。")
-                continue
-            raise RuntimeError(f"Gemini エラー ({model}): HTTP {e.code} "
-                               f"{e.read().decode('utf-8', 'ignore')[:200]}")
-    raise RuntimeError(f"Gemini 呼び出しに失敗しました: {last_err}")
+        for attempt in range(retries):
+            try:
+                req = urllib.request.Request(url, data=body,
+                                             headers={"Content-Type": "application/json"})
+                with urllib.request.urlopen(req, timeout=180) as resp:
+                    payload = json.loads(resp.read().decode("utf-8"))
+                cand = (payload.get("candidates") or [{}])[0]
+                finish = cand.get("finishReason")
+                text = "".join(p.get("text", "") for p in (cand.get("content") or {}).get("parts") or [])
+                log(f"    [{model}] finishReason={finish} / 応答 {len(text)} 文字")
+                if finish == "MAX_TOKENS":
+                    raise RuntimeError("応答が途中で切れました(MAX_TOKENS)。maxOutputTokens を増やしてください。")
+                if not text.strip():
+                    raise RuntimeError(f"空の応答(finishReason={finish})。")
+                return text
+            except urllib.error.HTTPError as e:
+                last_err = f"HTTP {e.code}"
+                if e.code in (429, 503) and attempt < retries - 1:
+                    wait = 5 * (2 ** attempt)  # 5,10,20s
+                    log(f"    {model} {e.code}（{'上限' if e.code==429 else '混雑'}）→ {wait}s 待って再試行 {attempt+2}/{retries}")
+                    time.sleep(wait)
+                    continue
+                if e.code in (429, 503):
+                    break  # このモデルは諦めて次モデルへ
+                raise RuntimeError(f"Gemini エラー ({model}): HTTP {e.code} "
+                                   f"{e.read().decode('utf-8', 'ignore')[:200]}")
+            except urllib.error.URLError as e:
+                last_err = str(e)
+                if attempt < retries - 1:
+                    time.sleep(5 * (2 ** attempt)); continue
+                break
+    raise RuntimeError(f"Gemini 呼び出しに失敗（上限/混雑が継続）: {last_err}")
 
 
 def detect_period(mime, data, api_key, fallback_year, log=lambda *a: None):
@@ -216,46 +229,12 @@ def gemini_extract(mime, data, api_key, year, log=lambda *a: None, hint=""):
         instruction += ("\n\n# 日付の参照表（必ずこれに従って date を決める）\n" + hint
                         + "\n各行事の date は、PDFに印刷された曜日と上の表で一致する日にすること。"
                         "ずれていると気づいたら表に合わせて必ず直す。")
-    body = json.dumps({
-        "contents": [{"parts": [source_part, {"text": instruction}]}],
-        "generationConfig": {
-            "responseMimeType": "application/json",
-            "temperature": 0,
-            # 思考(thinking)はカレンダーの日付・曜日合わせに有効なので残す。
-            # ただし大きめの出力枠を確保し、思考+出力で途中切れ(JSON破損)しないようにする。
-            "maxOutputTokens": 32768,
-        },
-    }).encode("utf-8")
-
-    last_err = None
-    for model in (PRIMARY_MODEL, FALLBACK_MODEL):
-        url = f"{API_BASE}/{model}:generateContent?key={api_key}"
-        req = urllib.request.Request(url, data=body,
-                                     headers={"Content-Type": "application/json"})
-        try:
-            with urllib.request.urlopen(req, timeout=180) as resp:
-                payload = json.loads(resp.read().decode("utf-8"))
-            cand = (payload.get("candidates") or [{}])[0]
-            finish = cand.get("finishReason")
-            parts = (cand.get("content") or {}).get("parts") or []
-            text = "".join(p.get("text", "") for p in parts)
-            log(f"    [{model}] finishReason={finish} / 応答 {len(text)} 文字")
-            if finish == "MAX_TOKENS":
-                raise RuntimeError("応答が長すぎて途中で切れました(MAX_TOKENS)。maxOutputTokens を増やすか分割が必要です。")
-            if not text.strip():
-                raise RuntimeError(f"空の応答が返りました(finishReason={finish})。")
-            try:
-                return json.loads(text)
-            except json.JSONDecodeError:
-                raise RuntimeError(f"JSON解析に失敗(finishReason={finish})。先頭: {text[:160]}")
-        except urllib.error.HTTPError as e:
-            last_err = f"HTTP {e.code}"
-            if e.code == 429:
-                log(f"    {model} が上限(429)。{FALLBACK_MODEL} にフォールバックします。")
-                continue
-            raise RuntimeError(f"Gemini エラー ({model}): HTTP {e.code} "
-                               f"{e.read().decode('utf-8', 'ignore')[:200]}")
-    raise RuntimeError(f"Gemini 呼び出しに失敗しました: {last_err}")
+    # 思考(thinking)は日付・曜日合わせに有効なので残し、出力枠を広く取って途中切れを防ぐ
+    text = _gemini_call([source_part, {"text": instruction}], api_key, 32768, log)
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        raise RuntimeError(f"JSON解析に失敗。先頭: {text[:160]}")
 
 
 _date_re = re.compile(r"^\d{4}-\d{2}-\d{2}$")
@@ -342,19 +321,22 @@ def run_ingest(api_key, center=None, year=None, log=print):
         if not centers:
             raise ValueError(f"児童館ID '{center}' が centers.json に見つかりません。")
 
-    # 単館モードでは既存イベントを残し、その館の分だけ差し替える
-    collected = []
-    if center:
-        collected = [e for e in load_existing() if e.get("centerId") != center]
+    # 既存データを館ごとに保持。成功した館だけ差し替え、失敗館は前回データを残す
+    # （ネットワーク不調や上限で全データが消えるのを防ぐ）。
+    by_center = {}
+    for e in load_existing():
+        by_center.setdefault(e.get("centerId"), []).append(e)
 
     today = date.today()
     ok, failed = [], []
-    for c in centers:
+    for idx, c in enumerate(centers):
         cid, name, url = c["id"], c.get("name", c["id"]), c.get("pdfUrl")
         if not url:
             log(f"[skip] {name}: pdfUrl が未設定")
             failed.append({"name": name, "error": "pdfUrl 未設定"})
             continue
+        if idx > 0:
+            time.sleep(4)  # 無料枠のレート上限を避けるためのスロットル
         log(f"[取得] {name}")
         try:
             mime, data, used = fetch_source(url)
@@ -377,14 +359,14 @@ def run_ingest(api_key, center=None, year=None, log=print):
                     kept.append(normalize(e, cid, len(kept) + 1))
                 else:
                     dropped += 1
-            collected.extend(kept)
+            by_center[cid] = kept  # 成功 → この館の分だけ差し替え
             ok.append({"name": name, "kept": len(kept), "dropped": dropped})
             log(f"    → {len(kept)} 件抽出（無効 {dropped} 件を除外）")
         except Exception as e:
-            log(f"    !! 失敗のためスキップ: {e}")
+            log(f"    !! 失敗のためスキップ（前回データを保持）: {e}")
             failed.append({"name": name, "error": str(e)})
 
-    collected = dedupe(collected)
+    collected = dedupe([e for evs in by_center.values() for e in evs])
     collected.sort(key=lambda e: (e.get("date") or "", e.get("start") or ""))
 
     generated_at = datetime.now(JST).isoformat(timespec="seconds")
