@@ -53,23 +53,42 @@ JST = timezone(timedelta(hours=9))
 PAST_LIMIT_DAYS = 60
 FUTURE_LIMIT_DAYS = 400
 
-PROMPT = """このPDFは日本の児童館・子育てひろばが公開している月間イベント予定表（おたより）です。
-記載されているイベント・行事・プログラムを漏れなく抽出してください。
+PROMPT = """このPDFは、日本の児童館・子育てひろば（主に東京都 江戸川区・江東区）が公開している
+「月間イベント予定表（おたより）」です。掲載されている対象月のイベント・行事・プログラムを、
+正確に・漏れなく抽出してください。
 
-出力は JSON 配列のみ。各要素は次のキーを持つこと:
-- date: "YYYY-MM-DD"。年の記載が無ければ {year} 年として補完する。
-- start: 開始時刻 "HH:MM"（不明なら null）
-- end: 終了時刻 "HH:MM"（不明なら null）
-- title: イベント名（短く）
-- description: 内容の補足（無ければ ""）
-- ageMin: 対象年齢の下限（整数の歳。乳児/0歳は0、小学生は6 等。不明なら null）
-- ageMax: 対象年齢の上限（整数の歳。小学生は12 等。不明なら null）
-- ageLabel: PDF原文に近い対象表記（例 "0〜2歳", "小学生", "どなたでも"）
+# 読み取りの注意（正確さ最優先）
+- まずPDFの見出しから対象の「年・月」を把握し、各イベントの date をその月の正しい日付にする
+  （年の記載が無ければ {year} 年）。
+- カレンダー形式（日付のマス目・表）の場合は、各イベントを必ず正しい日付の列／行に対応づける。
+  ひとつ隣の日付に取り違えないよう、罫線・曜日の並びをよく確認する。
+- 翌月のミニカレンダー・「来月の予告」など、対象月以外の日付のものは含めない。
+- 時刻は「10:30〜11:15」等の表記から start / end をできるだけ正確に取る。
+- 対象年齢は「対象: 0歳」「2〜3歳」「未就学児」「乳児/幼児」「小学生」「どなたでも」等から判断し、
+  ageMin / ageMax（歳の整数）と、原文に近い ageLabel を両方入れる。
+  目安: 「0〜2歳」→min0,max2 ／「○か月」→0歳扱いで min0 ／「未就学児」→min0,max5 ／
+        「幼児」→min3,max5 ／「小学生」→min6,max12 ／不明は null。
 
-ルール:
-- 日付が確実に特定できないイベントは含めない。
-- 開館時間・休館日など「イベントではないもの」は含めない。
-- 説明・前置き・コードフェンスは書かず、JSON 配列だけを返す。"""
+# 期間（連日）開催の扱い ★重要
+- 「7月1日〜7月7日」「期間中」「毎日」のように複数日連続で開催されるものは、
+  日ごとに分けず必ず 1件にまとめ、date=開始日 / dateEnd=終了日 とする。
+- 1日だけの単発イベントは dateEnd を null にする。
+
+# 含めないもの
+- 開館時間・休館日・利用案内・持ち物のみの注記・申込方法など「イベントでないもの」。
+- 日付が特定できないもの。まったく同一内容の重複。
+
+# 出力（JSON 配列のみ。前置き・説明・コードフェンスは書かない）
+各要素のキー:
+- date: "YYYY-MM-DD"
+- dateEnd: "YYYY-MM-DD" または null（連日開催の終了日）
+- start: "HH:MM" または null
+- end: "HH:MM" または null
+- title: イベント名（簡潔に）
+- description: 補足（無ければ ""）
+- ageMin: 整数の歳 または null
+- ageMax: 整数の歳 または null
+- ageLabel: 原文に近い対象表記（例 "0〜2歳", "小学生", "どなたでも"）"""
 
 
 def http_get(url):
@@ -104,7 +123,8 @@ def gemini_extract(pdf_bytes, api_key, year):
                 {"text": PROMPT.format(year=year)},
             ]
         }],
-        "generationConfig": {"responseMimeType": "application/json", "temperature": 0},
+        "generationConfig": {"responseMimeType": "application/json", "temperature": 0,
+                             "maxOutputTokens": 8192},
     }).encode("utf-8")
 
     last_err = None
@@ -158,10 +178,15 @@ def normalize(ev, center_id, idx):
         except (TypeError, ValueError):
             return None
     t = s(ev.get("start"))
+    d = ev["date"].strip()
+    de = s(ev.get("dateEnd"))
+    if not (de and _date_re.match(de) and de > d):
+        de = None  # 終了日が不正/開始日以前なら単発扱い
     return {
         "id": f"{center_id}-{idx:03d}",
         "centerId": center_id,
-        "date": ev["date"].strip(),
+        "date": d,
+        "dateEnd": de,
         "start": t if (t and _time_re.match(t)) else None,
         "end": (lambda e: e if (e and _time_re.match(e)) else None)(s(ev.get("end"))),
         "title": s(ev.get("title")) or "（無題）",

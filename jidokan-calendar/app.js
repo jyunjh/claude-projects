@@ -437,12 +437,24 @@ function render() {
 // 連続する同一イベント（同じ館・名称・時間が3日以上ほぼ連日）を1件の「期間中の催し」にまとめる。
 // 週1回などの定期開催（日付に間隔がある）は単発のまま残す。
 function splitRanges(evs) {
-  const groups = {};
+  const ranges = [], singles = [];
+
+  // 取り込み側が dateEnd を持つ連日イベントは、そのまま期間として扱う
+  const groupable = [];
   for (const e of evs) {
+    if (e.dateEnd && e.dateEnd > e.date) {
+      ranges.push({ ...e, isRange: true, from: e.date, to: e.dateEnd, count: daysBetween(e.date, e.dateEnd) + 1 });
+    } else {
+      groupable.push(e);
+    }
+  }
+
+  // dateEnd の無いものは、連日で重複する同一イベントをまとめる（旧データ・保険）
+  const groups = {};
+  for (const e of groupable) {
     const k = `${e.centerId}|${e.title}|${e.start || ""}|${e.end || ""}`;
     (groups[k] ||= []).push(e);
   }
-  const ranges = [], singles = [];
   for (const arr of Object.values(groups)) {
     arr.sort((a, b) => a.date.localeCompare(b.date));
     let run = [arr[0]];
