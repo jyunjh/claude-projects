@@ -82,6 +82,21 @@ python3 ingest/ingest.py --center kasai   # 指定した館だけ再取り込み
 
 > 月次のPDF URL（ハッシュ付き）は毎月変わります。`pdfUrl` に **おたより一覧ページのURL** を指定しておくと、自動解決で毎月の最新PDFに追随しやすくなります。
 
+### 抽出精度の測定 / Measuring accuracy
+
+Gemini の抽出がどれだけ正確かは、手動で作った正解データと突き合わせて
+**適合率(precision)・再現率(recall)・F1** で測れます。プロンプト変更の良し悪しを数値で確認できます。
+
+```bash
+export GEMINI_API_KEY=xxxxx
+python3 ingest/eval.py                # 正解データのある全館
+python3 ingest/eval.py --center kasai # 指定館のみ
+```
+
+- 正解データ: `ingest/eval/<centerId>.json`（`{"events":[{"date","title","dateEnd"?}]}`）。出典PDFを目視で作成。
+- 出力: 館ごとの precision / recall / F1 と、**取りこぼし（−）/ 余分・誤り（＋）** の一覧。
+- 同梱の正解データ: `nagisa`（1件）, `kasai`（14件）。他の館も `ingest/eval/` に追加すれば対象になります。
+
 ### 3. 表示（運用機能）
 
 - 画面上部の**状態バー**: 「サンプル / 実データ」バッジと**最終更新日時**を表示。
