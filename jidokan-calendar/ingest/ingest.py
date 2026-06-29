@@ -53,9 +53,9 @@ JST = timezone(timedelta(hours=9))
 PAST_LIMIT_DAYS = 60
 FUTURE_LIMIT_DAYS = 400
 
-PROMPT = """このPDFは、日本の児童館・子育てひろば（主に東京都 江戸川区・江東区）が公開している
-「月間イベント予定表（おたより）」です。掲載されている対象月のイベント・行事・プログラムを、
-正確に・漏れなく抽出してください。
+PROMPT = """以下の資料（PDF・ページのテキスト・画像のいずれか）は、日本の児童館・子育てひろば
+（主に東京都 江戸川区・江東区）が公開している「月間イベント予定表（おたより）」です。
+掲載されている対象月のイベント・行事・プログラムを、正確に・漏れなく抽出してください。
 
 # 読み取りの注意（正確さ最優先）
 - まずPDFの見出しから対象の「年・月」を把握し、各イベントの date をその月の正しい日付にする
@@ -97,32 +97,55 @@ def http_get(url):
         return resp.read(), resp.headers.get("Content-Type", "")
 
 
-def resolve_pdf(url):
-    """pdfUrl を取得。HTML ページならページ内の最初の .pdf リンクを解決して再取得する。
-    戻り値: (pdf_bytes, used_url)"""
+def html_to_text(html):
+    """HTML から可視テキストをざっくり抽出（script/style 除去・タグ除去・空白整理）。"""
+    html = re.sub(r"(?is)<(script|style)[^>]*>.*?</\1>", " ", html)
+    html = re.sub(r"(?is)<br\s*/?>", "\n", html)
+    html = re.sub(r"(?is)</(p|div|tr|li|h[1-6])>", "\n", html)
+    text = re.sub(r"(?s)<[^>]+>", " ", html)
+    text = (text.replace("&nbsp;", " ").replace("&amp;", "&")
+                .replace("&lt;", "<").replace("&gt;", ">"))
+    text = re.sub(r"[ \t]+", " ", text)
+    text = re.sub(r"\n\s*\n+", "\n", text)
+    return text.strip()
+
+
+def fetch_source(url):
+    """予定表の元データを取得する。PDF直リンク・HTMLページ・画像のいずれにも対応。
+    戻り値: (mime, data_bytes, used_url)。
+      - PDF:   ("application/pdf", bytes, url)
+      - 画像:  ("image/jpeg" 等, bytes, url)
+      - HTML:  ページ内に .pdf があればそのPDFを、無ければ本文テキストを
+               ("text/plain", text_bytes, url) で返す。"""
     data, ctype = http_get(url)
-    if "application/pdf" in ctype.lower() or url.lower().endswith(".pdf"):
-        return data, url
-    # HTML とみなして PDF リンクを探す
+    ct = ctype.lower()
+    if "application/pdf" in ct or url.lower().endswith(".pdf"):
+        return "application/pdf", data, url
+    if ct.startswith("image/"):
+        return ct.split(";")[0].strip(), data, url
+    # HTML: まず埋め込みPDFを優先、無ければページ本文テキストを使う
     html = data.decode("utf-8", "ignore")
     hrefs = re.findall(r'href=["\']([^"\']+?\.pdf)["\']', html, flags=re.IGNORECASE)
-    if not hrefs:
-        raise RuntimeError("ページ内に PDF リンクが見つかりませんでした（pdfUrl を直リンクに更新してください）")
-    pdf_url = urllib.parse.urljoin(url, hrefs[0])
-    pdf_bytes, _ = http_get(pdf_url)
-    return pdf_bytes, pdf_url
+    if hrefs:
+        pdf_url = urllib.parse.urljoin(url, hrefs[0])
+        pdf_bytes, _ = http_get(pdf_url)
+        return "application/pdf", pdf_bytes, pdf_url
+    text = html_to_text(html)
+    if len(text) < 50:
+        raise RuntimeError("ページから予定表テキスト・PDF・画像を取得できませんでした")
+    return "text/plain", text.encode("utf-8"), url
 
 
-def gemini_extract(pdf_bytes, api_key, year):
-    """PDFバイト列を Gemini に渡してイベント配列(list[dict])を得る。"""
+def gemini_extract(mime, data, api_key, year):
+    """予定表データ(PDF/画像/テキスト)を Gemini に渡してイベント配列(list[dict])を得る。"""
+    if mime == "text/plain":
+        source_part = {"text": "以下は予定表ページから抽出したテキストです:\n\n"
+                               + data.decode("utf-8")[:120000]}
+    else:
+        source_part = {"inline_data": {"mime_type": mime,
+                                       "data": base64.b64encode(data).decode("ascii")}}
     body = json.dumps({
-        "contents": [{
-            "parts": [
-                {"inline_data": {"mime_type": "application/pdf",
-                                 "data": base64.b64encode(pdf_bytes).decode("ascii")}},
-                {"text": PROMPT.format(year=year)},
-            ]
-        }],
+        "contents": [{"parts": [source_part, {"text": PROMPT.format(year=year)}]}],
         "generationConfig": {"responseMimeType": "application/json", "temperature": 0,
                              "maxOutputTokens": 8192},
     }).encode("utf-8")
@@ -246,10 +269,13 @@ def run_ingest(api_key, center=None, year=None, log=print):
             continue
         log(f"[取得] {name}")
         try:
-            pdf, used = resolve_pdf(url)
+            mime, data, used = fetch_source(url)
+            kind = {"application/pdf": "PDF", "text/plain": "HTMLテキスト"}.get(mime, mime)
             if used != url:
-                log(f"    PDFリンクを解決: {used}")
-            events = gemini_extract(pdf, api_key, year)
+                log(f"    取得元を解決: {used}（{kind}）")
+            else:
+                log(f"    形式: {kind}")
+            events = gemini_extract(mime, data, api_key, year)
             if not isinstance(events, list):
                 raise RuntimeError("Gemini が配列を返しませんでした")
             kept, dropped = [], 0
