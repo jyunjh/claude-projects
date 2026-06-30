@@ -210,15 +210,15 @@ header {
 .ongoing-chip .oc-meta { font-size: 0.76rem; color: var(--text-dim); }
 
 /* ---- Calendar ---- */
-.weekday-head { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 6px; }
+.weekday-head { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; margin-bottom: 6px; }
 .weekday-head span { text-align: center; font-size: 0.8rem; font-weight: 600; color: var(--text-dim); padding: 4px 0; }
 .weekday-head .sun { color: var(--sun); }
 .weekday-head .sat { color: var(--sat); }
 
-.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
 .day {
   background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
-  min-height: 96px; padding: 6px; display: flex; flex-direction: column; gap: 4px;
+  min-height: 96px; min-width: 0; padding: 6px; display: flex; flex-direction: column; gap: 4px;
 }
 .day.empty { background: transparent; border: none; }
 .day.today { background: var(--today); border-color: #f0cf7a; }
