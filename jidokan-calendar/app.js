@@ -67,11 +67,18 @@ function initialMonth() {
   const now = new Date();
   const cur = new Date(now.getFullYear(), now.getMonth(), 1);
   if (!state.events.length) return cur;
-  const curYM = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
-  const dates = state.events.map((e) => e.date).sort();
-  if (dates.some((d) => d.startsWith(curYM))) return cur;
-  const upcoming = dates.find((d) => d >= TODAY_KEY) || dates[dates.length - 1];
-  const [y, m] = upcoming.split("-").map(Number);
+  // イベント件数が最も多い月を初期表示（同数なら新しい月）。
+  // 月刊の予定表データでは、その月が「いま見たい月」になることが多い。
+  const byYM = {};
+  for (const e of state.events) {
+    const ym = e.date.slice(0, 7);
+    byYM[ym] = (byYM[ym] || 0) + 1;
+  }
+  let best = null, bestN = -1;
+  for (const ym of Object.keys(byYM).sort()) {
+    if (byYM[ym] >= bestN) { bestN = byYM[ym]; best = ym; }
+  }
+  const [y, m] = best.split("-").map(Number);
   return new Date(y, m - 1, 1);
 }
 
@@ -199,11 +206,9 @@ function syncCenterListChecks() {
 }
 
 /* ---------- 地図 ---------- */
+const NISHIKASAI = [35.6646, 139.8593]; // 西葛西駅（対象エリアの中心）
 function initMap() {
-  const center = state.centers.length
-    ? [avg(state.centers.map((c) => c.lat)), avg(state.centers.map((c) => c.lng))]
-    : [35.68, 139.76];
-  map = L.map("map").setView(center, 12);
+  map = L.map("map").setView(NISHIKASAI, 13);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "&copy; OpenStreetMap contributors",
     maxZoom: 19,
@@ -418,36 +423,116 @@ function render() {
   document.getElementById("selectedSummary").textContent =
     sel === total ? "すべての児童館を表示中" : `${sel} / ${total} 館を表示中`;
 
-  renderLegend();
-
-  if (state.view === "calendar") renderCalendar(y, m);
-  else renderList(y, m);
-}
-
-// 表示中の児童館を「色 → 館名」の凡例として並べる
-function renderLegend() {
-  const el = document.getElementById("legend");
-  const shown = state.centers.filter((c) => state.selected.has(c.id));
-  el.innerHTML = shown.map((c) =>
-    `<span class="lg"><span class="dot" style="background:${c.color}"></span>${esc(c.name)}<span class="lg-region">${esc(c.region)}</span></span>`
-  ).join("");
-}
-
-function eventsByDate(y, m) {
-  const map = {};
-  for (const e of visibleEvents()) {
+  // 当月の表示対象を取得し、連続開催（期間中の催し）と単発に分ける
+  const monthEvs = visibleEvents().filter((e) => {
     const d = new Date(e.date + "T00:00:00");
-    if (d.getFullYear() === y && d.getMonth() === m) (map[e.date] ||= []).push(e);
+    return d.getFullYear() === y && d.getMonth() === m;
+  });
+  const { ranges, singles } = splitRanges(monthEvs);
+
+  const totalCount = singles.length + ranges.length;
+  document.getElementById("countHint").textContent =
+    `今月 ${totalCount} 件` + (ranges.length ? `（うち期間中 ${ranges.length} 件）` : "");
+
+  renderLegend();
+  renderOngoing(ranges);
+
+  if (state.view === "calendar") renderCalendar(y, m, byDate(singles));
+  else renderList(byDate(singles));
+}
+
+// 連続する同一イベント（同じ館・名称・時間が3日以上ほぼ連日）を1件の「期間中の催し」にまとめる。
+// 週1回などの定期開催（日付に間隔がある）は単発のまま残す。
+function splitRanges(evs) {
+  const ranges = [], singles = [];
+
+  // 取り込み側が dateEnd を持つ連日イベントは、そのまま期間として扱う
+  const groupable = [];
+  for (const e of evs) {
+    if (e.dateEnd && e.dateEnd > e.date) {
+      ranges.push({ ...e, isRange: true, from: e.date, to: e.dateEnd, count: daysBetween(e.date, e.dateEnd) + 1 });
+    } else {
+      groupable.push(e);
+    }
   }
+
+  // dateEnd の無いものは、連日で重複する同一イベントをまとめる（旧データ・保険）
+  const groups = {};
+  for (const e of groupable) {
+    const k = `${e.centerId}|${e.title}|${e.start || ""}|${e.end || ""}`;
+    (groups[k] ||= []).push(e);
+  }
+  for (const arr of Object.values(groups)) {
+    arr.sort((a, b) => a.date.localeCompare(b.date));
+    let run = [arr[0]];
+    const runs = [];
+    for (let i = 1; i < arr.length; i++) {
+      const gap = daysBetween(arr[i - 1].date, arr[i].date);
+      if (gap >= 1 && gap <= 2) run.push(arr[i]); // 連日（最大1日の休館を許容）
+      else { runs.push(run); run = [arr[i]]; }
+    }
+    runs.push(run);
+    for (const r of runs) {
+      if (r.length >= 3) {
+        const f = r[0], l = r[r.length - 1];
+        ranges.push({ ...f, id: f.id + "-range", isRange: true, from: f.date, to: l.date, count: r.length });
+      } else {
+        singles.push(...r);
+      }
+    }
+  }
+  return { ranges, singles };
+}
+
+// イベント配列 → { "YYYY-MM-DD": [ev,...] }
+function byDate(evs) {
+  const map = {};
+  for (const e of evs) (map[e.date] ||= []).push(e);
   return map;
 }
 
-function renderCalendar(y, m) {
+// 「期間中の催し」をカレンダー上部の別枠に表示
+function renderOngoing(ranges) {
+  const sec = document.getElementById("ongoing");
+  const list = document.getElementById("ongoingList");
+  if (!ranges.length) { sec.hidden = true; list.innerHTML = ""; return; }
+  sec.hidden = false;
+  ranges.sort((a, b) => a.from.localeCompare(b.from) || a.centerId.localeCompare(b.centerId));
+  list.innerHTML = "";
+  for (const ev of ranges) {
+    const c = state.centerById[ev.centerId];
+    const past = ev.to < TODAY_KEY;
+    const btn = document.createElement("button");
+    btn.className = "ongoing-chip" + (past ? " past" : "");
+    btn.style.borderLeftColor = c ? c.color : "#888";
+    btn.innerHTML =
+      `<span class="oc-range">${fmtMD(ev.from)}〜${fmtMD(ev.to)}</span>` +
+      `<span class="oc-title">${esc(ev.title)}</span>` +
+      `<span class="oc-meta">${esc(c ? c.name : "")}${ev.start ? " ・" + ev.start + (ev.end ? "〜" + ev.end : "") : ""}・${esc(ev.ageLabel || "対象年齢の記載なし")}</span>`;
+    btn.onclick = () => openEvent(ev);
+    list.appendChild(btn);
+  }
+}
+
+// 表示中の児童館を「色 → 館名」の凡例として並べる。
+// クリックすると、その館の元の予定表ページ（sourcePage / officialUrl）を新規タブで開く。
+function renderLegend() {
+  const el = document.getElementById("legend");
+  const shown = state.centers.filter((c) => state.selected.has(c.id));
+  el.innerHTML = shown.map((c) => {
+    const href = c.sourcePage || c.officialUrl;
+    const inner =
+      `<span class="dot" style="background:${c.color}"></span>${esc(c.name)}` +
+      `<span class="lg-region">${esc(c.region)}</span>`;
+    return href
+      ? `<a class="lg" href="${esc(href)}" target="_blank" rel="noopener" title="${esc(c.name)}の元の予定表を開く">${inner}<span class="lg-ext">↗</span></a>`
+      : `<span class="lg">${inner}</span>`;
+  }).join("");
+}
+
+function renderCalendar(y, m, byDateMap) {
   const grid = document.getElementById("calendarGrid");
   grid.innerHTML = "";
-  const byDate = eventsByDate(y, m);
-  const monthCount = Object.values(byDate).reduce((s, a) => s + a.length, 0);
-  document.getElementById("countHint").textContent = `今月 ${monthCount} 件`;
 
   const first = new Date(y, m, 1);
   const startPad = first.getDay();
@@ -469,7 +554,7 @@ function renderCalendar(y, m) {
       (key === TODAY_KEY ? " today" : "") + (past ? " past" : "");
     cell.innerHTML = `<span class="num">${d}</span>`;
 
-    const list = (byDate[key] || []);
+    const list = (byDateMap[key] || []);
     const shown = list.slice(0, 3);
     for (const ev of shown) {
       const c = state.centerById[ev.centerId];
@@ -490,16 +575,13 @@ function renderCalendar(y, m) {
   }
 }
 
-function renderList(y, m) {
+function renderList(byDateMap) {
   const wrap = document.getElementById("listView");
   wrap.innerHTML = "";
-  const byDate = eventsByDate(y, m);
-  const dates = Object.keys(byDate).sort();
-  const monthCount = dates.reduce((s, k) => s + byDate[k].length, 0);
-  document.getElementById("countHint").textContent = `今月 ${monthCount} 件`;
+  const dates = Object.keys(byDateMap).sort();
 
   if (!dates.length) {
-    wrap.innerHTML = `<p class="empty-state">この月に表示できるイベントがありません。<br>対象の児童館や対象年齢の条件をご確認ください。</p>`;
+    wrap.innerHTML = `<p class="empty-state">この月に表示できる単発イベントがありません。<br>（期間中の催しは上部にまとめて表示されます）</p>`;
     return;
   }
 
@@ -511,7 +593,7 @@ function renderList(y, m) {
     const wdClass = dow === 0 ? "wd-sun" : dow === 6 ? "wd-sat" : "";
     day.innerHTML = `<div class="agenda-date">${date.getMonth() + 1}/${date.getDate()} <span class="${wdClass}">(${WEEKDAYS[dow]})</span></div>`;
 
-    for (const ev of byDate[key]) {
+    for (const ev of byDateMap[key]) {
       const c = state.centerById[ev.centerId];
       const item = document.createElement("button");
       item.className = "agenda-item" + (isPast(ev) ? " past" : "");
@@ -532,14 +614,15 @@ function renderList(y, m) {
 /* ---------- イベント詳細 ---------- */
 function openEvent(ev) {
   const c = state.centerById[ev.centerId] || {};
-  const date = new Date(ev.date + "T00:00:00");
-  const dateStr = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日（${WEEKDAYS[date.getDay()]}）`;
   const timeStr = ev.start ? `${ev.start}${ev.end ? "〜" + ev.end : ""}` : "時間未定";
+  const dateStr = ev.isRange
+    ? `${fmtFull(ev.from)} 〜 ${fmtFull(ev.to)}（期間中の催し・連日）`
+    : fmtFull(ev.date);
 
   document.getElementById("eventBody").innerHTML = `
     <h2>${esc(ev.title)}</h2>
     <span class="ev-center"><span class="dot" style="background:${c.color || "#888"}"></span>${esc(c.name || "")}（${esc(c.region || "")}）</span>
-    <div class="detail-row"><span class="k">日付</span><span class="v">${dateStr}</span></div>
+    <div class="detail-row"><span class="k">${ev.isRange ? "期間" : "日付"}</span><span class="v">${dateStr}</span></div>
     <div class="detail-row"><span class="k">時間</span><span class="v">${timeStr}</span></div>
     <div class="detail-row"><span class="k">対象</span><span class="v">${esc(ev.ageLabel || "記載なし")}</span></div>
     ${ev.description ? `<div class="detail-row"><span class="k">内容</span><span class="v">${esc(ev.description)}</span></div>` : ""}
@@ -559,6 +642,20 @@ function closeEvent() {
 function dateKey(d) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
+// "YYYY-MM-DD" 同士の日数差
+function daysBetween(k1, k2) {
+  return (new Date(k2 + "T00:00:00") - new Date(k1 + "T00:00:00")) / 86400000;
+}
+// "2026-07-01" → "7/1"
+function fmtMD(key) {
+  const [, m, d] = key.split("-").map(Number);
+  return `${m}/${d}`;
+}
+// "2026-07-01" → "2026年7月1日（火）"
+function fmtFull(key) {
+  const dt = new Date(key + "T00:00:00");
+  return `${dt.getFullYear()}年${dt.getMonth() + 1}月${dt.getDate()}日（${WEEKDAYS[dt.getDay()]}）`;
+}
 // ISO文字列 → "2026年6月29日 09:00"。失敗時は元の文字列を返す。
 function fmtDateTime(iso) {
   const d = new Date(iso);
@@ -566,7 +663,6 @@ function fmtDateTime(iso) {
   return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日 ` +
     `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
 }
-function avg(arr) { return arr.reduce((a, b) => a + b, 0) / arr.length; }
 function esc(s) {
   return String(s ?? "").replace(/[&<>"']/g, (ch) =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));

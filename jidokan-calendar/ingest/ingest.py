@@ -33,6 +33,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.parse
 import urllib.request
 import urllib.error
@@ -53,23 +54,49 @@ JST = timezone(timedelta(hours=9))
 PAST_LIMIT_DAYS = 60
 FUTURE_LIMIT_DAYS = 400
 
-PROMPT = """このPDFは日本の児童館・子育てひろばが公開している月間イベント予定表（おたより）です。
-記載されているイベント・行事・プログラムを漏れなく抽出してください。
+PROMPT = """以下の資料（PDF・ページのテキスト・画像のいずれか）は、日本の児童館・子育てひろば
+（主に東京都 江戸川区・江東区）が公開している「月間イベント予定表（おたより）」です。
+掲載されている対象月のイベント・行事・プログラムを、正確に・漏れなく抽出してください。
 
-出力は JSON 配列のみ。各要素は次のキーを持つこと:
-- date: "YYYY-MM-DD"。年の記載が無ければ {year} 年として補完する。
-- start: 開始時刻 "HH:MM"（不明なら null）
-- end: 終了時刻 "HH:MM"（不明なら null）
-- title: イベント名（短く）
-- description: 内容の補足（無ければ ""）
-- ageMin: 対象年齢の下限（整数の歳。乳児/0歳は0、小学生は6 等。不明なら null）
-- ageMax: 対象年齢の上限（整数の歳。小学生は12 等。不明なら null）
-- ageLabel: PDF原文に近い対象表記（例 "0〜2歳", "小学生", "どなたでも"）
+# 読み取りの注意（正確さ最優先）
+- まずPDFの見出しから対象の「年・月」を把握し、各イベントの date をその月の正しい日付にする
+  （年の記載が無ければ {year} 年）。
+- カレンダー形式（日付のマス目・表）の場合は、各マス目（日付欄）を1つずつ確認し、
+  書かれている行事を必ず全て拾う。
+- ★日付の取り違えに最大限注意する★: 各マス（日付欄）に印刷されている「数字」を、
+  その欄に書かれた行事の date の『日』としてそのまま使う。
+  曜日から日付を逆算・補正して動かしてはいけない（1日ずれる原因になる）。
+  行事はそれが印刷されているマスの数字の日に置き、隣のマスや上下の行とずらさない。
+- 行事名だけが欄に書かれ、時間や対象は別の囲み（説明欄）にある場合も多い。
+  その場合は囲みの説明と突き合わせて時間・対象を補う。分からなければ null にしてでも、
+  イベント自体は必ず出力する（明らかに行事があるのに空配列を返さない）。
+- 翌月のミニカレンダー・「来月の予告」など、対象月以外の日付のものは含めない。
+- 時刻は「10:30〜11:15」等の表記から start / end をできるだけ正確に取る。
+- 対象年齢は「対象: 0歳」「2〜3歳」「未就学児」「乳児/幼児」「小学生」「どなたでも」等から判断し、
+  ageMin / ageMax（歳の整数）と、原文に近い ageLabel を両方入れる。
+  目安: 「0〜2歳」→min0,max2 ／「○か月」→0歳扱いで min0 ／「未就学児」→min0,max5 ／
+        「幼児」→min3,max5 ／「小学生」→min6,max12 ／不明は null。
 
-ルール:
-- 日付が確実に特定できないイベントは含めない。
-- 開館時間・休館日など「イベントではないもの」は含めない。
-- 説明・前置き・コードフェンスは書かず、JSON 配列だけを返す。"""
+# 期間（連日）開催の扱い ★重要
+- 「7月1日〜7月7日」「期間中」「毎日」のように複数日連続で開催されるものは、
+  日ごとに分けず必ず 1件にまとめ、date=開始日 / dateEnd=終了日 とする。
+- 1日だけの単発イベントは dateEnd を null にする。
+
+# 含めないもの
+- 開館時間・休館日・利用案内・持ち物のみの注記・申込方法など「イベントでないもの」。
+- 日付が特定できないもの。まったく同一内容の重複。
+
+# 出力（JSON 配列のみ。前置き・説明・コードフェンスは書かない）
+各要素のキー:
+- date: "YYYY-MM-DD"
+- dateEnd: "YYYY-MM-DD" または null（連日開催の終了日）
+- start: "HH:MM" または null
+- end: "HH:MM" または null
+- title: イベント名（簡潔に）
+- description: 補足（無ければ ""）
+- ageMin: 整数の歳 または null
+- ageMax: 整数の歳 または null
+- ageLabel: 原文に近い対象表記（例 "0〜2歳", "小学生", "どなたでも"）"""
 
 
 def http_get(url):
@@ -78,53 +105,136 @@ def http_get(url):
         return resp.read(), resp.headers.get("Content-Type", "")
 
 
-def resolve_pdf(url):
-    """pdfUrl を取得。HTML ページならページ内の最初の .pdf リンクを解決して再取得する。
-    戻り値: (pdf_bytes, used_url)"""
+def html_to_text(html):
+    """HTML から可視テキストをざっくり抽出（script/style 除去・タグ除去・空白整理）。"""
+    html = re.sub(r"(?is)<(script|style)[^>]*>.*?</\1>", " ", html)
+    html = re.sub(r"(?is)<br\s*/?>", "\n", html)
+    html = re.sub(r"(?is)</(p|div|tr|li|h[1-6])>", "\n", html)
+    text = re.sub(r"(?s)<[^>]+>", " ", html)
+    text = (text.replace("&nbsp;", " ").replace("&amp;", "&")
+                .replace("&lt;", "<").replace("&gt;", ">"))
+    text = re.sub(r"[ \t]+", " ", text)
+    text = re.sub(r"\n\s*\n+", "\n", text)
+    return text.strip()
+
+
+def fetch_source(url):
+    """予定表の元データを取得する。PDF直リンク・HTMLページ・画像のいずれにも対応。
+    戻り値: (mime, data_bytes, used_url)。
+      - PDF:   ("application/pdf", bytes, url)
+      - 画像:  ("image/jpeg" 等, bytes, url)
+      - HTML:  ページ内に .pdf があればそのPDFを、無ければ本文テキストを
+               ("text/plain", text_bytes, url) で返す。"""
     data, ctype = http_get(url)
-    if "application/pdf" in ctype.lower() or url.lower().endswith(".pdf"):
-        return data, url
-    # HTML とみなして PDF リンクを探す
+    ct = ctype.lower()
+    if "application/pdf" in ct or url.lower().endswith(".pdf"):
+        return "application/pdf", data, url
+    if ct.startswith("image/"):
+        return ct.split(";")[0].strip(), data, url
+    # HTML: まず埋め込みPDFを優先、無ければページ本文テキストを使う
     html = data.decode("utf-8", "ignore")
     hrefs = re.findall(r'href=["\']([^"\']+?\.pdf)["\']', html, flags=re.IGNORECASE)
-    if not hrefs:
-        raise RuntimeError("ページ内に PDF リンクが見つかりませんでした（pdfUrl を直リンクに更新してください）")
-    pdf_url = urllib.parse.urljoin(url, hrefs[0])
-    pdf_bytes, _ = http_get(pdf_url)
-    return pdf_bytes, pdf_url
+    if hrefs:
+        pdf_url = urllib.parse.urljoin(url, hrefs[0])
+        pdf_bytes, _ = http_get(pdf_url)
+        return "application/pdf", pdf_bytes, pdf_url
+    text = html_to_text(html)
+    if len(text) < 50:
+        raise RuntimeError("ページから予定表テキスト・PDF・画像を取得できませんでした")
+    return "text/plain", text.encode("utf-8"), url
 
 
-def gemini_extract(pdf_bytes, api_key, year):
-    """PDFバイト列を Gemini に渡してイベント配列(list[dict])を得る。"""
+def _source_part(mime, data):
+    if mime == "text/plain":
+        return {"text": "以下は予定表ページから抽出したテキストです:\n\n"
+                        + data.decode("utf-8")[:120000]}
+    return {"inline_data": {"mime_type": mime, "data": base64.b64encode(data).decode("ascii")}}
+
+
+def _gemini_call(parts, api_key, max_tokens, log, retries=3):
+    """Gemini を呼び本文テキストを返す。
+    429(上限)/503(混雑)/通信エラーは指数バックオフで再試行し、flash→lite もフォールバック。"""
     body = json.dumps({
-        "contents": [{
-            "parts": [
-                {"inline_data": {"mime_type": "application/pdf",
-                                 "data": base64.b64encode(pdf_bytes).decode("ascii")}},
-                {"text": PROMPT.format(year=year)},
-            ]
-        }],
-        "generationConfig": {"responseMimeType": "application/json", "temperature": 0},
+        "contents": [{"parts": parts}],
+        "generationConfig": {"responseMimeType": "application/json",
+                             "temperature": 0, "maxOutputTokens": max_tokens},
     }).encode("utf-8")
-
     last_err = None
     for model in (PRIMARY_MODEL, FALLBACK_MODEL):
         url = f"{API_BASE}/{model}:generateContent?key={api_key}"
-        req = urllib.request.Request(url, data=body,
-                                     headers={"Content-Type": "application/json"})
-        try:
-            with urllib.request.urlopen(req, timeout=120) as resp:
-                payload = json.loads(resp.read().decode("utf-8"))
-            text = payload["candidates"][0]["content"]["parts"][0]["text"]
-            return json.loads(text)
-        except urllib.error.HTTPError as e:
-            last_err = f"HTTP {e.code}"
-            if e.code == 429:
-                print(f"    {model} が上限(429)。{FALLBACK_MODEL} にフォールバックします。")
-                continue
-            raise RuntimeError(f"Gemini エラー ({model}): HTTP {e.code} "
-                               f"{e.read().decode('utf-8', 'ignore')[:200]}")
-    raise RuntimeError(f"Gemini 呼び出しに失敗しました: {last_err}")
+        for attempt in range(retries):
+            try:
+                req = urllib.request.Request(url, data=body,
+                                             headers={"Content-Type": "application/json"})
+                with urllib.request.urlopen(req, timeout=180) as resp:
+                    payload = json.loads(resp.read().decode("utf-8"))
+                cand = (payload.get("candidates") or [{}])[0]
+                finish = cand.get("finishReason")
+                text = "".join(p.get("text", "") for p in (cand.get("content") or {}).get("parts") or [])
+                log(f"    [{model}] finishReason={finish} / 応答 {len(text)} 文字")
+                if finish == "MAX_TOKENS":
+                    raise RuntimeError("応答が途中で切れました(MAX_TOKENS)。maxOutputTokens を増やしてください。")
+                if not text.strip():
+                    raise RuntimeError(f"空の応答(finishReason={finish})。")
+                return text
+            except urllib.error.HTTPError as e:
+                last_err = f"HTTP {e.code}"
+                if e.code in (429, 503) and attempt < retries - 1:
+                    wait = 5 * (2 ** attempt)  # 5,10,20s
+                    log(f"    {model} {e.code}（{'上限' if e.code==429 else '混雑'}）→ {wait}s 待って再試行 {attempt+2}/{retries}")
+                    time.sleep(wait)
+                    continue
+                if e.code in (429, 503):
+                    break  # このモデルは諦めて次モデルへ
+                raise RuntimeError(f"Gemini エラー ({model}): HTTP {e.code} "
+                                   f"{e.read().decode('utf-8', 'ignore')[:200]}")
+            except urllib.error.URLError as e:
+                last_err = str(e)
+                if attempt < retries - 1:
+                    time.sleep(5 * (2 ** attempt)); continue
+                break
+    raise RuntimeError(f"Gemini 呼び出しに失敗（上限/混雑が継続）: {last_err}")
+
+
+def detect_period(mime, data, api_key, fallback_year, log=lambda *a: None):
+    """この号が何年・何月のものかを軽く問い合わせる。(year, month) を返す（不明は month=None）。"""
+    q = (f"この資料は何年・何月の予定表（おたより）ですか。"
+         f"JSONで {{\"year\": 整数, \"month\": 整数}} だけを返す。"
+         f"年が読めなければ year は {fallback_year}。月が読めなければ month は null。")
+    try:
+        text = _gemini_call([_source_part(mime, data), {"text": q}], api_key, 200, log)
+        obj = json.loads(text)
+        y = int(obj.get("year") or fallback_year)
+        mo = obj.get("month")
+        return y, (int(mo) if mo else None)
+    except Exception as e:
+        log(f"    年月の判定に失敗（曜日表なしで続行）: {e}")
+        return fallback_year, None
+
+
+def weekday_table(year, month):
+    """その月の各日の曜日対応表（Geminiの日付合わせ用の参照）。"""
+    import calendar
+    wd = "月火水木金土日"
+    n = calendar.monthrange(year, month)[1]
+    days = " ".join(f"{d}日({wd[date(year, month, d).weekday()]})" for d in range(1, n + 1))
+    return f"{year}年{month}月の各日の曜日: {days}"
+
+
+def gemini_extract(mime, data, api_key, year, log=lambda *a: None, hint=""):
+    """予定表データ(PDF/画像/テキスト)を Gemini に渡してイベント配列(list[dict])を得る。"""
+    source_part = _source_part(mime, data)
+    instruction = PROMPT.format(year=year)
+    if hint:
+        instruction += ("\n\n# 日付の参照表（必ずこれに従って date を決める）\n" + hint
+                        + "\n各行事の date は、PDFに印刷された曜日と上の表で一致する日にすること。"
+                        "ずれていると気づいたら表に合わせて必ず直す。")
+    # 思考(thinking)は日付・曜日合わせに有効なので残し、出力枠を広く取って途中切れを防ぐ
+    text = _gemini_call([source_part, {"text": instruction}], api_key, 32768, log)
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        raise RuntimeError(f"JSON解析に失敗。先頭: {text[:160]}")
 
 
 _date_re = re.compile(r"^\d{4}-\d{2}-\d{2}$")
@@ -158,10 +268,15 @@ def normalize(ev, center_id, idx):
         except (TypeError, ValueError):
             return None
     t = s(ev.get("start"))
+    d = ev["date"].strip()
+    de = s(ev.get("dateEnd"))
+    if not (de and _date_re.match(de) and de > d):
+        de = None  # 終了日が不正/開始日以前なら単発扱い
     return {
         "id": f"{center_id}-{idx:03d}",
         "centerId": center_id,
-        "date": ev["date"].strip(),
+        "date": d,
+        "dateEnd": de,
         "start": t if (t and _time_re.match(t)) else None,
         "end": (lambda e: e if (e and _time_re.match(e)) else None)(s(ev.get("end"))),
         "title": s(ev.get("title")) or "（無題）",
@@ -206,25 +321,43 @@ def run_ingest(api_key, center=None, year=None, log=print):
         if not centers:
             raise ValueError(f"児童館ID '{center}' が centers.json に見つかりません。")
 
-    # 単館モードでは既存イベントを残し、その館の分だけ差し替える
-    collected = []
-    if center:
-        collected = [e for e in load_existing() if e.get("centerId") != center]
+    # 既存データを館ごとに保持。成功した館だけ差し替え、失敗館は前回データを残す
+    # （ネットワーク不調や上限で全データが消えるのを防ぐ）。
+    by_center = {}
+    for e in load_existing():
+        by_center.setdefault(e.get("centerId"), []).append(e)
 
     today = date.today()
     ok, failed = [], []
-    for c in centers:
+    for idx, c in enumerate(centers):
         cid, name, url = c["id"], c.get("name", c["id"]), c.get("pdfUrl")
         if not url:
             log(f"[skip] {name}: pdfUrl が未設定")
             failed.append({"name": name, "error": "pdfUrl 未設定"})
             continue
+        if idx > 0:
+            time.sleep(4)  # 無料枠のレート上限を避けるためのスロットル
         log(f"[取得] {name}")
         try:
-            pdf, used = resolve_pdf(url)
+            mime, data, used = fetch_source(url)
+            kind = {"application/pdf": "PDF", "text/plain": "HTMLテキスト"}.get(mime, mime)
             if used != url:
-                log(f"    PDFリンクを解決: {used}")
-            events = gemini_extract(pdf, api_key, year)
+                log(f"    取得元を解決: {used}（{kind}）")
+            else:
+                log(f"    形式: {kind}")
+            # 号の年月を判定し、曜日対応表を渡してカレンダーの日付ズレを防ぐ。
+            # まずPDFのファイル名から月を読めれば、API呼び出し(=無料枠消費)を1回節約する。
+            py, pm = year, None
+            mfn = re.search(r"(?<!\d)(\d{1,2})\.pdf(?:$|[?#])", used or url)
+            if mfn and 1 <= int(mfn.group(1)) <= 12:
+                pm = int(mfn.group(1))
+                log(f"    対象月をURLから判定: {pm}月")
+            else:
+                py, pm = detect_period(mime, data, api_key, year, log=log)
+            hint = weekday_table(py, pm) if pm else ""
+            if pm:
+                log(f"    対象: {py}年{pm}月（曜日表を付与）")
+            events = gemini_extract(mime, data, api_key, py, log=log, hint=hint)
             if not isinstance(events, list):
                 raise RuntimeError("Gemini が配列を返しませんでした")
             kept, dropped = [], 0
@@ -233,14 +366,14 @@ def run_ingest(api_key, center=None, year=None, log=print):
                     kept.append(normalize(e, cid, len(kept) + 1))
                 else:
                     dropped += 1
-            collected.extend(kept)
+            by_center[cid] = kept  # 成功 → この館の分だけ差し替え
             ok.append({"name": name, "kept": len(kept), "dropped": dropped})
             log(f"    → {len(kept)} 件抽出（無効 {dropped} 件を除外）")
         except Exception as e:
-            log(f"    !! 失敗のためスキップ: {e}")
+            log(f"    !! 失敗のためスキップ（前回データを保持）: {e}")
             failed.append({"name": name, "error": str(e)})
 
-    collected = dedupe(collected)
+    collected = dedupe([e for evs in by_center.values() for e in evs])
     collected.sort(key=lambda e: (e.get("date") or "", e.get("start") or ""))
 
     generated_at = datetime.now(JST).isoformat(timespec="seconds")

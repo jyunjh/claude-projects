@@ -1,2 +1,6 @@
 __pycache__/
 *.pyc
+# APIキー等の秘密情報（コミットしない）
+.gemini_key
+*.key
+.env

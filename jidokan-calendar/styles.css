@@ -186,6 +186,28 @@ header {
 }
 .legend .lg .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
 .legend .lg .lg-region { color: var(--text-dim); font-size: 0.76rem; }
+.legend a.lg { text-decoration: none; cursor: pointer; transition: border-color .15s; }
+.legend a.lg:hover { border-color: var(--accent); }
+.legend a.lg:hover .lg-ext { color: var(--accent); }
+.legend .lg-ext { color: var(--text-dim); font-size: 0.72rem; }
+
+/* ---- Ongoing (multi-day) events ---- */
+.ongoing {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 12px 14px; margin-bottom: 14px;
+}
+.ongoing-title { font-size: 0.9rem; margin-bottom: 10px; color: var(--text); }
+.ongoing-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.ongoing-chip {
+  display: flex; flex-direction: column; gap: 2px; text-align: left;
+  background: var(--surface-2); border: 1px solid var(--border); border-left: 5px solid #888;
+  border-radius: 10px; padding: 8px 12px; cursor: pointer; min-width: 180px;
+}
+.ongoing-chip:hover { background: #eef2f7; }
+.ongoing-chip.past { opacity: 0.5; }
+.ongoing-chip .oc-range { font-size: 0.78rem; font-weight: 700; color: var(--accent); }
+.ongoing-chip .oc-title { font-size: 0.92rem; font-weight: 600; }
+.ongoing-chip .oc-meta { font-size: 0.76rem; color: var(--text-dim); }
 
 /* ---- Calendar ---- */
 .weekday-head { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 6px; }
