@@ -67,11 +67,18 @@ function initialMonth() {
   const now = new Date();
   const cur = new Date(now.getFullYear(), now.getMonth(), 1);
   if (!state.events.length) return cur;
-  const curYM = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
-  const dates = state.events.map((e) => e.date).sort();
-  if (dates.some((d) => d.startsWith(curYM))) return cur;
-  const upcoming = dates.find((d) => d >= TODAY_KEY) || dates[dates.length - 1];
-  const [y, m] = upcoming.split("-").map(Number);
+  // イベント件数が最も多い月を初期表示（同数なら新しい月）。
+  // 月刊の予定表データでは、その月が「いま見たい月」になることが多い。
+  const byYM = {};
+  for (const e of state.events) {
+    const ym = e.date.slice(0, 7);
+    byYM[ym] = (byYM[ym] || 0) + 1;
+  }
+  let best = null, bestN = -1;
+  for (const ym of Object.keys(byYM).sort()) {
+    if (byYM[ym] >= bestN) { bestN = byYM[ym]; best = ym; }
+  }
+  const [y, m] = best.split("-").map(Number);
   return new Date(y, m - 1, 1);
 }
 
