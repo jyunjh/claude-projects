@@ -226,6 +226,7 @@ header {
 .day.sun .num { color: var(--sun); }
 .day.sat .num { color: var(--sat); }
 .day.today .num { color: #b8860b; }
+.day .evs { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 
 .ev {
   border: none; text-align: left; width: 100%;
@@ -297,4 +298,27 @@ footer { margin-top: 28px; text-align: center; font-size: 0.76rem; color: var(--
   .ev { font-size: 0.68rem; padding: 3px 5px; }
   .ev .ev-time { display: none; }
   .month-nav span { min-width: 7em; font-size: 1rem; }
+}
+
+/* スマホ: カレンダーは狭くて文字が読めないため、イベントを色ドットで表示（一覧性重視）。
+   全文を読みたいときはリスト表示（スマホでは既定でリスト）。タップで詳細。 */
+@media (max-width: 640px) {
+  body { padding: 10px; }
+  .brand h1 { font-size: 1.25rem; }
+  .weekday-head { gap: 3px; }
+  .weekday-head span { font-size: 0.72rem; padding: 2px 0; }
+  .calendar-grid { gap: 3px; }
+  .day { min-height: 52px; padding: 3px; gap: 3px; border-radius: 8px; }
+  .day .num { font-size: 0.72rem; }
+  .day .evs { flex-direction: row; flex-wrap: wrap; gap: 3px; }
+  .day .ev {
+    width: 9px; height: 9px; padding: 0; border-radius: 50%;
+    font-size: 0; line-height: 0; overflow: hidden; flex: none;
+  }
+  .day .ev .ev-time { display: none; }
+  .day .more { font-size: 0.6rem; padding-left: 0; width: 100%; }
+  /* リスト表示を読みやすく */
+  .agenda-item { padding: 9px 11px; gap: 9px; }
+  .filter-bar { gap: 10px 12px; }
+  .count-hint { margin-left: 0; }
 }

@@ -54,6 +54,15 @@ async function init() {
   state.selected = new Set(state.centers.map((c) => c.id)); // 既定は全館表示
   state.month = initialMonth(); // 当月にイベントが無ければ直近のある月へ
 
+  // スマホ（狭い画面）では、全文が読めるリスト表示を初期選択にする
+  if (window.matchMedia("(max-width: 640px)").matches) {
+    state.view = "list";
+    document.getElementById("viewCalendar").classList.remove("active");
+    document.getElementById("viewList").classList.add("active");
+    document.getElementById("calendarView").hidden = true;
+    document.getElementById("listView").hidden = false;
+  }
+
   renderStatusBar();
   buildCenterList();
   bindControls();
@@ -554,6 +563,8 @@ function renderCalendar(y, m, byDateMap) {
       (key === TODAY_KEY ? " today" : "") + (past ? " past" : "");
     cell.innerHTML = `<span class="num">${d}</span>`;
 
+    const evs = document.createElement("div");
+    evs.className = "evs";
     const list = (byDateMap[key] || []);
     const shown = list.slice(0, 3);
     for (const ev of shown) {
@@ -561,16 +572,18 @@ function renderCalendar(y, m, byDateMap) {
       const btn = document.createElement("button");
       btn.className = "ev" + (past ? " past" : "");
       btn.style.background = c ? c.color : "#888";
+      btn.title = ev.title;
       btn.innerHTML = `${ev.start ? `<span class="ev-time">${ev.start}</span>` : ""}${esc(ev.title)}`;
       btn.onclick = () => openEvent(ev);
-      cell.appendChild(btn);
+      evs.appendChild(btn);
     }
     if (list.length > shown.length) {
       const more = document.createElement("span");
       more.className = "more";
       more.textContent = `他 ${list.length - shown.length} 件`;
-      cell.appendChild(more);
+      evs.appendChild(more);
     }
+    cell.appendChild(evs);
     grid.appendChild(cell);
   }
 }
