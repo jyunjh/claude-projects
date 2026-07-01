@@ -63,6 +63,14 @@ async function init() {
     document.getElementById("listView").hidden = false;
   }
 
+  // 公開サイト（localhost 以外）では取り込みAPIが無いため、更新UIを隠す。
+  // ローカルの serve.py で開いたときだけ「🔄最新に更新／⚙️API設定」を表示。
+  const isLocal = ["localhost", "127.0.0.1", ""].includes(location.hostname);
+  if (!isLocal) {
+    const tools = document.querySelector(".data-tools");
+    if (tools) tools.hidden = true;
+  }
+
   renderStatusBar();
   buildCenterList();
   bindControls();
