@@ -1,0 +1,311 @@
+:root {
+  --bg: #f4f6f9;
+  --card: #ffffff;
+  --ink: #1e2833;
+  --sub: #66707c;
+  --line: #e2e7ee;
+  --accent: #0f6fdb;
+  --accent-weak: #e8f1fc;
+  --good: #0d8a4f;
+  --warn: #b7791f;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.site-header {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.site-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 16px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+h1 { font-size: 18px; margin: 0 0 8px; }
+.area-label {
+  font-size: 12px;
+  color: var(--accent);
+  background: var(--accent-weak);
+  border-radius: 999px;
+  padding: 2px 10px;
+  vertical-align: middle;
+}
+.tabs { display: flex; gap: 4px; }
+.tab {
+  border: none;
+  background: none;
+  font-size: 14px;
+  padding: 10px 16px;
+  cursor: pointer;
+  color: var(--sub);
+  border-bottom: 3px solid transparent;
+}
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+
+main { max-width: 1200px; margin: 0 auto; padding: 14px 16px 40px; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ---- フィルタ ---- */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+.filter-bar.compact { padding: 8px 10px; }
+.filter-group { display: flex; align-items: center; gap: 6px; }
+.filter-group.grow { flex: 1 1 160px; }
+.filter-group label { font-size: 12px; color: var(--sub); white-space: nowrap; }
+.filter-group select, .filter-group input {
+  font-size: 13px;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  min-width: 0;
+}
+.filter-group input[type="search"] { width: 100%; }
+
+.stats-bar {
+  font-size: 12px;
+  color: var(--sub);
+  margin: 0 2px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  align-items: center;
+}
+.stats-bar .badge {
+  background: var(--good);
+  color: #fff;
+  border-radius: 999px;
+  padding: 1px 9px;
+  font-size: 11px;
+}
+
+/* ---- 部屋カード ---- */
+.room-list { display: flex; flex-direction: column; gap: 10px; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.room-card { padding: 12px 14px; }
+.room-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+}
+.room-name { font-size: 15px; font-weight: 700; }
+.room-sub { font-size: 12px; color: var(--sub); }
+.dup-badge {
+  font-size: 11px;
+  color: var(--accent);
+  background: var(--accent-weak);
+  border-radius: 999px;
+  padding: 1px 8px;
+  white-space: nowrap;
+}
+.room-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin-top: 8px;
+  align-items: center;
+}
+.rent-price { font-size: 20px; font-weight: 700; color: #c33; }
+.rent-price small { font-size: 12px; color: var(--sub); font-weight: 400; }
+.spec { font-size: 13px; }
+.spec b { font-weight: 600; }
+.init-cost {
+  font-size: 13px;
+  background: #f7faf7;
+  border: 1px solid #dceadf;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-top: 8px;
+}
+.init-cost .agency { font-weight: 700; color: var(--good); }
+.init-cost .total { font-weight: 700; }
+.init-cost .assumed { color: var(--warn); }
+.listing-toggle {
+  border: none;
+  background: none;
+  color: var(--accent);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px 0 0;
+}
+.listing-table { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 12px; }
+.listing-table th, .listing-table td {
+  text-align: left;
+  padding: 5px 8px;
+  border-top: 1px solid var(--line);
+  white-space: nowrap;
+}
+.listing-table th { color: var(--sub); font-weight: 500; border-top: none; }
+.listing-table .best td { background: #f2fbf5; }
+.listing-table a { color: var(--accent); }
+
+.load-more-wrap { text-align: center; margin-top: 14px; }
+.load-more {
+  font-size: 14px;
+  padding: 10px 40px;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  background: #fff;
+  cursor: pointer;
+}
+
+/* ---- 比較タブ ---- */
+.market-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.metric {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+}
+.metric .m-label { font-size: 11px; color: var(--sub); }
+.metric .m-value { font-size: 19px; font-weight: 700; }
+.metric .m-note { font-size: 11px; color: var(--sub); }
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.compare-col h2 { font-size: 15px; margin: 4px 0 8px; }
+.compare-col .hint { font-size: 11px; color: var(--sub); font-weight: 400; }
+
+.buy-list { display: flex; flex-direction: column; gap: 8px; max-height: 75vh; overflow-y: auto; }
+.buy-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  cursor: pointer;
+}
+.buy-card:hover { border-color: var(--accent); }
+.buy-card.selected { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-weak); }
+.buy-name { font-weight: 600; font-size: 13px; }
+.buy-specs { font-size: 12px; color: var(--sub); margin-top: 2px; }
+.buy-price { font-size: 16px; font-weight: 700; color: #c33; }
+.buy-price small { color: var(--sub); font-weight: 400; font-size: 11px; }
+
+.calc { padding: 14px; }
+.calc-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 14px; }
+.calc-inputs label {
+  font-size: 12px;
+  color: var(--sub);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: space-between;
+}
+.calc-inputs input {
+  width: 76px;
+  font-size: 13px;
+  padding: 5px 7px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  text-align: right;
+}
+.calc-result { margin-top: 14px; }
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 2px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+}
+.result-row b { font-size: 15px; }
+.verdict {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  background: var(--accent-weak);
+}
+.verdict.buy { background: #eaf7ef; color: var(--good); }
+.verdict.rent { background: #fdf3e4; color: var(--warn); }
+
+.site-footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 16px 30px;
+  font-size: 11px;
+  color: var(--sub);
+}
+
+.empty { color: var(--sub); padding: 30px; text-align: center; }
+
+/* 掲載比較テーブルは列が多いので、常に横スクロール可能にしておく */
+.listing-detail { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+@media (max-width: 800px) {
+  .compare-grid { grid-template-columns: 1fr; }
+  .calc-inputs { grid-template-columns: 1fr; }
+  .buy-list { max-height: none; }
+  .room-body { gap: 6px 14px; }
+}
+
+@media (max-width: 640px) {
+  body { font-size: 13px; }
+  main { padding: 10px 10px 40px; }
+  .site-header-inner { padding: 8px 10px 0; }
+  h1 { font-size: 16px; }
+  .tab { padding: 8px 12px; font-size: 13px; }
+
+  /* フィルタは2列グリッドに。ラベルを上に置いて片手で選びやすく */
+  .filter-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 10px;
+    padding: 10px;
+  }
+  .filter-group { flex-direction: column; align-items: stretch; gap: 2px; }
+  .filter-group label { font-size: 11px; }
+  .filter-group select, .filter-group input { width: 100%; }
+  .filter-group:has(#f-rent-min) { grid-column: 1 / -1; flex-direction: row; align-items: center; }
+  .filter-group:has(#f-rent-min) label { min-width: 2.5em; }
+  .filter-group:has(#f-name) { grid-column: 1 / -1; }
+  .filter-bar.compact { grid-template-columns: 1fr 1fr; }
+
+  .room-card { padding: 10px; }
+  .room-name { font-size: 14px; }
+  .rent-price { font-size: 18px; }
+  .init-cost { font-size: 12px; }
+  .listing-table th, .listing-table td { padding: 5px 6px; }
+  .metric .m-value { font-size: 16px; }
+  .calc-inputs input { width: 90px; }
+}

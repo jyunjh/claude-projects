@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>マンション検索 — 勝どき・晴海</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <h1>🏢 マンション検索 <span class="area-label">勝どき・晴海</span></h1>
+    <nav class="tabs">
+      <button class="tab active" data-tab="rent">賃貸検索</button>
+      <button class="tab" data-tab="compare">購入 vs 賃貸</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- ============================ 賃貸検索 ============================ -->
+  <section id="tab-rent" class="tab-panel active">
+    <div class="filter-bar">
+      <div class="filter-group">
+        <label>エリア</label>
+        <select id="f-area">
+          <option value="">すべて</option>
+          <option value="勝どき">勝どき</option>
+          <option value="晴海">晴海</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>賃料</label>
+        <select id="f-rent-min">
+          <option value="">下限なし</option>
+        </select>
+        <span>〜</span>
+        <select id="f-rent-max">
+          <option value="">上限なし</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>間取り</label>
+        <select id="f-layout" multiple size="1"></select>
+      </div>
+      <div class="filter-group">
+        <label>専有面積</label>
+        <select id="f-area-min">
+          <option value="">指定なし</option>
+          <option value="20">20㎡〜</option>
+          <option value="25">25㎡〜</option>
+          <option value="30">30㎡〜</option>
+          <option value="40">40㎡〜</option>
+          <option value="50">50㎡〜</option>
+          <option value="60">60㎡〜</option>
+          <option value="70">70㎡〜</option>
+          <option value="80">80㎡〜</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>築年数</label>
+        <select id="f-age-max">
+          <option value="">指定なし</option>
+          <option value="5">5年以内</option>
+          <option value="10">10年以内</option>
+          <option value="15">15年以内</option>
+          <option value="20">20年以内</option>
+          <option value="30">30年以内</option>
+        </select>
+      </div>
+      <div class="filter-group grow">
+        <label>建物名</label>
+        <input type="search" id="f-name" placeholder="例: タワー">
+      </div>
+      <div class="filter-group">
+        <label>並び順</label>
+        <select id="f-sort">
+          <option value="rent-asc">賃料が安い順</option>
+          <option value="rent-desc">賃料が高い順</option>
+          <option value="init-asc">初期費用が安い順</option>
+          <option value="unit-asc">㎡単価が安い順</option>
+          <option value="area-desc">面積が広い順</option>
+          <option value="age-asc">築年数が新しい順</option>
+          <option value="dup-desc">掲載社数が多い順</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="stats-bar" id="stats-bar"></div>
+    <div id="room-list" class="room-list"></div>
+    <div class="load-more-wrap"><button id="load-more" class="load-more" hidden>さらに表示</button></div>
+  </section>
+
+  <!-- ============================ 購入 vs 賃貸 ============================ -->
+  <section id="tab-compare" class="tab-panel">
+    <div class="market-summary" id="market-summary"></div>
+
+    <div class="compare-grid">
+      <div class="compare-col">
+        <h2>販売中の中古マンション <span class="hint">クリックで右の計算機に反映</span></h2>
+        <div class="filter-bar compact">
+          <div class="filter-group">
+            <label>エリア</label>
+            <select id="b-area">
+              <option value="">すべて</option>
+              <option value="勝どき">勝どき</option>
+              <option value="晴海">晴海</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>並び順</label>
+            <select id="b-sort">
+              <option value="price-asc">価格が安い順</option>
+              <option value="price-desc">価格が高い順</option>
+              <option value="unit-asc">㎡単価が安い順</option>
+              <option value="area-desc">面積が広い順</option>
+            </select>
+          </div>
+        </div>
+        <div id="buy-list" class="buy-list"></div>
+      </div>
+
+      <div class="compare-col">
+        <h2>購入 vs 賃貸 シミュレーター</h2>
+        <div class="calc card">
+          <div class="calc-inputs">
+            <label>物件価格<input type="number" id="c-price" value="8000" step="100">万円</label>
+            <label>頭金<input type="number" id="c-down" value="800" step="100">万円</label>
+            <label>金利（年）<input type="number" id="c-rate" value="0.6" step="0.05">%</label>
+            <label>返済期間<input type="number" id="c-years" value="35" step="1">年</label>
+            <label>管理費+修繕積立（月）<input type="number" id="c-hoa" value="3.5" step="0.5">万円</label>
+            <label>固定資産税（年）<input type="number" id="c-tax" value="25" step="5">万円</label>
+            <label>購入諸費用<input type="number" id="c-fees" value="7" step="1">%</label>
+            <label>比較する家賃（月・管理費込）<input type="number" id="c-rent" value="25" step="1">万円</label>
+            <label>居住年数<input type="number" id="c-horizon" value="15" step="1">年</label>
+            <label>売却時の想定価格（購入価格比）<input type="number" id="c-resale" value="90" step="5">%</label>
+          </div>
+          <div class="calc-result" id="calc-result"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  データ出典: SUUMO（個人利用のためのローカル集計）。初期費用は概算であり、実際の見積りは各社にご確認ください。
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

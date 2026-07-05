@@ -1,12 +1,15 @@
-name: Deploy 児童館カレンダー to GitHub Pages
+name: Deploy to GitHub Pages
 
-# jidokan-calendar フォルダだけを GitHub Pages に公開する（他ツールは配信しない）。
+# 公開するツールだけを GitHub Pages に配信する（他ツールは配信しない）。
+#   ルート:            jidokan-calendar（従来どおり）
+#   /mansion-finder/:  マンション検索（勝どき・晴海）
 # main への push で自動デプロイ。手動実行も可。
 on:
   push:
     branches: [main]
     paths:
       - "jidokan-calendar/**"
+      - "mansion-finder/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -28,8 +31,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      - name: サイトを組み立て（ルート=児童館カレンダー, /mansion-finder/=マンション検索）
+        run: |
+          mkdir -p _site/mansion-finder
+          cp -r jidokan-calendar/. _site/
+          cp mansion-finder/index.html mansion-finder/app.js mansion-finder/styles.css _site/mansion-finder/
+          cp -r mansion-finder/data _site/mansion-finder/data
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: jidokan-calendar
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4
