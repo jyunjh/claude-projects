@@ -12,6 +12,12 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["jidokan-calendar/serve.py", "--port", "9000"],
       "port": 9000
+    },
+    {
+      "name": "mansion-finder",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "9010", "--directory", "mansion-finder"],
+      "port": 9010
     }
   ]
 }
