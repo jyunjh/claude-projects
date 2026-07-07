@@ -30,43 +30,54 @@ python3 serve.py            # http://localhost:9000
 ### 画面から更新する（推奨）
 
 1. 右上の **⚙️ API設定** に [Gemini の無料APIキー](https://aistudio.google.com/apikey) を貼り付けて「保存」（このブラウザの localStorage に保存）。
-2. **🔄 最新に更新** を押すと、各館のPDFを取り込んで `data/events.json` を更新し、画面が自動で切り替わります（30〜60秒）。
+2. **🔄 最新に更新** を押すと、選択中の区を1区ずつ、各館のPDFを取り込んで `data/events/<区ID>.json` を更新し、画面が自動で切り替わります（1区あたり30〜60秒）。
 
 > キーはローカルサーバー経由で取り込み時のGemini呼び出しにのみ使われ、サーバーには保存されません。
 
-> **児童館は実在データ**（江戸川区・西葛西周辺の共育プラザ／子育てひろば。住所・座標・公式ページ・PDF予定表のURL）を登録済みです。
-> イベント（`data/events.json`）は取り込み済みなら「実データ」バッジ＋最終更新日、未取り込みなら「サンプル」バッジが画面上部に出ます。
+> **児童館は実在データ**（江戸川区8館・江東区1館の共育プラザ／子育てひろば／児童館。住所・座標・公式ページ・PDF予定表のURL）を登録済みです。
+> イベント（`data/events/<区ID>.json`）は取り込み済みなら「実データ」バッジ＋最終更新日、未取り込みなら「サンプル」バッジが画面上部に出ます。
 
 ## 実データの登録 / Using real data
 
-### 1. 児童館を登録する（`data/centers.json`）
+データは**区単位**で管理します（東京23区へ段階的に拡大中。設計は [`docs/SPEC-23ku.md`](docs/SPEC-23ku.md) 参照）。
+
+- `data/wards.json` — 23区のメタ情報（`id` / `name` / `lat` / `lng` / `status`）。施設を整備した区は `status: "covered"` にすると画面の「対象の区」チップに現れます。
+- `data/centers/<区ID>.json` — 区ごとの施設レジストリ
+- `data/events/<区ID>.json` — 区ごとの取り込み済みイベント（無い区は「予定未取込」として空扱い）
+
+### 1. 児童館を登録する（`data/centers/<区ID>.json`）
 
 地図・距離・リンクの源になります。1館ごとに以下を記載:
 
 | キー | 内容 |
 |---|---|
-| `id` | 一意なID（例 `kasai`） |
-| `name` / `region` / `address` | 名称・地域・住所 |
+| `id` | **全区を通して一意**なID（既存館は変更禁止。新規は `<区ID>-<slug>` 形式を推奨） |
+| `name` / `region` / `address` | 名称・地域（区名）・住所 |
 | `lat` / `lng` | 緯度・経度（地図/距離計算に使用。住所からジオコーディング） |
 | `officialUrl` | 公式ページのURL（イベント詳細の「公式ページ」リンク） |
 | `sourcePage` | 予定表（おたより）一覧ページのURL（出典・人間が確認する用） |
 | `pdfUrl` | 月間予定の **PDF直リンク** または **PDFが貼られたHTMLページ** のURL |
-| `color` | カレンダー上の表示色 |
+| `color` | カレンダー上の表示色（`docs/SPEC-23ku.md` §4.4 のパレットを区内で巡回） |
 
 > `pdfUrl` は PDF 直リンクでなくても構いません。HTMLページを指定した場合、取り込み時にページ内の最初の `.pdf` リンクを自動で解決して取得します（児童館サイトは記事内にPDFを貼ることが多いため）。
 
+> **新しい区を追加する手順**（一覧収集 → pdfUrl 特定 → ジオコーディング → 検証 → `wards.json` を `covered` に）は `docs/SPEC-23ku.md` §8 の手順書に従ってください。
+
 ### 2. PDFからイベントを取り込む（`ingest/ingest.py`）
 
-各館の `pdfUrl` を取得し、Gemini に直接渡してイベントを抽出、`data/events.json` を生成します。
+指定した区の各館の `pdfUrl` を取得し、Gemini に直接渡してイベントを抽出、`data/events/<区ID>.json` を生成します。
 **Python 標準ライブラリのみ**で動くため追加インストールは不要です。
 
 ```bash
 # 無料の Gemini APIキーを取得: https://aistudio.google.com/apikey
 export GEMINI_API_KEY=xxxxx
 
-python3 ingest/ingest.py                  # 全館を取り込み
-python3 ingest/ingest.py --center kasai   # 指定した館だけ再取り込み（既存にマージ）
+python3 ingest/ingest.py --ward edogawa                  # 江戸川区の全館を取り込み
+python3 ingest/ingest.py --ward edogawa --center kasai   # 区内の指定館だけ再取り込み（既存にマージ）
 ```
+
+> `--ward` は**必須**です（全区一括の取り込みは無料枠保護のため用意していません）。
+> 画面の「🔄 最新に更新」も同様に、選択中の区を1区ずつ順番に取り込みます。
 
 実運用向けの挙動:
 - 通常は `gemini-2.5-flash` を使い、無料枠の上限(429)時は `gemini-2.5-flash-lite` に自動フォールバック。
@@ -77,7 +88,7 @@ python3 ingest/ingest.py --center kasai   # 指定した館だけ再取り込み
 - **連日開催**（「○日〜○日」「期間中」「毎日」）は日ごとに分けず、`date`＋`dateEnd` の **1件**に集約。
   画面では上部の「📌 期間中の催し」に期間付きで表示される。
 - 抽出結果を**検証**（日付形式 `YYYY-MM-DD`・妥当な期間内・重複除去）。不正なものは除外。
-- 出力は `{ "mode": "live", "generatedAt": <取得日時>, "events": [...] }`。フロントの鮮度表示に使用。
+- 出力は `{ "mode": "live", "generatedAt": <取得日時>, "events": [...] }`（区ごとの `data/events/<区ID>.json`）。フロントの鮮度表示に使用。
 - 取得・解析に失敗した館はスキップして続行し、最後に**成功/失敗のサマリ**を表示（失敗があれば終了コード 2）。
 
 > 月次のPDF URL（ハッシュ付き）は毎月変わります。`pdfUrl` に **おたより一覧ページのURL** を指定しておくと、自動解決で毎月の最新PDFに追随しやすくなります。
@@ -94,26 +105,30 @@ python3 ingest/eval.py --center kasai # 指定館のみ
 ```
 
 - 正解データ: `ingest/eval/<centerId>.json`（`{"events":[{"date","title","dateEnd"?}]}`）。出典PDFを目視で作成。
+  館の情報は `data/centers/*.json` を全区横断で探します。
 - 出力: 館ごとの precision / recall / F1 と、**取りこぼし（−）/ 余分・誤り（＋）** の一覧。
 - 同梱の正解データ: `nagisa`（1件）, `kasai`（14件）。他の館も `ingest/eval/` に追加すれば対象になります。
 
 ### 3. 表示（運用機能）
 
-- 画面上部の**状態バー**: 「サンプル / 実データ」バッジと**最終更新日時**を表示。
+- **対象の区**チップ: データ整備済みの区を切り替え（選択はブラウザに保存され、次回も維持）。
+- 画面上部の**状態バー**: 「サンプル / 実データ」バッジ・**対象区**・**最終更新日時**（未取込の区があれば注記）を表示。
 - **終了分を隠す**チェック: 今日より前のイベントを非表示に（既定はグレー表示で残す）。
-- 色の**凡例**: 表示中の児童館を色つきで一覧。
+- 色の**凡例**: 表示中の児童館を色つきで一覧（12館を超えると「他 N 館」で折りたたみ）。
 
 ## ファイル構成 / Structure
 
 | ファイル | 役割 |
 |---|---|
-| `serve.py` | ローカルサーバー（静的配信 + 取り込みAPI `/api/ingest`） |
+| `serve.py` | ローカルサーバー（静的配信 + 取り込みAPI `/api/ingest`。body に `ward` 必須） |
 | `index.html` | 画面の骨組み（Leaflet を CDN 読込） |
 | `styles.css` | スタイル（見やすさ重視の明るいテーマ） |
-| `app.js` | 地図・カレンダー・距離/年齢フィルタの描画ロジック |
-| `data/centers.json` | 児童館レジストリ（実在データ。住所・座標・PDF/公式リンク） |
-| `data/events.json` | イベント（`{mode, generatedAt, events}` 形式） |
-| `ingest/ingest.py` | PDF取得（HTML→PDF自動解決）→ Gemini構造化抽出 → 検証 → events.json 生成 |
+| `app.js` | 区セレクタ・地図・カレンダー・距離/年齢フィルタの描画ロジック |
+| `data/wards.json` | 23区メタ＋カバレッジ状態（`covered` の区だけ画面に出る） |
+| `data/centers/<区ID>.json` | 区ごとの児童館レジストリ（実在データ。住所・座標・PDF/公式リンク） |
+| `data/events/<区ID>.json` | 区ごとのイベント（`{mode, generatedAt, events}` 形式） |
+| `ingest/ingest.py` | PDF取得（HTML→PDF自動解決）→ Gemini構造化抽出 → 検証 → events/<区ID>.json 生成 |
+| `docs/SPEC-23ku.md` | 23区拡大の仕様書（データ設計・区追加のワークパッケージ手順） |
 
 ## 免責 / Disclaimer
 

@@ -16,8 +16,8 @@ Python 標準ライブラリのみ・追加インストール不要。
   - Gemini APIキーはリクエストボディで受け取り、その取り込み実行にのみ使用（保存しない）。
 
 API:
-  POST /api/ingest   body: {"apiKey": "...", "center": "<任意のID>"}
-                     → ingest を実行し、サマリJSONを返す。
+  POST /api/ingest   body: {"apiKey": "...", "ward": "<区ID・必須>", "center": "<任意の館ID>"}
+                     → 指定区の ingest を実行し、サマリJSONを返す。
 
 使い方:
   cd jidokan-calendar
@@ -65,14 +65,21 @@ class Handler(SimpleHTTPRequestHandler):
             return
 
         api_key = (payload.get("apiKey") or "").strip()
+        ward = (payload.get("ward") or "").strip()
         center = (payload.get("center") or "").strip() or None
         if not api_key:
             self._send_json(400, {"error": "Gemini APIキーが未設定です。⚙️API設定から保存してください。"})
             return
+        if not ward:
+            self._send_json(400, {"error": "区ID（ward）が未指定です。例: {\"ward\": \"edogawa\"}"})
+            return
 
         logs = []
         try:
-            summary = ingest.run_ingest(api_key, center=center, log=logs.append)
+            summary = ingest.run_ingest(api_key, ward, center=center, log=logs.append)
+        except ValueError as e:  # 不正な区ID・館IDなどはクライアント側の誤り
+            self._send_json(400, {"error": str(e)})
+            return
         except ingest.urllib.error.HTTPError as e:
             self._send_json(502, {"error": f"Gemini/取得でエラー: HTTP {e.code}"})
             return

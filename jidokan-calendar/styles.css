@@ -66,7 +66,9 @@ header {
 }
 .status-bar.sample .st-badge { background: #c79a25; }
 .status-bar.live .st-badge { background: #3a9d63; }
+.status-bar .st-target { font-weight: 600; }
 .status-bar .st-updated { color: inherit; opacity: 0.85; }
+.status-bar .st-pending { color: inherit; opacity: 0.85; }
 .status-bar code { background: rgba(0,0,0,0.06); padding: 1px 5px; border-radius: 5px; font-size: 0.92em; }
 
 .ghost {
@@ -104,6 +106,22 @@ header {
 .key-row a { font-size: 0.82rem; color: var(--accent); }
 .key-note { font-size: 0.76rem; color: var(--text-dim); margin-top: 8px; }
 .key-note code { background: rgba(0,0,0,0.06); padding: 1px 5px; border-radius: 5px; }
+
+/* ---- Ward selector (対象の区チップ) ---- */
+.ward-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.ward-label { font-size: 0.82rem; color: var(--text-dim); font-weight: 600; flex: none; }
+.ward-chips { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ward-chip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.84rem;
+  cursor: pointer;
+  color: var(--text-dim);
+}
+.ward-chip:hover { border-color: var(--accent); color: var(--accent); }
+.ward-chip.on { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
 
 /* ---- Center panel (details) ---- */
 .panel {
@@ -158,6 +176,13 @@ header {
 .center-list .c-name { font-weight: 600; font-size: 0.9rem; }
 .center-list .c-meta { font-size: 0.76rem; color: var(--text-dim); }
 .center-list .c-dist { margin-left: auto; font-size: 0.78rem; color: var(--accent); font-weight: 600; white-space: nowrap; }
+/* 区見出し（館リストのグルーピング） */
+.center-list .ward-head {
+  border: none; padding: 8px 2px 2px; cursor: default;
+  font-size: 0.78rem; font-weight: 700; color: var(--text-dim);
+  border-bottom: 2px solid var(--border); border-radius: 0;
+}
+.center-list .ward-head:hover { background: transparent; }
 
 /* ---- Filter bar ---- */
 .filter-bar {
@@ -190,6 +215,9 @@ header {
 .legend a.lg:hover { border-color: var(--accent); }
 .legend a.lg:hover .lg-ext { color: var(--accent); }
 .legend .lg-ext { color: var(--text-dim); font-size: 0.72rem; }
+/* 「他 N 館」展開/折りたたみボタン（12館超のとき） */
+.legend button.lg-more { cursor: pointer; color: var(--accent); font-weight: 600; }
+.legend button.lg-more:hover { border-color: var(--accent); }
 
 /* ---- Ongoing (multi-day) events ---- */
 .ongoing {

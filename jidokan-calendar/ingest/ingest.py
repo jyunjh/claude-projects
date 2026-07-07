@@ -21,10 +21,10 @@
 モデル戦略（stock-analyzer/chat.js と同じ思想）:
   - 通常は gemini-2.5-flash を優先利用。無料枠の上限(HTTP 429)時は flash-lite に自動フォールバック。
 
-使い方:
+使い方（--ward は必須。全区一括は無料枠保護のため不可）:
   export GEMINI_API_KEY=xxxxx          # 無料キー: https://aistudio.google.com/apikey
-  python3 ingest/ingest.py             # 全館を取り込み
-  python3 ingest/ingest.py --center kasai   # 指定した館だけ再取り込み（既存にマージ）
+  python3 ingest/ingest.py --ward edogawa                 # 江戸川区の全館を取り込み
+  python3 ingest/ingest.py --ward edogawa --center kasai  # 区内の指定館だけ再取り込み（既存にマージ）
 """
 
 import argparse
@@ -41,8 +41,8 @@ from datetime import date, datetime, timezone, timedelta
 from pathlib import Path
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
-CENTERS_JSON = DATA_DIR / "centers.json"
-EVENTS_JSON = DATA_DIR / "events.json"
+CENTERS_DIR = DATA_DIR / "centers"   # 区ごとの施設レジストリ centers/<wardId>.json
+EVENTS_DIR = DATA_DIR / "events"     # 区ごとの取り込み済みイベント events/<wardId>.json
 
 PRIMARY_MODEL = "gemini-2.5-flash"
 FALLBACK_MODEL = "gemini-2.5-flash-lite"
@@ -299,32 +299,41 @@ def dedupe(events):
     return out
 
 
-def load_existing():
-    """既存 events.json を {mode, generatedAt, events} 形式 or 旧配列形式の両対応で読む。"""
-    if not EVENTS_JSON.exists():
+def load_existing(events_path):
+    """既存 events/<ward>.json を {mode, generatedAt, events} 形式 or 旧配列形式の両対応で読む。"""
+    if not events_path.exists():
         return []
-    raw = json.loads(EVENTS_JSON.read_text(encoding="utf-8"))
+    raw = json.loads(events_path.read_text(encoding="utf-8"))
     return raw.get("events", []) if isinstance(raw, dict) else raw
 
 
-def run_ingest(api_key, center=None, year=None, log=print):
+def run_ingest(api_key, ward, center=None, year=None, log=print):
     """取り込み本体。CLI / ローカルサーバー(serve.py) の両方から呼ぶ。
-    events.json を書き出し、サマリ dict を返す。例外は呼び出し側へ。"""
+    data/centers/<ward>.json を読み、data/events/<ward>.json を書き出し、サマリ dict を返す。
+    例外は呼び出し側へ。ward は必須（全区一括は無料枠保護のため不可）。"""
     api_key = (api_key or "").strip()
     if not api_key:
         raise ValueError("Gemini APIキーが指定されていません。")
+    ward = (ward or "").strip()
+    if not ward:
+        raise ValueError("区ID（ward）が指定されていません。例: --ward edogawa")
     year = year or date.today().year
 
-    centers = json.loads(CENTERS_JSON.read_text(encoding="utf-8"))
+    centers_json = CENTERS_DIR / f"{ward}.json"
+    events_json = EVENTS_DIR / f"{ward}.json"
+    if not centers_json.exists():
+        raise ValueError(f"区 '{ward}' の施設レジストリ {centers_json} がありません。")
+
+    centers = json.loads(centers_json.read_text(encoding="utf-8"))
     if center:
         centers = [c for c in centers if c["id"] == center]
         if not centers:
-            raise ValueError(f"児童館ID '{center}' が centers.json に見つかりません。")
+            raise ValueError(f"児童館ID '{center}' が {centers_json.name} に見つかりません。")
 
     # 既存データを館ごとに保持。成功した館だけ差し替え、失敗館は前回データを残す
     # （ネットワーク不調や上限で全データが消えるのを防ぐ）。
     by_center = {}
-    for e in load_existing():
+    for e in load_existing(events_json):
         by_center.setdefault(e.get("centerId"), []).append(e)
 
     today = date.today()
@@ -378,15 +387,19 @@ def run_ingest(api_key, center=None, year=None, log=print):
 
     generated_at = datetime.now(JST).isoformat(timespec="seconds")
     out = {"mode": "live", "generatedAt": generated_at, "events": collected}
-    EVENTS_JSON.write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n",
+    EVENTS_DIR.mkdir(parents=True, exist_ok=True)
+    events_json.write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n",
                            encoding="utf-8")
 
-    return {"generatedAt": generated_at, "total": len(collected), "ok": ok, "failed": failed}
+    return {"ward": ward, "generatedAt": generated_at, "total": len(collected),
+            "ok": ok, "failed": failed, "outfile": str(events_json)}
 
 
 def main():
     ap = argparse.ArgumentParser(description="児童館PDF→イベントJSON 取り込み（実運用版）")
-    ap.add_argument("--center", help="この館IDだけ再取り込み（既存JSONにマージ）")
+    ap.add_argument("--ward", required=True,
+                    help="取り込む区のID（必須。例: edogawa）。data/centers/<ward>.json を読む")
+    ap.add_argument("--center", help="区内のこの館IDだけ再取り込み（既存JSONにマージ）")
     ap.add_argument("--year", type=int, default=date.today().year,
                     help="年の記載が無いPDFを補完する年（既定: 今年）")
     args = ap.parse_args()
@@ -396,7 +409,7 @@ def main():
         sys.exit("環境変数 GEMINI_API_KEY が未設定です。 https://aistudio.google.com/apikey で無料取得できます。")
 
     try:
-        summary = run_ingest(api_key, center=args.center, year=args.year)
+        summary = run_ingest(api_key, args.ward, center=args.center, year=args.year)
     except ValueError as e:
         sys.exit(str(e))
 
@@ -405,7 +418,7 @@ def main():
         print(f"  ✓ {o['name']}: {o['kept']} 件")
     for f in summary["failed"]:
         print(f"  ✗ {f['name']}: {f['error']}")
-    print(f"合計 {summary['total']} 件を {EVENTS_JSON} に書き出しました"
+    print(f"合計 {summary['total']} 件を {summary['outfile']} に書き出しました"
           f"（成功 {len(summary['ok'])} 館 / 失敗 {len(summary['failed'])} 館）。")
     if summary["failed"]:
         sys.exit(2)  # 失敗があれば非ゼロ終了（CI等で検知しやすく）

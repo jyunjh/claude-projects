@@ -1,16 +1,24 @@
 /*
  * 児童館イベントカレンダー — 表示ロジック
  * --------------------------------------------------
- * data/centers.json（児童館レジストリ）と data/events.json（取り込み済みイベント）を
- * 読み込み、地図/距離/対象年齢で絞り込んでカレンダー（またはリスト）に表示する。
+ * data/wards.json（23区メタ）を読み、選択中の区の
+ * data/centers/<ward>.json（児童館レジストリ）と data/events/<ward>.json（取り込み済みイベント）を
+ * 遅延読み込みし、地図/距離/対象年齢で絞り込んでカレンダー（またはリスト）に表示する。
  * ビルド不要のバニラJS。地図は Leaflet + OpenStreetMap（APIキー不要）。
  */
 
 const WEEKDAYS = ["日", "月", "火", "水", "木", "金", "土"];
+const DEFAULT_WARDS = ["edogawa", "koto"];   // 初回既定の対象区
+const LEGEND_CAP = 12;                        // 凡例に常時出す上限（超過分は「他N館」）
 
 const state = {
-  centers: [],
-  events: [],
+  wards: [],               // wards.json 全区（status 付き）
+  wardById: {},
+  activeWards: [],          // 対象として選択中の区ID（表示順を保つため配列）
+  loadedWards: new Set(),   // centers/events を fetch 済みの区ID
+  wardMeta: {},             // wardId -> { mode, generatedAt, hasEvents }
+  centers: [],             // 読み込み済み区の全館
+  events: [],              // 読み込み済み区の全イベント
   centerById: {},
   selected: new Set(),     // 表示対象の児童館ID
   view: "calendar",        // "calendar" | "list"
@@ -19,7 +27,7 @@ const state = {
   ref: null,               // 距離の基準点 { lat, lng } | null
   maxDist: 3,              // km
   hidePast: false,         // 終了したイベントを隠す
-  meta: { mode: "sample", generatedAt: null }, // events.json のメタ情報
+  legendExpanded: false,   // 凡例の「他N館」を展開中か
 };
 
 const TODAY_KEY = dateKey(new Date());
@@ -32,26 +40,26 @@ async function init() {
   state.month = new Date(now.getFullYear(), now.getMonth(), 1);
 
   try {
-    const [centers, events] = await Promise.all([
-      fetch("data/centers.json").then((r) => r.json()),
-      fetch("data/events.json").then((r) => r.json()),
-    ]);
-    state.centers = centers;
-    // events.json は {mode, generatedAt, events} 形式 / 旧配列形式の両対応
-    if (Array.isArray(events)) {
-      state.events = events;
-    } else {
-      state.events = events.events || [];
-      state.meta = { mode: events.mode || "sample", generatedAt: events.generatedAt || null };
-    }
+    state.wards = await fetch("data/wards.json").then((r) => r.json());
   } catch (e) {
     document.querySelector("main").innerHTML =
       `<p class="empty-state">データの読み込みに失敗しました（${e.message}）。<br>ローカルサーバー経由で開いてください。</p>`;
     return;
   }
+  state.wardById = Object.fromEntries(state.wards.map((w) => [w.id, w]));
 
-  state.centerById = Object.fromEntries(state.centers.map((c) => [c.id, c]));
-  state.selected = new Set(state.centers.map((c) => c.id)); // 既定は全館表示
+  // 対象区の初期値: localStorage("selectedWards") ＞ 既定 ["edogawa","koto"]。
+  // covered な区に限定し、1つも残らなければ covered 区の全体へフォールバック。
+  const covered = state.wards.filter((w) => w.status === "covered").map((w) => w.id);
+  const saved = readSelectedWards();
+  let wanted = (saved || DEFAULT_WARDS).filter((id) => covered.includes(id));
+  if (!wanted.length) wanted = covered.slice();
+  state.activeWards = coveredOrder(wanted);
+
+  // 選択中の区データを読み込む（未取得の区のみ fetch。events 404 は空扱い）。
+  await Promise.all(state.activeWards.map(loadWard));
+  rebuildCenterIndex();
+  state.selected = new Set(state.centers.map((c) => c.id)); // 既定は読み込んだ全館を表示
   state.month = initialMonth(); // 当月にイベントが無ければ直近のある月へ
 
   // スマホ（狭い画面）では、全文が読めるリスト表示を初期選択にする
@@ -71,11 +79,123 @@ async function init() {
     if (tools) tools.hidden = true;
   }
 
+  renderWardChips();
   renderStatusBar();
   buildCenterList();
   bindControls();
   initMap();
   render();
+}
+
+/* ---------- 対象区（wards）の選択・遅延読み込み ---------- */
+// localStorage から選択区を読む（不正・未設定なら null）。
+function readSelectedWards() {
+  try {
+    const raw = localStorage.getItem("selectedWards");
+    if (!raw) return null;
+    const arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr.filter((x) => typeof x === "string") : null;
+  } catch (e) {
+    return null;
+  }
+}
+function writeSelectedWards() {
+  try { localStorage.setItem("selectedWards", JSON.stringify(state.activeWards)); }
+  catch (e) { /* プライベートモード等では保存できないが致命的ではない */ }
+}
+// 与えた区IDを wards.json（covered）の並び順に整える。
+function coveredOrder(ids) {
+  const set = new Set(ids);
+  return state.wards.filter((w) => w.status === "covered" && set.has(w.id)).map((w) => w.id);
+}
+
+// 1区分の centers/events を読み込む（未取得の区のみ）。events が無ければ(404)空扱い。
+async function loadWard(wardId) {
+  if (state.loadedWards.has(wardId)) return;
+  let centers = [];
+  try {
+    centers = await fetch(`data/centers/${wardId}.json`, { cache: "no-store" }).then((r) => {
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      return r.json();
+    });
+  } catch (e) {
+    console.warn(`区データの読み込みに失敗: ${wardId}`, e);
+    centers = [];
+  }
+  // 各館に wardId を付与（区見出し・グルーピング用）
+  for (const c of centers) c.wardId = wardId;
+  state.centers.push(...centers);
+
+  // events は無い区もある（covered だが未取込）。404/失敗は空扱い。
+  let mode = "sample", generatedAt = null, hasEvents = false;
+  try {
+    const raw = await fetch(`data/events/${wardId}.json`, { cache: "no-store" }).then((r) => {
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      return r.json();
+    });
+    const evs = Array.isArray(raw) ? raw : (raw.events || []);
+    state.events.push(...evs);
+    mode = Array.isArray(raw) ? "sample" : (raw.mode || "sample");
+    generatedAt = Array.isArray(raw) ? null : (raw.generatedAt || null);
+    hasEvents = evs.length > 0;
+  } catch (e) {
+    hasEvents = false; // events が無い/取れない区は未取込扱い（落とさない）
+  }
+  state.wardMeta[wardId] = { mode, generatedAt, hasEvents };
+  state.loadedWards.add(wardId);
+}
+
+// centerById を読み込み済み全館から作り直す。
+function rebuildCenterIndex() {
+  state.centerById = Object.fromEntries(state.centers.map((c) => [c.id, c]));
+}
+
+// 表示中（activeWards）の館のみを返す（未選択区を外した後の掃除に使う）。
+function activeCenters() {
+  const set = new Set(state.activeWards);
+  return state.centers.filter((c) => set.has(c.wardId));
+}
+
+// 区チップの選択状態を切り替える。
+async function toggleWard(wardId, on) {
+  if (on) {
+    if (!state.activeWards.includes(wardId)) {
+      state.activeWards = coveredOrder([...state.activeWards, wardId]);
+      await loadWard(wardId);
+      rebuildCenterIndex();
+      // 新たに読み込んだ区の館を選択状態に加える
+      for (const c of state.centers) if (c.wardId === wardId) state.selected.add(c.id);
+    }
+  } else {
+    state.activeWards = state.activeWards.filter((id) => id !== wardId);
+    // 外した区の館を選択状態から除外
+    for (const c of state.centers) if (c.wardId === wardId) state.selected.delete(c.id);
+  }
+  writeSelectedWards();
+  state.month = initialMonth();
+  renderWardChips();
+  buildCenterList();
+  rebuildMarkers();
+  renderStatusBar();
+  render();
+}
+
+// 対象の区チップ行を描画（covered の区のみ）。
+function renderWardChips() {
+  const row = document.getElementById("wardChips");
+  if (!row) return;
+  const active = new Set(state.activeWards);
+  row.innerHTML = "";
+  for (const w of state.wards) {
+    if (w.status !== "covered") continue;
+    const btn = document.createElement("button");
+    btn.className = "ward-chip" + (active.has(w.id) ? " on" : "");
+    btn.type = "button";
+    btn.textContent = w.name;
+    btn.setAttribute("aria-pressed", active.has(w.id) ? "true" : "false");
+    btn.onclick = () => toggleWard(w.id, !active.has(w.id));
+    row.appendChild(btn);
+  }
 }
 
 // 初期表示する月を決める: 当月にイベントがあれば当月、無ければ
@@ -99,23 +219,39 @@ function initialMonth() {
   return new Date(y, m - 1, 1);
 }
 
-/* ---------- データ状態バー（モード / 最終更新） ---------- */
+/* ---------- データ状態バー（対象区 / モード / 最終更新） ---------- */
 function renderStatusBar() {
   const bar = document.getElementById("statusBar");
-  const live = state.meta.mode === "live";
+  // 選択区のどれか一つでも live なら「実データ」バッジ
+  const live = state.activeWards.some((id) => (state.wardMeta[id] || {}).mode === "live");
   bar.className = "status-bar " + (live ? "live" : "sample");
-  const updated = state.meta.generatedAt ? fmtDateTime(state.meta.generatedAt) : "—";
-  if (live) {
-    bar.innerHTML =
-      `<span class="st-badge">実データ</span>` +
-      `<span class="st-updated">最終更新: ${esc(updated)}</span>` +
-      `<span>各館のPDF予定表から自動取得しています。</span>`;
-  } else {
-    bar.innerHTML =
-      `<span class="st-badge">サンプル</span>` +
-      `<span class="st-updated">最終更新: ${esc(updated)}</span>` +
-      `<span>実データ化するには <code>data/centers.json</code> を確認し、<code>python3 ingest/ingest.py</code> を実行してください。</span>`;
+
+  // 「対象: 江戸川区・江東区」（wards.json の並び順）
+  const names = state.activeWards.map((id) => (state.wardById[id] || { name: id }).name);
+  const target = names.length ? names.join("・") : "（区を選択してください）";
+
+  // 最終更新は選択区の generatedAt の最大（ISO文字列は辞書順比較でよい）
+  let latest = null;
+  for (const id of state.activeWards) {
+    const g = (state.wardMeta[id] || {}).generatedAt;
+    if (g && (!latest || g > latest)) latest = g;
   }
+  const updated = latest ? fmtDateTime(latest) : "—";
+
+  // イベント未取込（events が無い/空）の区は注記を後置
+  const pendingNames = state.activeWards
+    .filter((id) => !(state.wardMeta[id] || {}).hasEvents)
+    .map((id) => (state.wardById[id] || { name: id }).name);
+  const pending = pendingNames.length
+    ? `<span class="st-pending">（${esc(pendingNames.join("・"))}は予定未取込）</span>` : "";
+
+  bar.innerHTML =
+    `<span class="st-badge">${live ? "実データ" : "サンプル"}</span>` +
+    `<span class="st-target">対象: ${esc(target)}</span>` +
+    `<span class="st-updated">最終更新: ${esc(updated)}</span>` +
+    pending +
+    (live ? "" :
+      `<span>実データ化するには <code>python3 ingest/ingest.py --ward &lt;区ID&gt;</code> を実行してください。</span>`);
 }
 
 /* ---------- Gemini APIキー & 取り込み更新 ---------- */
@@ -128,7 +264,8 @@ function setUpdateStatus(msg, cls) {
   el.className = "update-status" + (cls ? " " + cls : "");
 }
 
-// 「🔄 最新に更新」: ローカルサーバーの /api/ingest を叩いて取り込み → 画面を再読込
+// 「🔄 最新に更新」: 選択中の区を1区ずつローカルサーバーの /api/ingest へ投げ、
+// 失敗しても次の区へ進み、最後に結果を集約表示する。
 async function runUpdate() {
   const key = getApiKey();
   if (!key) {
@@ -136,30 +273,46 @@ async function runUpdate() {
     setUpdateStatus("先に Gemini APIキーを保存してください（⚙️API設定）。", "err");
     return;
   }
+  if (!state.activeWards.length) {
+    setUpdateStatus("対象の区が選択されていません。", "err");
+    return;
+  }
   const btn = document.getElementById("updateBtn");
   btn.disabled = true;
-  setUpdateStatus("取り込み中…（各館のPDFを解析。30〜60秒ほどかかります）");
+
+  let totalEv = 0, okCenters = 0, failCenters = 0;
+  const failedWards = [];
   try {
-    const res = await fetch("api/ingest", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ apiKey: key }),
-    });
-    if (res.status === 404) {
-      setUpdateStatus("このサーバーでは更新できません。`python3 serve.py` で起動してください。", "err");
-      return;
-    }
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok) {
-      setUpdateStatus("更新に失敗しました: " + (data.error || `HTTP ${res.status}`), "err");
-      return;
+    for (let i = 0; i < state.activeWards.length; i++) {
+      const wardId = state.activeWards[i];
+      const wardName = (state.wardById[wardId] || { name: wardId }).name;
+      setUpdateStatus(`取り込み中… ${wardName}（${i + 1}/${state.activeWards.length} 区。各館のPDFを解析します）`);
+      try {
+        const res = await fetch("api/ingest", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ apiKey: key, ward: wardId }),
+        });
+        if (res.status === 404) {
+          setUpdateStatus("このサーバーでは更新できません。`python3 serve.py` で起動してください。", "err");
+          return;
+        }
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          failedWards.push(`${wardName}: ${data.error || `HTTP ${res.status}`}`);
+          continue; // 失敗しても次の区へ
+        }
+        totalEv += data.total || 0;
+        okCenters += (data.ok || []).length;
+        failCenters += (data.failed || []).length;
+      } catch (e) {
+        failedWards.push(`${wardName}: ${e.message}`);
+      }
     }
     await refreshEvents();
-    const okN = (data.ok || []).length, failN = (data.failed || []).length;
-    setUpdateStatus(
-      `更新しました（${data.total} 件 / 成功 ${okN} 館${failN ? ` ・失敗 ${failN} 館` : ""}）。`,
-      failN ? "err" : "ok"
-    );
+    let msg = `更新しました（${totalEv} 件 / 成功 ${okCenters} 館${failCenters ? ` ・失敗 ${failCenters} 館` : ""}）。`;
+    if (failedWards.length) msg += ` 失敗した区: ${failedWards.join(" / ")}`;
+    setUpdateStatus(msg, (failedWards.length || failCenters) ? "err" : "ok");
   } catch (e) {
     setUpdateStatus("更新に失敗しました: " + e.message + "（serve.py で起動していますか？）", "err");
   } finally {
@@ -167,45 +320,67 @@ async function runUpdate() {
   }
 }
 
-// events.json を読み直して画面を更新（ページ全体はリロードしない）
+// 選択区の events/<ward>.json を読み直して画面を更新（ページ全体はリロードしない）
 async function refreshEvents() {
-  const raw = await fetch("data/events.json", { cache: "no-store" }).then((r) => r.json());
-  if (Array.isArray(raw)) {
-    state.events = raw;
-  } else {
-    state.events = raw.events || [];
-    state.meta = { mode: raw.mode || "sample", generatedAt: raw.generatedAt || null };
+  for (const wardId of state.activeWards) {
+    let mode = "sample", generatedAt = null, hasEvents = false, evs = [];
+    try {
+      const raw = await fetch(`data/events/${wardId}.json`, { cache: "no-store" }).then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      });
+      evs = Array.isArray(raw) ? raw : (raw.events || []);
+      mode = Array.isArray(raw) ? "sample" : (raw.mode || "sample");
+      generatedAt = Array.isArray(raw) ? null : (raw.generatedAt || null);
+      hasEvents = evs.length > 0;
+    } catch (e) {
+      /* 未取込の区は空扱い */
+    }
+    // この区の旧イベントを入れ替える
+    const centerIds = new Set(state.centers.filter((c) => c.wardId === wardId).map((c) => c.id));
+    state.events = state.events.filter((e) => !centerIds.has(e.centerId));
+    state.events.push(...evs);
+    state.wardMeta[wardId] = { mode, generatedAt, hasEvents };
   }
   state.month = initialMonth();
   renderStatusBar();
   render();
 }
 
-/* ---------- 児童館リスト ---------- */
+/* ---------- 児童館リスト（区ごとの見出しでグルーピング） ---------- */
 function buildCenterList() {
   const ul = document.getElementById("centerList");
   ul.innerHTML = "";
-  for (const c of state.centers) {
-    const li = document.createElement("li");
-    li.dataset.id = c.id;
-    li.innerHTML = `
-      <input type="checkbox" ${state.selected.has(c.id) ? "checked" : ""} />
-      <span class="dot" style="background:${c.color}"></span>
-      <span>
-        <span class="c-name">${esc(c.name)}</span><br>
-        <span class="c-meta">${esc(c.region)}</span>
-      </span>
-      <span class="c-dist" data-dist></span>`;
-    li.querySelector("input").addEventListener("change", (ev) => {
-      toggleCenter(c.id, ev.target.checked);
-    });
-    li.addEventListener("click", (ev) => {
-      if (ev.target.tagName === "INPUT") return;
-      const cb = li.querySelector("input");
-      cb.checked = !cb.checked;
-      toggleCenter(c.id, cb.checked);
-    });
-    ul.appendChild(li);
+  for (const wardId of state.activeWards) {
+    const wardCenters = state.centers.filter((c) => c.wardId === wardId);
+    if (!wardCenters.length) continue;
+    // 区見出し
+    const head = document.createElement("li");
+    head.className = "ward-head";
+    head.textContent = (state.wardById[wardId] || { name: wardId }).name;
+    ul.appendChild(head);
+    for (const c of wardCenters) {
+      const li = document.createElement("li");
+      li.dataset.id = c.id;
+      li.innerHTML = `
+        <input type="checkbox" ${state.selected.has(c.id) ? "checked" : ""} />
+        <span class="dot" style="background:${c.color}"></span>
+        <span>
+          <span class="c-name">${esc(c.name)}</span><br>
+          <span class="c-meta">${esc(c.region)}</span>
+        </span>
+        <span class="c-dist" data-dist></span>`;
+      li.querySelector("input").addEventListener("change", (ev) => {
+        toggleCenter(c.id, ev.target.checked);
+      });
+      li.addEventListener("click", (ev) => {
+        if (ev.target.tagName === "INPUT") return;
+        const cb = li.querySelector("input");
+        cb.checked = !cb.checked;
+        toggleCenter(c.id, cb.checked);
+      });
+      ul.appendChild(li);
+    }
   }
 }
 
@@ -217,22 +392,53 @@ function toggleCenter(id, on) {
 }
 
 function syncCenterListChecks() {
-  document.querySelectorAll("#centerList li").forEach((li) => {
+  document.querySelectorAll("#centerList li[data-id]").forEach((li) => {
     li.querySelector("input").checked = state.selected.has(li.dataset.id);
   });
 }
 
 /* ---------- 地図 ---------- */
-const NISHIKASAI = [35.6646, 139.8593]; // 西葛西駅（対象エリアの中心）
+const NISHIKASAI = [35.6646, 139.8593]; // 西葛西駅（初期データ時代の中心・フォールバック）
+
+// 地図の既定中心: 選択区の施設の重心（施設が無ければ区の代表座標、それも無ければ西葛西）
+function defaultMapCenter() {
+  const cs = activeCenters();
+  if (cs.length) {
+    const lat = cs.reduce((s, c) => s + c.lat, 0) / cs.length;
+    const lng = cs.reduce((s, c) => s + c.lng, 0) / cs.length;
+    return [lat, lng];
+  }
+  if (state.activeWards.length === 1) {
+    const w = state.wardById[state.activeWards[0]];
+    if (w) return [w.lat, w.lng];
+  }
+  return NISHIKASAI;
+}
+
 function initMap() {
-  map = L.map("map").setView(NISHIKASAI, 13);
+  map = L.map("map").setView(defaultMapCenter(), 13);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "&copy; OpenStreetMap contributors",
     maxZoom: 19,
   }).addTo(map);
 
   markerLayer = L.layerGroup().addTo(map);
-  for (const c of state.centers) {
+  rebuildMarkers({ recenter: false });
+
+  // 地図クリックで基準点を設定
+  map.on("click", (e) => setRef(e.latlng.lat, e.latlng.lng, "地図上の地点"));
+
+  // 折りたたみを開いたとき地図サイズを再計算（detailsで初期非表示のため）
+  document.getElementById("centerPanel").addEventListener("toggle", (e) => {
+    if (e.target.open) setTimeout(() => map.invalidateSize(), 50);
+  });
+}
+
+// 選択区の館のマーカーだけを描き直す（区の切替時に呼ぶ）。
+function rebuildMarkers({ recenter = true } = {}) {
+  if (!markerLayer) return;
+  markerLayer.clearLayers();
+  for (const c of activeCenters()) {
     const m = L.circleMarker([c.lat, c.lng], markerStyle(c, state.selected.has(c.id)))
       .addTo(markerLayer)
       .bindTooltip(`${c.name}<br>${c.region}`);
@@ -245,13 +451,8 @@ function initMap() {
       render();
     });
   }
-  // 地図クリックで基準点を設定
-  map.on("click", (e) => setRef(e.latlng.lat, e.latlng.lng, "地図上の地点"));
-
-  // 折りたたみを開いたとき地図サイズを再計算（detailsで初期非表示のため）
-  document.getElementById("centerPanel").addEventListener("toggle", (e) => {
-    if (e.target.open) setTimeout(() => map.invalidateSize(), 50);
-  });
+  // 基準地の指定が無いときは、選択区の重心へ寄せ直す
+  if (recenter && !state.ref) map.setView(defaultMapCenter(), map.getZoom());
 }
 
 function markerStyle(c, selected) {
@@ -287,18 +488,18 @@ function clearRef() {
   if (refMarker) { refMarker.remove(); refMarker = null; }
   document.getElementById("distRow").hidden = true;
   document.querySelectorAll("#centerList [data-dist]").forEach((el) => (el.textContent = ""));
-  // 距離解除時は全館を選択し直す
-  state.selected = new Set(state.centers.map((c) => c.id));
+  // 距離解除時は選択区内の全館を選択し直す
+  state.selected = new Set(activeCenters().map((c) => c.id));
   syncCenterListChecks();
   updateMarkerStyles();
   render();
 }
 
-// 基準点から maxDist 以内の館だけを選択状態にする
+// 基準点から maxDist 以内の館（選択区内）だけを選択状態にする
 function applyDistance() {
   if (!state.ref) return;
   const next = new Set();
-  for (const c of state.centers) {
+  for (const c of activeCenters()) {
     const d = haversine(state.ref.lat, state.ref.lng, c.lat, c.lng);
     const el = document.querySelector(`#centerList li[data-id="${c.id}"] [data-dist]`);
     if (el) el.textContent = `${d.toFixed(1)} km`;
@@ -335,7 +536,8 @@ function bindControls() {
   document.getElementById("viewList").onclick = () => switchView("list");
 
   document.getElementById("selectAll").onclick = () => {
-    state.selected = new Set(state.centers.map((c) => c.id));
+    // 読み込み済みの選択区内で全選択
+    state.selected = new Set(activeCenters().map((c) => c.id));
     syncCenterListChecks(); updateMarkerStyles(); render();
   };
   document.getElementById("selectNone").onclick = () => {
@@ -436,7 +638,7 @@ function render() {
   const y = state.month.getFullYear(), m = state.month.getMonth();
   document.getElementById("monthLabel").textContent = `${y}年 ${m + 1}月`;
 
-  const sel = state.selected.size, total = state.centers.length;
+  const sel = state.selected.size, total = activeCenters().length;
   document.getElementById("selectedSummary").textContent =
     sel === total ? "すべての児童館を表示中" : `${sel} / ${total} 館を表示中`;
 
@@ -533,10 +735,14 @@ function renderOngoing(ranges) {
 
 // 表示中の児童館を「色 → 館名」の凡例として並べる。
 // クリックすると、その館の元の予定表ページ（sourcePage / officialUrl）を新規タブで開く。
+// 12館を超えたら「他 N 館」ボタンで折りたたむ（将来100館超に耐えるため）。
 function renderLegend() {
   const el = document.getElementById("legend");
-  const shown = state.centers.filter((c) => state.selected.has(c.id));
-  el.innerHTML = shown.map((c) => {
+  const shown = activeCenters().filter((c) => state.selected.has(c.id));
+  const capped = !state.legendExpanded && shown.length > LEGEND_CAP;
+  const visible = capped ? shown.slice(0, LEGEND_CAP) : shown;
+
+  el.innerHTML = visible.map((c) => {
     const href = c.sourcePage || c.officialUrl;
     const inner =
       `<span class="dot" style="background:${c.color}"></span>${esc(c.name)}` +
@@ -545,6 +751,15 @@ function renderLegend() {
       ? `<a class="lg" href="${esc(href)}" target="_blank" rel="noopener" title="${esc(c.name)}の元の予定表を開く">${inner}<span class="lg-ext">↗</span></a>`
       : `<span class="lg">${inner}</span>`;
   }).join("");
+
+  if (shown.length > LEGEND_CAP) {
+    const btn = document.createElement("button");
+    btn.className = "lg lg-more";
+    btn.type = "button";
+    btn.textContent = capped ? `他 ${shown.length - LEGEND_CAP} 館` : "折りたたむ";
+    btn.onclick = () => { state.legendExpanded = !state.legendExpanded; renderLegend(); };
+    el.appendChild(btn);
+  }
 }
 
 function renderCalendar(y, m, byDateMap) {
