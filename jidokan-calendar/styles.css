@@ -107,9 +107,8 @@ header {
 .key-note { font-size: 0.76rem; color: var(--text-dim); margin-top: 8px; }
 .key-note code { background: rgba(0,0,0,0.06); padding: 1px 5px; border-radius: 5px; }
 
-/* ---- Ward selector (対象の区チップ) ---- */
-.ward-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
-.ward-label { font-size: 0.82rem; color: var(--text-dim); font-weight: 600; flex: none; }
+/* ---- Ward selector (対象の区チップ / details.panel) ---- */
+.ward-panel-body { display: block; padding: 0 18px 18px; }
 .ward-chips { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .ward-chip {
   background: var(--surface);

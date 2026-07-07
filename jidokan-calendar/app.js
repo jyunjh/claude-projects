@@ -196,6 +196,17 @@ function renderWardChips() {
     btn.onclick = () => toggleWard(w.id, !active.has(w.id));
     row.appendChild(btn);
   }
+  updateWardSummary();
+}
+
+// wardPanel の summary ヒントに、選択中の区名を「・」区切りで表示（未選択なら「未選択」）。
+function updateWardSummary() {
+  const hint = document.getElementById("wardSummary");
+  if (!hint) return;
+  const names = state.activeWards
+    .map((id) => state.wardById[id] && state.wardById[id].name)
+    .filter(Boolean);
+  hint.textContent = names.length ? names.join("・") : "未選択";
 }
 
 // 初期表示する月を決める: 当月にイベントがあれば当月、無ければ
