@@ -94,17 +94,5 @@
     "sourcePage": "https://www.city.edogawa.tokyo.jp/e047/kuseijoho/gaiyo/shisetsuguide/bunya/kosodate/hiroba/be-teru.html",
     "pdfUrl": "https://www.city.edogawa.tokyo.jp/e047/kuseijoho/gaiyo/shisetsuguide/bunya/kosodate/hiroba/be-teru.html",
     "color": "#7e6cd6"
-  },
-  {
-    "id": "minamisuna",
-    "name": "南砂児童館",
-    "region": "江東区",
-    "address": "〒136-0076 東京都江東区南砂2-3-17",
-    "lat": 35.6729,
-    "lng": 139.8229,
-    "officialUrl": "https://www.city.koto.lg.jp/281062/kodomo/hokago/jidokan/access.html",
-    "sourcePage": "https://www.city.koto.lg.jp/281062/kodomo/hokago/jidokan/calendar.html",
-    "pdfUrl": "https://www.city.koto.lg.jp/281062/kodomo/hokago/jidokan/calendar.html",
-    "color": "#d2691e"
   }
 ]

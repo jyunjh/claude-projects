@@ -84,7 +84,11 @@ def main():
     if not api_key:
         sys.exit("環境変数 GEMINI_API_KEY が未設定です。 https://aistudio.google.com/apikey で無料取得できます。")
 
-    centers = {c["id"]: c for c in json.loads((HERE.parent / "data" / "centers.json").read_text("utf-8"))}
+    # 施設レジストリは区ごとに分割されている（data/centers/<wardId>.json）→ 全区を横断して引く
+    centers = {}
+    for cf in sorted((HERE.parent / "data" / "centers").glob("*.json")):
+        for c in json.loads(cf.read_text("utf-8")):
+            centers[c["id"]] = c
     gt_files = sorted(EVAL_DIR.glob("*.json"))
     if args.center:
         gt_files = [f for f in gt_files if f.stem == args.center]
@@ -97,7 +101,7 @@ def main():
         gt = json.loads(gf.read_text("utf-8")).get("events", [])
         c = centers.get(cid)
         if not c:
-            print(f"[skip] {cid}: centers.json に未登録")
+            print(f"[skip] {cid}: data/centers/*.json に未登録")
             continue
         print(f"[評価] {c['name']} …")
         try:
