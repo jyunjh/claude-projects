@@ -28,6 +28,8 @@ const state = {
   maxDist: 3,              // km
   hidePast: false,         // 終了したイベントを隠す
   legendExpanded: false,   // 凡例の「他N館」を展開中か
+  favMap: {},              // お気に入り: { centerId: wardId }（localStorageに永続）
+  favOnly: false,          // お気に入りのみ表示モード（永続）
 };
 
 const TODAY_KEY = dateKey(new Date());
@@ -53,13 +55,22 @@ async function init() {
   const covered = state.wards.filter((w) => w.status === "covered").map((w) => w.id);
   const saved = readSelectedWards();
   let wanted = (saved || DEFAULT_WARDS).filter((id) => covered.includes(id));
+  // お気に入り設定を読み、お気に入り館の区も必ず読み込む（次回そのまま表示できるように）。
+  loadFavPrefs();
+  const favWards = [...new Set(Object.values(state.favMap))].filter((id) => covered.includes(id));
+  wanted = [...new Set([...wanted, ...favWards])];
   if (!wanted.length) wanted = covered.slice();
   state.activeWards = coveredOrder(wanted);
 
   // 選択中の区データを読み込む（未取得の区のみ fetch。events 404 は空扱い）。
   await Promise.all(state.activeWards.map(loadWard));
   rebuildCenterIndex();
-  state.selected = new Set(state.centers.map((c) => c.id)); // 既定は読み込んだ全館を表示
+  // お気に入りのみモードが保存されていれば、それを復元（無ければ全館表示）。
+  if (state.favOnly && favIds().length) {
+    applyFavoritesSelection();
+    if (!state.selected.size) { state.favOnly = false; saveFavOnly(); } // お気に入りが見つからなければ解除
+  }
+  if (!state.favOnly) state.selected = new Set(state.centers.map((c) => c.id)); // 既定は読み込んだ全館を表示
   state.month = initialMonth(); // 当月にイベントが無ければ直近のある月へ
 
   // スマホ（狭い画面）では、全文が読めるリスト表示を初期選択にする
@@ -83,6 +94,7 @@ async function init() {
   renderStatusBar();
   buildCenterList();
   bindControls();
+  updateFavUI();
   initMap();
   render();
 }
@@ -172,6 +184,8 @@ async function toggleWard(wardId, on) {
     for (const c of state.centers) if (c.wardId === wardId) state.selected.delete(c.id);
   }
   writeSelectedWards();
+  // お気に入りのみ表示中は、区の増減後もお気に入りに追従させる
+  if (state.favOnly) applyFavoritesSelection();
   state.month = initialMonth();
   renderWardChips();
   buildCenterList();
@@ -373,6 +387,7 @@ function buildCenterList() {
     for (const c of wardCenters) {
       const li = document.createElement("li");
       li.dataset.id = c.id;
+      const fav = isFav(c.id);
       li.innerHTML = `
         <input type="checkbox" ${state.selected.has(c.id) ? "checked" : ""} />
         <span class="dot" style="background:${c.color}"></span>
@@ -380,12 +395,17 @@ function buildCenterList() {
           <span class="c-name">${esc(c.name)}</span><br>
           <span class="c-meta">${esc(c.region)}</span>
         </span>
-        <span class="c-dist" data-dist></span>`;
+        <span class="c-dist" data-dist></span>
+        <button type="button" class="fav-btn${fav ? " on" : ""}" title="${fav ? "お気に入りから外す" : "お気に入りに追加"}" aria-label="お気に入り">${fav ? "★" : "☆"}</button>`;
       li.querySelector("input").addEventListener("change", (ev) => {
         toggleCenter(c.id, ev.target.checked);
       });
+      li.querySelector(".fav-btn").addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        toggleFavorite(c);
+      });
       li.addEventListener("click", (ev) => {
-        if (ev.target.tagName === "INPUT") return;
+        if (ev.target.tagName === "INPUT" || ev.target.classList.contains("fav-btn")) return;
         const cb = li.querySelector("input");
         cb.checked = !cb.checked;
         toggleCenter(c.id, cb.checked);
@@ -396,6 +416,7 @@ function buildCenterList() {
 }
 
 function toggleCenter(id, on) {
+  clearFavOnlyMode();
   if (on) state.selected.add(id); else state.selected.delete(id);
   syncCenterListChecks();
   updateMarkerStyles();
@@ -406,6 +427,87 @@ function syncCenterListChecks() {
   document.querySelectorAll("#centerList li[data-id]").forEach((li) => {
     li.querySelector("input").checked = state.selected.has(li.dataset.id);
   });
+}
+
+/* ---------- お気に入り（⭐で保存し、次回そのまま復元） ---------- */
+// localStorage からお気に入り設定を読む。
+function loadFavPrefs() {
+  try {
+    const raw = localStorage.getItem("favoriteCenters");
+    const obj = raw ? JSON.parse(raw) : null;
+    state.favMap = (obj && typeof obj === "object" && !Array.isArray(obj)) ? obj : {};
+  } catch (e) { state.favMap = {}; }
+  state.favOnly = localStorage.getItem("favoritesOnly") === "1";
+}
+function saveFavMap() {
+  try { localStorage.setItem("favoriteCenters", JSON.stringify(state.favMap)); } catch (e) { /* 保存不可でも継続 */ }
+}
+function saveFavOnly() {
+  try { localStorage.setItem("favoritesOnly", state.favOnly ? "1" : "0"); } catch (e) { /* 同上 */ }
+}
+function isFav(id) { return Object.prototype.hasOwnProperty.call(state.favMap, id); }
+function favIds() { return Object.keys(state.favMap); }
+
+// お気に入りのみモード時の表示対象 = 読み込み済みのお気に入り館。
+function applyFavoritesSelection() {
+  const active = new Set(activeCenters().map((c) => c.id));
+  state.selected = new Set(favIds().filter((id) => active.has(id)));
+}
+
+// 手動で表示対象を変えたら「お気に入りのみ」モードは解除（＝モードは常に「favorites と一致」を意味する）。
+function clearFavOnlyMode() {
+  if (!state.favOnly) return;
+  state.favOnly = false;
+  saveFavOnly();
+  const cb = document.getElementById("favOnly");
+  if (cb) cb.checked = false;
+  updateFavUI();
+}
+
+// 「お気に入りのみ」トグル。
+function setFavOnly(on) {
+  state.favOnly = on;
+  saveFavOnly();
+  if (on) applyFavoritesSelection();
+  else state.selected = new Set(activeCenters().map((c) => c.id));
+  syncCenterListChecks();
+  updateMarkerStyles();
+  updateFavUI();
+  render();
+}
+
+// 1館のお気に入りを切り替え（★↔☆）。お気に入りのみ表示中なら表示対象にも即反映。
+function toggleFavorite(c) {
+  if (isFav(c.id)) {
+    delete state.favMap[c.id];
+    if (state.favOnly) state.selected.delete(c.id);
+  } else {
+    state.favMap[c.id] = c.wardId;
+    if (state.favOnly) state.selected.add(c.id);
+  }
+  saveFavMap();
+  const btn = document.querySelector(`#centerList li[data-id="${c.id}"] .fav-btn`);
+  if (btn) {
+    const on = isFav(c.id);
+    btn.classList.toggle("on", on);
+    btn.textContent = on ? "★" : "☆";
+    btn.title = on ? "お気に入りから外す" : "お気に入りに追加";
+  }
+  syncCenterListChecks();
+  updateMarkerStyles();
+  updateFavUI();
+  render();
+}
+
+// 「お気に入りのみ」チェックボックスと件数ヒントを最新化。
+function updateFavUI() {
+  const cb = document.getElementById("favOnly");
+  if (cb) cb.checked = state.favOnly;
+  const hint = document.getElementById("favHint");
+  if (hint) {
+    const n = favIds().length;
+    hint.textContent = n ? `（${n}館）` : "（未登録：一覧の☆で追加）";
+  }
 }
 
 /* ---------- 地図 ---------- */
@@ -455,6 +557,7 @@ function rebuildMarkers({ recenter = true } = {}) {
       .bindTooltip(`${c.name}<br>${c.region}`);
     m._centerId = c.id;
     m.on("click", () => {
+      clearFavOnlyMode();
       const on = !state.selected.has(c.id);
       if (on) state.selected.add(c.id); else state.selected.delete(c.id);
       syncCenterListChecks();
@@ -500,6 +603,7 @@ function clearRef() {
   document.getElementById("distRow").hidden = true;
   document.querySelectorAll("#centerList [data-dist]").forEach((el) => (el.textContent = ""));
   // 距離解除時は選択区内の全館を選択し直す
+  clearFavOnlyMode();
   state.selected = new Set(activeCenters().map((c) => c.id));
   syncCenterListChecks();
   updateMarkerStyles();
@@ -509,6 +613,7 @@ function clearRef() {
 // 基準点から maxDist 以内の館（選択区内）だけを選択状態にする
 function applyDistance() {
   if (!state.ref) return;
+  clearFavOnlyMode();
   const next = new Set();
   for (const c of activeCenters()) {
     const d = haversine(state.ref.lat, state.ref.lng, c.lat, c.lng);
@@ -548,13 +653,16 @@ function bindControls() {
 
   document.getElementById("selectAll").onclick = () => {
     // 読み込み済みの選択区内で全選択
+    clearFavOnlyMode();
     state.selected = new Set(activeCenters().map((c) => c.id));
     syncCenterListChecks(); updateMarkerStyles(); render();
   };
   document.getElementById("selectNone").onclick = () => {
+    clearFavOnlyMode();
     state.selected = new Set();
     syncCenterListChecks(); updateMarkerStyles(); render();
   };
+  document.getElementById("favOnly").onchange = (e) => setFavOnly(e.target.checked);
 
   document.getElementById("locateBtn").onclick = locateMe;
   document.getElementById("placeBtn").onclick = searchPlace;
@@ -651,7 +759,8 @@ function render() {
 
   const sel = state.selected.size, total = activeCenters().length;
   document.getElementById("selectedSummary").textContent =
-    sel === total ? "すべての児童館を表示中" : `${sel} / ${total} 館を表示中`;
+    state.favOnly ? `⭐ お気に入り ${sel} 館を表示中`
+    : sel === total ? "すべての児童館を表示中" : `${sel} / ${total} 館を表示中`;
 
   // 当月の表示対象を取得し、連続開催（期間中の催し）と単発に分ける
   const monthEvs = visibleEvents().filter((e) => {
