@@ -175,6 +175,15 @@ header {
 .center-list .c-name { font-weight: 600; font-size: 0.9rem; }
 .center-list .c-meta { font-size: 0.76rem; color: var(--text-dim); }
 .center-list .c-dist { margin-left: auto; font-size: 0.78rem; color: var(--accent); font-weight: 600; white-space: nowrap; }
+/* お気に入り☆ボタン */
+.center-list .fav-btn {
+  margin-left: auto; flex: none; background: none; border: none; cursor: pointer;
+  font-size: 1.15rem; line-height: 1; color: var(--text-dim); padding: 2px 2px;
+}
+.center-list .c-dist + .fav-btn { margin-left: 8px; }
+.center-list .fav-btn:hover { color: #e0a32e; }
+.center-list .fav-btn.on { color: #f2b01e; }
+.fav-hint { color: var(--text-dim); font-size: 0.76rem; margin-left: 2px; }
 /* 区見出し（館リストのグルーピング） */
 .center-list .ward-head {
   border: none; padding: 8px 2px 2px; cursor: default;
