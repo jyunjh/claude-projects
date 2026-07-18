@@ -48,11 +48,16 @@
     </details>
   </div>
 
-  <!-- 対象の区を選ぶ（データ整備済みの区のみ表示。app.js が中身を差し込む） -->
-  <div class="ward-row">
-    <span class="ward-label">対象の区</span>
-    <div class="ward-chips" id="wardChips"></div>
-  </div>
+  <!-- 対象の区を選ぶ（データ整備済みの区のみ表示。app.js が中身を差し込む。既定は折りたたみ） -->
+  <details class="panel" id="wardPanel">
+    <summary>
+      <span>🗾 対象の区を選ぶ</span>
+      <span class="summary-hint" id="wardSummary"></span>
+    </summary>
+    <div class="panel-body ward-panel-body">
+      <div class="ward-chips" id="wardChips"></div>
+    </div>
+  </details>
 
   <!-- 対象の児童館を選ぶ（地図 + リスト。普段は折りたたみ） -->
   <details class="panel" id="centerPanel">
