@@ -1,0 +1,110 @@
+[
+  {
+    "id": "chuo-tsukiji",
+    "name": "築地児童館",
+    "region": "中央区",
+    "address": "〒104-0045 東京都中央区築地7-9-17",
+    "lat": 35.665022,
+    "lng": 139.77561,
+    "officialUrl": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/tukijijidoukan.html",
+    "sourcePage": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/tukijijidoukan.html",
+    "pdfUrl": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/tukijijidoukan.html",
+    "color": "#4f86c6"
+  },
+  {
+    "id": "chuo-shinkawa",
+    "name": "新川児童館",
+    "region": "中央区",
+    "address": "〒104-0033 東京都中央区新川2-13-4",
+    "lat": 35.674363,
+    "lng": 139.782664,
+    "officialUrl": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/sinkawajidoukan.html",
+    "sourcePage": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/sinkawajidoukan.html",
+    "pdfUrl": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/sinkawajidoukan.html",
+    "color": "#e8804f"
+  },
+  {
+    "id": "chuo-horidomecho",
+    "name": "堀留町児童館",
+    "region": "中央区",
+    "address": "〒103-0012 東京都中央区日本橋堀留町1-1-1",
+    "lat": 35.6882197,
+    "lng": 139.780473,
+    "officialUrl": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/horidomecyoujidoukan.html",
+    "sourcePage": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/horidomecyoujidoukan.html",
+    "pdfUrl": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/horidomecyoujidoukan.html",
+    "color": "#5cb85c"
+  },
+  {
+    "id": "chuo-hamacho",
+    "name": "浜町児童館",
+    "region": "中央区",
+    "address": "〒103-0007 東京都中央区日本橋浜町3-37-1",
+    "lat": 35.6875758,
+    "lng": 139.7885881,
+    "officialUrl": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/hamacyoujidoukan.html",
+    "sourcePage": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/hamacyoujidoukan.html",
+    "pdfUrl": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/hamacyoujidoukan.html",
+    "color": "#a06cd5"
+  },
+  {
+    "id": "chuo-tsukuda",
+    "name": "佃児童館",
+    "region": "中央区",
+    "address": "〒104-0051 東京都中央区佃1-11-1",
+    "lat": 35.668867,
+    "lng": 139.78335,
+    "officialUrl": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/tukudajidoukan.html",
+    "sourcePage": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/tukudajidoukan.html",
+    "pdfUrl": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/tukudajidoukan.html",
+    "color": "#d6477f"
+  },
+  {
+    "id": "chuo-tsukishima",
+    "name": "月島児童館",
+    "region": "中央区",
+    "address": "〒104-0052 東京都中央区月島4-1-1",
+    "lat": 35.660441,
+    "lng": 139.782678,
+    "officialUrl": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/tukishimajidoukan.html",
+    "sourcePage": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/tukishimajidoukan.html",
+    "pdfUrl": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/tukishimajidoukan.html",
+    "color": "#2bb3a3"
+  },
+  {
+    "id": "chuo-kachidoki",
+    "name": "勝どき児童館",
+    "region": "中央区",
+    "address": "〒104-0054 東京都中央区勝どき1-8-1",
+    "lat": 35.660709,
+    "lng": 139.776476,
+    "officialUrl": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/kachidokijidoukan.html",
+    "sourcePage": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/kachidokijidoukan.html",
+    "pdfUrl": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/kachidokijidoukan.html",
+    "color": "#e0a32e"
+  },
+  {
+    "id": "chuo-harumi",
+    "name": "晴海児童館",
+    "region": "中央区",
+    "address": "〒104-0053 東京都中央区晴海2-4-31",
+    "lat": 35.655389,
+    "lng": 139.785823,
+    "officialUrl": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/harumijidoukan.html",
+    "sourcePage": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/harumijidoukan.html",
+    "pdfUrl": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/jidoukan/harumijidoukan.html",
+    "color": "#7e6cd6"
+  },
+  {
+    "id": "chuo-kirara-kachidoki",
+    "name": "子ども家庭支援センター「きらら中央」勝どき分室（あかちゃん天国）",
+    "region": "中央区",
+    "address": "〒104-0054 東京都中央区勝どき1-4-1",
+    "lat": 35.660709,
+    "lng": 139.776476,
+    "officialUrl": "https://www.city.chuo.lg.jp/a0025/shisetsu/genre/kosodate/kosodate00200.html",
+    "sourcePage": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/akachantengoku/akachantengokuevent.html",
+    "pdfUrl": "https://www.city.chuo.lg.jp/a0025/kosodate/kosodate/shien/akachantengoku/akachantengokuevent.html",
+    "color": "#d2691e"
+  }
+]
