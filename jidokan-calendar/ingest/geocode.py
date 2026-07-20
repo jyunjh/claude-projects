@@ -55,6 +55,13 @@ def address_variants(address):
         if s and s not in out:
             out.append(s)
 
+    # 「神田和泉町1 ちよだパークサイドプラザ6階」のように建物名・階が続く表記は、
+    # 空白区切りの末尾要素を落とした形も候補にする（Nominatimは建物名で引けない）。
+    if " " in a or "　" in a:
+        head = re.split(r"[ 　]", a)[0]
+        add(head)
+        a = head or a
+
     # 「38番1号」「15番地3」などの番地以下を落として丁目レベルへ
     add(re.sub(r"\d+番地?\d*号?.*$", "", a))
 
