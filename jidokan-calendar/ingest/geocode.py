@@ -42,17 +42,36 @@ TOKYO_BBOX = (35.5, 35.9, 139.5, 139.95)   # lat_min, lat_max, lng_min, lng_max
 
 
 def address_variants(address):
-    """住所を Nominatim が引きやすい形に段階的に短くした候補を返す。"""
+    """住所を Nominatim が引きやすい形に段階的に短くした候補を返す。
+
+    区の公開データは表記がまちまち（「赤塚6丁目38番1号」「南台五丁目15番3号」
+    「小豆沢3-9-2-103」など）なので、丁目レベルに落とす経路を複数用意して
+    先頭から順に試す。ハイフン表記（丁目-番-号）も丁目レベルに正規化する。"""
     a = re.sub(r"^〒?\d{3}-?\d{4}\s*", "", address).strip()
     out = [a]
-    # 「番3号」「15番3号」などの建物レベルを落として丁目レベルへ
-    b = re.sub(r"\d+番地?\d*号?.*$", "", a).strip()
-    if b and b not in out:
-        out.append(b)
-    # 「五丁目」までで止める
-    m = re.match(r"^(.*?[一二三四五六七八九十百]+丁目)", a)
-    if m and m.group(1) not in out:
-        out.append(m.group(1))
+
+    def add(s):
+        s = s.strip()
+        if s and s not in out:
+            out.append(s)
+
+    # 「38番1号」「15番地3」などの番地以下を落として丁目レベルへ
+    add(re.sub(r"\d+番地?\d*号?.*$", "", a))
+
+    # 「六丁目」「6丁目」までで止める（漢数字・算用数字の両方）
+    m = re.match(r"^(.*?[一二三四五六七八九十百\d]+丁目)", a)
+    if m:
+        add(m.group(1))
+
+    # ハイフン表記「小豆沢3-9-2-103」→「小豆沢3丁目」。
+    # 「大山東町8-7」のように丁目を持たない町名（〜町/〜村）には適用しない。
+    m = re.match(r"^(.*?[^\d\-])(\d+)-\d+", a)
+    if m and not m.group(1).rstrip().endswith(("町", "村")):
+        add(f"{m.group(1)}{m.group(2)}丁目")
+
+    # 最後の砦: 末尾の番地表記をまるごと落として町名だけにする
+    add(re.sub(r"[\d\-]+$", "", a))
+
     return out
 
 
