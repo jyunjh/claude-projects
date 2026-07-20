@@ -1,0 +1,98 @@
+[
+  {
+    "id": "chiyoda-nishikanda",
+    "name": "西神田児童センター",
+    "region": "千代田区",
+    "address": "〒101-0065 東京都千代田区西神田2-6-2 西神田コスモス館3階",
+    "officialUrl": "https://www.city.chiyoda.lg.jp/koho/kosodate/jidocenter/ichiran/nishikanda.html",
+    "sourcePage": "https://www.city.chiyoda.lg.jp/koho/kosodate/jidocenter/oshirase.html",
+    "pdfUrl": "https://www.city.chiyoda.lg.jp/documents/1830/r807nishikanda-tayori.pdf",
+    "color": "#4f86c6",
+    "lat": 35.6988,
+    "lng": 139.7553
+  },
+  {
+    "id": "chiyoda-kanda",
+    "name": "神田児童館",
+    "region": "千代田区",
+    "address": "〒101-0021 東京都千代田区外神田3-4-7 昌平童夢館5階",
+    "officialUrl": "https://www.city.chiyoda.lg.jp/koho/kosodate/jidocenter/ichiran/kanda.html",
+    "sourcePage": "https://www.city.chiyoda.lg.jp/koho/kosodate/jidocenter/oshirase.html",
+    "pdfUrl": "https://www.city.chiyoda.lg.jp/documents/1830/r807kanda-tayori.pdf",
+    "color": "#e8804f",
+    "lat": 35.7013,
+    "lng": 139.7705
+  },
+  {
+    "id": "chiyoda-yonbancho",
+    "name": "四番町児童館",
+    "region": "千代田区",
+    "address": "〒102-0081 東京都千代田区四番町5-8",
+    "officialUrl": "https://www.city.chiyoda.lg.jp/koho/kosodate/jidocenter/ichiran/4bancho.html",
+    "sourcePage": "https://www.city.chiyoda.lg.jp/koho/kosodate/jidocenter/oshirase.html",
+    "pdfUrl": "https://www.city.chiyoda.lg.jp/documents/1830/r807yombancho-tayori.pdf",
+    "color": "#5cb85c",
+    "lat": 35.6891,
+    "lng": 139.7378
+  },
+  {
+    "id": "chiyoda-ichibancho",
+    "name": "一番町児童館",
+    "region": "千代田区",
+    "address": "〒102-0082 東京都千代田区一番町10",
+    "officialUrl": "https://www.city.chiyoda.lg.jp/koho/kosodate/jidocenter/ichiran/1bancho.html",
+    "sourcePage": "https://www.city.chiyoda.lg.jp/koho/kosodate/jidocenter/oshirase.html",
+    "pdfUrl": "https://www.city.chiyoda.lg.jp/documents/1830/r807ichibancho-tayori.pdf",
+    "color": "#a06cd5",
+    "lat": 35.6874,
+    "lng": 139.7415
+  },
+  {
+    "id": "chiyoda-fujimi",
+    "name": "富士見わんぱくひろば",
+    "region": "千代田区",
+    "address": "〒102-0071 東京都千代田区富士見1-10-3 富士見みらい館5階",
+    "officialUrl": "https://www.city.chiyoda.lg.jp/koho/kosodate/jidocenter/ichiran/fujimi.html",
+    "sourcePage": "https://www.city.chiyoda.lg.jp/koho/kosodate/jidocenter/oshirase.html",
+    "pdfUrl": "https://www.city.chiyoda.lg.jp/documents/1830/r807fujimi-tayori1.pdf",
+    "color": "#d6477f",
+    "lat": 35.6979,
+    "lng": 139.747
+  },
+  {
+    "id": "chiyoda-izumi",
+    "name": "いずみこどもプラザ",
+    "region": "千代田区",
+    "address": "〒101-0024 東京都千代田区神田和泉町1",
+    "officialUrl": "https://www.city.chiyoda.lg.jp/koho/kosodate/jidocenter/ichiran/izumi.html",
+    "sourcePage": "https://www.city.chiyoda.lg.jp/koho/kosodate/jidocenter/oshirase.html",
+    "pdfUrl": "https://www.city.chiyoda.lg.jp/documents/1830/r807izumi-tayori.pdf",
+    "color": "#2bb3a3",
+    "lat": 35.6997,
+    "lng": 139.7779
+  },
+  {
+    "id": "chiyoda-nanairo",
+    "name": "子育てひろば なないろ（あい・ぽーと麹町）",
+    "region": "千代田区",
+    "address": "〒102-0075 東京都千代田区三番町7",
+    "officialUrl": "https://www.ai-port.jp/kojimachi/",
+    "sourcePage": "https://www.ai-port.jp/kojimachi/nanairotsushin/",
+    "pdfUrl": "https://www.ai-port.jp/kojimachi/nanairotsushin/",
+    "color": "#e0a32e",
+    "lat": 35.6906,
+    "lng": 139.7436
+  },
+  {
+    "id": "chiyoda-kandakoen",
+    "name": "子育てひろば（神田公園地区）",
+    "region": "千代田区",
+    "address": "〒101-0048 東京都千代田区神田司町2-2",
+    "officialUrl": "https://www.city.chiyoda.lg.jp/shisetsu/gakko/jido-kateishien.html",
+    "sourcePage": "https://www.city.chiyoda.lg.jp/shisetsu/gakko/jido-kateishien.html",
+    "pdfUrl": "https://www.city.chiyoda.lg.jp/documents/30377/r807dayori.pdf",
+    "color": "#7e6cd6",
+    "lat": 35.6936,
+    "lng": 139.7675
+  }
+]
