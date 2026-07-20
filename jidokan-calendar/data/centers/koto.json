@@ -9,7 +9,7 @@
     "officialUrl": "https://www.city.koto.lg.jp/281062/kodomo/hokago/jidokan/access.html",
     "sourcePage": "https://www.city.koto.lg.jp/281062/kodomo/hokago/jidokan/calendar.html",
     "pdfUrl": "https://www.city.koto.lg.jp/281062/kodomo/hokago/jidokan/calendar.html",
-    "color": "#d2691e"
+    "color": "#4f86c6"
   },
   {
     "id": "koto-morishita",
@@ -21,7 +21,7 @@
     "officialUrl": "https://www.city.koto.lg.jp/281050/kodomo/hokago/jidokan/8756.html",
     "sourcePage": "https://www.city.koto.lg.jp/281050/kodomo/hokago/jidokan/calendar.html",
     "pdfUrl": "https://www.city.koto.lg.jp/281050/kodomo/hokago/jidokan/calendar.html",
-    "color": "#4f86c6"
+    "color": "#e8804f"
   },
   {
     "id": "koto-hirano",
@@ -33,7 +33,7 @@
     "officialUrl": "https://www.hiranojidoukan.com/",
     "sourcePage": "https://www.hiranojidoukan.com/%E3%81%8A%E3%81%9F%E3%82%88%E3%82%8A-1/",
     "pdfUrl": "https://www.hiranojidoukan.com/%E3%81%8A%E3%81%9F%E3%82%88%E3%82%8A-1/",
-    "color": "#e8804f"
+    "color": "#5cb85c"
   },
   {
     "id": "koto-furuishiba",
@@ -45,7 +45,7 @@
     "officialUrl": "https://furuishiba-fukushi-jidou.ashita-ba.co.jp/jidou.html",
     "sourcePage": "https://furuishiba-fukushi-jidou.ashita-ba.co.jp/index.html",
     "pdfUrl": "https://furuishiba-fukushi-jidou.ashita-ba.co.jp/index.html",
-    "color": "#5cb85c"
+    "color": "#a06cd5"
   },
   {
     "id": "koto-shiohama",
@@ -57,7 +57,7 @@
     "officialUrl": "https://shiohama-fukushi-jidou.ashita-ba.co.jp/jidou.html",
     "sourcePage": "https://shiohama-fukushi-jidou.ashita-ba.co.jp/index.html",
     "pdfUrl": "https://shiohama-fukushi-jidou.ashita-ba.co.jp/index.html",
-    "color": "#a06cd5"
+    "color": "#d6477f"
   },
   {
     "id": "koto-toyosu",
@@ -69,7 +69,7 @@
     "officialUrl": "https://www.city.koto.lg.jp/281053/kodomo/hokago/jidokan/8760.html",
     "sourcePage": "https://www.city.koto.lg.jp/281053/kodomo/hokago/jidokan/calendar.html",
     "pdfUrl": "https://www.city.koto.lg.jp/281053/kodomo/hokago/jidokan/calendar.html",
-    "color": "#d6477f"
+    "color": "#2bb3a3"
   },
   {
     "id": "koto-shinonome",
@@ -81,7 +81,7 @@
     "officialUrl": "https://tokyo.ymca.or.jp/jidoukan/",
     "sourcePage": "https://tokyo.ymca.or.jp/jidoukan/news/index.html",
     "pdfUrl": "https://tokyo.ymca.or.jp/jidoukan/news/index.html",
-    "color": "#2bb3a3"
+    "color": "#e0a32e"
   },
   {
     "id": "koto-tatsumi",
@@ -93,7 +93,7 @@
     "officialUrl": "https://www.city.koto.lg.jp/281054/kodomo/hokago/jidokan/8762.html",
     "sourcePage": "https://www.city.koto.lg.jp/281054/kodomo/hokago/jidokan/calendar.html",
     "pdfUrl": "https://www.city.koto.lg.jp/281054/kodomo/hokago/jidokan/calendar.html",
-    "color": "#e0a32e"
+    "color": "#7e6cd6"
   },
   {
     "id": "koto-senda",
@@ -105,7 +105,7 @@
     "officialUrl": "https://www.mommy-senda.com/",
     "sourcePage": "https://www.mommy-senda.com/news/",
     "pdfUrl": "https://www.mommy-senda.com/news/",
-    "color": "#7e6cd6"
+    "color": "#d2691e"
   },
   {
     "id": "koto-toyo",

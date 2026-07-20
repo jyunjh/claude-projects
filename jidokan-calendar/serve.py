@@ -44,6 +44,23 @@ class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(ROOT), **kwargs)
 
+    def end_headers(self):
+        # 開発サーバなので静的ファイルもキャッシュさせない。
+        # 既定では Cache-Control が付かずブラウザのヒューリスティックキャッシュが効くため、
+        # app.js やデータJSONを編集しても古い内容が読み込まれ続けることがある。
+        if "Cache-Control" not in self._headers_buffer_names():
+            self.send_header("Cache-Control", "no-store, must-revalidate")
+        super().end_headers()
+
+    def _headers_buffer_names(self):
+        """送信予定のヘッダ名の集合（_send_json が既に付けた分を二重に出さないため）。"""
+        names = set()
+        for raw in getattr(self, "_headers_buffer", []):
+            line = raw.decode("latin-1", "ignore")
+            if ":" in line:
+                names.add(line.split(":", 1)[0].strip())
+        return names
+
     def _send_json(self, status, obj):
         body = json.dumps(obj, ensure_ascii=False).encode("utf-8")
         self.send_response(status)
