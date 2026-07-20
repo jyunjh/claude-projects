@@ -24,7 +24,7 @@
 使い方（--ward は必須。全区一括は無料枠保護のため不可）:
   export GEMINI_API_KEY=xxxxx          # 無料キー: https://aistudio.google.com/apikey
   python3 ingest/ingest.py --ward edogawa                 # 江戸川区の全館を取り込み
-  python3 ingest/ingest.py --ward edogawa --center kasai  # 区内の指定館だけ再取り込み（既存にマージ）
+  python3 ingest/ingest.py --ward edogawa --center edogawa-kasai  # 区内の指定館だけ再取り込み（既存にマージ）
 """
 
 import argparse

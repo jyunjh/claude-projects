@@ -1,6 +1,6 @@
 [
   {
-    "id": "kasai",
+    "id": "edogawa-kasai",
     "name": "共育プラザ葛西 子育てひろば",
     "region": "江戸川区",
     "address": "〒134-0082 東京都江戸川区宇喜田町175番地",
@@ -12,7 +12,7 @@
     "color": "#4f86c6"
   },
   {
-    "id": "nagisa",
+    "id": "edogawa-nagisa",
     "name": "なぎさ子育てひろば",
     "region": "江戸川区",
     "address": "〒134-0085 東京都江戸川区南葛西7-1-27（なぎさ健康サポートセンター内）",
@@ -24,7 +24,7 @@
     "color": "#e8804f"
   },
   {
-    "id": "horie",
+    "id": "edogawa-horie",
     "name": "堀江・臨海子育てひろば",
     "region": "江戸川区",
     "address": "東京都江戸川区南葛西3-16-8（堀江）／臨海町5-1-2（臨海）",
@@ -36,7 +36,7 @@
     "color": "#5cb85c"
   },
   {
-    "id": "nakakasai",
+    "id": "edogawa-nakakasai",
     "name": "中葛西子育てひろば（共育プラザ一之江）",
     "region": "江戸川区",
     "address": "東京都江戸川区中葛西1-2-8（運営: 共育プラザ一之江）",
@@ -48,7 +48,7 @@
     "color": "#a06cd5"
   },
   {
-    "id": "seishincho",
+    "id": "edogawa-seishincho",
     "name": "清新町子育てひろば",
     "region": "江戸川区",
     "address": "〒134-0087 東京都江戸川区清新町1-4-2（清新町コミュニティ会館1F）",
@@ -60,7 +60,7 @@
     "color": "#d6477f"
   },
   {
-    "id": "kasai_hc",
+    "id": "edogawa-kasai-hc",
     "name": "葛西健康サポートセンター子育てひろば",
     "region": "江戸川区",
     "address": "東京都江戸川区中葛西3-10-1",
@@ -72,7 +72,7 @@
     "color": "#2bb3a3"
   },
   {
-    "id": "funabori",
+    "id": "edogawa-funabori",
     "name": "船堀子育てひろば",
     "region": "江戸川区",
     "address": "東京都江戸川区船堀1-3-1（船堀コミュニティ会館1F）",
@@ -84,7 +84,7 @@
     "color": "#e0a32e"
   },
   {
-    "id": "beteru",
+    "id": "edogawa-beteru",
     "name": "ベーテルひろば",
     "region": "江戸川区",
     "address": "東京都江戸川区東葛西8-11-33",
