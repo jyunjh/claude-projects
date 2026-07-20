@@ -3,8 +3,8 @@
   "generatedAt": "2026-06-30T15:30:00+09:00",
   "events": [
     {
-      "id": "kasai-001",
-      "centerId": "kasai",
+      "id": "edogawa-kasai-001",
+      "centerId": "edogawa-kasai",
       "date": "2026-06-25",
       "dateEnd": "2026-07-07",
       "start": "09:00",
@@ -16,8 +16,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "kasai-002",
-      "centerId": "kasai",
+      "id": "edogawa-kasai-002",
+      "centerId": "edogawa-kasai",
       "date": "2026-07-01",
       "dateEnd": null,
       "start": "10:30",
@@ -29,8 +29,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "kasai-003",
-      "centerId": "kasai",
+      "id": "edogawa-kasai-003",
+      "centerId": "edogawa-kasai",
       "date": "2026-07-05",
       "dateEnd": null,
       "start": "11:00",
@@ -42,8 +42,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "kasai-004",
-      "centerId": "kasai",
+      "id": "edogawa-kasai-004",
+      "centerId": "edogawa-kasai",
       "date": "2026-07-06",
       "dateEnd": null,
       "start": "10:30",
@@ -55,8 +55,8 @@
       "ageLabel": "親子"
     },
     {
-      "id": "kasai-005",
-      "centerId": "kasai",
+      "id": "edogawa-kasai-005",
+      "centerId": "edogawa-kasai",
       "date": "2026-07-08",
       "dateEnd": null,
       "start": null,
@@ -68,8 +68,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "kasai-006",
-      "centerId": "kasai",
+      "id": "edogawa-kasai-006",
+      "centerId": "edogawa-kasai",
       "date": "2026-07-12",
       "dateEnd": null,
       "start": "15:00",
@@ -81,8 +81,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "kasai-007",
-      "centerId": "kasai",
+      "id": "edogawa-kasai-007",
+      "centerId": "edogawa-kasai",
       "date": "2026-07-14",
       "dateEnd": null,
       "start": "10:30",
@@ -94,8 +94,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "kasai-008",
-      "centerId": "kasai",
+      "id": "edogawa-kasai-008",
+      "centerId": "edogawa-kasai",
       "date": "2026-07-15",
       "dateEnd": null,
       "start": "10:00",
@@ -107,8 +107,8 @@
       "ageLabel": "乳児〜よちよち"
     },
     {
-      "id": "kasai-009",
-      "centerId": "kasai",
+      "id": "edogawa-kasai-009",
+      "centerId": "edogawa-kasai",
       "date": "2026-07-16",
       "dateEnd": null,
       "start": "10:30",
@@ -120,8 +120,8 @@
       "ageLabel": "0か月〜6か月"
     },
     {
-      "id": "kasai-010",
-      "centerId": "kasai",
+      "id": "edogawa-kasai-010",
+      "centerId": "edogawa-kasai",
       "date": "2026-07-17",
       "dateEnd": null,
       "start": "10:30",
@@ -133,8 +133,8 @@
       "ageLabel": "7か月〜1歳の誕生月"
     },
     {
-      "id": "kasai-011",
-      "centerId": "kasai",
+      "id": "edogawa-kasai-011",
+      "centerId": "edogawa-kasai",
       "date": "2026-07-20",
       "dateEnd": null,
       "start": "11:00",
@@ -146,8 +146,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "kasai-012",
-      "centerId": "kasai",
+      "id": "edogawa-kasai-012",
+      "centerId": "edogawa-kasai",
       "date": "2026-07-22",
       "dateEnd": null,
       "start": "10:30",
@@ -159,8 +159,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "kasai-013",
-      "centerId": "kasai",
+      "id": "edogawa-kasai-013",
+      "centerId": "edogawa-kasai",
       "date": "2026-07-23",
       "dateEnd": null,
       "start": "10:30",
@@ -172,8 +172,8 @@
       "ageLabel": "赤ちゃん"
     },
     {
-      "id": "kasai-014",
-      "centerId": "kasai",
+      "id": "edogawa-kasai-014",
+      "centerId": "edogawa-kasai",
       "date": "2026-07-26",
       "dateEnd": null,
       "start": "10:30",
@@ -185,8 +185,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "nagisa-001",
-      "centerId": "nagisa",
+      "id": "edogawa-nagisa-001",
+      "centerId": "edogawa-nagisa",
       "date": "2026-07-24",
       "dateEnd": null,
       "start": "13:10",
@@ -198,8 +198,8 @@
       "ageLabel": "区内在住の2歳頃まで"
     },
     {
-      "id": "horie-001",
-      "centerId": "horie",
+      "id": "edogawa-horie-001",
+      "centerId": "edogawa-horie",
       "date": "2026-06-23",
       "dateEnd": "2026-07-07",
       "start": null,
@@ -211,8 +211,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "horie-002",
-      "centerId": "horie",
+      "id": "edogawa-horie-002",
+      "centerId": "edogawa-horie",
       "date": "2026-07-02",
       "dateEnd": null,
       "start": "11:00",
@@ -224,8 +224,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "horie-003",
-      "centerId": "horie",
+      "id": "edogawa-horie-003",
+      "centerId": "edogawa-horie",
       "date": "2026-07-08",
       "dateEnd": null,
       "start": "11:00",
@@ -237,8 +237,8 @@
       "ageLabel": "0・1歳"
     },
     {
-      "id": "horie-004",
-      "centerId": "horie",
+      "id": "edogawa-horie-004",
+      "centerId": "edogawa-horie",
       "date": "2026-07-11",
       "dateEnd": null,
       "start": "10:15",
@@ -250,8 +250,8 @@
       "ageLabel": "0歳〜"
     },
     {
-      "id": "horie-005",
-      "centerId": "horie",
+      "id": "edogawa-horie-005",
+      "centerId": "edogawa-horie",
       "date": "2026-07-14",
       "dateEnd": null,
       "start": "11:00",
@@ -263,8 +263,8 @@
       "ageLabel": "0歳"
     },
     {
-      "id": "horie-006",
-      "centerId": "horie",
+      "id": "edogawa-horie-006",
+      "centerId": "edogawa-horie",
       "date": "2026-07-16",
       "dateEnd": null,
       "start": "10:30",
@@ -276,8 +276,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "horie-007",
-      "centerId": "horie",
+      "id": "edogawa-horie-007",
+      "centerId": "edogawa-horie",
       "date": "2026-07-17",
       "dateEnd": null,
       "start": "10:15",
@@ -289,8 +289,8 @@
       "ageLabel": "0歳〜"
     },
     {
-      "id": "horie-008",
-      "centerId": "horie",
+      "id": "edogawa-horie-008",
+      "centerId": "edogawa-horie",
       "date": "2026-07-24",
       "dateEnd": null,
       "start": "11:00",
@@ -302,8 +302,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "horie-009",
-      "centerId": "horie",
+      "id": "edogawa-horie-009",
+      "centerId": "edogawa-horie",
       "date": "2026-07-29",
       "dateEnd": null,
       "start": "10:15",
@@ -315,8 +315,8 @@
       "ageLabel": "0歳〜"
     },
     {
-      "id": "nakakasai-001",
-      "centerId": "nakakasai",
+      "id": "edogawa-nakakasai-001",
+      "centerId": "edogawa-nakakasai",
       "date": "2026-07-01",
       "dateEnd": "2026-07-07",
       "start": "10:00",
@@ -328,8 +328,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "nakakasai-002",
-      "centerId": "nakakasai",
+      "id": "edogawa-nakakasai-002",
+      "centerId": "edogawa-nakakasai",
       "date": "2026-07-02",
       "dateEnd": null,
       "start": "11:00",
@@ -341,8 +341,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "nakakasai-003",
-      "centerId": "nakakasai",
+      "id": "edogawa-nakakasai-003",
+      "centerId": "edogawa-nakakasai",
       "date": "2026-07-07",
       "dateEnd": null,
       "start": "10:30",
@@ -354,8 +354,8 @@
       "ageLabel": "0歳〜"
     },
     {
-      "id": "nakakasai-004",
-      "centerId": "nakakasai",
+      "id": "edogawa-nakakasai-004",
+      "centerId": "edogawa-nakakasai",
       "date": "2026-07-09",
       "dateEnd": null,
       "start": "11:00",
@@ -367,8 +367,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "nakakasai-005",
-      "centerId": "nakakasai",
+      "id": "edogawa-nakakasai-005",
+      "centerId": "edogawa-nakakasai",
       "date": "2026-07-16",
       "dateEnd": null,
       "start": "10:30",
@@ -380,8 +380,8 @@
       "ageLabel": "0歳〜"
     },
     {
-      "id": "nakakasai-006",
-      "centerId": "nakakasai",
+      "id": "edogawa-nakakasai-006",
+      "centerId": "edogawa-nakakasai",
       "date": "2026-07-17",
       "dateEnd": null,
       "start": "10:30",
@@ -393,8 +393,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "nakakasai-007",
-      "centerId": "nakakasai",
+      "id": "edogawa-nakakasai-007",
+      "centerId": "edogawa-nakakasai",
       "date": "2026-07-23",
       "dateEnd": null,
       "start": "11:00",
@@ -406,8 +406,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "nakakasai-008",
-      "centerId": "nakakasai",
+      "id": "edogawa-nakakasai-008",
+      "centerId": "edogawa-nakakasai",
       "date": "2026-07-30",
       "dateEnd": null,
       "start": "11:00",
@@ -419,8 +419,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "seishincho-001",
-      "centerId": "seishincho",
+      "id": "edogawa-seishincho-001",
+      "centerId": "edogawa-seishincho",
       "date": "2026-07-13",
       "dateEnd": null,
       "start": "15:30",
@@ -432,8 +432,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "seishincho-002",
-      "centerId": "seishincho",
+      "id": "edogawa-seishincho-002",
+      "centerId": "edogawa-seishincho",
       "date": "2026-07-14",
       "dateEnd": null,
       "start": "10:00",
@@ -445,8 +445,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "seishincho-003",
-      "centerId": "seishincho",
+      "id": "edogawa-seishincho-003",
+      "centerId": "edogawa-seishincho",
       "date": "2026-07-23",
       "dateEnd": null,
       "start": "10:30",
@@ -458,8 +458,8 @@
       "ageLabel": "2〜8か月"
     },
     {
-      "id": "seishincho-004",
-      "centerId": "seishincho",
+      "id": "edogawa-seishincho-004",
+      "centerId": "edogawa-seishincho",
       "date": "2026-07-27",
       "dateEnd": null,
       "start": "09:30",
@@ -471,8 +471,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "seishincho-005",
-      "centerId": "seishincho",
+      "id": "edogawa-seishincho-005",
+      "centerId": "edogawa-seishincho",
       "date": "2026-07-30",
       "dateEnd": null,
       "start": "10:00",
@@ -484,8 +484,8 @@
       "ageLabel": "0歳"
     },
     {
-      "id": "seishincho-006",
-      "centerId": "seishincho",
+      "id": "edogawa-seishincho-006",
+      "centerId": "edogawa-seishincho",
       "date": "2026-07-31",
       "dateEnd": null,
       "start": "14:00",
@@ -497,8 +497,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "kasai_hc-001",
-      "centerId": "kasai_hc",
+      "id": "edogawa-kasai-hc-001",
+      "centerId": "edogawa-kasai-hc",
       "date": "2026-07-01",
       "dateEnd": null,
       "start": "09:00",
@@ -510,8 +510,8 @@
       "ageLabel": "1歳未満"
     },
     {
-      "id": "kasai_hc-002",
-      "centerId": "kasai_hc",
+      "id": "edogawa-kasai-hc-002",
+      "centerId": "edogawa-kasai-hc",
       "date": "2026-07-15",
       "dateEnd": null,
       "start": "10:00",
@@ -523,8 +523,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "kasai_hc-003",
-      "centerId": "kasai_hc",
+      "id": "edogawa-kasai-hc-003",
+      "centerId": "edogawa-kasai-hc",
       "date": "2026-07-23",
       "dateEnd": null,
       "start": "09:30",
@@ -536,8 +536,8 @@
       "ageLabel": "多胎児の親子"
     },
     {
-      "id": "funabori-001",
-      "centerId": "funabori",
+      "id": "edogawa-funabori-001",
+      "centerId": "edogawa-funabori",
       "date": "2026-07-02",
       "dateEnd": null,
       "start": "10:30",
@@ -549,8 +549,8 @@
       "ageLabel": "産後1〜6か月"
     },
     {
-      "id": "funabori-002",
-      "centerId": "funabori",
+      "id": "edogawa-funabori-002",
+      "centerId": "edogawa-funabori",
       "date": "2026-07-06",
       "dateEnd": "2026-07-12",
       "start": null,
@@ -562,8 +562,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "funabori-003",
-      "centerId": "funabori",
+      "id": "edogawa-funabori-003",
+      "centerId": "edogawa-funabori",
       "date": "2026-07-06",
       "dateEnd": null,
       "start": "10:30",
@@ -575,8 +575,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "funabori-004",
-      "centerId": "funabori",
+      "id": "edogawa-funabori-004",
+      "centerId": "edogawa-funabori",
       "date": "2026-07-06",
       "dateEnd": null,
       "start": "14:00",
@@ -588,8 +588,8 @@
       "ageLabel": "2〜8か月"
     },
     {
-      "id": "funabori-005",
-      "centerId": "funabori",
+      "id": "edogawa-funabori-005",
+      "centerId": "edogawa-funabori",
       "date": "2026-07-07",
       "dateEnd": null,
       "start": "10:30",
@@ -601,8 +601,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "funabori-006",
-      "centerId": "funabori",
+      "id": "edogawa-funabori-006",
+      "centerId": "edogawa-funabori",
       "date": "2026-07-08",
       "dateEnd": null,
       "start": "10:30",
@@ -614,8 +614,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "funabori-007",
-      "centerId": "funabori",
+      "id": "edogawa-funabori-007",
+      "centerId": "edogawa-funabori",
       "date": "2026-07-09",
       "dateEnd": null,
       "start": "10:00",
@@ -627,8 +627,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "funabori-008",
-      "centerId": "funabori",
+      "id": "edogawa-funabori-008",
+      "centerId": "edogawa-funabori",
       "date": "2026-07-10",
       "dateEnd": null,
       "start": "10:30",
@@ -640,8 +640,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "funabori-009",
-      "centerId": "funabori",
+      "id": "edogawa-funabori-009",
+      "centerId": "edogawa-funabori",
       "date": "2026-07-11",
       "dateEnd": null,
       "start": "11:00",
@@ -653,8 +653,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "funabori-010",
-      "centerId": "funabori",
+      "id": "edogawa-funabori-010",
+      "centerId": "edogawa-funabori",
       "date": "2026-07-12",
       "dateEnd": null,
       "start": "09:30",
@@ -666,8 +666,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "funabori-011",
-      "centerId": "funabori",
+      "id": "edogawa-funabori-011",
+      "centerId": "edogawa-funabori",
       "date": "2026-07-15",
       "dateEnd": null,
       "start": "10:30",
@@ -679,8 +679,8 @@
       "ageLabel": "2〜8か月"
     },
     {
-      "id": "funabori-012",
-      "centerId": "funabori",
+      "id": "edogawa-funabori-012",
+      "centerId": "edogawa-funabori",
       "date": "2026-07-16",
       "dateEnd": null,
       "start": "14:00",
@@ -692,8 +692,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "funabori-013",
-      "centerId": "funabori",
+      "id": "edogawa-funabori-013",
+      "centerId": "edogawa-funabori",
       "date": "2026-07-17",
       "dateEnd": null,
       "start": "10:00",
@@ -705,8 +705,8 @@
       "ageLabel": "3〜6か月"
     },
     {
-      "id": "funabori-014",
-      "centerId": "funabori",
+      "id": "edogawa-funabori-014",
+      "centerId": "edogawa-funabori",
       "date": "2026-07-21",
       "dateEnd": null,
       "start": "10:30",
@@ -718,8 +718,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "beteru-001",
-      "centerId": "beteru",
+      "id": "edogawa-beteru-001",
+      "centerId": "edogawa-beteru",
       "date": "2026-07-01",
       "dateEnd": null,
       "start": "10:30",
@@ -731,8 +731,8 @@
       "ageLabel": "保護者向け"
     },
     {
-      "id": "beteru-002",
-      "centerId": "beteru",
+      "id": "edogawa-beteru-002",
+      "centerId": "edogawa-beteru",
       "date": "2026-07-03",
       "dateEnd": null,
       "start": null,
@@ -744,8 +744,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "beteru-003",
-      "centerId": "beteru",
+      "id": "edogawa-beteru-003",
+      "centerId": "edogawa-beteru",
       "date": "2026-07-04",
       "dateEnd": null,
       "start": "10:30",
@@ -757,8 +757,8 @@
       "ageLabel": "保護者向け"
     },
     {
-      "id": "beteru-004",
-      "centerId": "beteru",
+      "id": "edogawa-beteru-004",
+      "centerId": "edogawa-beteru",
       "date": "2026-07-06",
       "dateEnd": null,
       "start": "10:30",
@@ -770,8 +770,8 @@
       "ageLabel": "妊娠中〜赤ちゃん"
     },
     {
-      "id": "beteru-005",
-      "centerId": "beteru",
+      "id": "edogawa-beteru-005",
+      "centerId": "edogawa-beteru",
       "date": "2026-07-08",
       "dateEnd": null,
       "start": null,
@@ -783,8 +783,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "beteru-006",
-      "centerId": "beteru",
+      "id": "edogawa-beteru-006",
+      "centerId": "edogawa-beteru",
       "date": "2026-07-10",
       "dateEnd": null,
       "start": null,
@@ -796,8 +796,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "beteru-007",
-      "centerId": "beteru",
+      "id": "edogawa-beteru-007",
+      "centerId": "edogawa-beteru",
       "date": "2026-07-11",
       "dateEnd": null,
       "start": "10:20",
@@ -809,8 +809,8 @@
       "ageLabel": "保護者向け"
     },
     {
-      "id": "beteru-008",
-      "centerId": "beteru",
+      "id": "edogawa-beteru-008",
+      "centerId": "edogawa-beteru",
       "date": "2026-07-11",
       "dateEnd": null,
       "start": "14:00",
@@ -822,8 +822,8 @@
       "ageLabel": "親子"
     },
     {
-      "id": "beteru-009",
-      "centerId": "beteru",
+      "id": "edogawa-beteru-009",
+      "centerId": "edogawa-beteru",
       "date": "2026-07-17",
       "dateEnd": null,
       "start": null,
@@ -835,8 +835,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "beteru-010",
-      "centerId": "beteru",
+      "id": "edogawa-beteru-010",
+      "centerId": "edogawa-beteru",
       "date": "2026-07-21",
       "dateEnd": null,
       "start": null,
@@ -848,8 +848,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "beteru-011",
-      "centerId": "beteru",
+      "id": "edogawa-beteru-011",
+      "centerId": "edogawa-beteru",
       "date": "2026-07-22",
       "dateEnd": null,
       "start": null,
@@ -861,8 +861,8 @@
       "ageLabel": "どなたでも"
     },
     {
-      "id": "beteru-012",
-      "centerId": "beteru",
+      "id": "edogawa-beteru-012",
+      "centerId": "edogawa-beteru",
       "date": "2026-07-24",
       "dateEnd": null,
       "start": null,

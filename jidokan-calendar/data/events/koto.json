@@ -3,8 +3,8 @@
   "generatedAt": "2026-06-30T15:30:00+09:00",
   "events": [
     {
-      "id": "minamisuna-001",
-      "centerId": "minamisuna",
+      "id": "koto-minamisuna-001",
+      "centerId": "koto-minamisuna",
       "date": "2026-07-01",
       "dateEnd": null,
       "start": "11:20",
@@ -16,8 +16,8 @@
       "ageLabel": "幼児"
     },
     {
-      "id": "minamisuna-002",
-      "centerId": "minamisuna",
+      "id": "koto-minamisuna-002",
+      "centerId": "koto-minamisuna",
       "date": "2026-07-02",
       "dateEnd": null,
       "start": "10:30",
@@ -29,8 +29,8 @@
       "ageLabel": "乳児"
     },
     {
-      "id": "minamisuna-003",
-      "centerId": "minamisuna",
+      "id": "koto-minamisuna-003",
+      "centerId": "koto-minamisuna",
       "date": "2026-07-03",
       "dateEnd": null,
       "start": "10:30",
@@ -42,8 +42,8 @@
       "ageLabel": "幼児"
     },
     {
-      "id": "minamisuna-004",
-      "centerId": "minamisuna",
+      "id": "koto-minamisuna-004",
+      "centerId": "koto-minamisuna",
       "date": "2026-07-04",
       "dateEnd": null,
       "start": "16:00",
@@ -55,8 +55,8 @@
       "ageLabel": "小学生"
     },
     {
-      "id": "minamisuna-005",
-      "centerId": "minamisuna",
+      "id": "koto-minamisuna-005",
+      "centerId": "koto-minamisuna",
       "date": "2026-07-08",
       "dateEnd": null,
       "start": "11:20",
@@ -68,8 +68,8 @@
       "ageLabel": "幼児"
     },
     {
-      "id": "minamisuna-006",
-      "centerId": "minamisuna",
+      "id": "koto-minamisuna-006",
+      "centerId": "koto-minamisuna",
       "date": "2026-07-09",
       "dateEnd": null,
       "start": "10:30",
@@ -81,8 +81,8 @@
       "ageLabel": "乳児"
     },
     {
-      "id": "minamisuna-007",
-      "centerId": "minamisuna",
+      "id": "koto-minamisuna-007",
+      "centerId": "koto-minamisuna",
       "date": "2026-07-10",
       "dateEnd": null,
       "start": "10:30",
@@ -94,8 +94,8 @@
       "ageLabel": "幼児"
     },
     {
-      "id": "minamisuna-008",
-      "centerId": "minamisuna",
+      "id": "koto-minamisuna-008",
+      "centerId": "koto-minamisuna",
       "date": "2026-07-11",
       "dateEnd": null,
       "start": "10:30",
@@ -107,8 +107,8 @@
       "ageLabel": "小学生"
     },
     {
-      "id": "minamisuna-009",
-      "centerId": "minamisuna",
+      "id": "koto-minamisuna-009",
+      "centerId": "koto-minamisuna",
       "date": "2026-07-15",
       "dateEnd": null,
       "start": "11:20",
@@ -120,8 +120,8 @@
       "ageLabel": "幼児"
     },
     {
-      "id": "minamisuna-010",
-      "centerId": "minamisuna",
+      "id": "koto-minamisuna-010",
+      "centerId": "koto-minamisuna",
       "date": "2026-07-16",
       "dateEnd": null,
       "start": "10:30",
