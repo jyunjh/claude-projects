@@ -437,7 +437,28 @@ function loadFavPrefs() {
     const obj = raw ? JSON.parse(raw) : null;
     state.favMap = (obj && typeof obj === "object" && !Array.isArray(obj)) ? obj : {};
   } catch (e) { state.favMap = {}; }
+  migrateFavIds();
   state.favOnly = localStorage.getItem("favoritesOnly") === "1";
+}
+
+// 旧ID（"<wardId>-" 接頭辞なし。例 "kasai"）で保存されたお気に入りを新IDへ移行する。
+// favMap は { centerId: wardId } なので値から接頭辞を復元でき、変換は一意に決まる。
+// 移行済みなら何もしないので、毎回呼んでも安全。
+function migrateFavIds() {
+  let changed = false;
+  const next = {};
+  for (const [id, ward] of Object.entries(state.favMap)) {
+    if (typeof ward === "string" && ward && !id.startsWith(ward + "-")) {
+      next[`${ward}-${id.replace(/_/g, "-")}`] = ward;
+      changed = true;
+    } else {
+      next[id] = ward;
+    }
+  }
+  if (changed) {
+    state.favMap = next;
+    saveFavMap();
+  }
 }
 function saveFavMap() {
   try { localStorage.setItem("favoriteCenters", JSON.stringify(state.favMap)); } catch (e) { /* 保存不可でも継続 */ }
