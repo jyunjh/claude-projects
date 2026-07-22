@@ -36,38 +36,13 @@ python3 -m http.server 9010
 
 スクレイプは純Python（LLM不使用）なので、Claudeを介さず何度でも無料で更新できる。
 
+更新は手動で好きなタイミングに実行する（自動更新は設定しない方針）。
+
 ```bash
 ./update.sh            # data/*.json を更新するだけ
 ./update.sh --serve    # 更新してローカルでサイトを開く
 ./update.sh --publish  # 更新して git push（GitHub Pages に反映）
 ```
-
-### 自動更新（毎朝ローカルで回す・macOS launchd）
-
-Claudeもクラウドも使わず、Macで毎朝7時に自動更新したい場合:
-
-```bash
-mkdir -p ~/Library/LaunchAgents
-cat > ~/Library/LaunchAgents/com.mansionfinder.update.plist <<PLIST
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0"><dict>
-  <key>Label</key><string>com.mansionfinder.update</string>
-  <key>ProgramArguments</key>
-  <array>
-    <string>$(pwd)/update.sh</string>
-    <string>--publish</string>
-  </array>
-  <key>StartCalendarInterval</key><dict><key>Hour</key><integer>7</integer><key>Minute</key><integer>0</integer></dict>
-  <key>StandardOutPath</key><string>/tmp/mansionfinder-update.log</string>
-  <key>StandardErrorPath</key><string>/tmp/mansionfinder-update.log</string>
-</dict></plist>
-PLIST
-launchctl load ~/Library/LaunchAgents/com.mansionfinder.update.plist
-```
-
-停止は `launchctl unload ~/Library/LaunchAgents/com.mansionfinder.update.plist`。
-`--publish` を外せば push せずローカル更新のみ。
 
 ## エリアの追加
 
