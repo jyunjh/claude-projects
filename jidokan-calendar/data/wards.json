@@ -67,14 +67,14 @@
     "name": "目黒区",
     "lat": 35.6415,
     "lng": 139.6982,
-    "status": "none"
+    "status": "covered"
   },
   {
     "id": "ota",
     "name": "大田区",
     "lat": 35.5613,
     "lng": 139.7161,
-    "status": "none"
+    "status": "covered"
   },
   {
     "id": "setagaya",
@@ -88,7 +88,7 @@
     "name": "渋谷区",
     "lat": 35.664,
     "lng": 139.6982,
-    "status": "none"
+    "status": "covered"
   },
   {
     "id": "nakano",
@@ -137,7 +137,7 @@
     "name": "練馬区",
     "lat": 35.7357,
     "lng": 139.6517,
-    "status": "none"
+    "status": "covered"
   },
   {
     "id": "adachi",

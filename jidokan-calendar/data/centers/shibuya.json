@@ -1,0 +1,98 @@
+[
+  {
+    "id": "shibuya-kazoku-no-atelier",
+    "name": "かぞくのアトリエ（こども・親子支援センター）",
+    "region": "渋谷区",
+    "address": "〒150-0053 東京都渋谷区代々木2丁目32番5号",
+    "officialUrl": "https://www.city.shibuya.tokyo.jp/shisetsu/kosodate/kosodate-shisetsu/kazoku_no_atelier.html",
+    "sourcePage": "https://kazoku-no-atelier.com/",
+    "pdfUrl": "https://kazoku-no-atelier.com/",
+    "color": "#4f86c6",
+    "lat": 35.6834,
+    "lng": 139.6975
+  },
+  {
+    "id": "shibuya-spot",
+    "name": "渋谷スポーツ共育プラザ&ラボすぽっと",
+    "region": "渋谷区",
+    "address": "〒151-0051 東京都渋谷区千駄ヶ谷5丁目27番11号 アグリスクエア新宿1階",
+    "officialUrl": "https://www.city.shibuya.tokyo.jp/shisetsu/kosodate/kosodate-shisetsu/shibuya_spot.html",
+    "sourcePage": "https://shibuya-spot.jp/schedule/",
+    "pdfUrl": "https://shibuya-spot.jp/schedule/detail.php?id=1055",
+    "color": "#e8804f",
+    "lat": 35.6857,
+    "lng": 139.7033
+  },
+  {
+    "id": "shibuya-aozora",
+    "name": "神宮前あおぞらこども園 子育てひろば",
+    "region": "渋谷区",
+    "address": "〒150-0001 東京都渋谷区神宮前5丁目6番1号",
+    "officialUrl": "https://shibuyaswc.jp/hoiku/aozora/",
+    "sourcePage": "https://shibuyaswc.jp/cat/hoiku/aozora/",
+    "pdfUrl": "https://shibuyaswc.jp/blog/27069/",
+    "color": "#5cb85c",
+    "lat": 35.6664,
+    "lng": 139.7082
+  },
+  {
+    "id": "shibuya-kirakira",
+    "name": "本町きらきらこども園 子育てひろば",
+    "region": "渋谷区",
+    "address": "〒151-0071 東京都渋谷区本町3丁目38番10号",
+    "officialUrl": "https://shibuyaswc.jp/hoiku/kirakira/",
+    "sourcePage": "https://shibuyaswc.jp/cat/hoiku/kirakira/",
+    "pdfUrl": "https://shibuyaswc.jp/blog/27050/",
+    "color": "#a06cd5",
+    "lat": 35.6888,
+    "lng": 139.6811
+  },
+  {
+    "id": "shibuya-nobinobi",
+    "name": "恵比寿のびのびこども園 子育てひろば",
+    "region": "渋谷区",
+    "address": "〒150-0021 東京都渋谷区恵比寿西1丁目19番1号",
+    "officialUrl": "https://shibuyaswc.jp/hoiku/nobinobi/",
+    "sourcePage": "https://shibuyaswc.jp/cat/hoiku/nobinobi/",
+    "pdfUrl": "https://shibuyaswc.jp/blog/27002/",
+    "color": "#d6477f",
+    "lat": 35.6473,
+    "lng": 139.7071
+  },
+  {
+    "id": "shibuya-soyokaze",
+    "name": "本町そよかぜこども園 子育てひろば",
+    "region": "渋谷区",
+    "address": "〒151-0071 東京都渋谷区本町6丁目6番2号",
+    "officialUrl": "https://shibuyaswc.jp/hoiku/soyokaze/",
+    "sourcePage": "https://shibuyaswc.jp/cat/hoiku/soyokaze/",
+    "pdfUrl": "https://shibuyaswc.jp/blog/26881/",
+    "color": "#2bb3a3",
+    "lat": 35.6821,
+    "lng": 139.6789
+  },
+  {
+    "id": "shibuya-harajuku",
+    "name": "原宿こども園 子育てひろば",
+    "region": "渋谷区",
+    "address": "〒150-0001 東京都渋谷区神宮前1丁目1番10号",
+    "officialUrl": "https://shibuyaswc.jp/hoiku/harajuku/",
+    "sourcePage": "https://shibuyaswc.jp/cat/hoiku/harajuku/",
+    "pdfUrl": "https://shibuyaswc.jp/blog/26829/",
+    "color": "#e0a32e",
+    "lat": 35.674,
+    "lng": 139.7065
+  },
+  {
+    "id": "shibuya-yume",
+    "name": "西原保育園ゆめ 子育てひろば",
+    "region": "渋谷区",
+    "address": "〒151-0066 東京都渋谷区西原1丁目22番20号",
+    "officialUrl": "https://shibuyaswc.jp/hoiku/yume/",
+    "sourcePage": "https://shibuyaswc.jp/cat/hoiku/yume/",
+    "pdfUrl": "https://shibuyaswc.jp/blog/26815/",
+    "color": "#7e6cd6",
+    "lat": 35.6762,
+    "lng": 139.6787
+  }
+]
