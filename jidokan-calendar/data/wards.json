@@ -4,7 +4,7 @@
     "name": "千代田区",
     "lat": 35.694,
     "lng": 139.7536,
-    "status": "none"
+    "status": "covered"
   },
   {
     "id": "chuo",
@@ -18,7 +18,7 @@
     "name": "港区",
     "lat": 35.6581,
     "lng": 139.7516,
-    "status": "none"
+    "status": "covered"
   },
   {
     "id": "shinjuku",
@@ -67,28 +67,28 @@
     "name": "目黒区",
     "lat": 35.6415,
     "lng": 139.6982,
-    "status": "none"
+    "status": "covered"
   },
   {
     "id": "ota",
     "name": "大田区",
     "lat": 35.5613,
     "lng": 139.7161,
-    "status": "none"
+    "status": "covered"
   },
   {
     "id": "setagaya",
     "name": "世田谷区",
     "lat": 35.6466,
     "lng": 139.6532,
-    "status": "none"
+    "status": "covered"
   },
   {
     "id": "shibuya",
     "name": "渋谷区",
     "lat": 35.664,
     "lng": 139.6982,
-    "status": "none"
+    "status": "covered"
   },
   {
     "id": "nakano",
@@ -102,7 +102,7 @@
     "name": "杉並区",
     "lat": 35.6995,
     "lng": 139.6364,
-    "status": "none"
+    "status": "covered"
   },
   {
     "id": "toshima",
@@ -130,14 +130,14 @@
     "name": "板橋区",
     "lat": 35.7512,
     "lng": 139.7093,
-    "status": "none"
+    "status": "covered"
   },
   {
     "id": "nerima",
     "name": "練馬区",
     "lat": 35.7357,
     "lng": 139.6517,
-    "status": "none"
+    "status": "covered"
   },
   {
     "id": "adachi",

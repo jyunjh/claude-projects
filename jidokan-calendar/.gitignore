@@ -4,3 +4,4 @@ __pycache__/
 .gemini_key
 *.key
 .env
+ingest/.nominatim.lock
