@@ -766,11 +766,8 @@ function init() {
   document.getElementById("refreshBtn").addEventListener("click", updateLiveData);
   document.getElementById("saveKeyBtn").addEventListener("click", saveApiKey);
 
-  // メンターチャット
+  // メンターチャット (Enterでは送信しない。送信は「送信」ボタンのみ。Enterは改行)
   document.getElementById("chatSend").addEventListener("click", sendChat);
-  document.getElementById("chatInput").addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChat(); }
-  });
   document.getElementById("anthropicSaveBtn").addEventListener("click", () => {
     const inp = document.getElementById("anthropicKeyInput");
     setAiKey(inp.value);
