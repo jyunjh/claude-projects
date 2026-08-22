@@ -122,6 +122,25 @@ const I18N = {
     chatSuggest1: "Is this a genuine contrarian buy?",
     chatSuggest2: "What are the biggest risks to the thesis?",
     chatSuggest3: "What should I research next?",
+    // Coverage / data state
+    pendingData: "Not yet assessable — market data or fair value missing",
+    recPending: "NOT RATED — set a fair value to enable the verdict",
+    needPrice: "📡 Price not loaded yet. Press 🔄 Update to latest to fetch it.",
+    needFairValue: "✏️ Set your own fair-value estimate in data.js to enable valuation and the verdict.",
+    thesisLabel: "Structural read",
+    // Analyst coverage depth
+    covThin: "Thin",
+    covMedium: "Moderate",
+    covThick: "Well covered",
+    // Business model taxonomy
+    modelA: "A: IP owner, aftermarket-led",
+    modelB: "B: Build-to-print",
+    modelC: "C: Contractual exclusivity",
+    modelHybrid: "C/D hybrid: asset-cycling",
+    modelMaterial: "Materials — no blade",
+    modelDefenseEl: "Defense electronics",
+    modelDiversified: "Diversified (non-aero core)",
+
     chatSwitched: "⚡ {from} hit its free-tier limit — switched to {to} to keep going.",
     chatRecovered: "✅ {model} recovered — back to using it by default.",
 
@@ -239,6 +258,25 @@ const I18N = {
     chatSuggest1: "これは本物の逆張り買い場？",
     chatSuggest2: "この投資仮説の最大のリスクは？",
     chatSuggest3: "次に何を調べるべき？",
+    // カバレッジ / データ状態
+    pendingData: "判定不可 — 株価または適正価値が未設定",
+    recPending: "判定保留 — 適正価値を設定すると判定が有効になります",
+    needPrice: "📡 株価が未取得です。「🔄 最新に更新」で取得してください。",
+    needFairValue: "✏️ data.js に自身の適正価値を設定すると、バリュエーションと投資判断が有効になります。",
+    thesisLabel: "構造的な読み筋",
+    // アナリストカバレッジの厚さ
+    covThin: "薄い",
+    covMedium: "中程度",
+    covThick: "厚い",
+    // ビジネスモデル区分
+    modelA: "A: IP保有・アフター主導",
+    modelB: "B: 受託製造",
+    modelC: "C: 独占アクセス権",
+    modelHybrid: "C/D複合: 資産回転型",
+    modelMaterial: "素材 — 刃なし",
+    modelDefenseEl: "防衛電子",
+    modelDiversified: "多角化(航空は非中核)",
+
     chatSwitched: "⚡ {from} が無料枠の上限に達したため、{to} に切り替えて続行します。",
     chatRecovered: "✅ {model} が回復したので、優先利用に戻しました。",
 
