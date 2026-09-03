@@ -15,7 +15,7 @@ function readFile(p) {
 }
 
 var BASE = $.NSString.stringWithString($('./')).stringByStandardizingPath.js + '/';
-var FILES = ['data.js', 'i18n.js', 'sectors.js', 'chat.js', 'api.js', 'app.js'];
+var FILES = ['data.js', 'snapshot.js', 'i18n.js', 'sectors.js', 'chat.js', 'api.js', 'app.js'];
 
 var fails = [], warns = [], oks = [];
 function ok(m) { oks.push('  ✅ ' + m); }
