@@ -25,6 +25,7 @@
   <!-- 最新データ更新バー -->
   <div class="data-bar">
     <button id="refreshBtn" class="refresh-btn">🔄 <span id="refreshLabel"></span></button>
+    <button id="saveSnapBtn" class="refresh-btn">💾 <span id="saveSnapLabel"></span></button>
     <span id="dataStatus" class="data-status"></span>
     <details class="key-box" id="keyBox">
       <summary id="keyToggle"></summary>
@@ -84,6 +85,7 @@
 
   <!-- 読み込み順: データ → 翻訳 → セクター設定 → API → ロジック -->
   <script src="data.js"></script>
+  <script src="snapshot.js"></script>
   <script src="i18n.js"></script>
   <script src="sectors.js"></script>
   <script src="api.js"></script>

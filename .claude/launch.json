@@ -4,19 +4,33 @@
     {
       "name": "stock-analyzer",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8000", "--directory", "stock-analyzer"],
+      "runtimeArgs": [
+        "stock-analyzer/serve.py",
+        "--port",
+        "8000"
+      ],
       "port": 8000
     },
     {
       "name": "jidokan-calendar",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["jidokan-calendar/serve.py", "--port", "9000"],
+      "runtimeArgs": [
+        "jidokan-calendar/serve.py",
+        "--port",
+        "9000"
+      ],
       "port": 9000
     },
     {
       "name": "mansion-finder",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "9010", "--directory", "mansion-finder"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "9010",
+        "--directory",
+        "mansion-finder"
+      ],
       "port": 9010
     }
   ]

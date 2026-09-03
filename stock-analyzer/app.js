@@ -24,20 +24,73 @@ let historyCache = {};
 // メンター相談チャットの履歴と状態
 let chatMessages = []; // [{role:"user"|"assistant", content}]
 let chatBusy = false;
-// データバーの一時メッセージ ("refreshing" | "error" | null)
+// データバーの一時メッセージ ("refreshing" | "error" | "partial" | null)
 let dataMessage = null;
+// 直近の失敗理由 (診断用にそのまま画面へ出す)
+let dataDetail = "";
 
-// サンプル + 最新差分をマージした銘柄オブジェクトを返す
+/*
+ * 銘柄データは3層で重ねる:
+ *   1. SAMPLE_STOCKS  … 手書き (仮説・KPI・重要ファクター・適正価値)
+ *   2. LIVE_SNAPSHOT  … 保存済みの市場データ (snapshot.js / 自動生成)
+ *   3. liveOverrides  … 今セッションでAPI取得した最新値
+ * 上の層ほど優先。市場データだけが上書きされ、手書きの分析は保持される。
+ */
 function getStock(ticker) {
   const base = SAMPLE_STOCKS[ticker];
-  const ov = liveOverrides[ticker];
-  if (!ov) return base;
-  return {
-    ...base,
-    ...ov,
-    metrics: { ...base.metrics, ...(ov.metrics || {}) },
-    _liveAt: ov._liveAt,
-  };
+  const layers = [];
+  if (typeof LIVE_SNAPSHOT !== "undefined" && LIVE_SNAPSHOT[ticker]) layers.push(LIVE_SNAPSHOT[ticker]);
+  if (liveOverrides[ticker]) layers.push(liveOverrides[ticker]);
+  if (!layers.length) return base;
+
+  const merged = { ...base };
+  let metrics = { ...base.metrics };
+  layers.forEach((layer) => {
+    Object.keys(layer).forEach((k) => {
+      if (k === "metrics") metrics = { ...metrics, ...layer.metrics };
+      else merged[k] = layer[k];
+    });
+  });
+  merged.metrics = metrics;
+  return merged;
+}
+
+// snapshot.js へ保存する市場データを収集 (手書きの分析は含めない)
+function collectSnapshot() {
+  const snap = {};
+  Object.keys(SAMPLE_STOCKS).forEach((tk) => {
+    const s = getStock(tk);
+    if (s.price == null || !s._liveAt) return; // 取得済みのものだけ
+    const m = {};
+    Object.keys(s.metrics).forEach((k) => { if (s.metrics[k] != null) m[k] = s.metrics[k]; });
+    snap[tk] = { price: s.price, marketCap: s.marketCap, metrics: m, _liveAt: s._liveAt };
+  });
+  return snap;
+}
+
+// ローカルサーバー(serve.py)へ保存を依頼
+async function saveSnapshot() {
+  const snap = collectSnapshot();
+  const el = document.getElementById("dataStatus");
+  if (!Object.keys(snap).length) {
+    el.className = "data-status error";
+    el.textContent = t("saveNothing");
+    return;
+  }
+  try {
+    const res = await fetch("/api/save-snapshot", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(snap),
+    });
+    const j = await res.json();
+    el.className = "data-status " + (j.ok ? "live" : "error");
+    el.textContent = j.ok ? t("saveOk").replace("{n}", j.count) : t("saveFail") + " — " + (j.error || res.status);
+  } catch (e) {
+    // 素の http.server で開いていると保存エンドポイントが無い
+    el.className = "data-status error";
+    el.textContent = t("saveFail") + " — " + t("saveNeedsServer");
+  }
 }
 
 // セクターでフィルタした銘柄リスト ("all" は全件)。最新差分を反映。
@@ -490,6 +543,7 @@ function renderDataBar(stock) {
   document.getElementById("refreshLabel").textContent =
     dataMessage === "refreshing" ? t("refreshing") : t("refresh");
   document.getElementById("refreshBtn").disabled = dataMessage === "refreshing";
+  document.getElementById("saveSnapLabel").textContent = t("saveSnapshot");
   document.getElementById("keyToggle").textContent = `⚙️ ${t("apiSettings")}`;
   document.getElementById("saveKeyBtn").textContent = t("saveKey");
   document.getElementById("getKeyLink").textContent = t("getKey");
@@ -502,7 +556,10 @@ function renderDataBar(stock) {
   if (dataMessage === "refreshing") {
     el.textContent = t("refreshing");
   } else if (dataMessage === "error") {
-    el.textContent = t("dataError");
+    el.textContent = t("dataError") + (dataDetail ? " — " + dataDetail : "");
+    el.classList.add("error");
+  } else if (dataMessage === "partial") {
+    el.textContent = t("dataPartialFail") + (dataDetail ? " — " + dataDetail : "");
     el.classList.add("error");
   } else if (dataMessage === "keySaved") {
     el.textContent = t("keySaved");
@@ -530,12 +587,19 @@ async function updateLiveData() {
   dataMessage = "refreshing";
   render();
   const tickers = stocksInSector(currentSector).map((s) => s.ticker);
+  dataDetail = "";
   try {
     const { ok, failed } = await fetchLiveStocks(tickers);
     Object.assign(liveOverrides, ok);
-    dataMessage = failed.length === tickers.length ? "error" : null;
+    if (failed.length) {
+      // 失敗理由をそのまま見せる (原因が分からないと直せないため)
+      const reasons = [...new Set(failed.map((f) => f.reason || "unknown"))];
+      dataDetail = `${failed.length}/${tickers.length}件失敗 — ${failed.slice(0, 3).map((f) => f.ticker).join(", ")}${failed.length > 3 ? "…" : ""} : ${reasons[0]}`;
+    }
+    dataMessage = failed.length === tickers.length ? "error" : failed.length ? "partial" : null;
   } catch (e) {
     dataMessage = "error";
+    dataDetail = String(e && e.message ? e.message : e);
   }
   render();
 }
@@ -825,6 +889,7 @@ function init() {
     render();
   });
   document.getElementById("refreshBtn").addEventListener("click", updateLiveData);
+  document.getElementById("saveSnapBtn").addEventListener("click", saveSnapshot);
   document.getElementById("saveKeyBtn").addEventListener("click", saveApiKey);
 
   // メンターチャット (Enterでは送信しない。送信は「送信」ボタンのみ。Enterは改行)
