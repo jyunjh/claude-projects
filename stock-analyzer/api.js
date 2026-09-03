@@ -23,10 +23,31 @@ function setApiKey(k) {
 const round2 = (n) => Math.round(n * 100) / 100;
 const isNum = (n) => typeof n === "number" && isFinite(n);
 
+// APIの生の応答本文からエラー理由を取り出す。
+// FMPは 401/402/403 でも本文に理由 ("Exclusive Endpoint" 等) を返すので、
+// ステータスだけでなく本文も拾わないと原因が分からなくなる。
+function apiReason(status, body) {
+  let detail = "";
+  try {
+    const j = JSON.parse(body);
+    detail = j["Error Message"] || j.message || j.error || "";
+  } catch (_) {
+    detail = (body || "").trim().slice(0, 120);
+  }
+  return "HTTP " + status + (detail ? " — " + detail : "");
+}
+
 async function fetchJson(url) {
   const res = await fetch(url);
-  if (!res.ok) throw new Error("HTTP " + res.status);
-  const json = await res.json();
+  const body = await res.text();
+  if (!res.ok) throw new Error(apiReason(res.status, body));
+
+  let json;
+  try {
+    json = JSON.parse(body);
+  } catch (_) {
+    throw new Error("不正な応答 — " + body.trim().slice(0, 80));
+  }
   if (json && json["Error Message"]) throw new Error(json["Error Message"]);
   if (Array.isArray(json) && json.length === 0) throw new Error("EMPTY");
   return json;
@@ -42,12 +63,36 @@ async function fetchLiveStock(ticker) {
   const q = (s) => `${FMP_BASE}/${s}?symbol=${ticker}&apikey=${key}`;
 
   // --- 必須: 株価・時価総額 ---
-  const quote = (await fetchJson(q("quote")))[0];
+  // quote は無料プランで 402 (Exclusive Endpoint) になることがある。
+  // その場合は日次終値エンドポイントに切り替えて、最低限 株価だけは取る。
   const patch = { metrics: {} };
-  if (quote) {
-    if (isNum(quote.price)) patch.price = round2(quote.price);
-    if (isNum(quote.marketCap)) patch.marketCap = Math.round(quote.marketCap / 1e9); // 10億ドル単位
+  let quoteErr = null;
+  try {
+    const quote = (await fetchJson(q("quote")))[0];
+    if (quote) {
+      if (isNum(quote.price)) patch.price = round2(quote.price);
+      if (isNum(quote.marketCap)) patch.marketCap = Math.round(quote.marketCap / 1e9); // 10億ドル単位
+      patch._priceSource = "quote";
+    }
+  } catch (e) {
+    quoteErr = e;
   }
+
+  if (patch.price == null) {
+    try {
+      const hist = await fetchPriceHistory(ticker, 10);
+      const last = hist[hist.length - 1];
+      if (last && isNum(last.price)) {
+        patch.price = round2(last.price);
+        patch._priceSource = "eod";       // 終値ベース (リアルタイムではない)
+        patch._priceAsOf = last.date;
+      }
+    } catch (e) {
+      // 終値も取れない = このキーでは株価を取得できない。理由は quote 側を優先して返す。
+      throw new Error((quoteErr && quoteErr.message) || e.message);
+    }
+  }
+  if (patch.price == null) throw new Error((quoteErr && quoteErr.message) || "株価を取得できませんでした");
 
   // --- 任意: 各種レシオ (失敗してもサンプル維持) ---
   try {

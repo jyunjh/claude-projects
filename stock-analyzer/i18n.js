@@ -4,6 +4,7 @@
 
 const I18N = {
   en: {
+    eodPrice: "close",
     appTitle: "US Stock Analyzer",
     appSubtitle: "Long-term · Fundamental · Contrarian",
     selectStock: "Select a stock",
@@ -153,6 +154,7 @@ const I18N = {
     langButton: "日本語",
   },
   ja: {
+    eodPrice: "終値",
     appTitle: "米国株アナライザー",
     appSubtitle: "長期 · ファンダメンタル · コントラリアン",
     selectStock: "銘柄を選択",

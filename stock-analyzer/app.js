@@ -64,6 +64,8 @@ function collectSnapshot() {
     const m = {};
     Object.keys(s.metrics).forEach((k) => { if (s.metrics[k] != null) m[k] = s.metrics[k]; });
     snap[tk] = { price: s.price, marketCap: s.marketCap, metrics: m, _liveAt: s._liveAt };
+    if (s._priceSource) snap[tk]._priceSource = s._priceSource;
+    if (s._priceAsOf) snap[tk]._priceAsOf = s._priceAsOf;
   });
   return snap;
 }
@@ -308,7 +310,7 @@ function renderOverview(stock) {
         <div class="name">${localized(stock.name)}</div>
         <div class="ticker">${stock.ticker} · ${localized(stock.sector)}</div>
       </div>
-      <div class="big-price">${usd(stock.price)}</div>
+      <div class="big-price">${usd(stock.price)}${stock._priceSource === "eod" ? `<span class="src-tag">${t("eodPrice")}${stock._priceAsOf ? " " + stock._priceAsOf : ""}</span>` : ""}</div>
     </div>
     <div class="kv-grid">
       <div class="kv"><div class="label">${t("fairValue")}</div><div class="value">${usd(stock.fairValue)}</div></div>
@@ -748,7 +750,7 @@ function buildAnalysisContext(stock) {
   }
   if (stock.thesis) lines.push(`Structural note: ${stock.thesis.en}`);
   lines.push("Critical Factors (EPIC): " + stock.criticalFactors.map((f) => `${f.factor.en} [impact ${f.impact}, probability ${f.probability}%]`).join("; "));
-  lines.push(`Data status: ${stock._liveAt ? "live, as of " + new Date(stock._liveAt).toISOString().slice(0, 10) : "sample/snapshot data (not real-time)"}`);
+  lines.push(`Data status: ${stock._liveAt ? "live, as of " + new Date(stock._liveAt).toISOString().slice(0, 10) : "sample/snapshot data (not real-time)"}${stock._priceSource === "eod" ? " (price = daily close" + (stock._priceAsOf ? " " + stock._priceAsOf : "") + ", not intraday)" : ""}`);
   return lines.join("\n");
 }
 
