@@ -51,19 +51,28 @@ const localized = (obj) => (obj ? obj[currentLang] : "");
 
 /* ---------- 計算ロジック (analysis helpers) ---------- */
 
-// 適正価値に対する上昇/下落余地 (%)
+// 市場データ(株価)が揃っているか。未取得の新規カバレッジ銘柄は false。
+function hasPrice(stock) { return stock.price != null; }
+// 適正価値(アナリスト自身の推定)が設定されているか
+function hasFairValue(stock) { return stock.fairValue != null; }
+
+// 適正価値に対する上昇/下落余地 (%)。どちらか欠けていれば null。
 function upsidePct(stock) {
+  if (!hasPrice(stock) || !hasFairValue(stock)) return null;
   return ((stock.fairValue - stock.price) / stock.price) * 100;
 }
 
 // ファンダメンタルスコア 0-100 を簡易合成
 // (バリュエーションの割安さ・収益性・財務健全性・成長から)
 function fundamentalScore(stock) {
+  const up = upsidePct(stock);
+  // 株価も適正価値も無い銘柄はスコアを出さない (未取得を"中立"と偽らない)
+  if (up === null) return null;
   const m = stock.metrics;
   let score = 50;
 
   // バリュエーション: 適正価値より割安ならプラス
-  score += clamp(upsidePct(stock) * 0.8, -20, 20);
+  score += clamp(up * 0.8, -20, 20);
 
   // 収益性 (ROE)
   if (m.roe >= 20) score += 12;
@@ -91,6 +100,7 @@ function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
 function contrarianVerdict(stock) {
   const sentiment = stock.sentiment.sentimentScore;
   const fundamentals = fundamentalScore(stock);
+  if (fundamentals === null) return { type: "amber", key: "pendingData", gap: null };
   const gap = fundamentals - sentiment; // 正: 市場が過小評価 (逆張り買い)
 
   if (gap >= 15) return { type: "green", key: "contrarianBuy", gap };
@@ -102,6 +112,7 @@ function contrarianVerdict(stock) {
 function recommendation(stock) {
   const up = upsidePct(stock);
   const fund = fundamentalScore(stock);
+  if (up === null || fund === null) return { pill: "amber", key: "recPending" };
   const contrarian = contrarianVerdict(stock);
 
   if (up >= 8 && fund >= 55 && contrarian.type !== "red") {
@@ -116,8 +127,8 @@ function recommendation(stock) {
 /* ---------- フォーマット (formatting) ---------- */
 const fmt = (n, d = 1) => (n === 0 || n == null ? "—" : n.toFixed(d));
 const pct = (n, d = 1) => (n == null ? "—" : `${n > 0 ? "" : ""}${n.toFixed(d)}%`);
-const usd = (n) => `$${n.toFixed(2)}`;
-const bn = (n) => (n >= 1000 ? `$${(n / 1000).toFixed(2)}T` : `$${n}B`);
+const usd = (n) => (n == null ? "—" : `$${n.toFixed(2)}`);
+const bn = (n) => (n == null ? "—" : n >= 1000 ? `$${(n / 1000).toFixed(2)}T` : `$${n}B`);
 
 /* ---------- レンダリング (rendering) ---------- */
 
@@ -248,8 +259,8 @@ function renderOverview(stock) {
     </div>
     <div class="kv-grid">
       <div class="kv"><div class="label">${t("fairValue")}</div><div class="value">${usd(stock.fairValue)}</div></div>
-      <div class="kv"><div class="label">${up >= 0 ? t("upside") : t("downside")}</div>
-        <div class="value" style="color:${up >= 0 ? "var(--green)" : "var(--red)"}">${pct(up)}</div></div>
+      <div class="kv"><div class="label">${up === null ? t("upside") : up >= 0 ? t("upside") : t("downside")}</div>
+        <div class="value" style="color:${up === null ? "var(--text-dim)" : up >= 0 ? "var(--green)" : "var(--red)"}">${pct(up)}</div></div>
       <div class="kv"><div class="label">${t("marketCap")}</div><div class="value">${bn(stock.marketCap)}</div></div>
       <div class="kv"><div class="label">${t("sector")}</div><div class="value" style="font-size:0.95rem">${localized(stock.sector)}</div></div>
     </div>`;
@@ -284,6 +295,17 @@ function renderMetrics(stock) {
 
 function renderValuation(stock) {
   const up = upsidePct(stock);
+  // 株価または適正価値が未設定なら、判定せず必要な操作を案内する
+  if (up === null) {
+    document.getElementById("valuation").innerHTML = `
+      <h2>💰 ${t("valuation")}</h2>
+      <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:14px">${t("valuationIntro")}</p>
+      <div class="pending-box">
+        <div>${!hasPrice(stock) ? t("needPrice") : ""}</div>
+        <div>${!hasFairValue(stock) ? t("needFairValue") : ""}</div>
+      </div>`;
+    return;
+  }
   let msgKey = "fairlyValued", color = "var(--amber)";
   if (up >= 5) { msgKey = "undervalued"; color = "var(--green)"; }
   else if (up <= -5) { msgKey = "overvalued"; color = "var(--red)"; }
@@ -311,8 +333,8 @@ function renderContrarian(stock) {
       <div class="bar-track"><div class="bar-fill" style="width:${sentiment}%;background:var(--accent)"></div></div>
     </div>
     <div class="bar-row">
-      <div class="bar-label"><span>${t("fundamentalScore")}</span><span>${fund}/100</span></div>
-      <div class="bar-track"><div class="bar-fill" style="width:${fund}%;background:var(--green)"></div></div>
+      <div class="bar-label"><span>${t("fundamentalScore")}</span><span>${fund === null ? "—" : fund + "/100"}</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:${fund === null ? 0 : fund}%;background:var(--green)"></div></div>
     </div>
     <div style="margin-top:12px"><span class="pill ${verdict.type}">${t(verdict.key)}</span></div>`;
 }
@@ -362,18 +384,25 @@ function renderSectorPanels(stock) {
       </tbody>
     </table>`;
 
-  // 特化KPI
-  const d = stock.defense || {};
+  // 特化KPI (セクター固有データは stock[sectorKey] に格納)
+  const d = stock[stock.sectorKey] || {};
   kpiEl.innerHTML = `
-    <h2>🛡️ ${localized(cfg.name)} · ${t("sectorKpis")}</h2>
+    <h2>${cfg.icon || "🛡️"} ${localized(cfg.name)} · ${t("sectorKpis")}</h2>
     <div class="metrics">
       ${cfg.kpis.map((k) => {
         const v = d[k.key];
+        // 未取得の項目は "—" (推測で埋めない)
+        if (v === undefined || v === null) {
+          return `<div class="metric"><div class="label">${localized(k.label)}</div>
+            <div class="value" style="color:var(--text-dim)">—</div></div>`;
+        }
         let display, cls = "";
         if (k.unit === "tag") {
-          const lvl = v || "medium";
           return `<div class="metric"><div class="label">${localized(k.label)}</div>
-            <div class="value"><span class="tag ${lvl}">${t(lvl)}</span></div></div>`;
+            <div class="value"><span class="tag ${v}">${t(v)}</span></div></div>`;
+        } else if (k.unit === "i18n") {
+          return `<div class="metric"><div class="label">${localized(k.label)}</div>
+            <div class="value"><span class="tag low">${t(v)}</span></div></div>`;
         } else if (k.unit === "x") { display = `${fmt(v, 2)}x`; }
         else if (k.unit === "y") { display = `${fmt(v, 1)}`; }
         else { display = `${fmt(v, 0)}%`; }
@@ -382,7 +411,8 @@ function renderSectorPanels(stock) {
         return `<div class="metric"><div class="label">${localized(k.label)}</div>
           <div class="value ${cls}">${display}</div></div>`;
       }).join("")}
-    </div>`;
+    </div>
+    ${stock.thesis ? `<div class="thesis-note"><strong>${t("thesisLabel")}</strong>${localized(stock.thesis)}</div>` : ""}`;
 }
 
 /* 見るべきポイント解説: 共通 + セクター特化 (折りたたみ) */
@@ -400,13 +430,20 @@ function renderGuide(stock) {
 
 /* 株価チャート (SVG自前描画 / 適正価値ラインを重ねる) */
 function renderChart(stock) {
+  if (!hasPrice(stock)) {
+    document.getElementById("chart").innerHTML = `
+      <h2>📈 ${t("priceChart")}</h2>
+      <div class="pending-box">${t("needPrice")}</div>`;
+    return;
+  }
   const live = !!historyCache[stock.ticker];
   const hist = live ? historyCache[stock.ticker] : sampleHistory(stock);
   const prices = hist.map((d) => d.price);
   const fv = stock.fairValue;
 
   const W = 760, H = 260, padL = 6, padR = 6, padT = 18, padB = 26;
-  const lo = Math.min(...prices, fv), hi = Math.max(...prices, fv);
+  const scaleVals = fv == null ? prices : [...prices, fv];
+  const lo = Math.min(...scaleVals), hi = Math.max(...scaleVals);
   const range = hi - lo || 1;
   const X = (i) => padL + (i / (hist.length - 1)) * (W - padL - padR);
   const Y = (p) => padT + (1 - (p - lo) / range) * (H - padT - padB);
@@ -415,7 +452,7 @@ function renderChart(stock) {
   const areaPts = `${X(0).toFixed(1)},${(H - padB)} ${linePts} ${X(hist.length - 1).toFixed(1)},${(H - padB)}`;
   const up = prices[prices.length - 1] >= prices[0];
   const color = up ? "var(--green)" : "var(--red)";
-  const fvY = Y(fv).toFixed(1);
+  const fvY = fv == null ? null : Y(fv).toFixed(1);
 
   const seriesHi = Math.max(...prices), seriesLo = Math.min(...prices);
   const cur = prices[prices.length - 1];
@@ -430,7 +467,7 @@ function renderChart(stock) {
       <span>${t("price")}: <strong>${usd(cur)}</strong></span>
       <span style="color:var(--green)">${t("chartHigh")}: ${usd(seriesHi)}</span>
       <span style="color:var(--red)">${t("chartLow")}: ${usd(seriesLo)}</span>
-      <span style="color:var(--amber)">— ${t("chartFairValue")}: ${usd(fv)}</span>
+      ${fv == null ? "" : `<span style="color:var(--amber)">— ${t("chartFairValue")}: ${usd(fv)}</span>`}
     </div>
     <svg viewBox="0 0 ${W} ${H}" class="price-chart" preserveAspectRatio="none" role="img">
       <defs>
@@ -442,8 +479,8 @@ function renderChart(stock) {
       <polygon points="${areaPts}" fill="url(#grad)" />
       <polyline points="${linePts}" fill="none" stroke="${color}" stroke-width="2"
         stroke-linejoin="round" stroke-linecap="round" />
-      <line x1="${padL}" y1="${fvY}" x2="${W - padR}" y2="${fvY}"
-        stroke="var(--amber)" stroke-width="1.5" stroke-dasharray="6 5" opacity="0.85" />
+      ${fvY === null ? "" : `<line x1="${padL}" y1="${fvY}" x2="${W - padR}" y2="${fvY}"
+        stroke="var(--amber)" stroke-width="1.5" stroke-dasharray="6 5" opacity="0.85" />`}
     </svg>
     <div class="chart-axis"><span>${firstDate}</span><span>${lastDate}</span></div>`;
 }
@@ -537,13 +574,24 @@ function renderCompare() {
     { label: t("gap"), dir: "up", val: (s) => { const g = Math.round(contrarianVerdict(s).gap); return { n: g, d: `${g > 0 ? "+" : ""}${g}` }; } },
   ];
 
-  // 防衛セクター特化のKPI行を追加
+  // セクター特化KPIを汎用的に追加。数値は優劣判定つき、tag/i18n はテキスト行として並べる
+  // (スクリーニング用途ではモデル区分やIP強度の横並びこそが要点になるため)
   if (cfg) {
-    rows.push(
-      { label: localize2(cfg, "bookToBill", "Book-to-Bill", "受注/売上比率"), dir: "up", val: (s) => ({ n: s.defense.bookToBill, d: `${fmt(s.defense.bookToBill, 2)}x` }) },
-      { label: currentLang === "ja" ? "受注残高(年)" : "Backlog (yrs)", dir: "up", val: (s) => ({ n: s.defense.backlogYears, d: fmt(s.defense.backlogYears, 1) }) },
-      { label: currentLang === "ja" ? "海外売上比率" : "International %", dir: "up", val: (s) => ({ n: s.defense.internationalPct, d: `${s.defense.internationalPct}%` }) },
-    );
+    cfg.kpis.forEach((k) => {
+      const isText = k.unit === "tag" || k.unit === "i18n";
+      rows.push({
+        label: localized(k.label),
+        dir: isText ? "info" : k.good ? "up" : "info",
+        val: (s) => {
+          const v = (s[s.sectorKey] || {})[k.key];
+          if (v === undefined || v === null) return { n: NaN, d: "—" };
+          if (isText) return { n: NaN, d: t(v) };
+          const suffix = k.unit === "x" ? "x" : k.unit === "y" ? "" : "%";
+          const dec = k.unit === "x" ? 2 : k.unit === "y" ? 1 : 0;
+          return { n: v, d: `${fmt(v, dec)}${suffix}` };
+        },
+      });
+    });
   }
 
   // 各行で最良値のインデックスを求める
@@ -607,21 +655,34 @@ function buildAnalysisContext(stock) {
   const fund = fundamentalScore(stock);
   const v = contrarianVerdict(stock);
   const rec = recommendation(stock);
-  const verdictText = { contrarianBuy: "contrarian opportunity (weak sentiment, solid fundamentals)", crowdedTrade: "crowded trade (strong sentiment, stretched fundamentals)", aligned: "sentiment and fundamentals aligned" };
-  const recText = { recBuy: "BUY", recHold: "HOLD", recAvoid: "AVOID" };
+  const verdictText = { contrarianBuy: "contrarian opportunity (weak sentiment, solid fundamentals)", crowdedTrade: "crowded trade (strong sentiment, stretched fundamentals)", aligned: "sentiment and fundamentals aligned", pendingData: "not yet assessable — market data / fair value missing" };
+  const recText = { recBuy: "BUY", recHold: "HOLD", recAvoid: "AVOID", recPending: "NOT RATED (awaiting price / fair value)" };
 
   const lines = [
     `Ticker: ${stock.ticker} — ${stock.name.en} | Sector: ${stock.sector.en}`,
     `Price ${usd(stock.price)} | Analyst's fair-value estimate ${usd(stock.fairValue)} | Upside to fair value ${pct(up)}`,
     `Valuation: P/E ${fmt(m.pe)}, fwd P/E ${fmt(m.forwardPe)}, EV/EBITDA ${fmt(m.evEbitda)}, P/B ${fmt(m.pb, 1)}, P/S ${fmt(m.psales, 1)}, dividend yield ${fmt(m.divYield, 2)}%`,
     `Quality & growth: ROE ${fmt(m.roe, 1)}%, revenue growth ${fmt(m.revenueGrowth, 1)}%, net margin ${fmt(m.netMargin, 1)}%, debt/equity ${fmt(m.debtToEquity, 2)}, FCF yield ${fmt(m.fcfYield, 1)}%`,
-    `Market sentiment ${stock.sentiment.sentimentScore}/100 (analyst rating: ${stock.sentiment.analystRating}) vs fundamental score ${fund}/100 → ${verdictText[v.key]} (gap ${Math.round(v.gap)})`,
+    `Market sentiment ${stock.sentiment.sentimentScore}/100 (analyst rating: ${stock.sentiment.analystRating}) vs fundamental score ${fund === null ? "n/a" : fund + "/100"} → ${verdictText[v.key]}${v.gap === null ? "" : " (gap " + Math.round(v.gap) + ")"}`,
     `Model's overall read: ${recText[rec.key]}`,
   ];
-  if (stock.defense) {
-    const d = stock.defense;
-    lines.push(`Defense-sector KPIs: book-to-bill ${d.bookToBill}, backlog ${d.backlogYears} yrs of revenue, government revenue ${d.govRevenuePct}%, international ${d.internationalPct}%, flagship-program concentration ${d.programConcentration}`);
+  // セクター特化KPI (SECTORS の定義から汎用的に組み立て)
+  const cfg = SECTORS[stock.sectorKey];
+  const sd = stock[stock.sectorKey];
+  if (cfg && sd) {
+    const kpiText = cfg.kpis
+      .map((k) => {
+        const val = sd[k.key];
+        if (val === undefined || val === null) return `${k.label.en}: not disclosed`;
+        // タグ系(i18nキー)は英語ラベルに解決してからモデルへ渡す
+        if (k.unit === "i18n" || k.unit === "tag") return `${k.label.en}: ${I18N.en[val] || val}`;
+        const suffix = k.unit === "%" ? "%" : k.unit === "x" ? "x" : k.unit === "y" ? " yrs" : "";
+        return `${k.label.en}: ${val}${suffix}`;
+      })
+      .join(", ");
+    lines.push(`${cfg.name.en}-sector KPIs: ${kpiText}`);
   }
+  if (stock.thesis) lines.push(`Structural note: ${stock.thesis.en}`);
   lines.push("Critical Factors (EPIC): " + stock.criticalFactors.map((f) => `${f.factor.en} [impact ${f.impact}, probability ${f.probability}%]`).join("; "));
   lines.push(`Data status: ${stock._liveAt ? "live, as of " + new Date(stock._liveAt).toISOString().slice(0, 10) : "sample/snapshot data (not real-time)"}`);
   return lines.join("\n");

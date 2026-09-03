@@ -7,11 +7,14 @@
  * 後で無料API (Financial Modeling Prep / Alpha Vantage 等) に差し替えできるよう、
  * データ構造を実際のAPIに近い形にしています。
  *
- * 防衛セクターの数値は 2026年6月時点の公開情報を基にしたスナップショットです
+ * 防衛セクターの数値は 2026年8月時点の公開情報を基にしたスナップショットです
  * (株価・PER・受注残など)。あくまで学習用の参考値です。
+ *
+ * 航空アフターマーケットは調査由来のカバレッジ。事業構造・モデル分類は一次調査、
+ * 株価/バリュエーションは意図的に null (推測で埋めず、APIから取得する方針)。
  */
 
-const DATA_AS_OF = "2026-08"; // 防衛セクターデータの基準時点
+const DATA_AS_OF = "2026-08"; // データの基準時点
 
 const SAMPLE_STOCKS = {
   AAPL: {
@@ -224,6 +227,331 @@ const SAMPLE_STOCKS = {
       { factor: { en: "Submarine (Columbia/Virginia) demand", ja: "潜水艦 (Columbia/Virginia) 需要" }, impact: "high", probability: 80 },
       { factor: { en: "Gulfstream business-jet cycle", ja: "ガルフストリーム機の需要サイクル" }, impact: "medium", probability: 60 },
       { factor: { en: "Combat systems (ground vehicles)", ja: "戦闘システム (地上車両)" }, impact: "medium", probability: 65 },
+    ],
+  },
+  /* ---------- 航空アフターマーケット (Aerospace Aftermarket) ----------
+   * スクリーニング由来のカバレッジ。時価総額・事業構造・モデル分類は一次調査ベース。
+   * 株価/バリュエーション指標は意図的に null(未取得) — 「🔄 最新に更新」でAPIから取得する。
+   * fairValue はアナリスト自身の推定値。設定するまで投資判断は出さない設計。
+   * proprietary/aftermarket 比率は企業側の定義に依存するため、10-Kで裏取りすること。
+   */
+
+  // === グループ1: 純粋なモデルA (市場も既に認識済み) ===
+  TDG: {
+    ticker: "TDG", sectorKey: "aerospace",
+    name: { en: "TransDigm Group", ja: "トランスダイム" },
+    sector: { en: "Aerospace Aftermarket", ja: "航空アフターマーケット" },
+    price: null, fairValue: null, marketCap: 67.7,
+    metrics: { pe: null, forwardPe: null, evEbitda: null, pb: null, psales: null, divYield: null, roe: null, revenueGrowth: null, grossMargin: null, netMargin: null, debtToEquity: null, fcfYield: null },
+    aerospace: { aftermarketPct: null, proprietaryPct: 90, ipStrength: "high", certMoat: "high", coverage: "covThick", model: "modelA" },
+    thesis: {
+      en: "The benchmark. ~90% of products are sole-source or limited-competition, designed into the airframe at initial type certification. Displacement costs millions and years of re-certification. Very large cap — the model is fully understood by the market.",
+      ja: "基準点。製品の約90%がsole-sourceまたは限定競争で、初期型式証明時に機体設計へ組み込まれている。置換には数百万ドルと年単位の再認証が必要。ただし超大型で、モデルは市場に完全に理解されている。",
+    },
+    sentiment: { analystRating: "Buy", sentimentScore: 80, shortInterest: null },
+    criticalFactors: [
+      { factor: { en: "Durability of sole-source pricing power", ja: "sole-source価格決定力の持続性" }, impact: "high", probability: 80 },
+      { factor: { en: "M&A pipeline & capital deployment discipline", ja: "M&Aパイプラインと資本配分の規律" }, impact: "high", probability: 65 },
+      { factor: { en: "Premium already embedded in valuation", ja: "既にバリュエーションに織り込まれたプレミアム" }, impact: "high", probability: 75 },
+    ],
+  },
+  LOAR: {
+    ticker: "LOAR", sectorKey: "aerospace",
+    name: { en: "Loar Holdings", ja: "ロアー・ホールディングス" },
+    sector: { en: "Aerospace Aftermarket", ja: "航空アフターマーケット" },
+    price: null, fairValue: null, marketCap: 6.6,
+    metrics: { pe: null, forwardPe: null, evEbitda: null, pb: null, psales: null, divYield: null, roe: null, revenueGrowth: null, grossMargin: null, netMargin: null, debtToEquity: null, fcfYield: null },
+    aerospace: { aftermarketPct: 50, proprietaryPct: 85, ipStrength: "high", certMoat: "high", coverage: "covMedium", model: "modelA" },
+    thesis: {
+      en: "~85% of the portfolio is self-designed, aftermarket mix above 50%, GAAP operating margin ~22%. Over 15,000 parts, so no single-product or single-platform dependence. The market already frames it as a 'small TransDigm' — so a cheap-quality-business argument is hard to make. The live question is M&A durability and post-deal integration, not valuation.",
+      ja: "ポートフォリオの約85%が自社設計、アフターマーケット比率50%超、GAAP営業利益率約22%。15,000点超の部品を持ち単一製品・単一プラットフォーム依存がない。市場は既に「小型TransDigm」と認識しており、割安な優良ビジネスという主張は成立しにくい。論点はバリュエーションではなくM&Aの持続性と統合実績。",
+    },
+    sentiment: { analystRating: "Buy", sentimentScore: 78, shortInterest: null },
+    criticalFactors: [
+      { factor: { en: "Sustainability of the M&A compounding engine", ja: "M&A複利マシンの持続性" }, impact: "high", probability: 70 },
+      { factor: { en: "Post-acquisition integration track record", ja: "買収後の統合実績" }, impact: "high", probability: 65 },
+      { factor: { en: "Rising deal multiples from PE competition", ja: "PEとの競合による買収マルチプル上昇" }, impact: "medium", probability: 70 },
+    ],
+  },
+
+  // === グループ2: Misclassification候補 (本命) ===
+  WWD: {
+    ticker: "WWD", sectorKey: "aerospace",
+    name: { en: "Woodward", ja: "ウッドワード" },
+    sector: { en: "Aerospace Aftermarket", ja: "航空アフターマーケット" },
+    price: null, fairValue: null, marketCap: 21.4,
+    metrics: { pe: null, forwardPe: null, evEbitda: null, pb: null, psales: null, divYield: null, roe: null, revenueGrowth: null, grossMargin: null, netMargin: null, debtToEquity: null, fcfYield: null },
+    aerospace: { aftermarketPct: null, proprietaryPct: null, ipStrength: "high", certMoat: "high", coverage: "covMedium", model: "modelA" },
+    thesis: {
+      en: "PRIMARY CANDIDATE. Fuel control and flight control — Model A economics, but classified with diversified industrials (power generation, engine control), which dilutes the aftermarket annuity in the reported mix. FY26 Q2 revenue $1.1B, +23% YoY. Also acquired Collins Aerospace's North American actuator unit — divested as an antitrust remedy in Safran's $1.8B purchase of the Collins flight-control business — i.e. inorganic content-per-shipset growth. The work: separate the aerospace segment's OEM vs aftermarket split and margin gap from the industrial noise.",
+      ja: "本命候補。燃料制御・フライトコントロールというモデルAの経済性を持ちながら、多角化した産業機械（発電・エンジン制御）と同居して分類され、アフターマーケットのannuityが希薄化して見えている。FY26 Q2は売上11億ドル・前年比23%増。加えて、SafranによるCollinsフライトコントロール事業買収(18億ドル)の独禁対応として北米アクチュエーター部門を取得 — 無機的なcontent per shipset獲得。作業は、航空セグメントのOEM/アフターマーケット構成と利益率差を産業ノイズから分離すること。",
+    },
+    sentiment: { analystRating: "Buy", sentimentScore: 60, shortInterest: null },
+    criticalFactors: [
+      { factor: { en: "Aerospace segment OEM vs aftermarket split (10-K work)", ja: "航空セグメントのOEM/アフターマーケット構成 (10-K作業)" }, impact: "high", probability: 70 },
+      { factor: { en: "Segment margin gap = proof the razor/blades split is real", ja: "セグメント利益率差 = Razor and Bladesの実在確認" }, impact: "high", probability: 65 },
+      { factor: { en: "Collins actuator deal impact on content per shipset", ja: "Collinsアクチュエーター取得のcontent per shipsetへの影響" }, impact: "high", probability: 60 },
+      { factor: { en: "Industrial segment drag on the multiple", ja: "産業セグメントによるマルチプルの重石" }, impact: "medium", probability: 65 },
+    ],
+  },
+  "MOG-A": {
+    ticker: "MOG-A", sectorKey: "aerospace",
+    name: { en: "Moog Inc. (Class A)", ja: "ムーグ (クラスA)" },
+    sector: { en: "Aerospace Aftermarket", ja: "航空アフターマーケット" },
+    price: null, fairValue: null, marketCap: 12.8,
+    metrics: { pe: null, forwardPe: null, evEbitda: null, pb: null, psales: null, divYield: null, roe: null, revenueGrowth: null, grossMargin: null, netMargin: null, debtToEquity: null, fcfYield: null },
+    aerospace: { aftermarketPct: null, proprietaryPct: null, ipStrength: "high", certMoat: "high", coverage: "covMedium", model: "modelA" },
+    thesis: {
+      en: "Precision actuation with genuine IP, but split across four segments (Space & Defense, Military Aircraft, Commercial Aircraft, Industrial). The commercial aircraft segment — where the aftermarket annuity would live — is the smaller share. Risk: owns the IP, but the 'blade' may not be big enough to drive the whole company.",
+      ja: "精密アクチュエーションで実際にIPを保有するが、4セグメント（宇宙防衛・軍用機・商用機・産業）に分散。アフターマーケットのannuityが宿るはずの商用機セグメントの比率が小さい。リスクは「IPは保有するが刃の規模が足りない」可能性。",
+    },
+    sentiment: { analystRating: "Hold", sentimentScore: 55, shortInterest: null },
+    criticalFactors: [
+      { factor: { en: "Commercial aircraft segment share of total", ja: "商用機セグメントの全体比率" }, impact: "high", probability: 70 },
+      { factor: { en: "Is the blade large enough to move the company?", ja: "刃の規模が全社を動かすに足るか" }, impact: "high", probability: 60 },
+      { factor: { en: "Dual-class structure and control", ja: "種類株構造と支配権" }, impact: "medium", probability: 55 },
+    ],
+  },
+  CW: {
+    ticker: "CW", sectorKey: "aerospace",
+    name: { en: "Curtiss-Wright", ja: "カーチス・ライト" },
+    sector: { en: "Aerospace Aftermarket", ja: "航空アフターマーケット" },
+    price: null, fairValue: null, marketCap: 25.5,
+    metrics: { pe: null, forwardPe: null, evEbitda: null, pb: null, psales: null, divYield: null, roe: null, revenueGrowth: null, grossMargin: null, netMargin: null, debtToEquity: null, fcfYield: null },
+    aerospace: { aftermarketPct: null, proprietaryPct: null, ipStrength: "medium", certMoat: "medium", coverage: "covThick", model: "modelDiversified" },
+    thesis: {
+      en: "DOWNGRADED on inspection. Q2'26 Commercial Aerospace was $114M (+11%), but the growth driver is OEM revenue from narrowbody/widebody production ramp — not aftermarket annuity. In substance this is a nuclear and naval-defense conglomerate; the aerospace-aftermarket framing does not fit. Keep as a contrast case, not a candidate.",
+      ja: "精査により降格。Q2\'26のCommercial Aerospaceは1.14億ドル(+11%)だが、成長ドライバーは狭胴・広胴の生産ランプアップによるOEM売上であり、アフターマーケットのannuityではない。実質は原子力・海軍防衛のコングロマリットで、航空アフターマーケットの枠組みに合わない。候補ではなく対照群として保持。",
+    },
+    sentiment: { analystRating: "Hold", sentimentScore: 65, shortInterest: null },
+    criticalFactors: [
+      { factor: { en: "Nuclear / naval defense is the actual core", ja: "実際の主戦場は原子力・海軍防衛" }, impact: "high", probability: 85 },
+      { factor: { en: "Commercial aero growth is OEM-led, not aftermarket", ja: "商用航空の成長はOEM主導でアフターマーケットではない" }, impact: "high", probability: 75 },
+    ],
+  },
+
+  // === グループ3: 小型・カバレッジ空白 ===
+  ATRO: {
+    ticker: "ATRO", sectorKey: "aerospace",
+    name: { en: "Astronics", ja: "アストロニクス" },
+    sector: { en: "Aerospace Aftermarket", ja: "航空アフターマーケット" },
+    price: null, fairValue: null, marketCap: 3.3,
+    metrics: { pe: null, forwardPe: null, evEbitda: null, pb: null, psales: null, divYield: null, roe: null, revenueGrowth: null, grossMargin: null, netMargin: null, debtToEquity: null, fcfYield: null },
+    aerospace: { aftermarketPct: null, proprietaryPct: null, ipStrength: "medium", certMoat: "medium", coverage: "covThin", model: "modelA" },
+    thesis: {
+      en: "Cabin power, lighting and avionics databus. Q2 revenue $260M, +27% YoY, beating consensus by 6% with full-year guidance raised; the stock rose 24.6% after the print. Small cap with thin coverage. The open question is IP strength: is the cabin-power position genuinely proprietary and aftermarket-generating, or is it competed content?",
+      ja: "客室電源・照明・アビオニクスデータバス。Q2は売上2.6億ドル・前年比27%増でコンセンサスを6%上回り、通期ガイダンスも引き上げ。決算後に株価は24.6%上昇。小型でカバレッジが薄い。論点はIP強度 — 客室電源のポジションが本当にproprietaryでアフターマーケットを生むのか、それとも競争的コンテンツか。",
+    },
+    sentiment: { analystRating: "Buy", sentimentScore: 72, shortInterest: null },
+    criticalFactors: [
+      { factor: { en: "IP strength of the cabin-power position", ja: "客室電源ポジションのIP強度" }, impact: "high", probability: 60 },
+      { factor: { en: "Aftermarket conversion of installed cabin content", ja: "搭載済み客室コンテンツのアフターマーケット化" }, impact: "high", probability: 60 },
+      { factor: { en: "Post-earnings re-rating already banked", ja: "決算後の株価上昇で織り込み済みの部分" }, impact: "medium", probability: 70 },
+    ],
+  },
+  ISSC: {
+    ticker: "ISSC", sectorKey: "aerospace",
+    name: { en: "Innovative Aerosystems", ja: "イノベーティブ・エアロシステムズ" },
+    sector: { en: "Aerospace Aftermarket", ja: "航空アフターマーケット" },
+    price: null, fairValue: null, marketCap: 0.36,
+    metrics: { pe: null, forwardPe: null, evEbitda: null, pb: null, psales: null, divYield: null, roe: null, revenueGrowth: null, grossMargin: null, netMargin: null, debtToEquity: null, fcfYield: null },
+    aerospace: { aftermarketPct: null, proprietaryPct: null, ipStrength: "high", certMoat: "high", coverage: "covThin", model: "modelA" },
+    thesis: {
+      en: "Formerly Innovative Solutions & Support. Avionics retrofit built on STCs the company owns itself — structurally an IP holder, since the STC is a regulatory asset conferring the right to sell the modification. Micro cap with almost no coverage. Liquidity is a real constraint.",
+      ja: "旧Innovative Solutions & Support。自社保有のSTC（追加型式証明）に立脚したレトロフィット事業 — STCは改修販売権という規制上の資産であり、構造的にIP保有型。超小型でカバレッジはほぼ皆無。流動性が実際の制約。",
+    },
+    sentiment: { analystRating: "Hold", sentimentScore: 50, shortInterest: null },
+    criticalFactors: [
+      { factor: { en: "Breadth and renewal of the owned STC portfolio", ja: "保有STCポートフォリオの幅と更新" }, impact: "high", probability: 65 },
+      { factor: { en: "Micro-cap liquidity constraint", ja: "超小型ゆえの流動性制約" }, impact: "high", probability: 85 },
+      { factor: { en: "Customer concentration", ja: "顧客集中度" }, impact: "medium", probability: 60 },
+    ],
+  },
+  TATT: {
+    ticker: "TATT", sectorKey: "aerospace",
+    name: { en: "TAT Technologies", ja: "TATテクノロジーズ" },
+    sector: { en: "Aerospace Aftermarket", ja: "航空アフターマーケット" },
+    price: null, fairValue: null, marketCap: 0.52,
+    metrics: { pe: null, forwardPe: null, evEbitda: null, pb: null, psales: null, divYield: null, roe: null, revenueGrowth: null, grossMargin: null, netMargin: null, debtToEquity: null, fcfYield: null },
+    aerospace: { aftermarketPct: null, proprietaryPct: null, ipStrength: "low", certMoat: "medium", coverage: "covThin", model: "modelC" },
+    thesis: {
+      en: "MODEL UPGRADE IN PROGRESS. Historically Model B (build/repair to others' specs). In July 2026 it became the sole authorized global distributor of spare parts for Honeywell Aerospace's GTCP 331-200/250 APU platform and extended its MRO licence on that platform to 2036. It does not own the IP, but it now holds contractual exclusive access to someone else's IP — Model C. That is no longer a subcontractor. Micro cap, thin coverage, so an undervaluation case is easy to argue; liquidity is the offsetting problem.",
+      ja: "モデル格上げの進行中。従来はモデルB（他社仕様での製造・修理）。2026年7月、Honeywell AerospaceのGTCP 331-200/250 APUプラットフォームのスペアパーツ唯一の正規グローバル販売代理店となり、同プラットフォームのMROライセンスを2036年まで延長。IPは持たないが、他社IPへの独占アクセス権を契約で獲得 = モデルC。もはや下請けではない。超小型・カバレッジ薄で過小評価は主張しやすいが、流動性が難点。",
+    },
+    sentiment: { analystRating: "Hold", sentimentScore: 48, shortInterest: null },
+    criticalFactors: [
+      { factor: { en: "Durability of the Honeywell exclusive distributorship", ja: "Honeywell独占代理店契約の持続性" }, impact: "high", probability: 70 },
+      { factor: { en: "GTCP 331 platform installed base and retirement curve", ja: "GTCP 331搭載機数と退役カーブ" }, impact: "high", probability: 65 },
+      { factor: { en: "Contract renewal risk at 2036 licence expiry", ja: "2036年ライセンス期限での更新リスク" }, impact: "medium", probability: 55 },
+      { factor: { en: "Micro-cap liquidity constraint", ja: "超小型ゆえの流動性制約" }, impact: "high", probability: 85 },
+    ],
+  },
+
+  // === グループ4: 除外すべき「似て非なる」銘柄 (対照群) ===
+  DCO: {
+    ticker: "DCO", sectorKey: "aerospace",
+    name: { en: "Ducommun", ja: "デュコモン" },
+    sector: { en: "Aerospace Aftermarket", ja: "航空アフターマーケット" },
+    price: null, fairValue: null, marketCap: 3.0,
+    metrics: { pe: null, forwardPe: null, evEbitda: null, pb: null, psales: null, divYield: null, roe: null, revenueGrowth: null, grossMargin: null, netMargin: null, debtToEquity: null, fcfYield: null },
+    aerospace: { aftermarketPct: null, proprietaryPct: null, ipStrength: "low", certMoat: "low", coverage: "covMedium", model: "modelB" },
+    thesis: {
+      en: "EXCLUDE. Structural parts and assemblies with a high build-to-print share — it manufactures to the customer's drawings, so the customer owns the IP and can re-bid the work. No pricing power, no blade. Model B.",
+      ja: "除外。構造部品・アセンブリ中心でbuild-to-print比率が高い — 顧客図面どおりに製造するため、IPは顧客のもので再入札されうる。価格決定力も替刃もない。モデルB相当。",
+    },
+    sentiment: { analystRating: "Hold", sentimentScore: 55, shortInterest: null },
+    criticalFactors: [
+      { factor: { en: "Build-to-print share = no IP ownership", ja: "build-to-print比率 = IP非保有" }, impact: "high", probability: 85 },
+    ],
+  },
+  HXL: {
+    ticker: "HXL", sectorKey: "aerospace",
+    name: { en: "Hexcel", ja: "ヘクセル" },
+    sector: { en: "Aerospace Aftermarket", ja: "航空アフターマーケット" },
+    price: null, fairValue: null, marketCap: 7.8,
+    metrics: { pe: null, forwardPe: null, evEbitda: null, pb: null, psales: null, divYield: null, roe: null, revenueGrowth: null, grossMargin: null, netMargin: null, debtToEquity: null, fcfYield: null },
+    aerospace: { aftermarketPct: null, proprietaryPct: null, ipStrength: "medium", certMoat: "medium", coverage: "covThick", model: "modelMaterial" },
+    thesis: {
+      en: "EXCLUDE. Tier 4 composite materials. Structural material is not replaced during the aircraft's life, so there is no blade — revenue is levered to new-build rates, which is the opposite of the annuity profile being screened for.",
+      ja: "除外。Tier 4の複合材。構造材は機体寿命中に交換されないため替刃にならない。売上は新造機レートに連動し、探しているannuityとは逆の性格。",
+    },
+    sentiment: { analystRating: "Hold", sentimentScore: 50, shortInterest: null },
+    criticalFactors: [
+      { factor: { en: "Structural material is not replaced — no blade", ja: "構造材は交換されない = 刃にならない" }, impact: "high", probability: 90 },
+    ],
+  },
+  PKE: {
+    ticker: "PKE", sectorKey: "aerospace",
+    name: { en: "Park Aerospace", ja: "パーク・エアロスペース" },
+    sector: { en: "Aerospace Aftermarket", ja: "航空アフターマーケット" },
+    price: null, fairValue: null, marketCap: 0.8,
+    metrics: { pe: null, forwardPe: null, evEbitda: null, pb: null, psales: null, divYield: null, roe: null, revenueGrowth: null, grossMargin: null, netMargin: null, debtToEquity: null, fcfYield: null },
+    aerospace: { aftermarketPct: null, proprietaryPct: null, ipStrength: "medium", certMoat: "low", coverage: "covThin", model: "modelMaterial" },
+    thesis: {
+      en: "EXCLUDE. Same structural logic as Hexcel — advanced materials, consumed at build, not replaced in service.",
+      ja: "除外。ヘクセルと同じ構造的理由 — 先端素材であり製造時に消費され、就航後に交換されない。",
+    },
+    sentiment: { analystRating: "Hold", sentimentScore: 45, shortInterest: null },
+    criticalFactors: [
+      { factor: { en: "Materials business — no aftermarket annuity", ja: "素材事業 — アフターマーケットannuityなし" }, impact: "high", probability: 90 },
+    ],
+  },
+  MRCY: {
+    ticker: "MRCY", sectorKey: "aerospace",
+    name: { en: "Mercury Systems", ja: "マーキュリー・システムズ" },
+    sector: { en: "Aerospace Aftermarket", ja: "航空アフターマーケット" },
+    price: null, fairValue: null, marketCap: 6.5,
+    metrics: { pe: null, forwardPe: null, evEbitda: null, pb: null, psales: null, divYield: null, roe: null, revenueGrowth: null, grossMargin: null, netMargin: null, debtToEquity: null, fcfYield: null },
+    aerospace: { aftermarketPct: null, proprietaryPct: null, ipStrength: "high", certMoat: "medium", coverage: "covMedium", model: "modelDefenseEl" },
+    thesis: {
+      en: "EXCLUDE from this thesis. Defense electronics with genuine IP, but no commercial aftermarket annuity — defense programs are funded through procurement cycles rather than flight-hour-driven spares demand.",
+      ja: "本仮説からは除外。防衛エレクトロニクスで実際にIPは持つが、商用アフターマーケットのannuityがない。防衛プログラムはフライト時間連動のスペア需要ではなく調達サイクルで賄われる。",
+    },
+    sentiment: { analystRating: "Hold", sentimentScore: 58, shortInterest: null },
+    criticalFactors: [
+      { factor: { en: "IP yes, but no commercial aftermarket annuity", ja: "IPはあるが商用アフターマーケットannuityがない" }, impact: "high", probability: 85 },
+    ],
+  },
+  KRMN: {
+    ticker: "KRMN", sectorKey: "aerospace",
+    name: { en: "Karman Holdings", ja: "カーマン・ホールディングス" },
+    sector: { en: "Aerospace Aftermarket", ja: "航空アフターマーケット" },
+    price: null, fairValue: null, marketCap: 7.7,
+    metrics: { pe: null, forwardPe: null, evEbitda: null, pb: null, psales: null, divYield: null, roe: null, revenueGrowth: null, grossMargin: null, netMargin: null, debtToEquity: null, fcfYield: null },
+    aerospace: { aftermarketPct: null, proprietaryPct: null, ipStrength: "high", certMoat: "medium", coverage: "covMedium", model: "modelDefenseEl" },
+    thesis: {
+      en: "EXCLUDE from this thesis. Defense and space. Same reason as Mercury — the annuity is programme-funded, not flight-hour driven.",
+      ja: "本仮説からは除外。防衛・宇宙。マーキュリーと同じ理由 — annuityはプログラム予算依存でフライト時間連動ではない。",
+    },
+    sentiment: { analystRating: "Buy", sentimentScore: 62, shortInterest: null },
+    criticalFactors: [
+      { factor: { en: "Defense/space — no commercial flight-hour annuity", ja: "防衛・宇宙 — 商用フライト時間annuityがない" }, impact: "high", probability: 85 },
+    ],
+  },
+  AIR: {
+    ticker: "AIR", sectorKey: "aerospace",
+    name: { en: "AAR Corp.", ja: "AARコーポレーション" },
+    sector: { en: "Aerospace Aftermarket", ja: "航空アフターマーケット" },
+    price: null, fairValue: null, marketCap: 5.6,
+    metrics: { pe: null, forwardPe: null, evEbitda: null, pb: null, psales: null, divYield: null, roe: null, revenueGrowth: null, grossMargin: null, netMargin: null, debtToEquity: null, fcfYield: null },
+    aerospace: { aftermarketPct: null, proprietaryPct: null, ipStrength: "low", certMoat: "low", coverage: "covThick", model: "modelC" },
+    thesis: {
+      en: "OUT OF SCOPE for the IP-holder thesis. Aftermarket services and parts distribution — genuinely exposed to flight hours, but as a service provider rather than an IP owner. Useful as a comparison for aftermarket demand, not as a razor-and-blades candidate.",
+      ja: "IP保有者仮説の対象外。アフターマーケットのサービス・部品流通で、フライト時間には確かに連動するが、IP保有者ではなくサービス提供者。アフターマーケット需要の比較対象としては有用だが、Razor and Blades候補ではない。",
+    },
+    sentiment: { analystRating: "Buy", sentimentScore: 60, shortInterest: null },
+    criticalFactors: [
+      { factor: { en: "Service provider, not IP owner", ja: "IP保有者ではなくサービス提供者" }, impact: "high", probability: 85 },
+    ],
+  },
+  SARO: {
+    ticker: "SARO", sectorKey: "aerospace",
+    name: { en: "StandardAero", ja: "スタンダードエアロ" },
+    sector: { en: "Aerospace Aftermarket", ja: "航空アフターマーケット" },
+    price: null, fairValue: null, marketCap: 9.7,
+    metrics: { pe: null, forwardPe: null, evEbitda: null, pb: null, psales: null, divYield: null, roe: null, revenueGrowth: null, grossMargin: null, netMargin: null, debtToEquity: null, fcfYield: null },
+    aerospace: { aftermarketPct: null, proprietaryPct: null, ipStrength: "low", certMoat: "medium", coverage: "covThick", model: "modelC" },
+    thesis: {
+      en: "OUT OF SCOPE for the IP-holder thesis. Engine MRO at scale, operating under OEM licences. Model C — access rather than ownership. Relevant as an aftermarket-demand read-through.",
+      ja: "IP保有者仮説の対象外。OEMライセンス下で運営される大規模エンジンMRO。モデルC（保有ではなくアクセス）。アフターマーケット需要の読み取りには有用。",
+    },
+    sentiment: { analystRating: "Buy", sentimentScore: 65, shortInterest: null },
+    criticalFactors: [
+      { factor: { en: "Operates under OEM licence — access, not ownership", ja: "OEMライセンス下で運営 — 保有ではなくアクセス" }, impact: "high", probability: 80 },
+    ],
+  },
+  VSEC: {
+    ticker: "VSEC", sectorKey: "aerospace",
+    name: { en: "VSE Corp.", ja: "VSEコーポレーション" },
+    sector: { en: "Aerospace Aftermarket", ja: "航空アフターマーケット" },
+    price: null, fairValue: null, marketCap: 6.1,
+    metrics: { pe: null, forwardPe: null, evEbitda: null, pb: null, psales: null, divYield: null, roe: null, revenueGrowth: null, grossMargin: null, netMargin: null, debtToEquity: null, fcfYield: null },
+    aerospace: { aftermarketPct: null, proprietaryPct: null, ipStrength: "low", certMoat: "low", coverage: "covMedium", model: "modelC" },
+    thesis: {
+      en: "OUT OF SCOPE for the IP-holder thesis. Aftermarket distribution and MRO. Model B/C economics — distribution margins, not proprietary pricing power.",
+      ja: "IP保有者仮説の対象外。アフターマーケットの流通とMRO。モデルB/Cの経済性で、proprietaryな価格決定力ではなく流通マージン。",
+    },
+    sentiment: { analystRating: "Buy", sentimentScore: 60, shortInterest: null },
+    criticalFactors: [
+      { factor: { en: "Distribution margins, not proprietary pricing power", ja: "流通マージンでありproprietaryな価格決定力ではない" }, impact: "high", probability: 80 },
+    ],
+  },
+
+  // === 番外: 構造変化として見逃せない2社 ===
+  HONA: {
+    ticker: "HONA", sectorKey: "aerospace",
+    name: { en: "Honeywell Aerospace", ja: "ハネウェル・エアロスペース" },
+    sector: { en: "Aerospace Aftermarket", ja: "航空アフターマーケット" },
+    price: null, fairValue: null, marketCap: 53.4,
+    metrics: { pe: null, forwardPe: null, evEbitda: null, pb: null, psales: null, divYield: null, roe: null, revenueGrowth: null, grossMargin: null, netMargin: null, debtToEquity: null, fcfYield: null },
+    aerospace: { aftermarketPct: null, proprietaryPct: null, ipStrength: "high", certMoat: "high", coverage: "covThin", model: "modelA" },
+    thesis: {
+      en: "STRUCTURAL EVENT. Now a separately listed aerospace pure-play. Large cap, but in a coverage-transition window: analysts who covered the conglomerate are re-initiating on a differently-shaped company, which is exactly when analytical gaps open. Note it is also the OEM whose APU IP TAT Technologies now distributes.",
+      ja: "構造変化。航空単独の上場エンティティとして分離済み。大型だがカバレッジ移行期にあり、コングロマリットを担当していたアナリストが別形状の企業をカバー再開する局面 — まさに分析の空白が生じるタイミング。なお、TATが販売権を得たAPUのIP保有元でもある。",
+    },
+    sentiment: { analystRating: "Buy", sentimentScore: 60, shortInterest: null },
+    criticalFactors: [
+      { factor: { en: "Coverage transition gap after separation", ja: "分離後のカバレッジ移行による空白" }, impact: "high", probability: 65 },
+      { factor: { en: "Standalone aftermarket margin structure once disclosed", ja: "単独開示後のアフターマーケット採算構造" }, impact: "high", probability: 70 },
+      { factor: { en: "Size limits the mispricing available", ja: "規模の大きさが歪みの余地を制約" }, impact: "medium", probability: 70 },
+    ],
+  },
+  FTAI: {
+    ticker: "FTAI", sectorKey: "aerospace",
+    name: { en: "FTAI Aviation", ja: "FTAIアビエーション" },
+    sector: { en: "Aerospace Aftermarket", ja: "航空アフターマーケット" },
+    price: null, fairValue: null, marketCap: 22.2,
+    metrics: { pe: null, forwardPe: null, evEbitda: null, pb: null, psales: null, divYield: null, roe: null, revenueGrowth: null, grossMargin: null, netMargin: null, debtToEquity: null, fcfYield: null },
+    aerospace: { aftermarketPct: null, proprietaryPct: null, ipStrength: "medium", certMoat: "medium", coverage: "covThick", model: "modelHybrid" },
+    thesis: {
+      en: "THE FIFTH MODEL. CFM56 module-swap business: rather than sending an engine through a full overhaul, modules are exchanged and cycled. This restructures the economics of the shop visit itself, so it does not fit the four-model taxonomy — a Model C/D hybrid. Analytically interesting but heavy: the accounting treatment and asset valuation debate is substantial work.",
+      ja: "第5のモデル。CFM56のモジュール交換ビジネス — エンジンを丸ごとオーバーホールせず、モジュール単位で交換して回す。ショップビジットの経済性そのものを組み替えるため4分類の枠外にあり、モデルC/Dのハイブリッド。分析対象として面白いが、会計処理と資産評価の議論が重い。",
+    },
+    sentiment: { analystRating: "Buy", sentimentScore: 70, shortInterest: null },
+    criticalFactors: [
+      { factor: { en: "Accounting treatment and asset valuation", ja: "会計処理と資産評価" }, impact: "high", probability: 75 },
+      { factor: { en: "Module-swap economics vs full overhaul", ja: "モジュール交換 vs 丸ごとオーバーホールの経済性" }, impact: "high", probability: 70 },
+      { factor: { en: "CFM56 fleet retirement curve", ja: "CFM56搭載機の退役カーブ" }, impact: "high", probability: 65 },
     ],
   },
 };
