@@ -46,7 +46,8 @@ var R;
 try {
   R = eval(stub + src + '\n({SAMPLE_STOCKS:SAMPLE_STOCKS,I18N:I18N,SECTORS:SECTORS,COMMON_GUIDE:COMMON_GUIDE,'
       + 'upsidePct:upsidePct,fundamentalScore:fundamentalScore,contrarianVerdict:contrarianVerdict,'
-      + 'recommendation:recommendation,buildAnalysisContext:buildAnalysisContext,usd:usd,bn:bn,pct:pct,fmt:fmt})');
+      + 'recommendation:recommendation,buildAnalysisContext:buildAnalysisContext,usd:usd,bn:bn,pct:pct,fmt:fmt,'
+      + 'LIVE_SNAPSHOT:LIVE_SNAPSHOT,collectSnapshot:collectSnapshot,liveOverrides:liveOverrides})');
   ok('構文チェック: ' + FILES.length + 'ファイル読込成功');
 } catch (e) {
   fail('構文エラー: ' + e);
@@ -161,6 +162,38 @@ tickers.forEach(function (t) {
   } catch (e) { fail(t + ': メンター文脈の生成に失敗 — ' + e); ctxErr++; }
 });
 if (!ctxErr) ok('メンター文脈: ' + tickers.length + '銘柄すべて生成成功');
+
+/* --- 11. snapshot.js に手書きの分析が混入していないこと ---
+ * snapshot.js は自動生成の「市場データ」。collectSnapshot() が誤って
+ * data.js と合成後の銘柄から集めると、手書きの推定値が焼き付き、
+ * しかも snapshot 層は data.js より優先されるため静かに上書きしてしまう。
+ * 各プロバイダが実際に返しうる項目だけに限定されているかを検査する。
+ */
+var FINNHUB_KEYS = ['pe', 'pb', 'psales', 'roe', 'netMargin', 'grossMargin',
+                    'divYield', 'revenueGrowth', 'debtToEquity'];
+var FMP_EXTRA = ['evEbitda', 'fcfYield'];
+var snapTickers = Object.keys(R.LIVE_SNAPSHOT || {});
+var leaked = 0;
+snapTickers.forEach(function (t) {
+  var entry = R.LIVE_SNAPSHOT[t];
+  var provs = entry._providers || '';
+  var allowed = FINNHUB_KEYS.slice();
+  if (provs.indexOf('fmp') >= 0) allowed = allowed.concat(FMP_EXTRA);
+  Object.keys(entry.metrics || {}).forEach(function (k) {
+    if (allowed.indexOf(k) < 0) {
+      fail('snapshot.js: ' + t + '.' + k + ' は取得元(' + (provs || 'なし') + ')が返さない値 — 手書きの混入');
+      leaked++;
+    }
+  });
+  if (entry.price != null && !entry._liveAt) {
+    fail('snapshot.js: ' + t + ' に _liveAt が無い'); leaked++;
+  }
+});
+if (!leaked) {
+  ok(snapTickers.length
+    ? 'snapshot: ' + snapTickers.length + '銘柄すべて取得値のみ (手書きの混入なし)'
+    : 'snapshot: 空 (検査対象なし)');
+}
 
 /* --- 出力 --- */
 function renderReport() {

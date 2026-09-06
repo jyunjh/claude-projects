@@ -38,37 +38,56 @@ let staleHtml = false;
  *   3. liveOverrides  … 今セッションでAPI取得した最新値
  * 上の層ほど優先。市場データだけが上書きされ、手書きの分析は保持される。
  */
-function getStock(ticker) {
-  const base = SAMPLE_STOCKS[ticker];
+// API取得層のみ (2, 3)。手書きの data.js は含まない。
+function liveLayers(ticker) {
   const layers = [];
   if (typeof LIVE_SNAPSHOT !== "undefined" && LIVE_SNAPSHOT[ticker]) layers.push(LIVE_SNAPSHOT[ticker]);
   if (liveOverrides[ticker]) layers.push(liveOverrides[ticker]);
-  if (!layers.length) return base;
+  return layers;
+}
 
-  const merged = { ...base };
-  let metrics = { ...base.metrics };
+// 層を1つの patch に畳み込む (後の層が優先)
+function flattenLayers(layers) {
+  const out = { metrics: {} };
   layers.forEach((layer) => {
     Object.keys(layer).forEach((k) => {
-      if (k === "metrics") metrics = { ...metrics, ...layer.metrics };
-      else merged[k] = layer[k];
+      if (k === "metrics") Object.assign(out.metrics, layer.metrics);
+      else out[k] = layer[k];
     });
   });
-  merged.metrics = metrics;
+  return out;
+}
+
+function getStock(ticker) {
+  const base = SAMPLE_STOCKS[ticker];
+  const layers = liveLayers(ticker);
+  if (!layers.length) return base;
+  const live = flattenLayers(layers);
+  const merged = { ...base, ...live };
+  merged.metrics = { ...base.metrics, ...live.metrics };
   return merged;
 }
 
-// snapshot.js へ保存する市場データを収集 (手書きの分析は含めない)
+/*
+ * snapshot.js へ保存する市場データを収集。
+ * 必ず「API取得層だけ」から集める。getStock() は data.js と合成済みなので
+ * 使ってはいけない（手書きの推定値が自動生成ファイルに焼き付いてしまう）。
+ */
 function collectSnapshot() {
   const snap = {};
   Object.keys(SAMPLE_STOCKS).forEach((tk) => {
-    const s = getStock(tk);
-    if (s.price == null || !s._liveAt) return; // 取得済みのものだけ
+    const layers = liveLayers(tk);
+    if (!layers.length) return;
+    const live = flattenLayers(layers);
+    if (live.price == null || !live._liveAt) return; // 取得済みのものだけ
+
     const m = {};
-    Object.keys(s.metrics).forEach((k) => { if (s.metrics[k] != null) m[k] = s.metrics[k]; });
-    snap[tk] = { price: s.price, marketCap: s.marketCap, metrics: m, _liveAt: s._liveAt };
-    if (s._priceSource) snap[tk]._priceSource = s._priceSource;
-    if (s._priceAsOf) snap[tk]._priceAsOf = s._priceAsOf;
-    if (s._providers) snap[tk]._providers = s._providers;
+    Object.keys(live.metrics).forEach((k) => { if (live.metrics[k] != null) m[k] = live.metrics[k]; });
+    snap[tk] = { price: live.price, metrics: m, _liveAt: live._liveAt };
+    if (live.marketCap != null) snap[tk].marketCap = live.marketCap;
+    ["_priceSource", "_priceAsOf", "_providers"].forEach((k) => {
+      if (live[k]) snap[tk][k] = live[k];
+    });
   });
   return snap;
 }
