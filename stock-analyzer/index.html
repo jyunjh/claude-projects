@@ -30,9 +30,17 @@
     <details class="key-box" id="keyBox">
       <summary id="keyToggle"></summary>
       <div class="key-row">
+        <label class="key-label" for="finnhubKeyInput">Finnhub</label>
+        <input id="finnhubKeyInput" type="password" autocomplete="off" />
+        <a id="getFinnhubLink" href="https://finnhub.io/register" target="_blank" rel="noopener"></a>
+      </div>
+      <div class="key-row">
+        <label class="key-label" for="apiKeyInput">FMP</label>
         <input id="apiKeyInput" type="password" autocomplete="off" />
-        <button id="saveKeyBtn" class="refresh-btn"></button>
         <a id="getKeyLink" href="https://site.financialmodelingprep.com/developer/docs" target="_blank" rel="noopener"></a>
+      </div>
+      <div class="key-row">
+        <button id="saveKeyBtn" class="refresh-btn"></button>
       </div>
       <p id="liveNote" class="key-note"></p>
     </details>

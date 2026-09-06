@@ -21,7 +21,7 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 SNAPSHOT = os.path.join(BASE, "snapshot.js")
 
 # 保存を許可するフィールド（想定外のキーを書き込ませない）
-ALLOWED_TOP = {"price", "marketCap", "_liveAt"}
+ALLOWED_TOP = {"price", "marketCap", "_liveAt", "_priceSource", "_priceAsOf", "_providers"}
 ALLOWED_METRICS = {
     "pe", "forwardPe", "evEbitda", "pb", "psales", "divYield", "roe",
     "revenueGrowth", "grossMargin", "netMargin", "debtToEquity", "fcfYield",
@@ -43,7 +43,7 @@ def sanitize(payload):
                 if m:
                     entry["metrics"] = m
             elif k in ALLOWED_TOP:
-                if k == "_liveAt" and isinstance(v, str):
+                if k.startswith("_") and isinstance(v, str):
                     entry[k] = v[:40]
                 elif isinstance(v, (int, float)):
                     entry[k] = v
