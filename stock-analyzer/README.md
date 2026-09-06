@@ -12,7 +12,7 @@ A browser-based US stock analysis dashboard built around a long-term, fundamenta
 - 🛡️✈️ **セクター特化分析** — セクター独自の市場環境と特化KPIで分析（**防衛** / **航空アフターマーケット** に対応）
 - 📋 **グループ内 横比較** — 同セクター銘柄を一覧表で並べ、指標ごとに最良値を★でハイライト
 - 📖 **見るべきポイント解説** — 各指標の見方を折りたたみで解説
-- 🔄 **最新データ更新** — 無料API (Financial Modeling Prep) から株価・指標を取得（キー未設定/失敗時はサンプルにフォールバック）
+- 🔄 **最新データ更新** — 2つの無料API (Finnhub + FMP) を併用して株価・指標を取得。互いの穴を埋め合い、取れない項目は `null` のまま（推測で埋めない）
 - 🧑‍🏫 **メンター相談（AIチャット）** — 画面の分析を見ながら、熟練ファンドマネージャー役のClaudeにリアルタイムで相談
 - ✅ **投資判断** — 上記を総合した BUY / HOLD / AVOID
 - 🌐 **日本語 / English** ワンクリック切り替え
@@ -31,12 +31,35 @@ A browser-based US stock analysis dashboard built around a long-term, fundamenta
 
 ### 最新データの取得 / Live data
 
-1. [Financial Modeling Prep](https://site.financialmodelingprep.com/developer/docs) で**無料APIキー**を取得
-2. アプリ右上の「⚙️ API設定」にキーを貼り付けて保存（ブラウザの localStorage に保存。1回だけ）
-3. 「🔄 最新に更新」を押すと、表示中セクターの銘柄の**株価・PER・時価総額・各種レシオ**が最新値に更新されます
+**2つの無料APIを併用します。**どちらか一方のキーだけでも動きます。
+
+| プロバイダ | 無料枠 | 担当 | キー取得 |
+|---|---|---|---|
+| **Finnhub**（優先） | 60call/分・日次上限なし | 株価（リアルタイム）・時価総額・PER・PBR・PSR・ROE・利益率・配当利回り・D/E・増収率 | [finnhub.io](https://finnhub.io/register) |
+| **FMP**（補完） | 250call/日 | 株価チャート・日次終値フォールバック・EV/EBITDA・FCF利回り | [financialmodelingprep.com](https://site.financialmodelingprep.com/developer/docs) |
+
+1. 上記でキーを取得
+2. アプリ右上の「⚙️ API設定」に貼り付けて保存（ブラウザの localStorage に保存。1回だけ）
+3. 「🔄 最新に更新」を押すと、表示中セクターの銘柄が最新値に更新されます
+
+**なぜ併用するのか** — FMPの無料プランでは `quote` / `ratios-ttm` / `key-metrics-ttm` が
+`HTTP 402 (Exclusive Endpoint = 有料プラン専用)` になります。一方 Finnhub の無料枠は
+株価と基本ファンダメンタルズをカバーしますが、ローソク足は有料です。**互いの穴を埋め合う**構成です。
+
+**値の優先順位** — Finnhub → FMP の順に取得し、**後から来たプロバイダは「空いている項目だけ」を埋めます**。
+同じ項目を上書きすることはありません。どちらでも取れなかった項目は `null`（未取得）のままで、
+推測値では埋めません。
+
+**株価の出所を隠しません** — `quote`（リアルタイム）ではなく日次終値にフォールバックした場合、
+株価の横に「終値 2026-09-02」バッジが出ます。AIメンターに渡す文脈にも同じ注記が入ります。
 
 > 更新対象は市場データ（株価・バリュエーション指標）です。**適正価値・センチメント・重要ファクター**は、あなた自身の分析・推定値として保持されます（コントラリアン投資では、ここが腕の見せ所）。
 > キーが無い／取得に失敗した場合は、自動的にサンプルデータで表示します。
+
+> ⚠️ **未確認の前提**: Finnhub の `stock/metric` は ROE・利益率・配当利回り・増収率を
+> 「％で表現済み」(例 `roeTTM: 25.5` = 25.5%)、`marketCapitalization` を百万ドル単位として
+> 実装しています。初回取得後、防衛4銘柄（LMT/RTX/NOC/GD）の手書き値と桁が合うか
+> 一度目視で確認してください（例: LMT の ROE は 78.0%）。
 
 ### 航空アフターマーケット / Aerospace Aftermarket
 
@@ -114,7 +137,7 @@ cd stock-analyzer
 | `data.js` | サンプル銘柄データ |
 | `i18n.js` | 日本語/英語の翻訳 |
 | `sectors.js` | セクター特化設定（市場環境・特化KPI・解説） |
-| `api.js` | 最新データ取得（無料API連携・フォールバック） |
+| `api.js` | 最新データ取得（Finnhub + FMP のプロバイダ併用・フォールバック） |
 | `chat.js` | メンター相談（Gemini API のストリーミング） |
 | `app.js` | 分析ロジックと描画 |
 

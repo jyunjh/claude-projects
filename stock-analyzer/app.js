@@ -66,6 +66,7 @@ function collectSnapshot() {
     snap[tk] = { price: s.price, marketCap: s.marketCap, metrics: m, _liveAt: s._liveAt };
     if (s._priceSource) snap[tk]._priceSource = s._priceSource;
     if (s._priceAsOf) snap[tk]._priceAsOf = s._priceAsOf;
+    if (s._providers) snap[tk]._providers = s._providers;
   });
   return snap;
 }
@@ -551,6 +552,8 @@ function renderDataBar(stock) {
   document.getElementById("getKeyLink").textContent = t("getKey");
   document.getElementById("liveNote").textContent = t("liveNote");
   document.getElementById("apiKeyInput").placeholder = t("apiKeyPlaceholder");
+  document.getElementById("finnhubKeyInput").placeholder = t("finnhubPlaceholder");
+  document.getElementById("getFinnhubLink").textContent = t("getFinnhubKey");
 
   // ステータス表示
   const el = document.getElementById("dataStatus");
@@ -577,10 +580,10 @@ function renderDataBar(stock) {
 
 /* 「最新に更新」: 現在セクターの全銘柄をAPI取得し、サンプルに重ねる */
 async function updateLiveData() {
-  if (!getApiKey()) {
+  if (!hasAnyKey()) {
     // キー未設定: 設定パネルを開いて促す
     document.getElementById("keyBox").open = true;
-    document.getElementById("apiKeyInput").focus();
+    document.getElementById("finnhubKeyInput").focus();
     const el = document.getElementById("dataStatus");
     el.className = "data-status error";
     el.textContent = t("noKeyMsg");
@@ -608,9 +611,10 @@ async function updateLiveData() {
 
 function saveApiKey() {
   const input = document.getElementById("apiKeyInput");
-  setApiKey(input.value);
+  setKey("fmp", input.value);
+  setKey("finnhub", document.getElementById("finnhubKeyInput").value);
   input.value = "";
-  if (getApiKey()) {
+  if (hasAnyKey()) {
     dataMessage = "keySaved";
     document.getElementById("keyBox").open = false;
   }

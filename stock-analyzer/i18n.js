@@ -4,6 +4,8 @@
 
 const I18N = {
   en: {
+    getFinnhubKey: "Get a free key \u2197",
+    finnhubPlaceholder: "Finnhub key — price & fundamentals",
     eodPrice: "close",
     appTitle: "US Stock Analyzer",
     appSubtitle: "Long-term · Fundamental · Contrarian",
@@ -98,12 +100,12 @@ const I18N = {
     saveNeedsServer: "start the app with serve.py (python3 serve.py)",
     dataPartialFail: "Partially updated",
     apiSettings: "API settings",
-    apiKeyPlaceholder: "Paste your free API key",
+    apiKeyPlaceholder: "FMP key — chart & fallback price",
     saveKey: "Save",
     getKey: "Get a free key ↗",
     keySaved: "API key saved",
     noKeyMsg: "Enter a free API key, then press Update.",
-    liveNote: "Live update covers price & valuation multiples. Fair value, sentiment and critical factors stay your own estimates.",
+    liveNote: "Two free APIs are used together. Finnhub covers price and fundamentals (60 calls/min); FMP covers the chart and a daily-close fallback. Either key alone works. Fair value, sentiment and critical factors stay your own estimates.",
 
     // Price chart
     priceChart: "Price Chart (1Y)",
@@ -154,6 +156,8 @@ const I18N = {
     langButton: "日本語",
   },
   ja: {
+    getFinnhubKey: "無料キーを取得 \u2197",
+    finnhubPlaceholder: "Finnhubキー — 株価とファンダメンタルズ",
     eodPrice: "終値",
     appTitle: "米国株アナライザー",
     appSubtitle: "長期 · ファンダメンタル · コントラリアン",
@@ -241,12 +245,12 @@ const I18N = {
     saveNeedsServer: "serve.py で起動してください (python3 serve.py)",
     dataPartialFail: "一部のみ更新",
     apiSettings: "API設定",
-    apiKeyPlaceholder: "無料APIキーを貼り付け",
+    apiKeyPlaceholder: "FMPキー — チャートと株価の予備",
     saveKey: "保存",
     getKey: "無料キーを取得 ↗",
     keySaved: "APIキーを保存しました",
     noKeyMsg: "無料APIキーを入力してから「更新」を押してください。",
-    liveNote: "最新更新の対象は株価とバリュエーション指標です。適正価値・センチメント・重要ファクターはあなた自身の推定値のまま保持されます。",
+    liveNote: "2つの無料APIを併用します。Finnhubが株価とファンダメンタルズ（60call/分）、FMPがチャートと終値フォールバックを担当します。どちらか一方だけでも動きます。適正価値・センチメント・重要ファクターはあなた自身の推定値のまま保持されます。",
 
     // Price chart
     priceChart: "株価チャート（1年）",

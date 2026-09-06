@@ -97,6 +97,7 @@ select:hover, .lang-btn:hover { border-color: var(--accent); }
   font-size: 0.85rem;
 }
 .key-row a { color: var(--accent); font-size: 0.82rem; }
+.key-label { color: var(--text-dim); font-size: 0.78rem; min-width: 56px; }
 .key-note { margin-top: 8px; color: var(--text-dim); font-size: 0.78rem; max-width: 520px; }
 
 /* ---- Cards / Grid ---- */
