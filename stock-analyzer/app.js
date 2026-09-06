@@ -28,6 +28,8 @@ let chatBusy = false;
 let dataMessage = null;
 // 直近の失敗理由 (診断用にそのまま画面へ出す)
 let dataDetail = "";
+// 古いHTMLがキャッシュされている疑い (期待する要素が見つからない)
+let staleHtml = false;
 
 /*
  * 銘柄データは3層で重ねる:
@@ -103,6 +105,22 @@ function stocksInSector(sectorKey) {
 }
 
 const t = (key) => I18N[currentLang][key] || key;
+
+/*
+ * 要素が見つからなくても描画を止めないための setter。
+ * ブラウザに古い index.html が残っていると render() が途中で例外になり、
+ * 「更新中…」のまま無言で固まる事故が起きたため。
+ */
+function setText(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = text;
+  return !!el;
+}
+function setPlaceholder(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.placeholder = text;
+  return !!el;
+}
 const localized = (obj) => (obj ? obj[currentLang] : "");
 
 /* ---------- 計算ロジック (analysis helpers) ---------- */
@@ -547,13 +565,14 @@ function renderDataBar(stock) {
     dataMessage === "refreshing" ? t("refreshing") : t("refresh");
   document.getElementById("refreshBtn").disabled = dataMessage === "refreshing";
   document.getElementById("saveSnapLabel").textContent = t("saveSnapshot");
-  document.getElementById("keyToggle").textContent = `⚙️ ${t("apiSettings")}`;
-  document.getElementById("saveKeyBtn").textContent = t("saveKey");
-  document.getElementById("getKeyLink").textContent = t("getKey");
-  document.getElementById("liveNote").textContent = t("liveNote");
-  document.getElementById("apiKeyInput").placeholder = t("apiKeyPlaceholder");
-  document.getElementById("finnhubKeyInput").placeholder = t("finnhubPlaceholder");
-  document.getElementById("getFinnhubLink").textContent = t("getFinnhubKey");
+  setText("keyToggle", `⚙️ ${t("apiSettings")}`);
+  setText("saveKeyBtn", t("saveKey"));
+  setText("getKeyLink", t("getKey"));
+  setText("liveNote", t("liveNote"));
+  setPlaceholder("apiKeyInput", t("apiKeyPlaceholder"));
+  setText("getFinnhubLink", t("getFinnhubKey"));
+  // 古いHTMLがキャッシュされていると Finnhub 欄が存在しない。その場合は再読込を促す。
+  if (!setPlaceholder("finnhubKeyInput", t("finnhubPlaceholder"))) staleHtml = true;
 
   // ステータス表示
   const el = document.getElementById("dataStatus");
@@ -565,6 +584,9 @@ function renderDataBar(stock) {
     el.classList.add("error");
   } else if (dataMessage === "partial") {
     el.textContent = t("dataPartialFail") + (dataDetail ? " — " + dataDetail : "");
+    el.classList.add("error");
+  } else if (staleHtml) {
+    el.textContent = t("staleHtml");
     el.classList.add("error");
   } else if (dataMessage === "keySaved") {
     el.textContent = t("keySaved");
@@ -590,7 +612,7 @@ async function updateLiveData() {
     return;
   }
   dataMessage = "refreshing";
-  render();
+  safeRender();
   const tickers = stocksInSector(currentSector).map((s) => s.ticker);
   dataDetail = "";
   try {
@@ -606,14 +628,33 @@ async function updateLiveData() {
     dataMessage = "error";
     dataDetail = String(e && e.message ? e.message : e);
   }
-  render();
+  // 描画で例外が出ても「更新中…」のまま固まらせない
+  if (dataMessage === "refreshing") dataMessage = null;
+  safeRender();
+}
+
+/* render() の例外を握りつぶさず、画面に出す。無言で止まるのが一番たちが悪い。 */
+function safeRender() {
+  try {
+    render();
+  } catch (e) {
+    const el = document.getElementById("dataStatus");
+    if (el) {
+      el.className = "data-status error";
+      el.textContent = t("renderError") + " — " + (e && e.message ? e.message : e);
+    }
+    throw e;
+  }
 }
 
 function saveApiKey() {
-  const input = document.getElementById("apiKeyInput");
-  setKey("fmp", input.value);
-  setKey("finnhub", document.getElementById("finnhubKeyInput").value);
-  input.value = "";
+  // 空欄は「変更なし」。片方だけ入力したときに、もう片方を消さないため。
+  [["fmp", "apiKeyInput"], ["finnhub", "finnhubKeyInput"]].forEach(([provider, id]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (el.value.trim()) setKey(provider, el.value);
+    el.value = "";
+  });
   if (hasAnyKey()) {
     dataMessage = "keySaved";
     document.getElementById("keyBox").open = false;
@@ -914,5 +955,13 @@ function init() {
   });
   render();
 }
+
+// 予期しない例外も画面に出す (コンソールを開かないと分からない状態を避ける)
+if (typeof window !== "undefined") window.addEventListener("error", (ev) => {
+  const el = document.getElementById("dataStatus");
+  if (!el) return;
+  el.className = "data-status error";
+  el.textContent = t("renderError") + " — " + (ev.message || "unknown");
+}); //
 
 document.addEventListener("DOMContentLoaded", init);

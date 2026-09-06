@@ -4,6 +4,8 @@
 
 const I18N = {
   en: {
+    staleHtml: "Old page cached. Hard-reload (Cmd+Shift+R) to load the latest version.",
+    renderError: "Render error",
     getFinnhubKey: "Get a free key \u2197",
     finnhubPlaceholder: "Finnhub key — price & fundamentals",
     eodPrice: "close",
@@ -156,6 +158,8 @@ const I18N = {
     langButton: "日本語",
   },
   ja: {
+    staleHtml: "古いページがキャッシュされています。スーパーリロード (Cmd+Shift+R) してください。",
+    renderError: "描画エラー",
     getFinnhubKey: "無料キーを取得 \u2197",
     finnhubPlaceholder: "Finnhubキー — 株価とファンダメンタルズ",
     eodPrice: "終値",
