@@ -58,7 +58,9 @@ function flattenLayers(layers) {
   return out;
 }
 
-function getStock(ticker) {
+// 1〜3層を合成しただけの銘柄。バリュエーションは載せない。
+// ピア統計はこれを使う (適正価値の算出が自分自身を参照する循環を避けるため)。
+function rawStock(ticker) {
   const base = SAMPLE_STOCKS[ticker];
   const layers = liveLayers(ticker);
   if (!layers.length) return base;
@@ -66,6 +68,35 @@ function getStock(ticker) {
   const merged = { ...base, ...live };
   merged.metrics = { ...base.metrics, ...live.metrics };
   return merged;
+}
+
+// ピア統計のキャッシュ (セクター単位)。取得データが変わったら clearValuationCache()。
+let peerStatsCache = {};
+function clearValuationCache() { peerStatsCache = {}; }
+
+function peerStatsFor(sectorKey, selfTicker) {
+  const cacheKey = sectorKey + "|" + selfTicker;
+  if (!peerStatsCache[cacheKey]) {
+    const peers = Object.keys(SAMPLE_STOCKS)
+      .map(rawStock)
+      .filter((s) => s.sectorKey === sectorKey && s.price != null);
+    peerStatsCache[cacheKey] = buildPeerStats(peers, selfTicker);
+  }
+  return peerStatsCache[cacheKey];
+}
+
+/*
+ * 表示用の銘柄。適正価値が手書きされていなければ、同業ピアを
+ * レファレンス・クラスとしてアウトサイド・ビューで算出する (valuation.js)。
+ * 手書きの fairValue があれば、それが常に勝つ。機械は上書きしない。
+ */
+function getStock(ticker) {
+  const stock = rawStock(ticker);
+  if (stock.fairValue != null) return { ...stock, _fairValueSource: "manual" };
+
+  const val = computeFairValue(stock, peerStatsFor(stock.sectorKey, ticker), stock.inside);
+  if (!val) return stock;
+  return { ...stock, fairValue: val.fairValue, _fairValueSource: "auto", _valuation: val };
 }
 
 /*
@@ -206,15 +237,21 @@ function recommendation(stock) {
   const up = upsidePct(stock);
   const fund = fundamentalScore(stock);
   if (up === null || fund === null) return { pill: "amber", key: "recPending" };
+  // 適正価値が機械算出なら、判定は暫定。手で置いた適正価値と同列に見せない。
+  const provisional = stock._fairValueSource === "auto";
   const contrarian = contrarianVerdict(stock);
 
-  if (up >= 8 && fund >= 55 && contrarian.type !== "red") {
-    return { pill: "green", key: "recBuy" };
+  let out;
+  if (up >= 8 && fund >= 55 && contrarian.type !== "red") out = { pill: "green", key: "recBuy" };
+  else if (up <= -8 || fund < 40) out = { pill: "red", key: "recAvoid" };
+  else out = { pill: "amber", key: "recHold" };
+
+  if (provisional) {
+    out.provisional = true;
+    // 未検証の点推定を、確定判断と同じ色で出さない
+    out.pill = "amber";
   }
-  if (up <= -8 || fund < 40) {
-    return { pill: "red", key: "recAvoid" };
-  }
-  return { pill: "amber", key: "recHold" };
+  return out;
 }
 
 /* ---------- フォーマット (formatting) ---------- */
@@ -412,7 +449,56 @@ function renderValuation(stock) {
       <div class="bar-label"><span>${t("price")}: ${usd(stock.price)}</span><span>${t("fairValue")}: ${usd(stock.fairValue)}</span></div>
       <div class="bar-track"><div class="bar-fill" style="width:${priceRatio}%;background:${color}"></div></div>
     </div>
-    <div style="margin-top:12px"><span class="pill ${up >= 5 ? "green" : up <= -5 ? "red" : "amber"}">${t(msgKey)} · ${pct(up)}</span></div>`;
+    <div style="margin-top:12px"><span class="pill ${up >= 5 ? "green" : up <= -5 ? "red" : "amber"}">${t(msgKey)} · ${pct(up)}</span></div>
+    ${renderValuationBasis(stock)}`;
+}
+
+/*
+ * 適正価値の根拠。機械算出のときだけ出す。
+ * 点推定だけを見せず、各法の結果・ピア倍率とその四分位・母数・
+ * 市場が今当てている相対倍率、そして方法の限界(警告)まで並べる。
+ */
+function renderValuationBasis(stock) {
+  if (stock._fairValueSource !== "auto" || !stock._valuation) {
+    return stock._fairValueSource === "manual"
+      ? `<p class="key-note">${t("fvManual")}</p>` : "";
+  }
+  const v = stock._valuation;
+  const rows = v.methods.map((m) => `
+    <tr>
+      <td>${t(m.labelKey)}</td>
+      <td>${fmt(m.perShare, 2)}</td>
+      <td>${fmt(m.multiple, 1)}x</td>
+      <td>${m.q1 == null ? "—" : `${fmt(m.q1, 1)}–${fmt(m.q3, 1)}`}</td>
+      <td>${usd(m.value)}</td>
+    </tr>`).join("");
+
+  const caveats = (v.caveats || []).map((c) => {
+    if (c.dir === "spread") return `<li>${t("caveatSpread").replace("{ratio}", c.ratio)}</li>`;
+    const driver = t("kpi_" + c.driver) || c.driver;
+    const method = t("method_" + c.method);
+    const msg = c.dir === "negative"
+      ? t("caveatNegative") : c.dir === "below" ? t("caveatBelow") : t("caveatAbove");
+    return `<li>${msg
+      .replace("{driver}", driver)
+      .replace("{own}", fmt(c.own, 1))
+      .replace("{peer}", fmt(c.peer, 1))
+      .replace("{method}", method)}</li>`;
+  }).join("");
+
+  return `
+    <details class="guide-item" style="margin-top:14px">
+      <summary>${t("fvBasis")} — ${t("fvAuto")}</summary>
+      <p>${t("fvOutsideView")}</p>
+      <table>
+        <tr><th>${t("fvMethod")}</th><th>${t("fvPerShare")}</th><th>${t("fvMultiple")}</th><th>${t("fvIqr")}</th><th>${t("fvResult")}</th></tr>
+        ${rows}
+      </table>
+      <p>${t("fvRange").replace("{low}", usd(v.low)).replace("{high}", usd(v.high))}</p>
+      <p>${t("fvMarketRelative").replace("{rel}", v.marketRelative == null ? "—" : fmt(v.marketRelative, 2))}</p>
+      ${caveats ? `<p style="color:var(--amber);margin-top:10px"><strong>${t("fvCaveats")}</strong></p><ul style="color:var(--amber);font-size:0.84rem;padding-left:18px">${caveats}</ul>` : ""}
+      <p style="margin-top:10px">${t("fvInsideView")}</p>
+    </details>`;
 }
 
 function renderContrarian(stock) {
@@ -637,6 +723,7 @@ async function updateLiveData() {
   try {
     const { ok, failed } = await fetchLiveStocks(tickers);
     Object.assign(liveOverrides, ok);
+    clearValuationCache(); // ピアの倍率が変わったので統計を作り直す
     if (failed.length) {
       // 失敗理由をそのまま見せる (原因が分からないと直せないため)
       const reasons = [...new Set(failed.map((f) => f.reason || "unknown"))];
@@ -790,7 +877,9 @@ function buildAnalysisContext(stock) {
 
   const lines = [
     `Ticker: ${stock.ticker} — ${stock.name.en} | Sector: ${stock.sector.en}`,
-    `Price ${usd(stock.price)} | Analyst's fair-value estimate ${usd(stock.fairValue)} | Upside to fair value ${pct(up)}`,
+    `Price ${usd(stock.price)} | Fair value ${usd(stock.fairValue)} (${
+      stock._fairValueSource === "auto" ? "MACHINE ESTIMATE from peer multiples, outside view only" : "analyst's own estimate"
+    }) | Upside to fair value ${pct(up)}`,
     `Valuation: P/E ${fmt(m.pe)}, fwd P/E ${fmt(m.forwardPe)}, EV/EBITDA ${fmt(m.evEbitda)}, P/B ${fmt(m.pb, 1)}, P/S ${fmt(m.psales, 1)}, dividend yield ${fmt(m.divYield, 2)}%`,
     `Quality & growth: ROE ${fmt(m.roe, 1)}%, revenue growth ${fmt(m.revenueGrowth, 1)}%, net margin ${fmt(m.netMargin, 1)}%, debt/equity ${fmt(m.debtToEquity, 2)}, FCF yield ${fmt(m.fcfYield, 1)}%`,
     `Market sentiment ${stock.sentiment.sentimentScore}/100 (analyst rating: ${stock.sentiment.analystRating}) vs fundamental score ${fund === null ? "n/a" : fund + "/100"} → ${verdictText[v.key]}${v.gap === null ? "" : " (gap " + Math.round(v.gap) + ")"}`,
@@ -814,6 +903,23 @@ function buildAnalysisContext(stock) {
   }
   if (stock.thesis) lines.push(`Structural note: ${stock.thesis.en}`);
   lines.push("Critical Factors (EPIC): " + stock.criticalFactors.map((f) => `${f.factor.en} [impact ${f.impact}, probability ${f.probability}%]`).join("; "));
+  // 機械算出の適正価値を「確定した目標株価」として扱わせない
+  if (stock._fairValueSource === "auto" && stock._valuation) {
+    const v = stock._valuation;
+    lines.push(
+      `Valuation basis: outside view only — peer-median multiples at a relative multiple of ${v.relMultiple}. ` +
+      `Methods: ${v.methods.map((m) => `${m.key} ${m.multiple}x -> ${usd(m.value)}`).join("; ")}. ` +
+      `Cross-check range ${usd(v.low)}-${usd(v.high)}. ` +
+      `Market currently applies ${v.marketRelative == null ? "n/a" : v.marketRelative + "x"} vs peers.`
+    );
+    if (v.caveats && v.caveats.length) {
+      lines.push("Valuation caveats (peer multiple may not apply): " + v.caveats.map((c) =>
+        `${c.driver} ${c.own} vs peer median ${c.peer} (${c.dir}) -> ${c.method} distorted`).join("; "));
+    }
+    lines.push("IMPORTANT: this fair value is a mechanical starting point, not a price target. " +
+      "Do not present the resulting verdict as a conclusion. Guide the user toward setting the inside view " +
+      "(earnings-power adjustment and the premium/discount the stock deserves) with reasons.");
+  }
   lines.push(`Data status: ${stock._liveAt ? "live, as of " + new Date(stock._liveAt).toISOString().slice(0, 10) : "sample/snapshot data (not real-time)"}${stock._priceSource === "eod" ? " (price = daily close" + (stock._priceAsOf ? " " + stock._priceAsOf : "") + ", not intraday)" : ""}`);
   return lines.join("\n");
 }
@@ -929,7 +1035,11 @@ function insertChatNote(text) {
 function renderRecommendation(stock) {
   const rec = recommendation(stock);
   document.getElementById("recPill").className = `pill ${rec.pill}`;
-  document.getElementById("recPill").textContent = t(rec.key);
+  document.getElementById("recPill").textContent =
+    t(rec.key) + (rec.provisional ? " (" + t("provisional") + ")" : "");
+  document.getElementById("recDisclaimer").innerHTML =
+    (rec.provisional ? `<span style="color:var(--amber)">${t("provisionalNote")}</span><br>` : "") +
+    t("recDisclaimer");
 }
 
 /* ---------- イベント (events) ---------- */
