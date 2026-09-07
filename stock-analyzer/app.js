@@ -1014,11 +1014,21 @@ function sendChat() {
       let text = "";
       if (type === "switch") text = t("chatSwitched").replace("{from}", a).replace("{to}", b);
       else if (type === "recovered") text = t("chatRecovered").replace("{model}", a);
+      else if (type === "truncated") {
+        // 打ち切りは回答が出そろった「あと」の話なので、末尾に置く
+        text = (a === "MAX_TOKENS" ? t("chatTruncatedLength") : t("chatTruncated").replace("{reason}", a));
+        if (text) { chatMessages.push({ role: "note", content: text }); renderChat(); }
+        return;
+      }
       if (text) insertChatNote(text);
     },
     onDone: () => { chatBusy = false; renderChat(); },
     onError: (err) => {
-      assistant.content = `⚠️ ${t("chatError")}${err && err !== "NO_KEY" ? "（" + err + "）" : ""}`;
+      // 途中まで届いた回答は消さない。エラーは後ろに足すだけにする。
+      const note = `⚠️ ${t("chatError")}${err && err !== "NO_KEY" ? "（" + err + "）" : ""}`;
+      assistant.content = assistant.content
+        ? `${assistant.content}\n\n${note}${t("chatPartial") ? "\n" + t("chatPartial") : ""}`
+        : note;
       chatBusy = false;
       renderChat();
     },

@@ -4,6 +4,9 @@
 
 const I18N = {
   en: {
+    chatTruncatedLength: "The answer was cut off because it hit the model's output limit. Ask for a shorter answer, or ask about one point at a time.",
+    chatTruncated: "The model stopped early (reason: {reason}). The answer above may be incomplete.",
+    chatPartial: "(The text above is what arrived before the connection broke.)",
     caveatSpread: "The methods disagree by {ratio}x. When P/E, P/B and P/S point to very different values, none of them is describing this business well — treat the point estimate as unusable and work out why they diverge.",
     provisional: "provisional",
     provisionalNote: "Fair value is machine-estimated from peer multiples (outside view). Treat this verdict as a starting point, not a conclusion — set your own fair value or premium/discount in data.js.",
@@ -186,6 +189,9 @@ const I18N = {
     langButton: "日本語",
   },
   ja: {
+    chatTruncatedLength: "モデルの出力上限に達したため、回答が途中で切れました。短めに答えるよう頼むか、論点を1つずつ聞いてください。",
+    chatTruncated: "モデルが途中で停止しました（理由: {reason}）。上の回答は不完全な可能性があります。",
+    chatPartial: "（上の本文は、通信が切れるまでに届いた分です。）",
     caveatSpread: "手法どうしが {ratio}倍 も食い違っています。PER・PBR・PSRがこれだけ違う値を指すとき、どれもこの事業を説明できていません。点推定は使い物にならないものとして扱い、なぜ食い違うのかを先に解いてください。",
     provisional: "暫定",
     provisionalNote: "適正価値はピア倍率からの機械算出（アウトサイド・ビュー）です。この判定は結論ではなく出発点として扱ってください。data.js で自分の適正価値かプレミアム/ディスカウントを設定すると確定します。",

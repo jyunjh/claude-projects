@@ -86,25 +86,53 @@ async function streamOnce(model, key, body, onDelta) {
   const reader = res.body.getReader();
   const decoder = new TextDecoder();
   let buffer = "";
+  let finishReason = null;
+
+  // SSEの1行を処理する。data: 以外(コメント・空行)は読み飛ばす。
+  const handleLine = (line) => {
+    const s = line.trim();
+    if (!s.startsWith("data:")) return;
+    const data = s.slice(5).trim();
+    if (!data || data === "[DONE]") return;
+    try {
+      const chunk = JSON.parse(data);
+      const cand = chunk.candidates?.[0];
+      const text = cand?.content?.parts?.map((p) => p.text || "").join("") || "";
+      if (text) onDelta(text);
+      if (cand?.finishReason) finishReason = cand.finishReason;
+    } catch (e) {
+      // 行として完結しているのに JSON にならない = 本当に壊れている。
+      // 静かに捨てると「途中で切れた」ように見えるので、握りつぶさず記録する。
+      console.warn("チャット: 解釈できない行を無視しました", s.slice(0, 200));
+    }
+  };
+
   while (true) {
     const { done, value } = await reader.read();
     if (done) break;
     buffer += decoder.decode(value, { stream: true });
     const parts = buffer.split("\n");
     buffer = parts.pop(); // 未完の行は次回へ
-    for (const line of parts) {
-      const s = line.trim();
-      if (!s.startsWith("data:")) continue;
-      const data = s.slice(5).trim();
-      if (!data) continue;
-      try {
-        const chunk = JSON.parse(data);
-        const text = chunk.candidates?.[0]?.content?.parts?.map((p) => p.text || "").join("") || "";
-        if (text) onDelta(text);
-      } catch (e) { /* 部分JSONは無視 */ }
-    }
+    parts.forEach(handleLine);
   }
-  return { ok: true };
+
+  // マルチバイト文字の残りを吐き出し、最後の1行を必ず処理する。
+  // ここを捨てていたため、末尾が改行で終わらないストリームで
+  // 最後のかたまりが丸ごと消えていた (= 回答が途中で切れる)。
+  buffer += decoder.decode();
+  buffer.split("\n").forEach(handleLine);
+
+  return { ok: true, finishReason };
+}
+
+/*
+ * 回答が最後まで出ずに終わった場合に通知する。
+ * 黙って切れると「バグで欠けた」のか「モデルが打ち切った」のか区別できない。
+ */
+function notifyTruncation(result, onNotice) {
+  if (!onNotice || !result.finishReason) return;
+  if (result.finishReason === "STOP") return; // 正常終了
+  onNotice("truncated", result.finishReason);
 }
 
 /*
@@ -124,7 +152,9 @@ async function streamMentorChat({ system, messages, onDelta, onDone, onError, on
   const body = JSON.stringify({
     system_instruction: { parts: [{ text: system }] },
     contents,
-    generationConfig: { maxOutputTokens: 2048 },
+    // 2048 では長めの助言が MAX_TOKENS で切れていた。
+    // gemini-2.5 系は内部の思考トークンもこの枠を消費するため余裕を持たせる。
+    generationConfig: { maxOutputTokens: 8192 },
   });
 
   try {
@@ -137,6 +167,7 @@ async function streamMentorChat({ system, messages, onDelta, onDone, onError, on
         if (flashFailStreak > 0 && onNotice) onNotice("recovered", shortName(PRIMARY_MODEL));
         flashFailStreak = 0;
         flashCooldownUntil = 0;
+        notifyTruncation(r, onNotice);
         onDone();
         return;
       }
@@ -155,7 +186,7 @@ async function streamMentorChat({ system, messages, onDelta, onDone, onError, on
 
     // 2) フォールバック(lite)
     const r2 = await streamOnce(FALLBACK_MODEL, key, body, onDelta);
-    if (r2.ok) { onDone(); return; }
+    if (r2.ok) { notifyTruncation(r2, onNotice); onDone(); return; }
     onError(r2.message);
   } catch (e) {
     onError(String(e && e.message ? e.message : e));
