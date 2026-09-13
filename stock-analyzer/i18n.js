@@ -4,6 +4,7 @@
 
 const I18N = {
   en: {
+    readOnlyMode: "Read-only here. Snapshot saving needs serve.py on your own machine.",
     chatTruncatedLength: "The answer was cut off because it hit the model's output limit. Ask for a shorter answer, or ask about one point at a time.",
     chatTruncated: "The model stopped early (reason: {reason}). The answer above may be incomplete.",
     chatPartial: "(The text above is what arrived before the connection broke.)",
@@ -189,6 +190,7 @@ const I18N = {
     langButton: "日本語",
   },
   ja: {
+    readOnlyMode: "この配信元では閲覧のみです。スナップショット保存は手元の serve.py が必要です。",
     chatTruncatedLength: "モデルの出力上限に達したため、回答が途中で切れました。短めに答えるよう頼むか、論点を1つずつ聞いてください。",
     chatTruncated: "モデルが途中で停止しました（理由: {reason}）。上の回答は不完全な可能性があります。",
     chatPartial: "（上の本文は、通信が切れるまでに届いた分です。）",

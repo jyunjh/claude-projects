@@ -123,6 +123,17 @@ function collectSnapshot() {
   return snap;
 }
 
+/*
+ * スナップショット保存が使えるか。
+ * 書き込みは serve.py がこのMac自身からのリクエストにだけ許す (LANからは403)。
+ * GitHub Pages や file:// にはそもそもエンドポイントが無い。
+ * 押せば必ず失敗するボタンを出しておくのは不親切なので、事前に判定する。
+ */
+function canSaveSnapshot() {
+  const h = location.hostname;
+  return h === "localhost" || h === "127.0.0.1" || h === "::1" || h === "[::1]";
+}
+
 // ローカルサーバー(serve.py)へ保存を依頼
 async function saveSnapshot() {
   const snap = collectSnapshot();
@@ -669,6 +680,15 @@ function renderDataBar(stock) {
   document.getElementById("refreshLabel").textContent =
     dataMessage === "refreshing" ? t("refreshing") : t("refresh");
   document.getElementById("refreshBtn").disabled = dataMessage === "refreshing";
+  // 保存できない配信元(GitHub Pages / LAN / file://)ではボタンを隠し、理由を出す
+  const saveBtn = document.getElementById("saveSnapBtn");
+  if (saveBtn) {
+    const savable = canSaveSnapshot();
+    saveBtn.hidden = !savable;
+    setText("readOnlyNote", savable ? "" : t("readOnlyMode"));
+    const note = document.getElementById("readOnlyNote");
+    if (note) note.hidden = savable;
+  }
   document.getElementById("saveSnapLabel").textContent = t("saveSnapshot");
   setText("keyToggle", `⚙️ ${t("apiSettings")}`);
   setText("saveKeyBtn", t("saveKey"));
