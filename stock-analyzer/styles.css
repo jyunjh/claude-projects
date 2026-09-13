@@ -37,7 +37,8 @@ header {
 .brand h1 { font-size: 1.7rem; letter-spacing: -0.5px; }
 .brand p { color: var(--accent); font-size: 0.9rem; font-weight: 600; }
 
-.controls { display: flex; gap: 12px; align-items: center; }
+.controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.controls select { min-width: 0; }
 select, .lang-btn {
   background: var(--bg-card);
   color: var(--text);
@@ -93,7 +94,8 @@ select:hover, .lang-btn:hover { border-color: var(--accent); }
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 8px 10px;
-  min-width: 220px;
+  flex: 1 1 180px;
+  min-width: 0;          /* 縮めないと狭い画面で横スクロールが出る */
   font-size: 0.85rem;
 }
 .key-row a { color: var(--accent); font-size: 0.82rem; }
@@ -102,6 +104,9 @@ select:hover, .lang-btn:hover { border-color: var(--accent); }
 
 /* ---- Cards / Grid ---- */
 .grid { display: grid; gap: 16px; grid-template-columns: repeat(2, 1fr); }
+/* グリッドの子は既定で min-width:auto。中身(幅の広い表)に押し広げられて
+   ページ全体が横に伸びるのを防ぐ。 */
+.grid > * { min-width: 0; }
 .card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -159,6 +164,10 @@ th { color: var(--text-dim); font-weight: 600; font-size: 0.8rem; text-transform
 .tag.high { background: rgba(248,113,113,0.15); color: var(--red); }
 .tag.medium { background: rgba(251,191,36,0.15); color: var(--amber); }
 .tag.low { background: rgba(148,163,184,0.15); color: var(--text-dim); }
+
+/* 幅の広い表はコンテナ内で横スクロールさせる。
+   ページ本体が横に動くと、スマホでは操作不能になるため。 */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
 /* ---- Comparison table ---- */
 table.compare { min-width: 520px; }
@@ -335,4 +344,42 @@ footer { margin-top: 24px; color: var(--text-dim); font-size: 0.8rem; text-align
   .grid { grid-template-columns: 1fr; }
   .metrics { grid-template-columns: repeat(2, 1fr); }
   body { padding: 14px; }
+}
+
+/* ---- スマホ (縦持ち) ---- */
+@media (max-width: 520px) {
+  body { padding: 10px; }
+
+  /* ヘッダーは2段に。銘柄選択を主役にして幅いっぱい使う */
+  header { gap: 10px; margin-bottom: 14px; }
+  .brand h1 { font-size: 1.3rem; }
+  .brand p { font-size: 0.8rem; }
+  .controls { width: 100%; gap: 8px; }
+  .controls select { flex: 1 1 100%; }
+  .controls .lang-btn { flex: 1 1 0; }
+  select, .lang-btn { padding: 9px 10px; font-size: 0.88rem; }
+
+  /* データバー: ボタンを横並びのまま、状態表示は改行して全文見せる */
+  .data-bar { gap: 8px; }
+  .data-bar .refresh-btn { flex: 1 1 0; padding: 9px 8px; font-size: 0.82rem; }
+  .data-status { flex: 1 1 100%; font-size: 0.8rem; }
+  .key-box { margin-left: 0; flex: 1 1 100%; }
+
+  .card { padding: 14px; }
+  .card h2 { font-size: 0.98rem; }
+
+  /* 銘柄名と株価が1行に収まらないので縦に積む */
+  .overview-head { flex-direction: column; gap: 6px; }
+  .big-price { text-align: left; font-size: 1.5rem; }
+
+  .metrics { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .metric .value { font-size: 1rem; }
+  .kv-grid { gap: 8px; }
+
+  .price-chart { height: 180px; }
+  .chat-msg { max-width: 92%; }
+  .chat-log { max-height: 60vh; }
+
+  /* 表は詰めて、はみ出す分はコンテナ内でスクロール */
+  th, td { padding: 8px 6px; font-size: 0.84rem; }
 }

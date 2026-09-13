@@ -3,6 +3,7 @@ name: Deploy to GitHub Pages
 # 公開するツールだけを GitHub Pages に配信する（他ツールは配信しない）。
 #   ルート:            jidokan-calendar（従来どおり）
 #   /mansion-finder/:  マンション検索（勝どき・晴海）
+#   /stock-analyzer/:  米国株アナライザー（閲覧のみ。保存は手元の serve.py）
 # main への push で自動デプロイ。手動実行も可。
 on:
   push:
@@ -10,6 +11,7 @@ on:
     paths:
       - "jidokan-calendar/**"
       - "mansion-finder/**"
+      - "stock-analyzer/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -31,12 +33,33 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
-      - name: サイトを組み立て（ルート=児童館カレンダー, /mansion-finder/=マンション検索）
+      - name: サイトを組み立て（ルート=児童館カレンダー, /mansion-finder/, /stock-analyzer/）
         run: |
-          mkdir -p _site/mansion-finder
+          mkdir -p _site/mansion-finder _site/stock-analyzer
           cp -r jidokan-calendar/. _site/
           cp mansion-finder/index.html mansion-finder/app.js mansion-finder/styles.css _site/mansion-finder/
           cp -r mansion-finder/data _site/mansion-finder/data
+          # 静的配信に必要なファイルだけを置く。
+          # serve.py / verify.sh / tools/ はサーバ・開発用なので配信しない。
+          cp stock-analyzer/index.html stock-analyzer/styles.css _site/stock-analyzer/
+          cp stock-analyzer/data.js stock-analyzer/snapshot.js stock-analyzer/i18n.js \
+             stock-analyzer/sectors.js stock-analyzer/valuation.js stock-analyzer/api.js \
+             stock-analyzer/chat.js stock-analyzer/app.js _site/stock-analyzer/
+      - name: 配信物の検査（必要なファイルが揃い、サーバ用ファイルが混ざっていないこと）
+        run: |
+          set -e
+          for f in index.html styles.css data.js snapshot.js i18n.js sectors.js \
+                   valuation.js api.js chat.js app.js; do
+            test -f "_site/stock-analyzer/$f" || { echo "欠落: $f"; exit 1; }
+          done
+          for f in serve.py verify.sh tools; do
+            test ! -e "_site/stock-analyzer/$f" || { echo "配信してはいけない: $f"; exit 1; }
+          done
+          # index.html が読み込む <script src> が実在すること
+          grep -o 'src="[^"]*\.js"' _site/stock-analyzer/index.html | sed 's/src="//;s/"//' | while read -r js; do
+            test -f "_site/stock-analyzer/$js" || { echo "参照先が無い: $js"; exit 1; }
+          done
+          echo "配信物OK"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

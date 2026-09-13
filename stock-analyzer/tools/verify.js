@@ -15,7 +15,7 @@ function readFile(p) {
 }
 
 var BASE = $.NSString.stringWithString($('./')).stringByStandardizingPath.js + '/';
-var FILES = ['data.js', 'snapshot.js', 'i18n.js', 'sectors.js', 'chat.js', 'api.js', 'app.js'];
+var FILES = ['data.js', 'snapshot.js', 'i18n.js', 'sectors.js', 'valuation.js', 'chat.js', 'api.js', 'app.js'];
 
 var fails = [], warns = [], oks = [];
 function ok(m) { oks.push('  ✅ ' + m); }
@@ -46,7 +46,10 @@ var R;
 try {
   R = eval(stub + src + '\n({SAMPLE_STOCKS:SAMPLE_STOCKS,I18N:I18N,SECTORS:SECTORS,COMMON_GUIDE:COMMON_GUIDE,'
       + 'upsidePct:upsidePct,fundamentalScore:fundamentalScore,contrarianVerdict:contrarianVerdict,'
-      + 'recommendation:recommendation,buildAnalysisContext:buildAnalysisContext,usd:usd,bn:bn,pct:pct,fmt:fmt})');
+      + 'recommendation:recommendation,buildAnalysisContext:buildAnalysisContext,usd:usd,bn:bn,pct:pct,fmt:fmt,'
+      + 'LIVE_SNAPSHOT:LIVE_SNAPSHOT,collectSnapshot:collectSnapshot,liveOverrides:liveOverrides,'
+      + 'computeFairValue:computeFairValue,buildPeerStats:buildPeerStats,rawStock:rawStock,getStock:getStock,'
+      + 'MIN_PEERS:MIN_PEERS})');
   ok('構文チェック: ' + FILES.length + 'ファイル読込成功');
 } catch (e) {
   fail('構文エラー: ' + e);
@@ -161,6 +164,67 @@ tickers.forEach(function (t) {
   } catch (e) { fail(t + ': メンター文脈の生成に失敗 — ' + e); ctxErr++; }
 });
 if (!ctxErr) ok('メンター文脈: ' + tickers.length + '銘柄すべて生成成功');
+
+/* --- 11. snapshot.js に手書きの分析が混入していないこと ---
+ * snapshot.js は自動生成の「市場データ」。collectSnapshot() が誤って
+ * data.js と合成後の銘柄から集めると、手書きの推定値が焼き付き、
+ * しかも snapshot 層は data.js より優先されるため静かに上書きしてしまう。
+ * 各プロバイダが実際に返しうる項目だけに限定されているかを検査する。
+ */
+var FINNHUB_KEYS = ['pe', 'pb', 'psales', 'roe', 'netMargin', 'grossMargin',
+                    'divYield', 'revenueGrowth', 'debtToEquity'];
+var FMP_EXTRA = ['evEbitda', 'fcfYield'];
+var snapTickers = Object.keys(R.LIVE_SNAPSHOT || {});
+var leaked = 0;
+snapTickers.forEach(function (t) {
+  var entry = R.LIVE_SNAPSHOT[t];
+  var provs = entry._providers || '';
+  var allowed = FINNHUB_KEYS.slice();
+  if (provs.indexOf('fmp') >= 0) allowed = allowed.concat(FMP_EXTRA);
+  Object.keys(entry.metrics || {}).forEach(function (k) {
+    if (allowed.indexOf(k) < 0) {
+      fail('snapshot.js: ' + t + '.' + k + ' は取得元(' + (provs || 'なし') + ')が返さない値 — 手書きの混入');
+      leaked++;
+    }
+  });
+  if (entry.price != null && !entry._liveAt) {
+    fail('snapshot.js: ' + t + ' に _liveAt が無い'); leaked++;
+  }
+});
+if (!leaked) {
+  ok(snapTickers.length
+    ? 'snapshot: ' + snapTickers.length + '銘柄すべて取得値のみ (手書きの混入なし)'
+    : 'snapshot: 空 (検査対象なし)');
+}
+
+/* --- 12. バリュエーション・エンジン ---
+ * 機械算出の適正価値が、手書きの推定値を上書きしないこと。
+ * また、機械算出に基づく判定が「確定」として出ないこと。
+ */
+var vFail = 0, autoN = 0, manualN = 0;
+tickers.forEach(function (t) {
+  var raw = R.rawStock(t), s = R.getStock(t);
+
+  if (raw.fairValue != null) {
+    manualN++;
+    if (s.fairValue !== raw.fairValue) { fail(t + ': 手書きの適正価値が機械算出で上書きされた'); vFail++; }
+    if (s._fairValueSource !== 'manual') { fail(t + ': 手書きなのに source が manual でない'); vFail++; }
+  } else if (s.fairValue != null) {
+    autoN++;
+    if (s._fairValueSource !== 'auto') { fail(t + ': 機械算出なのに source が auto でない'); vFail++; }
+    if (!s._valuation || !s._valuation.methods.length) { fail(t + ': 算出根拠が無い'); vFail++; }
+    var rec = R.recommendation(s);
+    if (!rec.provisional) { fail(t + ': 機械算出なのに判定が暫定になっていない'); vFail++; }
+    if (rec.pill !== 'amber') { fail(t + ': 機械算出の判定が確定色(' + rec.pill + ')で出ている'); vFail++; }
+  }
+});
+if (!vFail) ok('バリュエーション: 手書き' + manualN + '件は不可侵 / 機械算出' + autoN + '件はすべて暫定');
+
+/* ピアが薄いときは算出しないこと (点推定を捏造しない) */
+var thin = R.buildPeerStats([{ ticker: 'X', metrics: { pe: 20, pb: 3, psales: 2 } }], 'SELF');
+var thinResult = R.computeFairValue({ price: 100, metrics: { pe: 20, pb: 3, psales: 2 } }, thin, null);
+if (thinResult === null) ok('バリュエーション: ピア不足時は算出しない (n=1)');
+else fail('ピアが1件でも適正価値を算出してしまう — ' + JSON.stringify(thinResult));
 
 /* --- 出力 --- */
 function renderReport() {
