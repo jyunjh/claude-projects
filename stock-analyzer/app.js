@@ -490,10 +490,10 @@ function renderValuationBasis(stock) {
     <details class="guide-item" style="margin-top:14px">
       <summary>${t("fvBasis")} — ${t("fvAuto")}</summary>
       <p>${t("fvOutsideView")}</p>
-      <table>
+      <div class="table-scroll"><table>
         <tr><th>${t("fvMethod")}</th><th>${t("fvPerShare")}</th><th>${t("fvMultiple")}</th><th>${t("fvIqr")}</th><th>${t("fvResult")}</th></tr>
         ${rows}
-      </table>
+      </table></div>
       <p>${t("fvRange").replace("{low}", usd(v.low)).replace("{high}", usd(v.high))}</p>
       <p>${t("fvMarketRelative").replace("{rel}", v.marketRelative == null ? "—" : fmt(v.marketRelative, 2))}</p>
       ${caveats ? `<p style="color:var(--amber);margin-top:10px"><strong>${t("fvCaveats")}</strong></p><ul style="color:var(--amber);font-size:0.84rem;padding-left:18px">${caveats}</ul>` : ""}
@@ -521,7 +521,7 @@ function renderContrarian(stock) {
 function renderFactors(stock) {
   document.getElementById("factors").innerHTML = `
     <h2>🎯 ${t("criticalFactors")}</h2>
-    <table>
+    <div class="table-scroll"><table>
       <thead><tr><th>${t("factor")}</th><th>${t("impact")}</th><th>${t("probability")}</th></tr></thead>
       <tbody>
         ${stock.criticalFactors.map((f) => `
@@ -531,7 +531,7 @@ function renderFactors(stock) {
             <td>${f.probability}%</td>
           </tr>`).join("")}
       </tbody>
-    </table>`;
+    </table></div>`;
 }
 
 /* セクター特化パネル: 市場環境 + 特化KPI (defense 等のみ表示) */
@@ -552,7 +552,7 @@ function renderSectorPanels(stock) {
   const statusClass = { tailwind: "green", neutral: "amber", headwind: "red" };
   envEl.innerHTML = `
     <h2>🌐 ${localized(cfg.name)} · ${t("sectorEnvironment")}</h2>
-    <table>
+    <div class="table-scroll"><table>
       <tbody>
         ${cfg.environment.map((e) => `
           <tr>
@@ -561,7 +561,7 @@ function renderSectorPanels(stock) {
             <td><div>${localized(e.reading)}</div><div style="color:var(--text-dim);font-size:0.82rem">${localized(e.why)}</div></td>
           </tr>`).join("")}
       </tbody>
-    </table>`;
+    </table></div>`;
 
   // 特化KPI (セクター固有データは stock[sectorKey] に格納)
   const d = stock[stock.sectorKey] || {};

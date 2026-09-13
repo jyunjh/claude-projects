@@ -16,6 +16,7 @@ A browser-based US stock analysis dashboard built around a long-term, fundamenta
 - 🧑‍🏫 **メンター相談（AIチャット）** — 画面の分析を見ながら、熟練ファンドマネージャー役のClaudeにリアルタイムで相談
 - ✅ **投資判断** — 上記を総合した BUY / HOLD / AVOID
 - 🌐 **日本語 / English** ワンクリック切り替え
+- 📱 **スマホ対応** — 縦持ちレイアウトに最適化。同じWi-Fiのスマホからも閲覧可（`--host 0.0.0.0`）
 
 ### メンター相談 / Mentor chat
 
@@ -147,6 +148,30 @@ python3 serve.py
 ```
 
 > `python3 -m http.server` でも閲覧はできますが、**スナップショット保存が使えません**（保存にはサーバー側の書き込みが必要なため）。`serve.py` で起動してください。
+
+### スマホから見る / View on your phone
+
+同じWi-Fiにつないだスマホから見るには、待ち受けアドレスを開放します。
+
+```bash
+cd stock-analyzer
+python3 serve.py --host 0.0.0.0
+```
+
+起動時にスマホで開くURLが表示されます。
+
+```
+stock-analyzer: http://localhost:8000  (保存先 snapshot.js)
+  LAN公開中: 同じWi-Fiの端末から http://192.168.x.x:8000 で開けます
+  ※ スナップショット保存はこのMacからのみ。他端末からの書き込みは拒否します。
+```
+
+**既定は `127.0.0.1`（このMacのみ）です。** `--host 0.0.0.0` を付けたときだけLANに出ます。
+その場合でも **`snapshot.js` への書き込みはこのMacからのリクエストに限定**され、
+他端末からの `POST /api/save-snapshot` は 403 で拒否します（スマホからは閲覧のみ）。
+
+> カフェや社内など、信頼できないネットワークでは `--host` を付けないでください。
+> APIキーは各端末のブラウザ内(localStorage)に保存されるため、スマホで使うにはスマホ側でも入力が必要です。
 
 ## 取得データの保存 / Snapshot persistence
 

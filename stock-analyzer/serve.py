@@ -11,9 +11,11 @@ stock-analyzer ローカルサーバー
 使い方: python3 serve.py [--port 8000]
 """
 import argparse
+import ipaddress
 import json
 import os
 import re
+import socket
 from datetime import datetime, timezone
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
@@ -85,6 +87,11 @@ class Handler(SimpleHTTPRequestHandler):
         if self.path != "/api/save-snapshot":
             self.send_error(404, "Not Found")
             return
+        # 書き込みはこのMac自身からのみ。LAN公開時(--host 0.0.0.0)に
+        # スマホや同じネットワークの他人がファイルを書き換えられないようにする。
+        if not is_loopback(self.client_address[0]):
+            self.send_error(403, "Snapshot saving is allowed from this machine only")
+            return
         try:
             length = int(self.headers.get("Content-Length", 0))
             if length <= 0 or length > 2_000_000:
@@ -119,13 +126,42 @@ class Handler(SimpleHTTPRequestHandler):
             super().log_message(fmt, *args)
 
 
+def is_loopback(addr):
+    try:
+        return ipaddress.ip_address(addr).is_loopback
+    except ValueError:
+        return False
+
+
+def lan_ip():
+    """このMacがLANで使っているIPアドレスを調べる（外部通信はしない）。"""
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        s.connect(("192.0.2.1", 1))  # TEST-NET-1。到達不要でルーティングだけ引く
+        return s.getsockname()[0]
+    except OSError:
+        return None
+    finally:
+        s.close()
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--port", type=int, default=8000)
+    ap.add_argument(
+        "--host",
+        default="127.0.0.1",
+        help="待ち受けアドレス。既定はこのMacのみ。"
+             "スマホなど同じWi-Fiの端末から見るときは 0.0.0.0 を指定する。",
+    )
     args = ap.parse_args()
-    # ローカル専用（外部からは接続できない）
-    srv = ThreadingHTTPServer(("127.0.0.1", args.port), Handler)
+
+    srv = ThreadingHTTPServer((args.host, args.port), Handler)
     print(f"stock-analyzer: http://localhost:{args.port}  (保存先 snapshot.js)")
+    if not is_loopback(args.host):
+        ip = lan_ip()
+        print(f"  LAN公開中: 同じWi-Fiの端末から http://{ip or args.host}:{args.port} で開けます")
+        print("  ※ スナップショット保存はこのMacからのみ。他端末からの書き込みは拒否します。")
     try:
         srv.serve_forever()
     except KeyboardInterrupt:
