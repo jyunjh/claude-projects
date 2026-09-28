@@ -202,5 +202,17 @@
     "sourcePage": "https://www.city.koto.lg.jp/281061/kodomo/hokago/jidokan/calendar.html",
     "pdfUrl": "https://www.city.koto.lg.jp/281061/kodomo/hokago/jidokan/calendar.html",
     "color": "#4f86c6"
+  },
+  {
+    "id": "koto-ariake-mizube",
+    "name": "有明子ども家庭支援センター（有明みずべ）",
+    "region": "江東区",
+    "address": "〒135-0063 東京都江東区有明2-1-8 有明ガーデン1",
+    "officialUrl": "https://koto-kosodate-portal.jp/mizube/ariake/index.html",
+    "sourcePage": "https://koto-kosodate-portal.jp/mizube/ariake/index.html",
+    "pdfUrl": "https://koto-kosodate-portal.jp/news/news_detail_0000010208.html",
+    "color": "#e8804f",
+    "lat": 35.6377,
+    "lng": 139.7905
   }
 ]

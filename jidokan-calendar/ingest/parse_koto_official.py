@@ -115,15 +115,24 @@ def parse_table(table, year, month):
     if not rows:
         return []
     # ヘッダ行を探す（先頭に「8月」だけのキャプション行がある館があるため）
-    hdr_i = 0
+    hdr_i = None
     for i, r in enumerate(rows):
         cells = [cell_text(x) for x in re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", r, re.S)]
-        if any("日にち" in c or "曜" in c for c in cells):
+        if any("日にち" in c or re.fullmatch(r"\s*曜日?\s*", c) for c in cells):
             hdr_i = i
             break
-    header = [cell_text(x).strip() for x in
-              re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", rows[hdr_i], re.S)]
-    rows = rows[hdr_i:]
+    if hdr_i is None:
+        # 見出し行の無い表（豊洲の10月表など）。先頭行はデータ行なので捨てずに使い、
+        # 列は「日にち / 曜日 / 内容…」の標準構成とみなす。先頭データ行を見出しと
+        # 誤認すると、その日の行事が欠落し、行事名中の「10時～12時」を時間帯列の
+        # 見出しと解釈して全行事に時刻を捏造してしまう。
+        ncol = len(re.findall(r"<t[dh][^>]*>", rows[0]))
+        header = ["日にち", "曜日"] + ["内容"] * max(ncol - 2, 0)
+        rows = [""] + rows          # 下の rows[1:] で先頭データ行を落とさないため
+    else:
+        header = [cell_text(x).strip() for x in
+                  re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", rows[hdr_i], re.S)]
+        rows = rows[hdr_i:]
 
     # 列の役割を判定: 日にち / 曜日 / 時間列 / 時間帯列(ヘッダが"9時~13時"等) / 予定列
     day_col = wd_col = time_col = None
@@ -171,6 +180,25 @@ def parse_table(table, year, month):
                     start, end = parse_time(slot)
                 else:                          # 時間列の (n) と対応
                     start, end = parse_time(times.get(n, ""))
+                if title.startswith(("★", "※")):
+                    # 「★乳幼児室は行事の為、午前中は使用できません。」のような施設利用の
+                    # 注意書き。行事ではないが来館者には重要なので、お知らせとして残す。
+                    # 文中の時刻は「使えない時間帯」であって開始時刻ではないので付けない。
+                    events.append({
+                        "date": d, "dateEnd": None, "start": None, "end": None,
+                        "title": "【お知らせ】" + title.lstrip("★※ "),
+                        "description": "", "ageMin": None, "ageMax": None,
+                        "ageLabel": None,
+                    })
+                    continue
+                if not start:
+                    # 時間列が無い表では「ゲーミングPC(13時~18時)」のように行事名に時刻が
+                    # 書かれることがある。範囲がちょうど1つのときだけ採用し、
+                    # 「10時~12時、13時~18時」のような複数枠は曖昧なので付けない。
+                    ranges = re.findall(r"\d{1,2}時(?:\d{1,2}分)?\s*[～〜~\-−]\s*"
+                                        r"\d{1,2}時(?:\d{1,2}分)?", title)
+                    if len(ranges) == 1:
+                        start, end = parse_time(ranges[0])
                 events.append({
                     "date": d, "dateEnd": None, "start": start, "end": end,
                     "title": title,
