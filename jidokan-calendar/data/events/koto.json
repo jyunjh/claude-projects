@@ -1,6 +1,6 @@
 {
   "mode": "live",
-  "generatedAt": "2026-09-29T07:33:13+09:00",
+  "generatedAt": "2026-09-29T07:39:19+09:00",
   "events": [
     {
       "id": "koto-morishita-001",
@@ -1602,6 +1602,19 @@
       "ageLabel": "対象年齢の記載なし"
     },
     {
+      "id": "koto-ariake-mizube-001",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-01",
+      "dateEnd": null,
+      "start": "10:30",
+      "end": "11:30",
+      "title": "ちびっこビクス",
+      "description": "",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
       "id": "koto-ojima-001",
       "centerId": "koto-ojima",
       "date": "2026-10-01",
@@ -1756,6 +1769,19 @@
       "ageMin": null,
       "ageMax": null,
       "ageLabel": "対象年齢の記載なし"
+    },
+    {
+      "id": "koto-ariake-mizube-002",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-02",
+      "dateEnd": null,
+      "start": "10:30",
+      "end": "11:30",
+      "title": "0歳グループ懇談会①",
+      "description": "申込は終了しました",
+      "ageMin": 0,
+      "ageMax": 0,
+      "ageLabel": "0歳児と保護者"
     },
     {
       "id": "koto-ojima-002",
@@ -1940,6 +1966,19 @@
       "ageLabel": "対象年齢の記載なし"
     },
     {
+      "id": "koto-ariake-mizube-003",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-03",
+      "dateEnd": null,
+      "start": "14:00",
+      "end": "15:30",
+      "title": "プレママ・パパ講座『新生児との過ごし方』",
+      "description": "電話受付、先着4組程度。対象:妊娠中の方またはその家族、生後2か月までの赤ちゃんと保護者の方。受付締切10月2日(金)。",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "妊娠中の方・生後2か月までの赤ちゃんと保護者"
+    },
+    {
       "id": "koto-higashisuna2-012",
       "centerId": "koto-higashisuna2",
       "date": "2026-10-04",
@@ -1947,6 +1986,19 @@
       "start": null,
       "end": null,
       "title": "休館日 【江東区民まつり 砂町地区大会 仙台掘川他】",
+      "description": "",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
+      "id": "koto-ariake-mizube-004",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-05",
+      "dateEnd": null,
+      "start": "10:30",
+      "end": "11:45",
+      "title": "有明子育てひろば",
       "description": "",
       "ageMin": null,
       "ageMax": null,
@@ -2055,6 +2107,19 @@
       "ageMin": null,
       "ageMax": null,
       "ageLabel": "対象年齢の記載なし"
+    },
+    {
+      "id": "koto-ariake-mizube-005",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-06",
+      "dateEnd": null,
+      "start": "10:30",
+      "end": "11:30",
+      "title": "0歳グループ懇談会②",
+      "description": "",
+      "ageMin": 0,
+      "ageMax": 0,
+      "ageLabel": "0歳児と保護者"
     },
     {
       "id": "koto-toyosu-009",
@@ -2317,6 +2382,19 @@
       "ageLabel": "対象年齢の記載なし"
     },
     {
+      "id": "koto-ariake-mizube-006",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-07",
+      "dateEnd": null,
+      "start": "10:00",
+      "end": "13:00",
+      "title": "家族問題相談",
+      "description": "電話受付。事前予約が必要です。専門相談委員:龍野陽子先生。家族の問題、お母さん自身の悩み、親子関係等についての相談。",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
       "id": "koto-ojima-005",
       "centerId": "koto-ojima",
       "date": "2026-10-07",
@@ -2525,6 +2603,19 @@
       "ageLabel": "対象年齢の記載なし"
     },
     {
+      "id": "koto-ariake-mizube-007",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-08",
+      "dateEnd": null,
+      "start": "11:30",
+      "end": "11:50",
+      "title": "おはなしタイム",
+      "description": "",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
       "id": "koto-toyosu-017",
       "centerId": "koto-toyosu",
       "date": "2026-10-08",
@@ -2666,6 +2757,19 @@
       "ageMin": null,
       "ageMax": null,
       "ageLabel": "対象年齢の記載なし"
+    },
+    {
+      "id": "koto-ariake-mizube-008",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-09",
+      "dateEnd": null,
+      "start": "10:30",
+      "end": "11:30",
+      "title": "0歳グループ懇談会③",
+      "description": "",
+      "ageMin": 0,
+      "ageMax": 0,
+      "ageLabel": "0歳児と保護者"
     },
     {
       "id": "koto-ojima-007",
@@ -3123,6 +3227,19 @@
       "ageLabel": "対象年齢の記載なし"
     },
     {
+      "id": "koto-ariake-mizube-009",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-13",
+      "dateEnd": null,
+      "start": "11:00",
+      "end": "11:45",
+      "title": "プレーパーク",
+      "description": "場所:ブリリア有明スカイタワーセンターコート(芝生ひろば)",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
       "id": "koto-toyosu-028",
       "centerId": "koto-toyosu",
       "date": "2026-10-14",
@@ -3383,6 +3500,19 @@
       "ageLabel": "対象年齢の記載なし"
     },
     {
+      "id": "koto-ariake-mizube-010",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-14",
+      "dateEnd": null,
+      "start": "10:15",
+      "end": "11:45",
+      "title": "おしゃべり会①『0〜1歳向け講座』",
+      "description": "アプリ申込み、抽選4組。対象:1か月〜1歳6か月の赤ちゃんと保護者。全3回の連続講座で、全回参加できる方が優先(保育付き)。申込期間10月6日(火)〜7日(水)。",
+      "ageMin": 0,
+      "ageMax": 1,
+      "ageLabel": "0〜1歳(1か月〜1歳6か月)の赤ちゃんと保護者"
+    },
+    {
       "id": "koto-ojima-012",
       "centerId": "koto-ojima",
       "date": "2026-10-14",
@@ -3416,6 +3546,19 @@
       "start": "13:00",
       "end": "18:00",
       "title": "Teen's Time Plus",
+      "description": "",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
+      "id": "koto-ariake-mizube-011",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-14",
+      "dateEnd": null,
+      "start": "14:00",
+      "end": "15:00",
+      "title": "つくってあそぼう『とんぼのめがね』",
       "description": "",
       "ageMin": null,
       "ageMax": null,
@@ -3617,6 +3760,19 @@
       "ageLabel": "対象年齢の記載なし"
     },
     {
+      "id": "koto-ariake-mizube-012",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-15",
+      "dateEnd": null,
+      "start": "11:00",
+      "end": "12:00",
+      "title": "助産師さんを囲んで『卒乳について』",
+      "description": "",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
       "id": "koto-toyosu-038",
       "centerId": "koto-toyosu",
       "date": "2026-10-16",
@@ -3755,6 +3911,19 @@
       "end": "13:00",
       "title": "とことこクラス",
       "description": "",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
+      "id": "koto-ariake-mizube-013",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-16",
+      "dateEnd": null,
+      "start": "10:00",
+      "end": "12:00",
+      "title": "ARIAKE♡BAZAAR!2026",
+      "description": "有明みずべのバザー。品物の数に限りがあり、無くなり次第終了。支払いは現金のみ(小銭を用意)。エコバッグをご持参ください。ベビーカー置き場に限りがあるため抱っこ紐での来室推奨。混雑が予想されます。",
       "ageMin": null,
       "ageMax": null,
       "ageLabel": "対象年齢の記載なし"
@@ -3929,6 +4098,32 @@
       "ageLabel": "対象年齢の記載なし"
     },
     {
+      "id": "koto-ariake-mizube-014",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-19",
+      "dateEnd": null,
+      "start": "09:00",
+      "end": "10:00",
+      "title": "すこやかMONDAY",
+      "description": "電話受付、先着5組程度。申込10月12日(月)〜。0〜3歳くらいの子育てに心配や気になることがあるお子さん、しょうがいのあるお子さんを対象に、ひろば内で遊んだり絵本を読んだりできます。",
+      "ageMin": 0,
+      "ageMax": 3,
+      "ageLabel": "0〜3歳くらいの子育てに心配や気になることがあるお子さん・しょうがいのあるお子さん"
+    },
+    {
+      "id": "koto-ariake-mizube-015",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-19",
+      "dateEnd": null,
+      "start": "10:30",
+      "end": "11:30",
+      "title": "ガーデン体験",
+      "description": "",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
       "id": "koto-toyosu-043",
       "centerId": "koto-toyosu",
       "date": "2026-10-20",
@@ -4059,6 +4254,32 @@
       "ageLabel": "対象年齢の記載なし"
     },
     {
+      "id": "koto-ariake-mizube-016",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-20",
+      "dateEnd": null,
+      "start": "10:00",
+      "end": "14:00",
+      "title": "発達相談",
+      "description": "電話受付。事前の予約が必要です。専門相談委員:南めぐみ先生(臨床心理士)。言葉の発達が遅い、人との関わり、こどもの心の育ちについての相談。",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
+      "id": "koto-ariake-mizube-017",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-20",
+      "dateEnd": null,
+      "start": "10:30",
+      "end": "12:00",
+      "title": "AOMI PLAY DAY",
+      "description": "",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
       "id": "koto-toyosu-045",
       "centerId": "koto-toyosu",
       "date": "2026-10-20",
@@ -4067,6 +4288,19 @@
       "end": "18:00",
       "title": "ゲーミングPC(13時~18時)",
       "description": "",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
+      "id": "koto-ariake-mizube-018",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-20",
+      "dateEnd": null,
+      "start": "14:00",
+      "end": "14:45",
+      "title": "アロマミストづくり(保護者向けプログラム)",
+      "description": "アプリ申込み、先着6組。申込10月13日(火)〜19日(月)。つくったアロマはお持ち帰りできます。",
       "ageMin": null,
       "ageMax": null,
       "ageLabel": "対象年齢の記載なし"
@@ -4332,6 +4566,19 @@
       "ageLabel": "対象年齢の記載なし"
     },
     {
+      "id": "koto-ariake-mizube-019",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-21",
+      "dateEnd": null,
+      "start": "10:10",
+      "end": "10:40",
+      "title": "ありもんタイム①",
+      "description": "アプリ申込み、抽選各1組。申込10月13日(火)〜14日(水)。別室でお子さんと離れてゆっくりできる時間(お子さんはひろばで見守り)。時間の選択不可、重複利用不可。",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
       "id": "koto-ojima-017",
       "centerId": "koto-ojima",
       "date": "2026-10-21",
@@ -4340,6 +4587,32 @@
       "end": "11:10",
       "title": "ちゅうりっぷひろば 10時40分~11時10分",
       "description": "",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
+      "id": "koto-ariake-mizube-020",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-21",
+      "dateEnd": null,
+      "start": "10:50",
+      "end": "11:20",
+      "title": "ありもんタイム②",
+      "description": "アプリ申込み、抽選各1組。申込10月13日(火)〜14日(水)。別室でお子さんと離れてゆっくりできる時間(お子さんはひろばで見守り)。時間の選択不可、重複利用不可。",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
+      "id": "koto-ariake-mizube-021",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-21",
+      "dateEnd": null,
+      "start": "11:30",
+      "end": "12:00",
+      "title": "ありもんタイム③",
+      "description": "アプリ申込み、抽選各1組。申込10月13日(火)〜14日(水)。別室でお子さんと離れてゆっくりできる時間(お子さんはひろばで見守り)。時間の選択不可、重複利用不可。",
       "ageMin": null,
       "ageMax": null,
       "ageLabel": "対象年齢の記載なし"
@@ -4553,6 +4826,19 @@
       "ageLabel": "対象年齢の記載なし"
     },
     {
+      "id": "koto-ariake-mizube-022",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-22",
+      "dateEnd": null,
+      "start": "10:00",
+      "end": "12:00",
+      "title": "KOTOハッピー子育てトレーニング講座①",
+      "description": "",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
       "id": "koto-ojima-018",
       "centerId": "koto-ojima",
       "date": "2026-10-22",
@@ -4564,6 +4850,19 @@
       "ageMin": null,
       "ageMax": null,
       "ageLabel": "対象年齢の記載なし"
+    },
+    {
+      "id": "koto-ariake-mizube-023",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-22",
+      "dateEnd": null,
+      "start": "14:00",
+      "end": "15:00",
+      "title": "ベビーマッサージ",
+      "description": "アプリ申込み、抽選6組。申込10月14日(水)〜15日(木)。予防接種後24時間以上経過しているお子さん。初めての方優先。オイルを使用します。",
+      "ageMin": 0,
+      "ageMax": 0,
+      "ageLabel": "2か月から6か月の赤ちゃんと保護者"
     },
     {
       "id": "koto-toyosu-054",
@@ -4717,6 +5016,19 @@
       "end": "11:30",
       "title": "あかちゃんひろば ねんねクラス・よちよちクラス 10時30分~11時30分",
       "description": "",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
+      "id": "koto-ariake-mizube-024",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-23",
+      "dateEnd": null,
+      "start": "11:00",
+      "end": "11:45",
+      "title": "合同プレーパーク『ミニミニ運動会』",
+      "description": "アプリ申込み、先着15組。申込10月16日(金)〜22日(木)。場所:有明親水海浜公園(玉ねぎ公園)。東雲児童館と合同で行います。戸外で身体をいっぱい使って遊ぼう!",
       "ageMin": null,
       "ageMax": null,
       "ageLabel": "対象年齢の記載なし"
@@ -5021,6 +5333,45 @@
       "ageLabel": "対象年齢の記載なし"
     },
     {
+      "id": "koto-ariake-mizube-025",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-26",
+      "dateEnd": null,
+      "start": "10:00",
+      "end": "11:00",
+      "title": "ありベビタイム",
+      "description": "お子さんと一緒に遊びながらスタッフやみんなと楽しく過ごすサークル活動です。初めての方も大歓迎。",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
+      "id": "koto-ariake-mizube-026",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-26",
+      "dateEnd": null,
+      "start": "11:00",
+      "end": "11:45",
+      "title": "江東区有明みずべと無印良品のクリーン大作戦",
+      "description": "",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
+      "id": "koto-ariake-mizube-027",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-26",
+      "dateEnd": null,
+      "start": "14:00",
+      "end": "16:00",
+      "title": "身体測定",
+      "description": "身長、体重が測れます",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
       "id": "koto-toyosu-063",
       "centerId": "koto-toyosu",
       "date": "2026-10-27",
@@ -5138,6 +5489,19 @@
       "ageLabel": "対象年齢の記載なし"
     },
     {
+      "id": "koto-ariake-mizube-028",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-27",
+      "dateEnd": null,
+      "start": "10:00",
+      "end": "12:00",
+      "title": "身体測定",
+      "description": "身長、体重が測れます",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
       "id": "koto-toyosu-064",
       "centerId": "koto-toyosu",
       "date": "2026-10-27",
@@ -5146,6 +5510,19 @@
       "end": "18:00",
       "title": "ゲーミングPC(13時~18時)",
       "description": "",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
+      "id": "koto-ariake-mizube-029",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-27",
+      "dateEnd": null,
+      "start": "14:30",
+      "end": "16:30",
+      "title": "身体測定",
+      "description": "身長、体重が測れます",
       "ageMin": null,
       "ageMax": null,
       "ageLabel": "対象年齢の記載なし"
@@ -5437,6 +5814,19 @@
       "ageLabel": "対象年齢の記載なし"
     },
     {
+      "id": "koto-ariake-mizube-030",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-28",
+      "dateEnd": null,
+      "start": "10:15",
+      "end": "11:45",
+      "title": "おしゃべり会②『0〜1歳向け講座』",
+      "description": "アプリ申込み、抽選4組。対象:1か月〜1歳6か月の赤ちゃんと保護者。全3回の連続講座で、全回参加できる方が優先(保育付き)。",
+      "ageMin": 0,
+      "ageMax": 1,
+      "ageLabel": "0〜1歳(1か月〜1歳6か月)の赤ちゃんと保護者"
+    },
+    {
       "id": "koto-ojima-023",
       "centerId": "koto-ojima",
       "date": "2026-10-28",
@@ -5671,6 +6061,19 @@
       "ageLabel": "対象年齢の記載なし"
     },
     {
+      "id": "koto-ariake-mizube-031",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-29",
+      "dateEnd": null,
+      "start": "10:00",
+      "end": "12:00",
+      "title": "KOTOハッピー子育てトレーニング講座②",
+      "description": "",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
       "id": "koto-ojima-024",
       "centerId": "koto-ojima",
       "date": "2026-10-29",
@@ -5866,6 +6269,19 @@
       "ageLabel": "対象年齢の記載なし"
     },
     {
+      "id": "koto-ariake-mizube-032",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-30",
+      "dateEnd": null,
+      "start": "10:30",
+      "end": "11:15",
+      "title": "誕生会",
+      "description": "10月生まれのおともだちの誕生会。アプリ申込み、先着25名。申込9月25日(金)〜10月28日(水)。有明みずべのカードがない方は電話受付。",
+      "ageMin": 1,
+      "ageMax": 4,
+      "ageLabel": "幼稚園や保育園に所属していない1歳〜4歳のお子さん"
+    },
+    {
       "id": "koto-ojima-025",
       "centerId": "koto-ojima",
       "date": "2026-10-30",
@@ -6029,6 +6445,19 @@
       "start": "09:00",
       "end": "13:00",
       "title": "親子でチャレンジ2「リトミック」",
+      "description": "",
+      "ageMin": null,
+      "ageMax": null,
+      "ageLabel": "対象年齢の記載なし"
+    },
+    {
+      "id": "koto-ariake-mizube-033",
+      "centerId": "koto-ariake-mizube",
+      "date": "2026-10-31",
+      "dateEnd": null,
+      "start": "10:30",
+      "end": "12:00",
+      "title": "ぱんだタイム(パパ)",
       "description": "",
       "ageMin": null,
       "ageMax": null,
