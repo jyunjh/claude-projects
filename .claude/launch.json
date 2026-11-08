@@ -32,6 +32,18 @@
         "mansion-finder"
       ],
       "port": 9010
+    },
+    {
+      "name": "sale-alert",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "9020",
+        "--directory",
+        "sale-alert"
+      ],
+      "port": 9020
     }
   ]
 }

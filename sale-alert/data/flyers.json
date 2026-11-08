@@ -1,0 +1,188 @@
+{
+ "flyers": [
+  {
+   "key": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "firstSeenAt": "2026-11-08T22:25:00+09:00",
+   "ingestedHash": "8c0663a58b36718a28445fcd38aa8369fc878a00",
+   "ingestedAt": "2026-11-08T22:30:17+09:00",
+   "title": "11月7日(土)～11月9日(月)号",
+   "periodText": "11月7日(土)～11月9日(月)号",
+   "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+   "images": [
+    "https://ipqcache2.shufoo.net/c/2026/11/04/c/8895376942183/index/orig/0.jpg",
+    "https://ipqcache2.shufoo.net/c/2026/11/04/c/8895376942183/index/orig/1.jpg"
+   ],
+   "hash": "8c0663a58b36718a28445fcd38aa8369fc878a00",
+   "version": "8895376942183",
+   "lastSeenAt": "2026-11-08T22:25:00+09:00",
+   "status": "ingested"
+  },
+  {
+   "key": "summit-266109:shufoo:68728553760430",
+   "storeId": "summit-266109",
+   "firstSeenAt": "2026-11-08T22:25:00+09:00",
+   "ingestedHash": null,
+   "ingestedAt": null,
+   "title": "11月1日(日)～11月30日(月)号",
+   "periodText": "11月1日(日)～11月30日(月)号",
+   "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/879562/68728553760430/",
+   "images": [
+    "https://ipqcache2.shufoo.net/c/2026/10/29/c/6783036931950/index/orig/0.jpg"
+   ],
+   "hash": "27ae79deefcd1fc6bcc47ca88af4ba29f96843ad",
+   "version": "6783036931950",
+   "lastSeenAt": "2026-11-08T22:25:00+09:00",
+   "status": "new"
+  },
+  {
+   "key": "summit-266109:shufoo:28497753760290",
+   "storeId": "summit-266109",
+   "firstSeenAt": "2026-11-08T22:25:00+09:00",
+   "ingestedHash": null,
+   "ingestedAt": null,
+   "title": "11月1日(日)～11月30日(月)号",
+   "periodText": "11月1日(日)～11月30日(月)号",
+   "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/879562/28497753760290/",
+   "images": [
+    "https://ipqcache2.shufoo.net/c/2026/10/29/c/7853246931944/index/orig/0.jpg"
+   ],
+   "hash": "cd3b7d5e30be21c39b24c25c10d8f7d0fefe16a7",
+   "version": "7853246931944",
+   "lastSeenAt": "2026-11-08T22:25:00+09:00",
+   "status": "new"
+  },
+  {
+   "key": "summit-266109:shufoo:43646353760199",
+   "storeId": "summit-266109",
+   "firstSeenAt": "2026-11-08T22:25:00+09:00",
+   "ingestedHash": null,
+   "ingestedAt": null,
+   "title": "11月1日(日)～11月30日(月)号",
+   "periodText": "11月1日(日)～11月30日(月)号",
+   "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/879562/43646353760199/",
+   "images": [
+    "https://ipqcache2.shufoo.net/c/2026/10/29/c/2997516931940/index/orig/0.jpg"
+   ],
+   "hash": "0842bda77daa617279c47768220859e49bcd2ff8",
+   "version": "2997516931940",
+   "lastSeenAt": "2026-11-08T22:25:00+09:00",
+   "status": "new"
+  },
+  {
+   "key": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "firstSeenAt": "2026-11-08T22:25:00+09:00",
+   "ingestedHash": "bcb36e9254b2a79b7234dfce883dfa4677cef0d4",
+   "ingestedAt": "2026-11-08T22:28:13+09:00",
+   "title": "11/9～11/11",
+   "periodText": "11/9～11/11",
+   "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+   "images": [
+    "https://ipqcache2.shufoo.net/c/2026/11/06/c/2805516947479/index/orig/0.jpg"
+   ],
+   "hash": "bcb36e9254b2a79b7234dfce883dfa4677cef0d4",
+   "version": "2805516947479",
+   "lastSeenAt": "2026-11-08T22:25:00+09:00",
+   "status": "ingested"
+  },
+  {
+   "key": "aeonstyle-274631:shufoo:15073654055773",
+   "storeId": "aeonstyle-274631",
+   "firstSeenAt": "2026-11-08T22:25:00+09:00",
+   "ingestedHash": null,
+   "ingestedAt": null,
+   "title": "11/6～11/8",
+   "periodText": "11/6～11/8",
+   "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/873161/15073654055773/",
+   "images": [
+    "https://ipqcache2.shufoo.net/c/2026/11/05/c/6643976946536/index/orig/0.jpg",
+    "https://ipqcache2.shufoo.net/c/2026/11/05/c/6643976946536/index/orig/1.jpg"
+   ],
+   "hash": "c48a642e22ff8f825dd5030d31c31e91e4d4efae",
+   "version": "6643976946536",
+   "lastSeenAt": "2026-11-08T22:25:00+09:00",
+   "status": "new"
+  },
+  {
+   "key": "aeonstyle-274631:shufoo:91428453896424",
+   "storeId": "aeonstyle-274631",
+   "firstSeenAt": "2026-11-08T22:25:00+09:00",
+   "ingestedHash": null,
+   "ingestedAt": null,
+   "title": "11/1～11/8",
+   "periodText": "11/1～11/8",
+   "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/873161/91428453896424/",
+   "images": [
+    "https://ipqcache2.shufoo.net/c/2026/10/30/c/7741326937802/index/orig/0.jpg"
+   ],
+   "hash": "a89556951b7d946ab6eb50d9b9d5a38a3ffdf85c",
+   "version": "7741326937802",
+   "lastSeenAt": "2026-11-08T22:25:00+09:00",
+   "status": "new"
+  },
+  {
+   "key": "aeonstyle-274631:shufoo:42204653893145",
+   "storeId": "aeonstyle-274631",
+   "firstSeenAt": "2026-11-08T22:25:00+09:00",
+   "ingestedHash": null,
+   "ingestedAt": null,
+   "title": "イオンスタイルオンライン 超！ブラックフライデー先行セール",
+   "periodText": "イオンスタイルオンライン 超！ブラックフライデー先行セール",
+   "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/873161/42204653893145/",
+   "version": "3546756937784",
+   "lastSeenAt": "2026-11-08T22:25:00+09:00",
+   "status": "skipped",
+   "note": "題名で除外（食品特売以外）"
+  },
+  {
+   "key": "aeonstyle-274631:shufoo:96398453892123",
+   "storeId": "aeonstyle-274631",
+   "firstSeenAt": "2026-11-08T22:25:00+09:00",
+   "ingestedHash": null,
+   "ingestedAt": null,
+   "title": "イオンスタイルオンライン 超！ブラックフライデー ご予約販売会",
+   "periodText": "イオンスタイルオンライン 超！ブラックフライデー ご予約販売会",
+   "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/873161/96398453892123/",
+   "version": "5533126937781",
+   "lastSeenAt": "2026-11-08T22:25:00+09:00",
+   "status": "skipped",
+   "note": "題名で除外（食品特売以外）"
+  },
+  {
+   "key": "aeonstyle-274631:shufoo:75173453883323",
+   "storeId": "aeonstyle-274631",
+   "firstSeenAt": "2026-11-08T22:25:00+09:00",
+   "ingestedHash": null,
+   "ingestedAt": null,
+   "title": "10/31～11/9",
+   "periodText": "10/31～11/9",
+   "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/873161/75173453883323/",
+   "images": [
+    "https://ipqcache2.shufoo.net/c/2026/10/30/c/9514656937559/index/orig/0.jpg",
+    "https://ipqcache2.shufoo.net/c/2026/10/30/c/9514656937559/index/orig/1.jpg",
+    "https://ipqcache2.shufoo.net/c/2026/10/30/c/9514656937559/index/orig/2.jpg",
+    "https://ipqcache2.shufoo.net/c/2026/10/30/c/9514656937559/index/orig/3.jpg"
+   ],
+   "hash": "1b7fea9d095780b7f5ae7f717f53513b83b352d2",
+   "version": "9514656937559",
+   "lastSeenAt": "2026-11-08T22:25:00+09:00",
+   "status": "new"
+  },
+  {
+   "key": "aeonstyle-274631:shufoo:60515652980591",
+   "storeId": "aeonstyle-274631",
+   "firstSeenAt": "2026-11-08T22:25:00+09:00",
+   "ingestedHash": null,
+   "ingestedAt": null,
+   "title": "年末年始ごちそうご予約承り",
+   "periodText": "年末年始ごちそうご予約承り",
+   "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/873161/60515652980591/",
+   "version": "5699736892652",
+   "lastSeenAt": "2026-11-08T22:25:00+09:00",
+   "status": "skipped",
+   "note": "題名で除外（食品特売以外）"
+  }
+ ],
+ "checkedAt": "2026-11-08T22:25:00+09:00"
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#d9480f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="特売アラート" />
+  <title>特売アラート</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon-180.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top">
+    <h1>🛒 特売アラート</h1>
+    <div id="status" class="status"></div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button data-tab="today" class="active">今日</button>
+    <button data-tab="upcoming">先の予定</button>
+    <button data-tab="all">すべて</button>
+    <button data-tab="items">品目</button>
+    <button data-tab="stores">店舗</button>
+    <button data-tab="settings">設定</button>
+  </nav>
+
+  <main>
+    <section id="tab-today" class="tab active">
+      <div class="day-nav">
+        <button id="dayPrev" aria-label="前の日">◀</button>
+        <span id="dayLabel"></span>
+        <button id="dayNext" aria-label="次の日">▶</button>
+      </div>
+      <div id="todayList"></div>
+    </section>
+
+    <section id="tab-upcoming" class="tab">
+      <p class="hint">チラシで先の日付まで分かっている、対象品目の特売です。</p>
+      <div id="upcomingList"></div>
+    </section>
+
+    <section id="tab-all" class="tab">
+      <div class="filters">
+        <input id="q" type="search" placeholder="品名で検索（例: 卵、豚こま）" />
+        <select id="allDay"></select>
+      </div>
+      <div id="allList"></div>
+    </section>
+
+    <section id="tab-items" class="tab">
+      <div id="itemsNote" class="note"></div>
+      <form id="itemForm" class="item-form">
+        <input type="hidden" name="itemId" />
+        <label>品目名<input name="itemName" required placeholder="卵" /></label>
+        <label>一致させる語（カンマ区切り）<input name="keywords" placeholder="卵,たまご,玉子" /></label>
+        <label>除外する語<input name="exclude" placeholder="卵焼き,うずら" /></label>
+        <label>この価格以下のときだけ（円・税抜）<input name="maxPrice" type="number" min="1" inputmode="numeric" placeholder="空欄なら価格を問わない" /></label>
+        <div class="row">
+          <button type="submit" class="primary">保存</button>
+          <button type="button" id="itemReset" class="ghost">クリア</button>
+        </div>
+      </form>
+      <ul id="itemList" class="item-list"></ul>
+    </section>
+
+    <section id="tab-stores" class="tab">
+      <p id="storesNote" class="hint"></p>
+      <ul id="storeList" class="store-list"></ul>
+    </section>
+
+    <section id="tab-settings" class="tab">
+      <h2>共有の設定</h2>
+      <p class="hint">品目リストは Google シート（Apps Script）に置き、夫婦で共有します。URL と合言葉はこの端末にだけ保存され、公開されません。</p>
+      <form id="settingsForm" class="item-form">
+        <label>Apps Script の URL<input name="gasUrl" type="url" placeholder="https://script.google.com/macros/s/…/exec" /></label>
+        <label>合言葉<input name="passcode" type="password" autocomplete="off" /></label>
+        <label>あなたの名前（追加者として表示）<input name="me" placeholder="例: じゅん" /></label>
+        <div class="row">
+          <button type="submit" class="primary">保存して接続</button>
+        </div>
+      </form>
+      <div id="settingsResult" class="note"></div>
+      <h2>家族に共有</h2>
+      <p class="hint">下のリンクを LINE で送ると、相手は開くだけで同じ設定になります（合言葉を含むので、家族以外には送らないでください）。</p>
+      <div class="row">
+        <button id="copyShare" class="ghost">共有リンクをコピー</button>
+      </div>
+      <h2>ホーム画面に追加</h2>
+      <p class="hint">iPhone: Safari の共有ボタン →「ホーム画面に追加」。Android: Chrome のメニュー →「アプリをインストール」。</p>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="match.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

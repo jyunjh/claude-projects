@@ -1,0 +1,45 @@
+{
+ "note": "Apps Script（共有の品目リスト）を接続していないときに表示する見本。実際の品目は Google シートで管理する。",
+ "items": [
+  {
+   "id": "ex-egg",
+   "name": "卵",
+   "keywords": "卵,たまご,玉子",
+   "exclude": "玉子焼,卵焼,うずら,ゆで卵,温泉卵,かもめの玉子,たまごサンド,卵スープ",
+   "maxPrice": null,
+   "enabled": true
+  },
+  {
+   "id": "ex-milk",
+   "name": "牛乳",
+   "keywords": "牛乳",
+   "exclude": "",
+   "maxPrice": null,
+   "enabled": true
+  },
+  {
+   "id": "ex-pork",
+   "name": "豚こま",
+   "keywords": "豚こま,豚小間,豚肉こま,豚こま切",
+   "exclude": "",
+   "maxPrice": null,
+   "enabled": true
+  },
+  {
+   "id": "ex-chicken",
+   "name": "鶏むね",
+   "keywords": "鶏むね,鶏胸,若鶏むね,とりむね",
+   "exclude": "ミンチ,ひき肉",
+   "maxPrice": null,
+   "enabled": true
+  },
+  {
+   "id": "ex-banana",
+   "name": "バナナ",
+   "keywords": "バナナ",
+   "exclude": "チップ",
+   "maxPrice": null,
+   "enabled": true
+  }
+ ]
+}

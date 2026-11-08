@@ -1,0 +1,6556 @@
+{
+ "generatedAt": "2026-11-08T22:30:17+09:00",
+ "sales": [
+  {
+   "id": "4117dccf2cfa",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "-196 ストロングゼロ ダブルレモン",
+   "brand": "サントリー",
+   "spec": "350ml",
+   "price": 118,
+   "priceTaxIncl": 129.8,
+   "priceText": "各118円(税込各129.80円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "税率10%対象"
+   ],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "f20840956ce9",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "25° いいちこパック",
+   "brand": "三和酒類",
+   "spec": "1800ml",
+   "price": 1498,
+   "priceTaxIncl": 1647.8,
+   "priceText": "1,498円(税込1,647.80円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "期間限定ボーナスポイント+50",
+    "税率10%対象"
+   ],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "8e783ebc63d2",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "Y1000 6本パック",
+   "brand": "ヤクルト",
+   "spec": "110ml×6",
+   "price": 858,
+   "priceTaxIncl": 926.64,
+   "priceText": "858円(税込926.64円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "45b9e04f8063",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "おいしい無調整豆乳",
+   "brand": "キッコーマン",
+   "spec": "1000ml",
+   "price": 218,
+   "priceTaxIncl": 235.44,
+   "priceText": "218円(税込235.44円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "841b8ec2ec7e",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "おいしい牛乳",
+   "brand": "明治",
+   "spec": "900ml",
+   "price": 238,
+   "priceTaxIncl": 257.04,
+   "priceText": "238円(税込257.04円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "卵・乳",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "6d1f1030f14a",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "おかず畑 おばんざい小鉢 ひじき煮2P",
+   "brand": "フジッコ",
+   "spec": "42g×2",
+   "price": 198,
+   "priceTaxIncl": 213.84,
+   "priceText": "1コ各198円(税込各213.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "よりどり2コ380円(税込410.40円)"
+   ],
+   "category": "日配",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "258b305aa660",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "おでん詰合せ 8種16品",
+   "brand": "川上",
+   "spec": "1パック",
+   "price": 798,
+   "priceTaxIncl": 861.84,
+   "priceText": "998円(税込1,077.84円)→2割引で798円(税込861.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "当店表示価格の2割引の一例(通常998円)",
+    "レジにて割引"
+   ],
+   "category": "日配",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "d4eb1290848c",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "かもめの玉子ミニ",
+   "brand": "さいとう製菓",
+   "spec": "4コ入",
+   "price": 480,
+   "priceTaxIncl": 518.4,
+   "priceText": "480円(税込518.40円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "日配品",
+    "ご当地スイーツ"
+   ],
+   "category": "菓子",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "17801aa9d009",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "きき湯マグネシウム炭酸湯",
+   "brand": "アース製薬",
+   "spec": "360g",
+   "price": 508,
+   "priceTaxIncl": 558.8,
+   "priceText": "598円(税込657.80円)→15%引で508円(税込558.80円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "当店表示価格の15%引の一例(通常598円)",
+    "税率10%対象",
+    "レジにて割引"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "6cf44ee98fb6",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "きのこのうま鍋・山椒香る旨辛ごま味噌",
+   "brand": "久原醤油",
+   "spec": "700g",
+   "price": 298,
+   "priceTaxIncl": 321.84,
+   "priceText": "1コ各298円(税込各321.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-30",
+   "conditions": [
+    "鍋つゆよりどりセール",
+    "よりどり2コ550円(税込594.00円)",
+    "11月30日(月)までこの価格で販売"
+   ],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "4be48b229659",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "こだわり酒場のレモンサワー",
+   "brand": "サントリー",
+   "spec": "350ml",
+   "price": 118,
+   "priceTaxIncl": 129.8,
+   "priceText": "各118円(税込各129.80円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "税率10%対象"
+   ],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "8a15dac5e423",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "ごま油",
+   "brand": "かどや",
+   "spec": "200g",
+   "price": 298,
+   "priceTaxIncl": 321.84,
+   "priceText": "298円(税込321.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "ce480da8c4a4",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "ごま豆乳鍋つゆ ストレート",
+   "brand": "ミツカン",
+   "spec": "750g",
+   "price": 298,
+   "priceTaxIncl": 321.84,
+   "priceText": "1コ各298円(税込各321.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-30",
+   "conditions": [
+    "鍋つゆよりどりセール",
+    "よりどり2コ550円(税込594.00円)",
+    "11月30日(月)までこの価格で販売"
+   ],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "ce09f8d7a182",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "つまみ種",
+   "brand": "亀田",
+   "spec": "120g",
+   "price": 238,
+   "priceTaxIncl": 257.04,
+   "priceText": "各238円(税込各257.04円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "菓子",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "c5eabb137798",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "ねぎ塩だれで食べる牛タン重(麦ご飯)",
+   "brand": null,
+   "spec": "1パック",
+   "price": 798,
+   "priceTaxIncl": 861.84,
+   "priceText": "798円(税込861.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "お総菜"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "4ca47d032802",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "ひとくちずんだ餅",
+   "brand": "井ヶ田製茶",
+   "spec": "4コ入",
+   "price": 648,
+   "priceTaxIncl": 699.84,
+   "priceText": "648円(税込699.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "日配品",
+    "ご当地スイーツ"
+   ],
+   "category": "菓子",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "2fae59b3fd1a",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "ふじっ子煮 ごま昆布",
+   "brand": "フジッコ",
+   "spec": "74g",
+   "price": 198,
+   "priceTaxIncl": 213.84,
+   "priceText": "1コ各198円(税込各213.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "よりどり2コ380円(税込410.40円)"
+   ],
+   "category": "日配",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "ea10cbed80ab",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "やさしい甘さのトマトケチャップ",
+   "brand": "ナガノトマト",
+   "spec": "300g",
+   "price": 198,
+   "priceTaxIncl": 213.84,
+   "priceText": "198円(税込213.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "今回限りのお試し価格",
+    "おいしさ発見隊"
+   ],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "43cef2996ff9",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "アタック抗菌EX 詰替え超特大",
+   "brand": "花王",
+   "spec": "850g",
+   "price": 378,
+   "priceTaxIncl": 415.8,
+   "priceText": "各378円(税込各415.80円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "税率10%対象",
+    "家庭用品のチラシ特売を実施していない店舗あり"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "54cb3078eceb",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "アタック抗菌EX 部屋干し詰替え超特大",
+   "brand": "花王",
+   "spec": "850g",
+   "price": 378,
+   "priceTaxIncl": 415.8,
+   "priceText": "各378円(税込各415.80円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "税率10%対象",
+    "家庭用品のチラシ特売を実施していない店舗あり"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "0e0f27a5bd77",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "アマニ油",
+   "brand": "くらし良好",
+   "spec": "190g",
+   "price": 598,
+   "priceTaxIncl": 645.84,
+   "priceText": "598円(税込645.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "93db3e2b4d0f",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "アメリカ産 甘口たら(解凍)",
+   "brand": null,
+   "spec": "100g",
+   "price": 328,
+   "priceTaxIncl": 354.24,
+   "priceText": "328円(税込354.24円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "bafbb12b91d5",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "イギリストースト",
+   "brand": "工藤パン",
+   "spec": "1コ",
+   "price": 158,
+   "priceTaxIncl": 170.64,
+   "priceText": "各158円(税込各170.64円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "ご当地パンフェア"
+   ],
+   "category": "米・パン",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "27e1603373c4",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "インド産 大粒むきえび(背わた取り・解凍・養殖)",
+   "brand": null,
+   "spec": "340g入 1パック",
+   "price": 888,
+   "priceTaxIncl": 959.04,
+   "priceText": "888円(税込959.04円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "fde1242e3a87",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "エアリアル しお",
+   "brand": "ヤマザキビスケット",
+   "spec": "65g",
+   "price": 108,
+   "priceTaxIncl": 116.64,
+   "priceText": "各108円(税込各116.64円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "菓子",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "ba15c872e70b",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "エアリアル 濃厚チェダーチーズ",
+   "brand": "ヤマザキビスケット",
+   "spec": "65g",
+   "price": 108,
+   "priceTaxIncl": 116.64,
+   "priceText": "各108円(税込各116.64円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "菓子",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "295910af56d7",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "エキソンパイ",
+   "brand": "三万石",
+   "spec": "4コ入",
+   "price": 880,
+   "priceTaxIncl": 950.4,
+   "priceText": "880円(税込950.40円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "日配品",
+    "ご当地スイーツ"
+   ],
+   "category": "菓子",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "1e15f887ade1",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "オールフリー",
+   "brand": "サントリー",
+   "spec": "350ml",
+   "price": 108,
+   "priceTaxIncl": 116.64,
+   "priceText": "108円(税込116.64円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "ノンアルコール"
+   ],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "97b84bd759a0",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "カットトマト 缶",
+   "brand": "アシストバルール",
+   "spec": "400g",
+   "price": 99,
+   "priceTaxIncl": 106.92,
+   "priceText": "99円(税込106.92円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "f80283a28328",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "クレラップお徳用ミニ",
+   "brand": "クレハ",
+   "spec": "22cm×50m",
+   "price": 298,
+   "priceTaxIncl": 327.8,
+   "priceText": "298円(税込327.80円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "税率10%対象"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "6c82287f6060",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "グランドテイスト コク深いリッチブレンド",
+   "brand": "キーコーヒー",
+   "spec": "240g",
+   "price": 558,
+   "priceTaxIncl": 602.64,
+   "priceText": "各698円(税込各753.84円)→2割引で各558円(税込各602.64円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "当店表示価格の2割引の一例(通常各698円)",
+    "レジにて割引"
+   ],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "94465ef24a48",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "グランドテイスト 甘い香りのモカブレンド",
+   "brand": "キーコーヒー",
+   "spec": "240g",
+   "price": 558,
+   "priceTaxIncl": 602.64,
+   "priceText": "各698円(税込各753.84円)→2割引で各558円(税込各602.64円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "当店表示価格の2割引の一例(通常各698円)",
+    "レジにて割引"
+   ],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "23aeb64060b6",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "コーヒーサンド",
+   "brand": "オリオンベーカリー",
+   "spec": "1コ",
+   "price": 158,
+   "priceTaxIncl": 170.64,
+   "priceText": "各158円(税込各170.64円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "ご当地パンフェア"
+   ],
+   "category": "米・パン",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "37e8f2233d5c",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "ゴロっとイカメンチ",
+   "brand": null,
+   "spec": "1パック",
+   "price": 358,
+   "priceTaxIncl": 386.64,
+   "priceText": "358円(税込386.64円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "お総菜",
+    "増量 5切+1切"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "47f7f28e497f",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "サッポロ一番 5食パック みそ",
+   "brand": "サンヨー",
+   "spec": "100g×5",
+   "price": 398,
+   "priceTaxIncl": 429.84,
+   "priceText": "各398円(税込各429.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "9f51400082e9",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "サッポロ一番 5食パック 塩",
+   "brand": "サンヨー",
+   "spec": "100g×5",
+   "price": 398,
+   "priceTaxIncl": 429.84,
+   "priceText": "各398円(税込各429.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "8cd8c293e55e",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "サンドイッチ各種",
+   "brand": "ダン・ブラウン",
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "当店表示価格の1割引",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "当店表示価格の1割引",
+    "ダン・ブラウンの商品に限る",
+    "レジにて割引",
+    "新発売"
+   ],
+   "category": "米・パン",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "0449feb77b03",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "ザーサイ",
+   "brand": "桃屋",
+   "spec": "100g",
+   "price": 206,
+   "priceTaxIncl": 222.48,
+   "priceText": "各258円(税込各278.64円)→2割引で各206円(税込各222.48円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "当店表示価格の2割引の一例(通常各258円)",
+    "瓶詰コーナーの商品に限る",
+    "レジにて割引"
+   ],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "e834eb14d259",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "シクラメン(5号)",
+   "brand": null,
+   "spec": "1鉢",
+   "price": 980,
+   "priceTaxIncl": 1078.0,
+   "priceText": "1鉢 980円(税込1,078.00円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "青果コーナー",
+    "税率10%対象"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "0ca8e31e3169",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "ジャム・はちみつ",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "当店表示価格の2割引",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-13",
+   "conditions": [
+    "当店表示価格の2割引",
+    "冷蔵ケース販売・インストアベーカリーのジャム・はちみつは除く",
+    "レジにて割引",
+    "7日間実施(7日〜13日)"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "9d1ec57fc0f1",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "スコッティティッシュ 5コパック",
+   "brand": "クレシア",
+   "spec": "200組×5",
+   "price": 398,
+   "priceTaxIncl": 437.8,
+   "priceText": "1コ398円(税込437.80円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "2コ750円(税込825.00円)",
+    "税率10%対象"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "f9c3e645ca15",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "スタミナ源たれのうまみ 若鶏ももから揚",
+   "brand": null,
+   "spec": "100g当り",
+   "price": 258,
+   "priceTaxIncl": 278.64,
+   "priceText": "258円(税込278.64円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "お総菜"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "56bd430a9408",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "スパゲティーニ1.6mm",
+   "brand": "ディチェコ",
+   "spec": "500g",
+   "price": 302,
+   "priceTaxIncl": 326.16,
+   "priceText": "各378円(税込各408.24円)→2割引で各302円(税込各326.16円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-13",
+   "conditions": [
+    "当店表示価格の2割引の一例(通常各378円)",
+    "レジにて割引"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "7c424f2927ce",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "スンドゥブ マイルド",
+   "brand": "丸大食品",
+   "spec": "300g",
+   "price": 188,
+   "priceTaxIncl": 203.04,
+   "priceText": "188円(税込203.04円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "日配",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "a7afe6dfd85d",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "チョコケーキサンド",
+   "brand": "工藤パン",
+   "spec": "1コ",
+   "price": 158,
+   "priceTaxIncl": 170.64,
+   "priceText": "各158円(税込各170.64円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "ご当地パンフェア"
+   ],
+   "category": "米・パン",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "2d7b3daf51e3",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "チョコチップクッキー",
+   "brand": "森永",
+   "spec": "2枚×6入",
+   "price": 168,
+   "priceTaxIncl": 181.44,
+   "priceText": "各168円(税込各181.44円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "菓子",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "29b75186bba7",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "チョコレートアイスバー",
+   "brand": "ハーシー",
+   "spec": "7本入",
+   "price": 258,
+   "priceTaxIncl": 278.64,
+   "priceText": "各258円(税込各278.64円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "アイスクリームコーナー"
+   ],
+   "category": "冷凍",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "60a06975d546",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "チリ産 骨取り銀さけ(解凍・養殖)",
+   "brand": null,
+   "spec": "100g",
+   "price": 298,
+   "priceTaxIncl": 321.84,
+   "priceText": "298円(税込321.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "骨とり"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "2c17b4174f17",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "ハム・ソーセージ・ベーコン",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "当店表示価格の1割引",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "当店表示価格の1割引",
+    "ミートボール・焼豚・魚肉ソーセージ・サラダチキン・ハンバーグ(生、冷凍品、グリルキッチンは除く)",
+    "一部対象外商品あり",
+    "レジにて割引"
+   ],
+   "category": "日配",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "a03dca64e513",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "パスタ・パスタソース",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "当店表示価格の2割引",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-13",
+   "conditions": [
+    "当店表示価格の2割引",
+    "冷凍ケース販売、鮮魚・精肉・お総菜コーナーのパスタ・パスタソースは除く",
+    "レジにて割引",
+    "7日間実施(7日〜13日)"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "bc5c10c9e2d1",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "パリパリバー",
+   "brand": "森永製菓",
+   "spec": "8本入",
+   "price": 258,
+   "priceTaxIncl": 278.64,
+   "priceText": "各258円(税込各278.64円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "アイスクリームコーナー"
+   ],
+   "category": "冷凍",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "d24346b3f2fb",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "フェデリーニ1.4mm",
+   "brand": "ディチェコ",
+   "spec": "500g",
+   "price": 302,
+   "priceTaxIncl": 326.16,
+   "priceText": "各378円(税込各408.24円)→2割引で各302円(税込各326.16円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-13",
+   "conditions": [
+    "当店表示価格の2割引の一例(通常各378円)",
+    "レジにて割引"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "187be92fc655",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "プチッと鍋 寄せ鍋",
+   "brand": "エバラ",
+   "spec": "6コ入",
+   "price": 298,
+   "priceTaxIncl": 321.84,
+   "priceText": "1コ各298円(税込各321.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-30",
+   "conditions": [
+    "鍋つゆよりどりセール",
+    "よりどり2コ550円(税込594.00円)",
+    "11月30日(月)までこの価格で販売"
+   ],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "76c8b6027e5c",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "ペットフード・ペット用品",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "当店表示価格の2割引",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "当店表示価格の2割引",
+    "一部店舗では割引率が異なる",
+    "一部対象外商品あり",
+    "レジにて割引"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "c2f45d9af1a0",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "マウントレーニア カフェラッテ",
+   "brand": "森永",
+   "spec": "240ml",
+   "price": 138,
+   "priceTaxIncl": 149.04,
+   "priceText": "138円(税込149.04円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "18add57ed554",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "マーブル加工 ディープパン オレンジ 24cm",
+   "brand": "和平フレイズ",
+   "spec": null,
+   "price": 648,
+   "priceTaxIncl": 712.8,
+   "priceText": "各648円(税込各712.80円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "税率10%対象",
+    "ガス火専用",
+    "家庭用品のチラシ特売を実施していない店舗あり"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "354849e1e6c1",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "マーブル加工 フライパン オレンジ 26cm",
+   "brand": "和平フレイズ",
+   "spec": null,
+   "price": 648,
+   "priceTaxIncl": 712.8,
+   "priceText": "各648円(税込各712.80円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "税率10%対象",
+    "ガス火専用",
+    "家庭用品のチラシ特売を実施していない店舗あり"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "70298d848789",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "ムーンライト",
+   "brand": "森永",
+   "spec": "2枚×7入",
+   "price": 168,
+   "priceTaxIncl": 181.44,
+   "priceText": "各168円(税込各181.44円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "菓子",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "e959a1c8ca3a",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "メンマ",
+   "brand": "桃屋",
+   "spec": "100g",
+   "price": 206,
+   "priceTaxIncl": 222.48,
+   "priceText": "各258円(税込各278.64円)→2割引で各206円(税込各222.48円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "当店表示価格の2割引の一例(通常各258円)",
+    "瓶詰コーナーの商品に限る",
+    "レジにて割引"
+   ],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "7431419d4d35",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "モランボン 韓キムチ",
+   "brand": "モランボン",
+   "spec": "300g",
+   "price": 298,
+   "priceTaxIncl": 321.84,
+   "priceText": "298円(税込321.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [],
+   "category": "日配",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "2f3488b5149b",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "ヨーグルト・プリン(シュークリーム・ケーキ・ゼリー・ドリンクヨーグルト)",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "当店表示価格の2割引",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "当店表示価格の2割引",
+    "青果・菓子売場のゼリーは除く",
+    "レジにて割引"
+   ],
+   "category": "卵・乳",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "ba5e5d2c86f1",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "レギュラーコーヒー",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "当店表示価格の2割引",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "当店表示価格の2割引",
+    "インスタントコーヒー・ココア・スティックコーヒー・ペットボトル・練粉乳・コーヒーフィルターは除く",
+    "レジにて割引"
+   ],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "d5f65060415d",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "三陸産ひらめや青森サーモンが入った海鮮重",
+   "brand": null,
+   "spec": "1パック",
+   "price": 598,
+   "priceTaxIncl": 645.84,
+   "priceText": "598円(税込645.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "お総菜"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "ca932ec77bb9",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "九州産みつせ鶏各種(もも肉、もも鍋物・から揚用 等)",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "当店表示価格の2割引",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "当店表示価格の2割引",
+    "ひき肉・内臓肉・味付肉・ガラ・加工品・加熱済商品は除く",
+    "レジにて割引"
+   ],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "761733bbc1de",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "仙台あおば餃子",
+   "brand": "船田食品",
+   "spec": "12コ入",
+   "price": 568,
+   "priceTaxIncl": 613.44,
+   "priceText": "568円(税込613.44円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "冷蔵ケース"
+   ],
+   "category": "日配",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "332353daccf8",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "刺身でも食べられる海鮮しゃぶしゃぶセット(3種盛)",
+   "brand": null,
+   "spec": "1パック",
+   "price": 1780,
+   "priceTaxIncl": 1922.4,
+   "priceText": "1,780円(税込1,922.40円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "0118806c97a8",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "割烹茶わんむし 4人前",
+   "brand": "くらし良好",
+   "spec": "100g×4",
+   "price": 298,
+   "priceTaxIncl": 321.84,
+   "priceText": "298円(税込321.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "日配",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "685b0e87ab3e",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "力あんぱん",
+   "brand": "オリオンベーカリー",
+   "spec": "1コ",
+   "price": 158,
+   "priceTaxIncl": 170.64,
+   "priceText": "各158円(税込各170.64円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "ご当地パンフェア"
+   ],
+   "category": "米・パン",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "bf5d28e2414a",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "化粧石鹸・ボディソープ・入浴剤(ハンドソープ・洗顔フォーム・メイク落とし)",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "当店表示価格の15%引",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "当店表示価格の15%引",
+    "レジにて割引",
+    "家庭用品のチラシ特売を実施していない店舗あり"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "6a98e09ac89b",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "北海道十勝カマンベール",
+   "brand": "明治",
+   "spec": "90g",
+   "price": 288,
+   "priceTaxIncl": 311.04,
+   "priceText": "288円(税込311.04円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "卵・乳",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "4319cea8f540",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "北海道産 じゃがいも(大袋)",
+   "brand": null,
+   "spec": "1袋",
+   "price": 300,
+   "priceTaxIncl": 324.0,
+   "priceText": "1袋 各300円(税込各324.00円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "よりどり2袋588円(税込635.04円)"
+   ],
+   "category": "野菜",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "dfed0c87c4e0",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "北海道産 たまねぎ(大袋)",
+   "brand": null,
+   "spec": "1袋",
+   "price": 300,
+   "priceTaxIncl": 324.0,
+   "priceText": "1袋 各300円(税込各324.00円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "よりどり2袋588円(税込635.04円)"
+   ],
+   "category": "野菜",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "4e8622479e30",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "北海道産 金時豆",
+   "brand": "ヤマザキ",
+   "spec": "115g",
+   "price": 95,
+   "priceTaxIncl": 102.6,
+   "priceText": "各95円(税込各102.60円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "日配",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "6ac879aa84b1",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "北海道産 黒豆",
+   "brand": "ヤマザキ",
+   "spec": "100g",
+   "price": 95,
+   "priceTaxIncl": 102.6,
+   "priceText": "各95円(税込各102.60円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "日配",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "8f7de45ea603",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "午後のつまみ種",
+   "brand": "亀田",
+   "spec": "95g",
+   "price": 238,
+   "priceTaxIncl": 257.04,
+   "priceText": "各238円(税込各257.04円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "菓子",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "7123d85de276",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "味の素 オリーブオイル エクストラバージン",
+   "brand": "くらし良好",
+   "spec": "400g",
+   "price": 698,
+   "priceTaxIncl": 753.84,
+   "priceText": "698円(税込753.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "aabc65c2fa3b",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "和歌山県産 みかん(ゆら早生)",
+   "brand": null,
+   "spec": "1袋",
+   "price": 398,
+   "priceTaxIncl": 429.84,
+   "priceText": "398円(税込429.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [],
+   "category": "果物",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "55be1f7800a6",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "国内産 豚ばらうす切り",
+   "brand": null,
+   "spec": "100g",
+   "price": 228,
+   "priceTaxIncl": 246.24,
+   "priceText": "228円(税込246.24円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "988ba582bb0a",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "国内産若どりもも鍋物・から揚用",
+   "brand": null,
+   "spec": "100g",
+   "price": 168,
+   "priceTaxIncl": 181.44,
+   "priceText": "168円(税込181.44円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "f9325c957003",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "国内産若どり手羽もと",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "当店表示価格の半額",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "当店表示価格の半額",
+    "九州産みつせ鶏は除く",
+    "レジにて割引"
+   ],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "8426a831255a",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "国内産豚かたロース切りおとし",
+   "brand": null,
+   "spec": "100g",
+   "price": 198,
+   "priceTaxIncl": 213.84,
+   "priceText": "198円(税込213.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "7a57595329ee",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "国内産豚ブロック肉各種(ばら、ヒレ 等)",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "当店表示価格の半額",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "当店表示価格の半額",
+    "黒豚、赤豚、穀うま豚は除く",
+    "レジにて割引"
+   ],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "06266deb4eab",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "国内産豚ロース肉各種(超うす切り(しゃぶしゃぶ用)、切りみ 等)",
+   "brand": null,
+   "spec": "100g",
+   "price": 228,
+   "priceTaxIncl": 246.24,
+   "priceText": "各228円(税込各246.24円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "efb1ea688f42",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "塩パン(各種)",
+   "brand": "ダン・ブラウン",
+   "spec": "1コ",
+   "price": 138,
+   "priceTaxIncl": 149.04,
+   "priceText": "1コ各138円(税込各149.04円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "よりどりセール",
+    "よりどり2コ258円(税込278.64円)",
+    "よりどり3コ378円(税込408.24円)",
+    "あさ10時〜よる7時までの品揃え"
+   ],
+   "category": "米・パン",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "31ed5a29e9d0",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "宮城産 刺身用志津川産 蒸たこ(地たこ)",
+   "brand": null,
+   "spec": "100g",
+   "price": 598,
+   "priceTaxIncl": 645.84,
+   "priceText": "598円(税込645.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "東北生鮮魚"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "3dc424c53869",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "宮城産 北限しらす",
+   "brand": null,
+   "spec": "60g入 1パック",
+   "price": 398,
+   "priceTaxIncl": 429.84,
+   "priceText": "398円(税込429.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "東北生鮮魚"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "db9a9f80c83c",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "岩手県産 銀河のしずく(新米・令和8年産)",
+   "brand": null,
+   "spec": "5kg",
+   "price": 2780,
+   "priceTaxIncl": 3002.4,
+   "priceText": "2,780円(税込3,002.40円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "7日〜9日 ボーナスポイント+200",
+    "お米割引セールの対象外"
+   ],
+   "category": "米・パン",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "e0953b404535",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "幻のクリームパン",
+   "brand": "ダン・ブラウン",
+   "spec": "1コ",
+   "price": 128,
+   "priceTaxIncl": 138.24,
+   "priceText": "128円(税込138.24円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "あさ10時〜よる7時までの品揃え",
+    "数に限りあり"
+   ],
+   "category": "米・パン",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "d37b137a8678",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "徳用国産こんにゃく",
+   "brand": "くらし良好",
+   "spec": "350g",
+   "price": 178,
+   "priceTaxIncl": 192.24,
+   "priceText": "各178円(税込各192.24円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "日配",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "1977aebc03b6",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "徳用国産しらたき",
+   "brand": "くらし良好",
+   "spec": "300g",
+   "price": 178,
+   "priceTaxIncl": 192.24,
+   "priceText": "各178円(税込各192.24円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "日配",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "c77acfcdfd78",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "愛知県産 次郎柿 L",
+   "brand": null,
+   "spec": "1コ",
+   "price": 128,
+   "priceTaxIncl": 138.24,
+   "priceText": "1コ各128円(税込各138.24円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "よりどり2コ238円(税込257.04円)"
+   ],
+   "category": "果物",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "6ebe3086a022",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "新潟県などの国内産 たねなし柿 2L",
+   "brand": null,
+   "spec": "1コ",
+   "price": 128,
+   "priceTaxIncl": 138.24,
+   "priceText": "1コ各128円(税込各138.24円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "よりどり2コ238円(税込257.04円)"
+   ],
+   "category": "果物",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "363a68d256c2",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "早摘みもずく(三杯酢)",
+   "brand": "海産物のきむらや",
+   "spec": "60g×2",
+   "price": 158,
+   "priceTaxIncl": 170.64,
+   "priceText": "158円(税込170.64円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "鮮魚コーナー",
+    "今回限りのお試し価格",
+    "おいしさ発見隊"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "fe494b0b4fe1",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "本まぐろ中トロ入お刺身盛合せ(5種盛)",
+   "brand": null,
+   "spec": "1パック",
+   "price": 1280,
+   "priceTaxIncl": 1382.4,
+   "priceText": "1,280円(税込1,382.40円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "盛合せ内容は一例"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "b3fc85f2c115",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "本格炒め炒飯",
+   "brand": "ニチレイ",
+   "spec": "420g",
+   "price": 358,
+   "priceTaxIncl": 386.64,
+   "priceText": "358円(税込386.64円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "冷凍食品超特価"
+   ],
+   "category": "冷凍",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "1d4c37c02fc8",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "本鮪赤身や活〆真鯛が入ったご馳走にぎり",
+   "brand": null,
+   "spec": "1パック",
+   "price": 990,
+   "priceTaxIncl": 1069.2,
+   "priceText": "990円(税込1,069.20円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "お総菜"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "e3af1ffee650",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "本麒麟",
+   "brand": "キリン",
+   "spec": "350ml×6缶",
+   "price": 848,
+   "priceTaxIncl": 932.8,
+   "priceText": "848円(税込932.80円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "税率10%対象"
+   ],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "5df1fe581355",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "本麒麟",
+   "brand": "キリン",
+   "spec": "500ml×6缶",
+   "price": 1188,
+   "priceTaxIncl": 1306.8,
+   "priceText": "1,188円(税込1,306.80円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "税率10%対象"
+   ],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "68866cdb91e7",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "本麒麟",
+   "brand": "キリン",
+   "spec": "350ml×24缶",
+   "price": 3390,
+   "priceTaxIncl": 3729.0,
+   "priceText": "3,390円(税込3,729.00円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "税率10%対象"
+   ],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "4718faa7e420",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "栃木県などの国内産 にら",
+   "brand": null,
+   "spec": "1袋",
+   "price": 128,
+   "priceTaxIncl": 138.24,
+   "priceText": "128円(税込138.24円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "野菜",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "d5608711844e",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "梅干",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "当店表示価格の3割引",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "当店表示価格の3割引",
+    "青果・菓子売場の商品は除く",
+    "レジにて割引"
+   ],
+   "category": "日配",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "252fff25ed68",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "歯磨き・歯ブラシ(マウスウォッシュ・歯間清掃具)",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "当店表示価格の2割引",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "当店表示価格の2割引",
+    "レジにて割引"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "c538fd24f021",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "海老とイカのアヒージョ",
+   "brand": null,
+   "spec": "1パック",
+   "price": 498,
+   "priceTaxIncl": 537.84,
+   "priceText": "各498円(税込各537.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "おさかなDELI 鮮魚コーナー冷凍ケース",
+    "一例",
+    "骨とり"
+   ],
+   "category": "冷凍",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "45aaf2f73ee2",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "海鮮塩ちゃんこ鍋",
+   "brand": null,
+   "spec": "1パック",
+   "price": 588,
+   "priceTaxIncl": 635.04,
+   "priceText": "588円(税込635.04円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-10",
+   "conditions": [
+    "IH対応",
+    "あさ10時〜よる8時までの品揃え",
+    "11月10日(火)までこの価格で販売"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "cfba28f57984",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "海鮮寄せ鍋セット",
+   "brand": null,
+   "spec": "1パック",
+   "price": 1380,
+   "priceTaxIncl": 1490.4,
+   "priceText": "1,380円(税込1,490.40円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "99bbbbdb29ed",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "焼そば",
+   "brand": "マルちゃん",
+   "spec": "107g",
+   "price": 118,
+   "priceTaxIncl": 127.44,
+   "priceText": "各118円(税込各127.44円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "0bc2aa52d26f",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "熊本県などの国内産 ミニトマト",
+   "brand": null,
+   "spec": "1パック",
+   "price": 198,
+   "priceTaxIncl": 213.84,
+   "priceText": "198円(税込213.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [],
+   "category": "野菜",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "d0ccaeb6a33c",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "熊本県などの国内産 ミニトマト(大パック)",
+   "brand": null,
+   "spec": "1パック",
+   "price": 398,
+   "priceTaxIncl": 429.84,
+   "priceText": "398円(税込429.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [],
+   "category": "野菜",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "ecf97024a8cc",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "爽健美茶",
+   "brand": "コカ・コーラ",
+   "spec": "2L",
+   "price": 148,
+   "priceTaxIncl": 159.84,
+   "priceText": "各148円(税込各159.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "d5c017da5611",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "爽健美茶",
+   "brand": "コカ・コーラ",
+   "spec": "2L×6(ケース)",
+   "price": 828,
+   "priceTaxIncl": 894.24,
+   "priceText": "2L×6 各828円(税込各894.24円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "ケースで買う更にお得"
+   ],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "6d46c878a1df",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "瓶詰(佃煮・漬物・魚介フレーク 等)",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "当店表示価格の2割引",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "当店表示価格の2割引",
+    "瓶詰コーナーの商品に限る",
+    "レジにて割引"
+   ],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "74dfcaa8146b",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "生ビール",
+   "brand": "アサヒ",
+   "spec": "350ml",
+   "price": 190,
+   "priceTaxIncl": 209.0,
+   "priceText": "1本各190円(税込各209.00円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "よりどり2本368円(税込404.80円)",
+    "税率10%対象"
+   ],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "f5a89307d996",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "生ビール ワンサード",
+   "brand": "アサヒ",
+   "spec": "350ml",
+   "price": 190,
+   "priceTaxIncl": 209.0,
+   "priceText": "1本各190円(税込各209.00円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "よりどり2本368円(税込404.80円)",
+    "税率10%対象"
+   ],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "32d3a65308a4",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "生ビール ワンサード",
+   "brand": "アサヒ",
+   "spec": "350ml×6缶",
+   "price": 968,
+   "priceTaxIncl": 1064.8,
+   "priceText": "968円(税込1,064.80円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "税率10%対象"
+   ],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "85edbe99f3c9",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "生一番切り餅",
+   "brand": "越後",
+   "spec": "1kg",
+   "price": 778,
+   "priceTaxIncl": 840.24,
+   "priceText": "778円(税込840.24円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "米・パン",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "1fdbaa070a81",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "生乳100%ヨーグルト",
+   "brand": "小岩井",
+   "spec": "400g",
+   "price": 206,
+   "priceTaxIncl": 222.48,
+   "priceText": "258円(税込278.64円)→2割引で206円(税込222.48円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "当店表示価格の2割引の一例(通常258円)",
+    "レジにて割引"
+   ],
+   "category": "卵・乳",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "7f38b7b00b38",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "目玉焼きベーコン",
+   "brand": "ダン・ブラウン",
+   "spec": "1コ",
+   "price": 198,
+   "priceTaxIncl": 213.84,
+   "priceText": "198円(税込213.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "あさ10時〜よる7時までの品揃え",
+    "数に限りあり"
+   ],
+   "category": "米・パン",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "cd1bd7046cfd",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "秋田名物だまっこ鍋(比内地鶏だし仕立て)",
+   "brand": null,
+   "spec": "1パック",
+   "price": 588,
+   "priceTaxIncl": 635.04,
+   "priceText": "588円(税込635.04円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "IH対応",
+    "あさ10時〜よる8時までの品揃え",
+    "店舗により販売場所が異なる"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "e720bc5d2d9d",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "秋田県などの国内産 長ねぎL 2本入",
+   "brand": null,
+   "spec": "1束(2本入)",
+   "price": 138,
+   "priceTaxIncl": 149.04,
+   "priceText": "1束138円(税込149.04円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "野菜",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "9eb120d3947e",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "穀物酢",
+   "brand": "ミツカン",
+   "spec": "500ml",
+   "price": 99,
+   "priceTaxIncl": 106.92,
+   "priceText": "99円(税込106.92円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "67d49e1e207f",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "米",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "当店表示価格の1割引",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "当店表示価格の1割引",
+    "もち米、麦、玄米も対象",
+    "一部対象外商品あり",
+    "レジにて割引"
+   ],
+   "category": "米・パン",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "97200eaa3e04",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "綾鷹",
+   "brand": "コカ・コーラ",
+   "spec": "2L",
+   "price": 148,
+   "priceTaxIncl": 159.84,
+   "priceText": "各148円(税込各159.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "e90389ba373c",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "綾鷹",
+   "brand": "コカ・コーラ",
+   "spec": "2L×6(ケース)",
+   "price": 828,
+   "priceTaxIncl": 894.24,
+   "priceText": "2L×6 各828円(税込各894.24円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "ケースで買う更にお得"
+   ],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "7516bc0a1be6",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "緑のたぬき天そば",
+   "brand": "マルちゃん",
+   "spec": "101g",
+   "price": 118,
+   "priceTaxIncl": 127.44,
+   "priceText": "各118円(税込各127.44円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "f9c830cdbbee",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "練製品(かまぼこ・ちくわ・さつま揚 等)",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "当店表示価格の2割引",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "当店表示価格の2割引",
+    "一部対象外商品あり",
+    "レジにて割引"
+   ],
+   "category": "日配",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "0b8e97a3f556",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "肉の旨み溢れる牛豚しぐれ重",
+   "brand": null,
+   "spec": "1パック",
+   "price": 698,
+   "priceTaxIncl": 753.84,
+   "priceText": "698円(税込753.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "お総菜"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "b47272f7dfea",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "脂がのった金華さばを楽しむ具だくさん太巻",
+   "brand": null,
+   "spec": "4巻 1パック",
+   "price": 598,
+   "priceTaxIncl": 645.84,
+   "priceText": "598円(税込645.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "お総菜"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "9b381190f23c",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "茨城県などの国内産 れんこん",
+   "brand": null,
+   "spec": "100g",
+   "price": 99,
+   "priceTaxIncl": 106.92,
+   "priceText": "99円(税込106.92円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "野菜",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "c3f2b087a6f2",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "薄皮饅頭こしあん",
+   "brand": "柏屋",
+   "spec": "5コ入",
+   "price": 795,
+   "priceTaxIncl": 858.6,
+   "priceText": "795円(税込858.60円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "日配品",
+    "ご当地スイーツ"
+   ],
+   "category": "菓子",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "a08b4c5f1cad",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "贅沢チーズタルト",
+   "brand": "岩泉ファーム",
+   "spec": "1コ",
+   "price": 358,
+   "priceTaxIncl": 386.64,
+   "priceText": "358円(税込386.64円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "日配品",
+    "ご当地スイーツ",
+    "ケーキ割引セールの対象外"
+   ],
+   "category": "菓子",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "e8376b55a608",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "赤いきつねうどん",
+   "brand": "マルちゃん",
+   "spec": "96g",
+   "price": 118,
+   "priceTaxIncl": 127.44,
+   "priceText": "各118円(税込各127.44円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "1914d7c8faac",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "赤い実なつめ習慣",
+   "brand": "ビクタージャパン",
+   "spec": "5袋入",
+   "price": 198,
+   "priceTaxIncl": 213.84,
+   "priceText": "198円(税込213.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "期間限定お試し価格",
+    "ピックアップ"
+   ],
+   "category": "菓子",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "b5e4949713a5",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "赤から鍋スープ3番",
+   "brand": "イチビキ",
+   "spec": "720g",
+   "price": 298,
+   "priceTaxIncl": 321.84,
+   "priceText": "1コ各298円(税込各321.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-30",
+   "conditions": [
+    "鍋つゆよりどりセール",
+    "よりどり2コ550円(税込594.00円)",
+    "11月30日(月)までこの価格で販売"
+   ],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "53d729791a67",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "長野県などの国内産 ぶなしめじ",
+   "brand": null,
+   "spec": "1袋",
+   "price": 99,
+   "priceTaxIncl": 106.92,
+   "priceText": "各99円(税込各106.92円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "野菜",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "120948d0362a",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "長野県などの国内産 シャキシャキえのき茸",
+   "brand": null,
+   "spec": "1袋",
+   "price": 99,
+   "priceTaxIncl": 106.92,
+   "priceText": "各99円(税込各106.92円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "野菜",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "d7e0e1956541",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "食研 ロースとんかつ",
+   "brand": "食研",
+   "spec": "2枚入",
+   "price": 358,
+   "priceTaxIncl": 386.64,
+   "priceText": "358円(税込386.64円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "冷凍食品コーナー",
+    "期間限定お試し価格",
+    "ピックアップ"
+   ],
+   "category": "冷凍",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "82f9212db784",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "骨取りサーモンのバター醤油",
+   "brand": null,
+   "spec": "1パック",
+   "price": 498,
+   "priceTaxIncl": 537.84,
+   "priceText": "各498円(税込各537.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "おさかなDELI 鮮魚コーナー冷凍ケース",
+    "一例",
+    "骨とり"
+   ],
+   "category": "冷凍",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "92a10083902f",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "骨取り赤魚のアクアパッツァ",
+   "brand": null,
+   "spec": "1パック",
+   "price": 498,
+   "priceTaxIncl": 537.84,
+   "priceText": "各498円(税込各537.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "おさかなDELI 鮮魚コーナー冷凍ケース",
+    "一例",
+    "骨とり"
+   ],
+   "category": "冷凍",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "282b0727f574",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "鮭はらこのわっぱめし",
+   "brand": null,
+   "spec": "1パック",
+   "price": 798,
+   "priceTaxIncl": 861.84,
+   "priceText": "798円(税込861.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "お総菜",
+    "あさ10時からの品揃え"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "419adfb33501",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "黒毛和牛(国内産) かたロース肉、かた肉各種",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "当店表示価格の4割引",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-08",
+   "conditions": [
+    "当店表示価格の4割引",
+    "レジにて割引",
+    "かたロースうす切り(すき焼き用)、かたしゃぶしゃぶ用、かたロースステーキ用 等"
+   ],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "8b9834228f8c",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "黒毛和牛(国内産)もも・ばらカルビ焼肉用食べ比べセット",
+   "brand": null,
+   "spec": "100g",
+   "price": 798,
+   "priceTaxIncl": 861.84,
+   "priceText": "798円(税込861.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "7cd36c521305",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "黒毛和牛(国内産)切りおとし(すき焼き用)",
+   "brand": null,
+   "spec": "100g",
+   "price": 498,
+   "priceTaxIncl": 537.84,
+   "priceText": "498円(税込537.84円)",
+   "validFrom": "2026-11-07",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "1769c7be0910",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "99.99%除菌のアルコールウエットティシュー 8個パック",
+   "brand": "トップバリュ ベストプライス",
+   "spec": "44枚×8",
+   "price": 698,
+   "priceTaxIncl": 767.8,
+   "priceText": "698円（税込767.8円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "本体各698円/税込各767.80円",
+    "イオンスタイル上麻生では取り扱いなし"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "e5dea5233a4e",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "Dole ストロベリーミックス&ヨーグルト",
+   "brand": "協同乳業",
+   "spec": "170g",
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "よりどり3点で本体298円（税込321.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "よりどり3点で本体298円",
+    "1点では本体108円/税込116.64円",
+    "週はじめのトクイチ"
+   ],
+   "category": "卵・乳",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "12fb3355209c",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "Dole フルーツミックス&ヨーグルト",
+   "brand": "協同乳業",
+   "spec": "170g",
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "よりどり3点で本体298円（税込321.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "よりどり3点で本体298円",
+    "1点では本体108円/税込116.64円",
+    "週はじめのトクイチ"
+   ],
+   "category": "卵・乳",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "45754ef14b47",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "JAS特級あらびきポークウインナー",
+   "brand": "トップバリュ ベストプライス",
+   "spec": "238g",
+   "price": 358,
+   "priceTaxIncl": 386.64,
+   "priceText": "358円（税込386.64円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "05a9f0651c88",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "お徳用つぶ入りマスタード",
+   "brand": "エスビー食品",
+   "spec": "175g",
+   "price": 338,
+   "priceTaxIncl": 365.04,
+   "priceText": "338円（税込365.04円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "5121cf052677",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "かすてら",
+   "brand": "トップバリュ ベストプライス",
+   "spec": "6切入",
+   "price": 398,
+   "priceTaxIncl": 429.84,
+   "priceText": "398円（税込429.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "菓子",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "8e741f078df3",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "かつおたたき刺身用",
+   "brand": null,
+   "spec": "100g",
+   "price": 238,
+   "priceTaxIncl": 257.04,
+   "priceText": "238円（税込257.04円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "あさ9時からの販売"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "064859a6809b",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "きのこの山とたけのこの里 きのこたけのこ袋",
+   "brand": "明治",
+   "spec": "8袋入",
+   "price": 278,
+   "priceTaxIncl": 300.24,
+   "priceText": "278円（税込300.24円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "菓子",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "579fc79d9167",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "しっかり吸収厚型消臭ペットシーツ レギュラー",
+   "brand": "トップバリュ ベストプライス",
+   "spec": null,
+   "price": 1180,
+   "priceTaxIncl": 1298,
+   "priceText": "1180円（税込1298円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "8c590b8a9c34",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "しっかり吸収厚型消臭ペットシーツ ワイド",
+   "brand": "トップバリュ ベストプライス",
+   "spec": null,
+   "price": 1180,
+   "priceTaxIncl": 1298,
+   "priceText": "1180円（税込1298円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "03207ddcbbf5",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "じゃがいも",
+   "brand": null,
+   "spec": null,
+   "price": 38,
+   "priceTaxIncl": 41.04,
+   "priceText": "38円（税込41.04円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "北海道などの国内産"
+   ],
+   "category": "野菜",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "e5e35e78697e",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "たまねぎ",
+   "brand": null,
+   "spec": null,
+   "price": 38,
+   "priceTaxIncl": 41.04,
+   "priceText": "38円（税込41.04円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "北海道などの国内産"
+   ],
+   "category": "野菜",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "8c06e3116a50",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "だしの旨み おでん6種6品",
+   "brand": "トップバリュ",
+   "spec": "450g",
+   "price": 298,
+   "priceTaxIncl": 321.84,
+   "priceText": "298円（税込321.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "日配",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "d0a7fe92daf3",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "なす",
+   "brand": null,
+   "spec": "1本",
+   "price": 48,
+   "priceTaxIncl": 51.84,
+   "priceText": "48円（税込51.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "高知県などの国内産"
+   ],
+   "category": "野菜",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "f3eeef46c95f",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "はぐきケア ハプラス レギュラーふつう(両テーパー)",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "よりどり3点で本体278円（税込305.80円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "よりどり3点で本体278円",
+    "1点では本体98円/税込107.80円"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "bad2fff617f6",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "まぜるだけのスパゲッティソース ペペロンチーノ",
+   "brand": "エスビー食品",
+   "spec": "44.6g",
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "よりどり2点で本体288円（税込311.04円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "よりどり2点で本体288円",
+    "1点では本体148円/税込159.84円",
+    "週はじめのトクイチ"
+   ],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "dfdd4924458a",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "まぜるだけのスパゲッティソース 生風味たらこ",
+   "brand": "エスビー食品",
+   "spec": "53.4g",
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "よりどり2点で本体288円（税込311.04円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "よりどり2点で本体288円",
+    "1点では本体148円/税込159.84円",
+    "週はじめのトクイチ"
+   ],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "f35cc130e725",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "まぜるだけのスパゲッティソース 生風味たらこバター",
+   "brand": "エスビー食品",
+   "spec": "53.4g",
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "よりどり2点で本体288円（税込311.04円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "よりどり2点で本体288円",
+    "1点では本体148円/税込159.84円",
+    "週はじめのトクイチ"
+   ],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "8fb2cecef688",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "まぜるだけのスパゲッティソース 生風味明太子",
+   "brand": "エスビー食品",
+   "spec": "53.4g",
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "よりどり2点で本体288円（税込311.04円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "よりどり2点で本体288円",
+    "1点では本体148円/税込159.84円",
+    "週はじめのトクイチ"
+   ],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "5f017a3f17d2",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "みかん",
+   "brand": null,
+   "spec": "6個",
+   "price": 398,
+   "priceTaxIncl": 429.84,
+   "priceText": "6個で398円（税込429.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "愛媛県などの国内産",
+    "1個では本体68円/税込73.44円"
+   ],
+   "category": "果物",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "ccf43d5cc424",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "りんご（ぐんま名月）",
+   "brand": null,
+   "spec": "1個",
+   "price": 178,
+   "priceTaxIncl": 192.24,
+   "priceText": "178円（税込192.24円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "1日通してのお買得品",
+    "長野県産",
+    "まとめて2個では本体350円/税込378円"
+   ],
+   "category": "果物",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "abf547f10ad3",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "オリジナルコーヒー無糖",
+   "brand": "トップバリュ ベストプライス",
+   "spec": "1500ml",
+   "price": 158,
+   "priceTaxIncl": 170.64,
+   "priceText": "158円（税込170.64円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "f97e33691f39",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "オリジナルコーヒー無糖",
+   "brand": "トップバリュ ベストプライス",
+   "spec": "1500ml×8本入",
+   "price": 1250,
+   "priceTaxIncl": 1350,
+   "priceText": "1250円（税込1350円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "91da1fcf22b2",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "カルピス",
+   "brand": "アサヒ飲料",
+   "spec": "470ml",
+   "price": 288,
+   "priceTaxIncl": 311.04,
+   "priceText": "288円（税込311.04円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "8c03b39fd820",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "カルピス 甘熟いちご",
+   "brand": "アサヒ飲料",
+   "spec": "470ml",
+   "price": 288,
+   "priceTaxIncl": 311.04,
+   "priceText": "288円（税込311.04円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "cac7fb5688f3",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "クイックル ちょいがけモップ本体",
+   "brand": "花王",
+   "spec": "1組",
+   "price": 1380,
+   "priceTaxIncl": 1518,
+   "priceText": "1380円（税込1518円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "お買物アプリ15%OFFクーポン（11/10〜11/16）"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "33851728ae37",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "シュミテクト フューチャーホワイト エナメル",
+   "brand": "Haleon",
+   "spec": "80g",
+   "price": 1280,
+   "priceTaxIncl": 1408,
+   "priceText": "1280円（税込1408円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "イオンスタイル有明ガーデンでは一部取り扱いのない商品あり"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "585c73028d76",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "シュミテクト フューチャーホワイト ブライト",
+   "brand": "Haleon",
+   "spec": "80g",
+   "price": 1280,
+   "priceTaxIncl": 1408,
+   "priceText": "1280円（税込1408円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "イオンスタイル有明ガーデンでは一部取り扱いのない商品あり"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "7a837e7dc858",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "シュミテクト フューチャーホワイト マイルド",
+   "brand": "Haleon",
+   "spec": "80g",
+   "price": 1280,
+   "priceTaxIncl": 1408,
+   "priceText": "1280円（税込1408円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "イオンスタイル有明ガーデンでは一部取り扱いのない商品あり"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "7b4d6d74b9db",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "ジョア1日分の カルシウム&ビタミンD ストロベリー",
+   "brand": "ヤクルト",
+   "spec": "125ml",
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "よりどり3点で本体298円（税込321.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "よりどり3点で本体298円",
+    "1点では本体108円/税込116.64円",
+    "週はじめのトクイチ"
+   ],
+   "category": "卵・乳",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "6d3062719fb4",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "ジョア1日分の マルチビタミン ブルーベリー",
+   "brand": "ヤクルト",
+   "spec": "125ml",
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "よりどり3点で本体298円（税込321.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "よりどり3点で本体298円",
+    "1点では本体108円/税込116.64円",
+    "週はじめのトクイチ"
+   ],
+   "category": "卵・乳",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "2f3bcbeb81a7",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "ソースとんかつ",
+   "brand": "Umios",
+   "spec": "5個入(105g)",
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "よりどり3点で本体500円（税込540円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "よりどり3点で本体500円",
+    "1点では本体168円/税込181.44円",
+    "冷凍食品売場にて",
+    "週はじめのトクイチ"
+   ],
+   "category": "冷凍",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "48c543990fb1",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "タルタルソース",
+   "brand": "キユーピー",
+   "spec": "155g",
+   "price": 248,
+   "priceTaxIncl": 267.84,
+   "priceText": "248円（税込267.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "7fee5f617d33",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "ダヴ ボディウォッシュ 詰替え 各種",
+   "brand": "ユニリーバ",
+   "spec": null,
+   "price": 198,
+   "priceTaxIncl": 217.8,
+   "priceText": "198円（税込217.8円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "7af0a265df32",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "チーズソース（torochi モスバーガー監修）",
+   "brand": "雪印メグミルク",
+   "spec": "100g",
+   "price": 398,
+   "priceTaxIncl": 429.84,
+   "priceText": "398円（税込429.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "221356f15721",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "トマトケチャップ（完熟トマトの風味をいかした）",
+   "brand": null,
+   "spec": "500g",
+   "price": 158,
+   "priceTaxIncl": 170.64,
+   "priceText": "158円（税込170.64円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "55534605c863",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "ノンアルコールで除菌できるウエットティシュー 8個パック",
+   "brand": "トップバリュ ベストプライス",
+   "spec": "44枚×8",
+   "price": 698,
+   "priceTaxIncl": 767.8,
+   "priceText": "698円（税込767.8円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "本体各698円/税込各767.80円",
+    "イオンスタイル上麻生では取り扱いなし"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "e7134efff29f",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "バーガーバンズ",
+   "brand": null,
+   "spec": "2個入",
+   "price": 98,
+   "priceTaxIncl": 105.84,
+   "priceText": "98円（税込105.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "米・パン",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "06c0cde483e3",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "パブロンSゴールドW",
+   "brand": "大正製薬",
+   "spec": "60錠",
+   "price": 2180,
+   "priceTaxIncl": 2398,
+   "priceText": "2180円（税込2398円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "指定第2類医薬品",
+    "お1人さま1点限り",
+    "医薬品の販売はお薬売場の営業時間に限る"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "3ba46bce1e50",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "ビスケコッペ 練乳入りミルクホイップ",
+   "brand": "ヤマザキ",
+   "spec": "1個",
+   "price": 98,
+   "priceTaxIncl": 105.84,
+   "priceText": "98円（税込105.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "米・パン",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "b45bd910bc5f",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "ピーマン",
+   "brand": null,
+   "spec": "各1個",
+   "price": 38,
+   "priceTaxIncl": 41.04,
+   "priceText": "38円（税込41.04円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "茨城県または青森県などの国内産"
+   ],
+   "category": "野菜",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "e8e3d6cb35b7",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "ファンタ ゴールデンアップル",
+   "brand": "コカ・コーラ",
+   "spec": "490ml",
+   "price": 98,
+   "priceTaxIncl": 105.84,
+   "priceText": "98円（税込105.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "イオンスタイル上麻生では取り扱いなし"
+   ],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "218e6aa10e22",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "フルグラ ブラックサンダー味",
+   "brand": "カルビー",
+   "spec": "530g",
+   "price": 798,
+   "priceTaxIncl": 861.84,
+   "priceText": "798円（税込861.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "5b3e64329124",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "ブローネ 香りと艶カラー 各種",
+   "brand": "花王",
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "よりどり2点で本体1,000円（税込1,100円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "よりどり2点で本体1,000円",
+    "お買物アプリ10%OFFクーポン"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "89c5015e656f",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "プチッと鍋 キムチ鍋",
+   "brand": "エバラ食品",
+   "spec": "23g×6",
+   "price": 278,
+   "priceTaxIncl": 300.24,
+   "priceText": "278円（税込300.24円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "9a3870161967",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "プチッと鍋 寄せ鍋",
+   "brand": "エバラ食品",
+   "spec": "23g×6",
+   "price": 278,
+   "priceTaxIncl": 300.24,
+   "priceText": "278円（税込300.24円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "fc1c3af7ec0e",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "プチッと鍋 濃厚みそ鍋",
+   "brand": "エバラ食品",
+   "spec": "40g×4",
+   "price": 278,
+   "priceTaxIncl": 300.24,
+   "priceText": "278円（税込300.24円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "db4cdc5665bf",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "メンソレータム ADクリーム",
+   "brand": "ロート製薬",
+   "spec": "145g",
+   "price": 1080,
+   "priceTaxIncl": 1188,
+   "priceText": "1080円（税込1188円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "第2類医薬品",
+    "医薬品の販売はお薬売場の営業時間に限る"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "6195106bdfb9",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "ルイボスティー ティーバッグ",
+   "brand": "トップバリュ",
+   "spec": "150g",
+   "price": 498,
+   "priceTaxIncl": 537.84,
+   "priceText": "498円（税込537.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "5be1e3fabfa4",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "ワイドハイターEXパワー 詰替大サイズ",
+   "brand": "花王",
+   "spec": "820ml",
+   "price": 348,
+   "priceTaxIncl": 382.8,
+   "priceText": "348円（税込382.8円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "お買物アプリ15%OFFクーポン（11/10〜11/16）"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "be9a6af4843d",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "切り餅",
+   "brand": "トップバリュ ベストプライス",
+   "spec": "700g",
+   "price": 698,
+   "priceTaxIncl": 753.84,
+   "priceText": "698円（税込753.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "米・パン",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "6834cfb13f57",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "厚切りバウムクーヘン",
+   "brand": "エースベーカリー",
+   "spec": "10個入",
+   "price": 278,
+   "priceTaxIncl": 300.24,
+   "priceText": "278円（税込300.24円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "菓子",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "2ed8b7663fa7",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "国産若どりむね肉",
+   "brand": null,
+   "spec": "100g",
+   "price": 78,
+   "priceTaxIncl": 84.24,
+   "priceText": "78円（税込84.24円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "cd59a4425f16",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "国産若どり手羽もと（解凍品）",
+   "brand": null,
+   "spec": "100g",
+   "price": 68,
+   "priceTaxIncl": 73.44,
+   "priceText": "68円（税込73.44円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "1日通してのお買得品",
+    "あさ9時からの販売"
+   ],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "179e7773bd38",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "国産鶏 鶏つくね串（照焼）",
+   "brand": "ケイエス冷凍食品",
+   "spec": "117g",
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "よりどり3点で本体500円（税込540円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "よりどり3点で本体500円",
+    "1点では本体168円/税込181.44円",
+    "冷凍食品売場にて",
+    "週はじめのトクイチ"
+   ],
+   "category": "冷凍",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "6ce107b64b61",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "塩銀鮭甘塩味ばら売り",
+   "brand": null,
+   "spec": "1切",
+   "price": 178,
+   "priceTaxIncl": 192.24,
+   "priceText": "178円（税込192.24円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "あさ9時から18時までの販売",
+    "チリ産原料使用"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "7662bd1760bf",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "子持ちからふとししゃも",
+   "brand": null,
+   "spec": "8尾",
+   "price": 298,
+   "priceTaxIncl": 321.84,
+   "priceText": "298円（税込321.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "804c049c0de9",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "子持ち黒かれい（解凍）",
+   "brand": null,
+   "spec": "100g",
+   "price": 98,
+   "priceTaxIncl": 105.84,
+   "priceText": "98円（税込105.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "1日通してのお買得品",
+    "北海道産他",
+    "イオンスタイル上麻生では取り扱いなし"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "31066412e2b8",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "木綿厚揚げ",
+   "brand": null,
+   "spec": "2枚入",
+   "price": 98,
+   "priceTaxIncl": 105.84,
+   "priceText": "98円（税込105.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "日配",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "101b3c24f5c8",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "歯周ケア ハプラス コンパクトふつう(片テーパー)",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "よりどり3点で本体278円（税込305.80円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "よりどり3点で本体278円",
+    "1点では本体98円/税込107.80円"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "85e6bb1faef7",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "歯周ケア ハプラス レギュラーふつう(片テーパー)",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "よりどり3点で本体278円（税込305.80円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "よりどり3点で本体278円",
+    "1点では本体98円/税込107.80円"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "239ef554582d",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "水切りゴミ袋 ストッキングタイプ 各種",
+   "brand": "トップバリュ ベストプライス",
+   "spec": "100枚",
+   "price": 358,
+   "priceTaxIncl": 393.8,
+   "priceText": "358円（税込393.8円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "8f5916cb53a1",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "活しじみ",
+   "brand": null,
+   "spec": "100g",
+   "price": 178,
+   "priceTaxIncl": 192.24,
+   "priceText": "178円（税込192.24円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "あさ9時からの販売",
+    "青森県産",
+    "天候不順により水揚げ無い場合あり"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "0d95c9ca9022",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "無添加食品保存ラップ ミニ",
+   "brand": "トップバリュ ベストプライス",
+   "spec": "22cm×50m",
+   "price": 178,
+   "priceTaxIncl": 195.8,
+   "priceText": "178円（税込195.8円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "feafd51cc017",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "無添加食品保存ラップ レギュラー",
+   "brand": "トップバリュ ベストプライス",
+   "spec": "30cm×50m",
+   "price": 198,
+   "priceTaxIncl": 217.8,
+   "priceText": "198円（税込217.8円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "b6d29dea9430",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "牛肉すねシチュー用",
+   "brand": null,
+   "spec": "100g",
+   "price": 348,
+   "priceTaxIncl": 375.84,
+   "priceText": "348円（税込375.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "オーストラリア産"
+   ],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "cffb917b7839",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "牛肉切りおとし（国産）",
+   "brand": null,
+   "spec": "100g",
+   "price": 398,
+   "priceTaxIncl": 429.84,
+   "priceText": "398円（税込429.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "2b1a74f5e0ef",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "白身魚とタルタルソースのフライ",
+   "brand": "ニッスイ",
+   "spec": "5個(80g)",
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "よりどり3点で本体500円（税込540円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "よりどり3点で本体500円",
+    "1点では本体168円/税込181.44円",
+    "冷凍食品売場にて",
+    "週はじめのトクイチ"
+   ],
+   "category": "冷凍",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "0a592ddb94c8",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "白身魚フライ",
+   "brand": "トップバリュ",
+   "spec": "280g(4枚)",
+   "price": 398,
+   "priceTaxIncl": 429.84,
+   "priceText": "398円（税込429.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "水産の冷凍コーナーでの販売"
+   ],
+   "category": "冷凍",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "5525cf800b65",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "純水99%使用 ペット用ウエットティシュー",
+   "brand": "トップバリュ ベストプライス",
+   "spec": null,
+   "price": 398,
+   "priceTaxIncl": 437.8,
+   "priceText": "398円（税込437.8円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "bec641593760",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "職人の珈琲ワンドリップコーヒー あまい香りのリッチブレンド",
+   "brand": "UCC上島珈琲",
+   "spec": "7g×16袋入",
+   "price": 498,
+   "priceTaxIncl": 537.84,
+   "priceText": "498円（税込537.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "本体各498円/税込各537.84円"
+   ],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "bd9b143fec69",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "職人の珈琲ワンドリップコーヒー 深いコクのスペシャルブレンド",
+   "brand": "UCC上島珈琲",
+   "spec": "7g×16袋入",
+   "price": 498,
+   "priceTaxIncl": 537.84,
+   "priceText": "498円（税込537.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "本体各498円/税込各537.84円"
+   ],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "186ed1c14021",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "蒸しほたて（加熱用）",
+   "brand": null,
+   "spec": "1個",
+   "price": 88,
+   "priceTaxIncl": 95.04,
+   "priceText": "88円（税込95.04円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "朝市 あさ9時からひる12時まで（イオンスタイル赤羽はあさ8時から）"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "be1bbde9009b",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "蒸しほたて（生食用）",
+   "brand": null,
+   "spec": "100g",
+   "price": 358,
+   "priceTaxIncl": 386.64,
+   "priceText": "358円（税込386.64円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "あさ9時からの販売"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "e85e36b3ab58",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "豚タンねぎ塩味付焼肉用（解凍）",
+   "brand": null,
+   "spec": "100g",
+   "price": 98,
+   "priceTaxIncl": 105.84,
+   "priceText": "98円（税込105.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "朝市 あさ9時からひる12時まで（イオンスタイル赤羽はあさ8時から）",
+    "原料肉/アメリカ産",
+    "イオンスタイル上麻生では取り扱いなし"
+   ],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "f8c647dbcd06",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "豚肉ロース味付ステーキ用（コク旨トンテキ）",
+   "brand": null,
+   "spec": "1枚(70g)",
+   "price": 128,
+   "priceTaxIncl": 138.24,
+   "priceText": "128円（税込138.24円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "あさ9時からの販売",
+    "原料肉/アメリカ産",
+    "100g当り本体183円"
+   ],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "ff595ec7ba9a",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "豚肉ロース味付ステーキ用（レモン香味）",
+   "brand": null,
+   "spec": "1枚(70g)",
+   "price": 128,
+   "priceTaxIncl": 138.24,
+   "priceText": "128円（税込138.24円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "あさ9時からの販売",
+    "原料肉/アメリカ産",
+    "100g当り本体183円"
+   ],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "32bced1037bf",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "豚肉ロース味付ステーキ用（味噌焼）",
+   "brand": null,
+   "spec": "1枚(70g)",
+   "price": 128,
+   "priceTaxIncl": 138.24,
+   "priceText": "128円（税込138.24円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "あさ9時からの販売",
+    "原料肉/アメリカ産",
+    "100g当り本体183円"
+   ],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "8ad4ff9547ca",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "豚肉ロース生姜焼・豚丼用",
+   "brand": null,
+   "spec": "100g",
+   "price": 178,
+   "priceTaxIncl": 192.24,
+   "priceText": "178円（税込192.24円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "アメリカ産"
+   ],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "e3839db76590",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "豚肉ロース超うす切り",
+   "brand": null,
+   "spec": "100g",
+   "price": 178,
+   "priceTaxIncl": 192.24,
+   "priceText": "178円（税込192.24円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "アメリカ産"
+   ],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "19dcd83c42ab",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "部屋干しでもにおわない柔軟仕上げ剤",
+   "brand": null,
+   "spec": "2000ml",
+   "price": 248,
+   "priceTaxIncl": 272.8,
+   "priceText": "248円（税込272.8円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "お買物アプリ15%OFFクーポン（11/10〜11/16）"
+   ],
+   "category": "日用品",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "ab90b51886ff",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "野菜一日これ一本 冬にんじんMix",
+   "brand": "カゴメ",
+   "spec": "200ml",
+   "price": 108,
+   "priceTaxIncl": 116.64,
+   "priceText": "108円（税込116.64円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [],
+   "category": "飲料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "11dff0dfa9da",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "銀さけはらす西京漬け",
+   "brand": null,
+   "spec": null,
+   "price": 178,
+   "priceTaxIncl": 192.24,
+   "priceText": "178円（税込192.24円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "あさ9時からの販売"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "498affa47a65",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "長ねぎ",
+   "brand": null,
+   "spec": "1本",
+   "price": 98,
+   "priceTaxIncl": 105.84,
+   "priceText": "98円（税込105.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "朝市 あさ9時からひる12時まで（イオンスタイル赤羽はあさ8時から）",
+    "秋田県または山形県などの国内産"
+   ],
+   "category": "野菜",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "2ff224a1d5f2",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "雪見だいふく 白いショコラとあまおう苺",
+   "brand": "ロッテ",
+   "spec": "45ml×2個入",
+   "price": 198,
+   "priceTaxIncl": 213.84,
+   "priceText": "198円（税込213.84円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "ボーナスポイント30（11/11〜11/17）"
+   ],
+   "category": "冷凍",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "3125af02d293",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "骨取銀鮭（養殖・解凍）",
+   "brand": null,
+   "spec": "100g",
+   "price": 338,
+   "priceTaxIncl": 365.04,
+   "priceText": "338円（税込365.04円）",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "あさ9時からの販売",
+    "チリ産他"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "2fb1dcae55d9",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "いか串の七味焼",
+   "brand": null,
+   "spec": "1本",
+   "price": 100,
+   "priceTaxIncl": 108.0,
+   "priceText": "100円(税込108.00円)",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-10",
+   "conditions": [
+    "店内手作り煮魚・焼魚",
+    "あさ10時〜よる8時までの品揃え",
+    "11月10日(火)まで実施"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "4851ce661a63",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "さけハラスの西京焼",
+   "brand": null,
+   "spec": "100g",
+   "price": 298,
+   "priceTaxIncl": 321.84,
+   "priceText": "298円(税込321.84円)",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-10",
+   "conditions": [
+    "店内手作り煮魚・焼魚",
+    "あさ10時〜よる8時までの品揃え",
+    "11月10日(火)まで実施"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "8b27f67474c7",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "ひき肉",
+   "brand": null,
+   "spec": null,
+   "price": null,
+   "priceTaxIncl": null,
+   "priceText": "当店表示価格の1割引",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-10",
+   "conditions": [
+    "当店表示価格の1割引",
+    "冷凍商品は除きます",
+    "レジにて割引",
+    "11月10日(火)まで実施"
+   ],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "6fd7126df69a",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "フィリピン産 甘熟王バナナ",
+   "brand": null,
+   "spec": "1袋",
+   "price": 198,
+   "priceTaxIncl": 213.84,
+   "priceText": "198円(税込213.84円)",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "果物",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "fccc1da84096",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "フレッシュパックソフト",
+   "brand": "にんべん",
+   "spec": "4.5g×8",
+   "price": 298,
+   "priceTaxIncl": 321.84,
+   "priceText": "298円(税込321.84円)",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "調味料",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "03f7d0a228f2",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "プチサーモン丼",
+   "brand": null,
+   "spec": "1パック",
+   "price": 395,
+   "priceTaxIncl": 426.6,
+   "priceText": "各395円(税込各426.60円)",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-10",
+   "conditions": [
+    "お総菜",
+    "プチ海鮮丼セール",
+    "9日(月)・10日(火)限り"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "cfd9e89e0211",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "プチ活〆穴子丼",
+   "brand": null,
+   "spec": "1パック",
+   "price": 395,
+   "priceTaxIncl": 426.6,
+   "priceText": "各395円(税込各426.60円)",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-10",
+   "conditions": [
+    "お総菜",
+    "プチ海鮮丼セール",
+    "9日(月)・10日(火)限り"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "21838e52f10d",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "プチ海鮮バラちらし",
+   "brand": null,
+   "spec": "1パック",
+   "price": 395,
+   "priceTaxIncl": 426.6,
+   "priceText": "各395円(税込各426.60円)",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-10",
+   "conditions": [
+    "お総菜",
+    "プチ海鮮丼セール",
+    "9日(月)・10日(火)限り"
+   ],
+   "category": "その他",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 2
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "e2c9595259e8",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "刺身用びんちょうまぐろ角切(解凍)",
+   "brand": null,
+   "spec": "100g",
+   "price": 228,
+   "priceTaxIncl": 246.24,
+   "priceText": "228円(税込246.24円)",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-09",
+   "conditions": [
+    "太平洋・インド洋産など"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "18641c6c3484",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "国内産若どりささみ(薄皮が付いたまま)",
+   "brand": null,
+   "spec": "100g",
+   "price": 69,
+   "priceTaxIncl": 74.52,
+   "priceText": "各69円(税込各74.52円)",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "088d331cc6e7",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "国内産若どりむね肉",
+   "brand": null,
+   "spec": "100g",
+   "price": 69,
+   "priceTaxIncl": 74.52,
+   "priceText": "各69円(税込各74.52円)",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "3148898833ec",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "熊本県などの国内産 長なす",
+   "brand": null,
+   "spec": "1本",
+   "price": 69,
+   "priceTaxIncl": 74.52,
+   "priceText": "69円(税込74.52円)",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "野菜",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "a377a06e1210",
+   "flyerKey": "summit-266109:shufoo:41554953994009",
+   "storeId": "summit-266109",
+   "title": "群馬県などの国内産 ほうれん草",
+   "brand": null,
+   "spec": "1袋",
+   "price": 138,
+   "priceTaxIncl": 149.04,
+   "priceText": "138円(税込149.04円)",
+   "validFrom": "2026-11-09",
+   "validTo": "2026-11-09",
+   "conditions": [],
+   "category": "野菜",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/879562/41554953994009/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:30:17+09:00",
+   "updatedAt": "2026-11-08T22:30:17+09:00",
+   "history": []
+  },
+  {
+   "id": "4a7c6c4b1139",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "えのき",
+   "brand": null,
+   "spec": "1袋",
+   "price": 98,
+   "priceTaxIncl": 105.84,
+   "priceText": "98円（税込105.84円）",
+   "validFrom": "2026-11-10",
+   "validTo": "2026-11-10",
+   "conditions": [
+    "朝市 あさ9時からひる12時まで（イオンスタイル赤羽はあさ8時から）",
+    "長野県などの国内産"
+   ],
+   "category": "野菜",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "7881e7c6174d",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "びんちょうまぐろ（解凍）刺身用",
+   "brand": null,
+   "spec": "100g",
+   "price": 198,
+   "priceTaxIncl": 213.84,
+   "priceText": "198円（税込213.84円）",
+   "validFrom": "2026-11-10",
+   "validTo": "2026-11-10",
+   "conditions": [
+    "朝市 あさ9時からひる12時まで（イオンスタイル赤羽はあさ8時から）",
+    "中国産太平洋海域他"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "c0801d3669ee",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "めかじき（骨取）切身（解凍）",
+   "brand": null,
+   "spec": "100g",
+   "price": 238,
+   "priceTaxIncl": 257.04,
+   "priceText": "238円（税込257.04円）",
+   "validFrom": "2026-11-10",
+   "validTo": "2026-11-10",
+   "conditions": [
+    "1日通してのお買得品",
+    "あさ9時からの販売",
+    "バヌアツ産他"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "e4820ee576f0",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "シャインマスカット",
+   "brand": null,
+   "spec": "1パック",
+   "price": 880,
+   "priceTaxIncl": 950.4,
+   "priceText": "880円（税込950.4円）",
+   "validFrom": "2026-11-10",
+   "validTo": "2026-11-10",
+   "conditions": [
+    "1日通してのお買得品",
+    "長野県などの国内産"
+   ],
+   "category": "果物",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "9bf9351e0c63",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "国産若とりささみ（解凍品）",
+   "brand": null,
+   "spec": "100g",
+   "price": 88,
+   "priceTaxIncl": 95.04,
+   "priceText": "88円（税込95.04円）",
+   "validFrom": "2026-11-10",
+   "validTo": "2026-11-10",
+   "conditions": [
+    "朝市 あさ9時からひる12時まで（イオンスタイル赤羽はあさ8時から）"
+   ],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "c50b862a8f42",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "国産若どりむねミンチ",
+   "brand": null,
+   "spec": "100g",
+   "price": 118,
+   "priceTaxIncl": 127.44,
+   "priceText": "118円（税込127.44円）",
+   "validFrom": "2026-11-10",
+   "validTo": "2026-11-10",
+   "conditions": [
+    "1日通してのお買得品"
+   ],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "1287c1d8d682",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "すけそうたら（うす塩味）",
+   "brand": null,
+   "spec": "100g",
+   "price": 158,
+   "priceTaxIncl": 170.64,
+   "priceText": "158円（税込170.64円）",
+   "validFrom": "2026-11-11",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "1日通してのお買得品",
+    "あさ9時からの販売"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "ac8e7f1880be",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "エリンギ",
+   "brand": null,
+   "spec": "1パック",
+   "price": 98,
+   "priceTaxIncl": 105.84,
+   "priceText": "98円（税込105.84円）",
+   "validFrom": "2026-11-11",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "朝市 あさ9時からひる12時まで（イオンスタイル赤羽はあさ8時から）",
+    "長野県などの国内産"
+   ],
+   "category": "野菜",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "8880b3ead8a4",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "国産若どりもも肉角切り（解凍品）",
+   "brand": null,
+   "spec": "100g",
+   "price": 168,
+   "priceTaxIncl": 181.44,
+   "priceText": "168円（税込181.44円）",
+   "validFrom": "2026-11-11",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "1日通してのお買得品"
+   ],
+   "category": "肉",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "e08289ac844d",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "洋梨（ラ・フランス）",
+   "brand": null,
+   "spec": "1個",
+   "price": 178,
+   "priceTaxIncl": 192.24,
+   "priceText": "178円（税込192.24円）",
+   "validFrom": "2026-11-11",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "1日通してのお買得品",
+    "山形県産",
+    "まとめて2個では本体350円/税込378円"
+   ],
+   "category": "果物",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  },
+  {
+   "id": "5886d1a8d59c",
+   "flyerKey": "aeonstyle-274631:shufoo:80842254083133",
+   "storeId": "aeonstyle-274631",
+   "title": "秋鮭西京漬け",
+   "brand": null,
+   "spec": "1切",
+   "price": 178,
+   "priceTaxIncl": 192.24,
+   "priceText": "178円（税込192.24円）",
+   "validFrom": "2026-11-11",
+   "validTo": "2026-11-11",
+   "conditions": [
+    "朝市 あさ9時からひる12時まで（イオンスタイル赤羽はあさ8時から）"
+   ],
+   "category": "魚",
+   "source": {
+    "type": "flyer",
+    "url": "https://www.shufoo.net/pntweb/shopDetail/873161/80842254083133/",
+    "page": 1
+   },
+   "status": "active",
+   "firstSeenAt": "2026-11-08T22:28:13+09:00",
+   "updatedAt": "2026-11-08T22:28:13+09:00",
+   "history": []
+  }
+ ]
+}
