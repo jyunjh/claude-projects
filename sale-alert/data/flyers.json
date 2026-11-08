@@ -22,8 +22,8 @@
    "key": "summit-266109:shufoo:68728553760430",
    "storeId": "summit-266109",
    "firstSeenAt": "2026-11-08T22:25:00+09:00",
-   "ingestedHash": null,
-   "ingestedAt": null,
+   "ingestedHash": "27ae79deefcd1fc6bcc47ca88af4ba29f96843ad",
+   "ingestedAt": "2026-11-09T08:03:21+09:00",
    "title": "11月1日(日)～11月30日(月)号",
    "periodText": "11月1日(日)～11月30日(月)号",
    "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/879562/68728553760430/",
@@ -33,14 +33,14 @@
    "hash": "27ae79deefcd1fc6bcc47ca88af4ba29f96843ad",
    "version": "6783036931950",
    "lastSeenAt": "2026-11-09T07:46:17+09:00",
-   "status": "new"
+   "status": "ingested"
   },
   {
    "key": "summit-266109:shufoo:28497753760290",
    "storeId": "summit-266109",
    "firstSeenAt": "2026-11-08T22:25:00+09:00",
-   "ingestedHash": null,
-   "ingestedAt": null,
+   "ingestedHash": "cd3b7d5e30be21c39b24c25c10d8f7d0fefe16a7",
+   "ingestedAt": "2026-11-09T08:03:22+09:00",
    "title": "11月1日(日)～11月30日(月)号",
    "periodText": "11月1日(日)～11月30日(月)号",
    "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/879562/28497753760290/",
@@ -50,7 +50,7 @@
    "hash": "cd3b7d5e30be21c39b24c25c10d8f7d0fefe16a7",
    "version": "7853246931944",
    "lastSeenAt": "2026-11-09T07:46:17+09:00",
-   "status": "new"
+   "status": "ingested"
   },
   {
    "key": "summit-266109:shufoo:43646353760199",
@@ -224,8 +224,8 @@
    "key": "tobu-238176:shufoo:60194553774746",
    "storeId": "tobu-238176",
    "firstSeenAt": "2026-11-09T07:46:17+09:00",
-   "ingestedHash": null,
-   "ingestedAt": null,
+   "ingestedHash": "e77cfadbbc0dd205c56393ec899a95e085f9f83b",
+   "ingestedAt": "2026-11-09T08:03:22+09:00",
    "title": "11月これ得！値下げ宣言",
    "periodText": "11月これ得！値下げ宣言",
    "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/869000/60194553774746/",
@@ -235,7 +235,7 @@
    "hash": "e77cfadbbc0dd205c56393ec899a95e085f9f83b",
    "version": "6715026932978",
    "lastSeenAt": "2026-11-09T07:46:17+09:00",
-   "status": "new"
+   "status": "ingested"
   },
   {
    "key": "tobu-238176:shufoo:47848453771609",
@@ -339,8 +339,8 @@
    "key": "tobu-123744:shufoo:45607953774742",
    "storeId": "tobu-123744",
    "firstSeenAt": "2026-11-09T07:46:17+09:00",
-   "ingestedHash": null,
-   "ingestedAt": null,
+   "ingestedHash": "e77cfadbbc0dd205c56393ec899a95e085f9f83b",
+   "ingestedAt": "2026-11-09T08:03:22+09:00",
    "title": "11月これ得！値下げ宣言",
    "periodText": "11月これ得！値下げ宣言",
    "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/865015/45607953774742/",
@@ -350,7 +350,7 @@
    "hash": "e77cfadbbc0dd205c56393ec899a95e085f9f83b",
    "version": "6715026932978",
    "lastSeenAt": "2026-11-09T07:46:17+09:00",
-   "status": "new"
+   "status": "ingested"
   },
   {
    "key": "tobu-123744:shufoo:38019753771608",
@@ -433,8 +433,8 @@
    "key": "bunkado-4108:shufoo:50638553688765",
    "storeId": "bunkado-4108",
    "firstSeenAt": "2026-11-09T07:46:17+09:00",
-   "ingestedHash": null,
-   "ingestedAt": null,
+   "ingestedHash": "3fa37b3c547e9c2831b44eea98c9eb8828018822",
+   "ingestedAt": "2026-11-09T08:03:22+09:00",
    "title": "１１月厳選特価品",
    "periodText": "１１月厳選特価品",
    "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/252607/50638553688765/",
@@ -445,7 +445,7 @@
    "hash": "3fa37b3c547e9c2831b44eea98c9eb8828018822",
    "version": "2704636929439",
    "lastSeenAt": "2026-11-09T07:46:17+09:00",
-   "status": "new"
+   "status": "ingested"
   },
   {
    "key": "summit-372254:shufoo:95986353994010",
@@ -469,8 +469,8 @@
    "key": "summit-372254:shufoo:16852153760431",
    "storeId": "summit-372254",
    "firstSeenAt": "2026-11-09T07:46:17+09:00",
-   "ingestedHash": null,
-   "ingestedAt": null,
+   "ingestedHash": "27ae79deefcd1fc6bcc47ca88af4ba29f96843ad",
+   "ingestedAt": "2026-11-09T08:03:22+09:00",
    "title": "11月1日(日)～11月30日(月)号",
    "periodText": "11月1日(日)～11月30日(月)号",
    "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/911914/16852153760431/",
@@ -480,14 +480,14 @@
    "hash": "27ae79deefcd1fc6bcc47ca88af4ba29f96843ad",
    "version": "6783036931950",
    "lastSeenAt": "2026-11-09T07:46:17+09:00",
-   "status": "new"
+   "status": "ingested"
   },
   {
    "key": "summit-372254:shufoo:68256453760291",
    "storeId": "summit-372254",
    "firstSeenAt": "2026-11-09T07:46:17+09:00",
-   "ingestedHash": null,
-   "ingestedAt": null,
+   "ingestedHash": "cd3b7d5e30be21c39b24c25c10d8f7d0fefe16a7",
+   "ingestedAt": "2026-11-09T08:03:22+09:00",
    "title": "11月1日(日)～11月30日(月)号",
    "periodText": "11月1日(日)～11月30日(月)号",
    "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/911914/68256453760291/",
@@ -497,7 +497,7 @@
    "hash": "cd3b7d5e30be21c39b24c25c10d8f7d0fefe16a7",
    "version": "7853246931944",
    "lastSeenAt": "2026-11-09T07:46:17+09:00",
-   "status": "new"
+   "status": "ingested"
   },
   {
    "key": "summit-372254:shufoo:96216753760200",
@@ -554,8 +554,8 @@
    "key": "bunkado-4107:shufoo:47976853688768",
    "storeId": "bunkado-4107",
    "firstSeenAt": "2026-11-09T07:46:17+09:00",
-   "ingestedHash": null,
-   "ingestedAt": null,
+   "ingestedHash": "3fa37b3c547e9c2831b44eea98c9eb8828018822",
+   "ingestedAt": "2026-11-09T08:03:22+09:00",
    "title": "１１月厳選特価品",
    "periodText": "１１月厳選特価品",
    "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/252611/47976853688768/",
@@ -566,7 +566,7 @@
    "hash": "3fa37b3c547e9c2831b44eea98c9eb8828018822",
    "version": "2704636929439",
    "lastSeenAt": "2026-11-09T07:46:17+09:00",
-   "status": "new"
+   "status": "ingested"
   },
   {
    "key": "sanwa-372468:shufoo:42944454066178",
@@ -632,8 +632,8 @@
    "key": "sanwa-372468:shufoo:50025853866451",
    "storeId": "sanwa-372468",
    "firstSeenAt": "2026-11-09T07:46:17+09:00",
-   "ingestedHash": null,
-   "ingestedAt": null,
+   "ingestedHash": "a25e6d90060a2b2d584d3149658d6e03d39788c5",
+   "ingestedAt": "2026-11-09T08:03:22+09:00",
    "title": "11/1(日)～11/30(月)月間値下げ",
    "periodText": "11/1(日)～11/30(月)月間値下げ",
    "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/911785/50025853866451/",
@@ -644,7 +644,7 @@
    "hash": "a25e6d90060a2b2d584d3149658d6e03d39788c5",
    "version": "2443656937204",
    "lastSeenAt": "2026-11-09T07:46:17+09:00",
-   "status": "new"
+   "status": "ingested"
   },
   {
    "key": "bunkado-4095:shufoo:43015653933559",
@@ -682,8 +682,8 @@
    "key": "bunkado-4095:shufoo:98756553688773",
    "storeId": "bunkado-4095",
    "firstSeenAt": "2026-11-09T07:46:17+09:00",
-   "ingestedHash": null,
-   "ingestedAt": null,
+   "ingestedHash": "3fa37b3c547e9c2831b44eea98c9eb8828018822",
+   "ingestedAt": "2026-11-09T08:03:23+09:00",
    "title": "１１月厳選特価品",
    "periodText": "１１月厳選特価品",
    "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/252616/98756553688773/",
@@ -694,7 +694,7 @@
    "hash": "3fa37b3c547e9c2831b44eea98c9eb8828018822",
    "version": "2704636929439",
    "lastSeenAt": "2026-11-09T07:46:17+09:00",
-   "status": "new"
+   "status": "ingested"
   },
   {
    "key": "life-258900:shufoo:95557053684100",
@@ -767,8 +767,8 @@
    "key": "bunkado-4106:shufoo:22875453688769",
    "storeId": "bunkado-4106",
    "firstSeenAt": "2026-11-09T07:46:17+09:00",
-   "ingestedHash": null,
-   "ingestedAt": null,
+   "ingestedHash": "3fa37b3c547e9c2831b44eea98c9eb8828018822",
+   "ingestedAt": "2026-11-09T08:03:23+09:00",
    "title": "１１月厳選特価品",
    "periodText": "１１月厳選特価品",
    "pageUrl": "https://www.shufoo.net/pntweb/shopDetail/252612/22875453688769/",
@@ -779,7 +779,7 @@
    "hash": "3fa37b3c547e9c2831b44eea98c9eb8828018822",
    "version": "2704636929439",
    "lastSeenAt": "2026-11-09T07:46:17+09:00",
-   "status": "new"
+   "status": "ingested"
   }
  ],
  "checkedAt": "2026-11-09T07:46:17+09:00"
