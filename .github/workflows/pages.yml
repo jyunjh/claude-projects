@@ -4,6 +4,7 @@ name: Deploy to GitHub Pages
 #   ルート:            jidokan-calendar（従来どおり）
 #   /mansion-finder/:  マンション検索（勝どき・晴海）
 #   /stock-analyzer/:  米国株アナライザー（閲覧のみ。保存は手元の serve.py）
+#   /sale-alert/:      特売アラート（PWA。品目の共有・LINE配信は Apps Script 側）
 # main への push で自動デプロイ。手動実行も可。
 on:
   push:
@@ -12,6 +13,7 @@ on:
       - "jidokan-calendar/**"
       - "mansion-finder/**"
       - "stock-analyzer/**"
+      - "sale-alert/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -45,6 +47,12 @@ jobs:
           cp stock-analyzer/data.js stock-analyzer/snapshot.js stock-analyzer/i18n.js \
              stock-analyzer/sectors.js stock-analyzer/valuation.js stock-analyzer/api.js \
              stock-analyzer/chat.js stock-analyzer/app.js _site/stock-analyzer/
+          # 特売アラート: PWA 本体とデータだけ（ingest/ gas/ tests/ docs/ .secrets.json は配信しない）
+          mkdir -p _site/sale-alert
+          cp sale-alert/index.html sale-alert/app.js sale-alert/match.js sale-alert/styles.css \
+             sale-alert/sw.js sale-alert/manifest.webmanifest sale-alert/icon.svg \
+             sale-alert/icon-180.png sale-alert/icon-512.png _site/sale-alert/
+          cp -r sale-alert/data _site/sale-alert/data
       - name: 配信物の検査（必要なファイルが揃い、サーバ用ファイルが混ざっていないこと）
         run: |
           set -e
@@ -58,6 +66,12 @@ jobs:
           # index.html が読み込む <script src> が実在すること
           grep -o 'src="[^"]*\.js"' _site/stock-analyzer/index.html | sed 's/src="//;s/"//' | while read -r js; do
             test -f "_site/stock-analyzer/$js" || { echo "参照先が無い: $js"; exit 1; }
+          done
+          for f in ingest gas tests docs .secrets.json; do
+            test ! -e "_site/sale-alert/$f" || { echo "配信してはいけない: sale-alert/$f"; exit 1; }
+          done
+          for f in data/stores.json data/sales.json manifest.webmanifest sw.js match.js; do
+            test -f "_site/sale-alert/$f" || { echo "欠落: sale-alert/$f"; exit 1; }
           done
           echo "配信物OK"
       - uses: actions/upload-pages-artifact@v3

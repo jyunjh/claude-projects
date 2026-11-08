@@ -1,0 +1,1041 @@
+{
+ "origin": {
+  "label": "晴海五丁目",
+  "lat": 35.651,
+  "lng": 139.777
+ },
+ "radiusKm": 2.0,
+ "note": "距離は基準点からの直線距離（km）。2.0km超の店は radiusKm を広げたときのために載せている。店舗調査 2026-11-08。",
+ "stores": [
+  {
+   "id": "summit-266109",
+   "chain": "サミット",
+   "name": "サミット ららテラス HARUMI FLAG店",
+   "short": "サミット晴海フラッグ",
+   "address": "東京都中央区晴海5-2-31",
+   "lat": 35.650803,
+   "lng": 139.774704,
+   "distanceKm": 0.21,
+   "hours": "9:00〜22:00",
+   "sources": [
+    {
+     "kind": "shufoo",
+     "url": "https://www.shufoo.net/pntweb/shopDetail/879562/",
+     "label": "Shufoo!"
+    }
+   ],
+   "flyerNote": null,
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "high"
+  },
+  {
+   "id": "tobu-238176",
+   "chain": "東武ストア",
+   "name": "東武ストア 晴海三丁目店",
+   "short": "東武晴海",
+   "address": "東京都中央区晴海3-9-1",
+   "lat": 35.654743,
+   "lng": 139.780029,
+   "distanceKm": 0.5,
+   "hours": "9:00〜21:00",
+   "sources": [
+    {
+     "kind": "shufoo",
+     "url": "https://www.shufoo.net/pntweb/shopDetail/869000/",
+     "label": "Shufoo!"
+    }
+   ],
+   "flyerNote": null,
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "maruetsu-26729",
+   "chain": "マルエツ",
+   "name": "マルエツ 晴海三丁目店",
+   "short": "マルエツ晴海",
+   "address": "東京都中央区晴海3-13-2",
+   "lat": 35.65551,
+   "lng": 139.778351,
+   "distanceKm": 0.52,
+   "hours": "24時間営業",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（トクバイのみ掲載。トクバイは Claude の利用を拒否しているため使わない）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": "https://www.maruetsu.co.jp/line/"
+   },
+   "active": true,
+   "confidence": "high"
+  },
+  {
+   "id": "maruetsu-3591",
+   "chain": "マルエツ",
+   "name": "マルエツ 勝どき六丁目店",
+   "short": "マルエツ勝どき",
+   "address": "東京都中央区勝どき6-3-2",
+   "lat": 35.656155,
+   "lng": 139.773788,
+   "distanceKm": 0.64,
+   "hours": "24時間営業",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（トクバイのみ掲載。トクバイは Claude の利用を拒否しているため使わない）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": "https://www.maruetsu.co.jp/line/"
+   },
+   "active": true,
+   "confidence": "high"
+  },
+  {
+   "id": "maruetsu-petit-968",
+   "chain": "マルエツプチ",
+   "name": "マルエツプチ 晴海店",
+   "short": "マルエツプチ晴海",
+   "address": "東京都中央区晴海1丁目8番16号晴海トリトン1-1",
+   "lat": 35.655556,
+   "lng": 139.78183,
+   "distanceKm": 0.67,
+   "hours": "8:00〜22:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（トクバイのみ掲載。トクバイは Claude の利用を拒否しているため使わない）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": "https://www.maruetsu.co.jp/line/"
+   },
+   "active": true,
+   "confidence": "high"
+  },
+  {
+   "id": "seijoishi-6514",
+   "chain": "成城石井",
+   "name": "成城石井 晴海トリトン店",
+   "short": "成城石井トリトン",
+   "address": "東京都中央区晴海1-8-16 晴海トリトン2階",
+   "lat": 35.655556,
+   "lng": 139.78183,
+   "distanceKm": 0.67,
+   "hours": "8:00〜22:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（トクバイのみ掲載。トクバイは Claude の利用を拒否しているため使わない）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "life-260983",
+   "chain": "ライフ",
+   "name": "ライフ 勝どきミッド店",
+   "short": "ライフ勝どき",
+   "address": "東京都中央区勝どき4-6-2",
+   "lat": 35.657429,
+   "lng": 139.777695,
+   "distanceKm": 0.72,
+   "hours": "9:30〜23:00",
+   "sources": [
+    {
+     "kind": "shufoo",
+     "url": "https://www.shufoo.net/pntweb/shopDetail/877851/",
+     "label": "Shufoo!"
+    }
+   ],
+   "flyerNote": null,
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "high"
+  },
+  {
+   "id": "tobu-123744",
+   "chain": "東武ストア",
+   "name": "東武ストア 勝どき店",
+   "short": "東武勝どき",
+   "address": "東京都中央区勝どき3-5-5",
+   "lat": 35.658539,
+   "lng": 139.776215,
+   "distanceKm": 0.84,
+   "hours": "7:00〜24:00",
+   "sources": [
+    {
+     "kind": "shufoo",
+     "url": "https://www.shufoo.net/pntweb/shopDetail/865015/",
+     "label": "Shufoo!"
+    }
+   ],
+   "flyerNote": null,
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "bunkado-4108",
+   "chain": "文化堂",
+   "name": "文化堂 勝どき店",
+   "short": "文化堂勝どき",
+   "address": "東京都中央区勝どき1丁目7-1",
+   "lat": 35.660099,
+   "lng": 139.777786,
+   "distanceKm": 1.01,
+   "hours": "10:00〜22:00",
+   "sources": [
+    {
+     "kind": "shufoo",
+     "url": "https://www.shufoo.net/pntweb/shopDetail/252607/",
+     "label": "Shufoo!"
+    }
+   ],
+   "flyerNote": null,
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "high"
+  },
+  {
+   "id": "summit-372254",
+   "chain": "サミット",
+   "name": "サミット 月島3丁目店",
+   "short": "サミット月島",
+   "address": "東京都中央区月島三丁目18番1号-101号",
+   "lat": 35.663174,
+   "lng": 139.780045,
+   "distanceKm": 1.38,
+   "hours": "9:30〜22:00",
+   "sources": [
+    {
+     "kind": "shufoo",
+     "url": "https://www.shufoo.net/pntweb/shopDetail/911914/",
+     "label": "Shufoo!"
+    }
+   ],
+   "flyerNote": null,
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "high"
+  },
+  {
+   "id": "foodstyle-7949",
+   "chain": "フードスタイル",
+   "name": "フードスタイル 月島店",
+   "short": "フードスタイル月島",
+   "address": "東京都中央区月島3丁目4-5-101",
+   "lat": 35.663445,
+   "lng": 139.781174,
+   "distanceKm": 1.43,
+   "hours": "ホームページよりご確認下さい。",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（トクバイのみ掲載。トクバイは Claude の利用を拒否しているため使わない）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "daiei-227722",
+   "chain": "ダイエー",
+   "name": "ダイエー 豊洲店",
+   "short": "ダイエー豊洲",
+   "address": "東京都江東区豊洲5-1-6",
+   "lat": 35.651268,
+   "lng": 139.793045,
+   "distanceKm": 1.45,
+   "hours": "ホームページよりご確認下さい。",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（トクバイのみ掲載。トクバイは Claude の利用を拒否しているため使わない）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "bunkado-4107",
+   "chain": "文化堂",
+   "name": "文化堂 月島店",
+   "short": "文化堂月島",
+   "address": "東京都中央区月島2丁目10-2",
+   "lat": 35.663799,
+   "lng": 139.784668,
+   "distanceKm": 1.58,
+   "hours": "10:00〜22:00",
+   "sources": [
+    {
+     "kind": "shufoo",
+     "url": "https://www.shufoo.net/pntweb/shopDetail/252611/",
+     "label": "Shufoo!"
+    }
+   ],
+   "flyerNote": null,
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "high"
+  },
+  {
+   "id": "zennichishoku-22764",
+   "chain": "全日食チェーン",
+   "name": "全日食チェーン ニューみ乃り屋",
+   "short": "ニューみ乃り屋",
+   "address": "東京都中央区築地7-6-5",
+   "lat": 35.665646,
+   "lng": 139.77388,
+   "distanceKm": 1.65,
+   "hours": "8:00〜22:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（トクバイのみ掲載。トクバイは Claude の利用を拒否しているため使わない）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "ysmart-297009",
+   "chain": "ワイズマート",
+   "name": "ワイズマート 豊洲セイルパーク店",
+   "short": "ワイズマート豊洲",
+   "address": "東京都江東区豊洲二丁目1番9号 豊洲セイルパーク 1階ワイズマート",
+   "lat": 35.656776,
+   "lng": 139.793976,
+   "distanceKm": 1.66,
+   "hours": "10:00〜22:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（トクバイのみ掲載。トクバイは Claude の利用を拒否しているため使わない）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "sanwa-372468",
+   "chain": "三和",
+   "name": "三和 ららぽーと豊洲店",
+   "short": "三和豊洲",
+   "address": "東京都江東区豊洲2-1-14 アーバンドッグ ららぽーと豊洲",
+   "lat": 35.65572,
+   "lng": 139.794662,
+   "distanceKm": 1.68,
+   "hours": "10:00〜22:00",
+   "sources": [
+    {
+     "kind": "shufoo",
+     "url": "https://www.shufoo.net/pntweb/shopDetail/911785/",
+     "label": "Shufoo!"
+    }
+   ],
+   "flyerNote": null,
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "high"
+  },
+  {
+   "id": "seijoishi-178034",
+   "chain": "成城石井",
+   "name": "成城石井 ららぽーと豊洲店",
+   "short": "成城石井豊洲",
+   "address": "東京都江東区豊洲2丁目2番1号 三井ショッピングパーク アーバンドックららぽーと豊洲地下1階B1100",
+   "lat": 35.655811,
+   "lng": 139.794891,
+   "distanceKm": 1.7,
+   "hours": "8:00〜23:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（トクバイのみ掲載。トクバイは Claude の利用を拒否しているため使わない）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "sakagami-260547",
+   "chain": "サカガミ",
+   "name": "サカガミ グランルパ豊洲店",
+   "short": "サカガミ グランルパ豊洲店",
+   "address": "東京都江東区豊洲5-5-1 シエルタワー1F",
+   "lat": 35.653679,
+   "lng": 139.795715,
+   "distanceKm": 1.72,
+   "hours": "10:00～21:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（店舗チラシなし）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "low"
+  },
+  {
+   "id": "mybasket-261473",
+   "chain": "まいばすけっと",
+   "name": "まいばすけっと 豊洲1丁目店",
+   "short": "まいばすけっと 豊洲1丁目店",
+   "address": "東京都江東区豊洲1-2-39パークアクシス豊洲",
+   "lat": 35.660038,
+   "lng": 139.792831,
+   "distanceKm": 1.75,
+   "hours": "8:00－23:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（店舗チラシなし）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "maruetsu-petit-987",
+   "chain": "マルエツプチ",
+   "name": "マルエツプチ 汐留シオサイト店",
+   "short": "マルエツプチ汐留",
+   "address": "東京都港区海岸1-1-1",
+   "lat": 35.658314,
+   "lng": 139.759232,
+   "distanceKm": 1.8,
+   "hours": "24時間営業",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（トクバイのみ掲載。トクバイは Claude の利用を拒否しているため使わない）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": "https://www.maruetsu.co.jp/line/"
+   },
+   "active": true,
+   "confidence": "high"
+  },
+  {
+   "id": "bunkado-4095",
+   "chain": "文化堂",
+   "name": "文化堂 有明店",
+   "short": "文化堂有明",
+   "address": "東京都江東区有明1-4-20 ブリリア有明スカイタワー102",
+   "lat": 35.636227,
+   "lng": 139.786835,
+   "distanceKm": 1.87,
+   "hours": "10:00〜22:00",
+   "sources": [
+    {
+     "kind": "shufoo",
+     "url": "https://www.shufoo.net/pntweb/shopDetail/252616/",
+     "label": "Shufoo!"
+    }
+   ],
+   "flyerNote": null,
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "high"
+  },
+  {
+   "id": "mybasket-261394",
+   "chain": "まいばすけっと",
+   "name": "まいばすけっと 築地明石町店",
+   "short": "まいばすけっと 築地明石町店",
+   "address": "東京都中央区明石町5-15明図ビル",
+   "lat": 35.6679,
+   "lng": 139.778061,
+   "distanceKm": 1.88,
+   "hours": "8:00－23:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（店舗チラシなし）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "aeonstyle-274631",
+   "chain": "イオンスタイル",
+   "name": "イオンスタイル 有明ガーデン",
+   "short": "イオン有明",
+   "address": "東京都江東区有明2-1-8",
+   "lat": 35.637699,
+   "lng": 139.790451,
+   "distanceKm": 1.91,
+   "hours": "8:00〜23:00",
+   "sources": [
+    {
+     "kind": "shufoo",
+     "url": "https://www.shufoo.net/pntweb/shopDetail/873161/",
+     "label": "Shufoo!"
+    }
+   ],
+   "flyerNote": null,
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "high"
+  },
+  {
+   "id": "life-258900",
+   "chain": "ライフ",
+   "name": "ライフ ビオラル有明ガーデン店",
+   "short": "ビオラル有明",
+   "address": "東京都江東区有明2-1-8",
+   "lat": 35.637699,
+   "lng": 139.790451,
+   "distanceKm": 1.91,
+   "hours": "10:00〜21:00",
+   "sources": [
+    {
+     "kind": "shufoo",
+     "url": "https://www.shufoo.net/pntweb/shopDetail/874992/",
+     "label": "Shufoo!"
+    }
+   ],
+   "flyerNote": null,
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "high"
+  },
+  {
+   "id": "kitano-263279",
+   "chain": "KITANO",
+   "name": "KITANO ACE 有明ガーデン店",
+   "short": "KITANO ACE 有明ガーデン店",
+   "address": "東京都江東区有明2－1－8 有明ガーデン2階",
+   "lat": 35.637699,
+   "lng": 139.790451,
+   "distanceKm": 1.91,
+   "hours": "10:00 ～ 21:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（店舗チラシなし）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "low"
+  },
+  {
+   "id": "mybasket-89712",
+   "chain": "まいばすけっと",
+   "name": "まいばすけっと 浜松町駅南店",
+   "short": "まいばすけっと 浜松町駅南店",
+   "address": "東京都港区浜松町2-13-14 サンワード浜松町",
+   "lat": 35.653206,
+   "lng": 139.755386,
+   "distanceKm": 1.97,
+   "hours": "7:00〜23:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（店舗チラシなし）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "mybasket-124245",
+   "chain": "まいばすけっと",
+   "name": "まいばすけっと 築地2丁目店",
+   "short": "まいばすけっと 築地2丁目店",
+   "address": "東京都中央区築地2-11-9 築地MTビル",
+   "lat": 35.668446,
+   "lng": 139.772766,
+   "distanceKm": 1.98,
+   "hours": "8:00〜23:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（店舗チラシなし）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "bunkado-4106",
+   "chain": "文化堂",
+   "name": "文化堂 豊洲店",
+   "short": "文化堂豊洲",
+   "address": "東京都江東区豊洲3-4-8 スーパービバホーム豊洲2Ｆ",
+   "lat": 35.655907,
+   "lng": 139.798172,
+   "distanceKm": 1.99,
+   "hours": "10:00〜23:00",
+   "sources": [
+    {
+     "kind": "shufoo",
+     "url": "https://www.shufoo.net/pntweb/shopDetail/252612/",
+     "label": "Shufoo!"
+    }
+   ],
+   "flyerNote": null,
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "high"
+  },
+  {
+   "id": "maruetsu-petit-175570",
+   "chain": "マルエツプチ",
+   "name": "マルエツプチ 浜松町一丁目店",
+   "short": "マルエツプチ 浜松町一丁目店",
+   "address": "東京都港区浜松町1-3-1 浜離宮 ザ タワー",
+   "lat": 35.659565,
+   "lng": 139.757416,
+   "distanceKm": 2.01,
+   "hours": "8:00〜23:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（トクバイのみ掲載。トクバイは Claude の利用を拒否しているため使わない）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": "https://www.maruetsu.co.jp/line/"
+   },
+   "active": true,
+   "confidence": "high"
+  },
+  {
+   "id": "mybasket-261239",
+   "chain": "まいばすけっと",
+   "name": "まいばすけっと 新富町駅東店",
+   "short": "まいばすけっと 新富町駅東店",
+   "address": "東京都中央区湊3-5-10VORT新富町",
+   "lat": 35.66954,
+   "lng": 139.778122,
+   "distanceKm": 2.06,
+   "hours": "8:00－23:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（店舗チラシなし）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "life-237318",
+   "chain": "ライフ",
+   "name": "ライフ 豊洲店",
+   "short": "ライフ 豊洲店",
+   "address": "東京都江東区豊洲4-11-6",
+   "lat": 35.65163,
+   "lng": 139.79982,
+   "distanceKm": 2.06,
+   "hours": "9:30〜24:00",
+   "sources": [
+    {
+     "kind": "shufoo",
+     "url": "https://www.shufoo.net/pntweb/shopDetail/867286/",
+     "label": "Shufoo!"
+    }
+   ],
+   "flyerNote": null,
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "high"
+  },
+  {
+   "id": "mybasket-89705",
+   "chain": "まいばすけっと",
+   "name": "まいばすけっと 海岸3丁目店",
+   "short": "まいばすけっと 海岸3丁目店",
+   "address": "東京都港区海岸3-2-15 東京ベイテラス",
+   "lat": 35.643948,
+   "lng": 139.755478,
+   "distanceKm": 2.1,
+   "hours": "8:00〜23:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（店舗チラシなし）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "mybasket-261408",
+   "chain": "まいばすけっと",
+   "name": "まいばすけっと 芝大門2丁目店",
+   "short": "まいばすけっと 芝大門2丁目店",
+   "address": "東京都港区芝大門2-12-10T＆G浜松町ビル",
+   "lat": 35.654144,
+   "lng": 139.754044,
+   "distanceKm": 2.1,
+   "hours": "7:00－23:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（店舗チラシなし）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "mybasket-261343",
+   "chain": "まいばすけっと",
+   "name": "まいばすけっと 浜松町1丁目店",
+   "short": "まいばすけっと 浜松町1丁目店",
+   "address": "東京都港区浜松町1-2-17ストークベル浜松町",
+   "lat": 35.659809,
+   "lng": 139.756317,
+   "distanceKm": 2.11,
+   "hours": "8:00－23:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（店舗チラシなし）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "maruetsu-4460",
+   "chain": "マルエツ",
+   "name": "マルエツ 佃店",
+   "short": "マルエツ 佃店",
+   "address": "東京都中央区佃2-2-8リバーシティー21G棟",
+   "lat": 35.668449,
+   "lng": 139.786957,
+   "distanceKm": 2.14,
+   "hours": "10:00〜23:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（トクバイのみ掲載。トクバイは Claude の利用を拒否しているため使わない）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": "https://www.maruetsu.co.jp/line/"
+   },
+   "active": true,
+   "confidence": "high"
+  },
+  {
+   "id": "mybasket-90103",
+   "chain": "まいばすけっと",
+   "name": "まいばすけっと 新富町駅前店",
+   "short": "まいばすけっと 新富町駅前店",
+   "address": "東京都中央区入船3-2-6 NTT築地ビル",
+   "lat": 35.670372,
+   "lng": 139.775909,
+   "distanceKm": 2.16,
+   "hours": "7:00〜23:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（店舗チラシなし）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "maruetsu-petit-14147",
+   "chain": "マルエツプチ",
+   "name": "マルエツプチ 芝二丁目店",
+   "short": "マルエツプチ 芝二丁目店",
+   "address": "東京都港区芝2-15-13",
+   "lat": 35.650814,
+   "lng": 139.752762,
+   "distanceKm": 2.19,
+   "hours": "8:00〜22:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（トクバイのみ掲載。トクバイは Claude の利用を拒否しているため使わない）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": "https://www.maruetsu.co.jp/line/"
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "mybasket-89706",
+   "chain": "まいばすけっと",
+   "name": "まいばすけっと 芝2丁目店",
+   "short": "まいばすけっと 芝2丁目店",
+   "address": "東京都港区芝2-12-16 Ocean 1st",
+   "lat": 35.651501,
+   "lng": 139.752731,
+   "distanceKm": 2.19,
+   "hours": "7:00〜23:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（店舗チラシなし）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "ricos-19093",
+   "chain": "スーパーマーケットリコス",
+   "name": "スーパーマーケットリコス 入船3丁目店",
+   "short": "リコス 入船3丁目店",
+   "address": "東京都中央区入船3丁目5-10",
+   "lat": 35.670715,
+   "lng": 139.776291,
+   "distanceKm": 2.19,
+   "hours": "24時間営業",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（店舗チラシなし）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "rincos-175573",
+   "chain": "リンコス",
+   "name": "リンコス リバーシティ店",
+   "short": "リンコス リバーシティ店",
+   "address": "東京都中央区佃1-11-8リバーシティー21ピアウエスト",
+   "lat": 35.669807,
+   "lng": 139.784775,
+   "distanceKm": 2.21,
+   "hours": "10:00〜22:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（店舗チラシなし）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "tobu-256707",
+   "chain": "東武ストア",
+   "name": "東武ストア 東雲店",
+   "short": "東武ストア 東雲店",
+   "address": "東京都江東区東雲1-5-19",
+   "lat": 35.647747,
+   "lng": 139.801392,
+   "distanceKm": 2.23,
+   "hours": "9:00〜20:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（店舗チラシなし）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "ok-266608",
+   "chain": "オーケー",
+   "name": "オーケー 東雲店",
+   "short": "オーケー 東雲店",
+   "address": "東京都江東区東雲2-5-40",
+   "lat": 35.640598,
+   "lng": 139.798508,
+   "distanceKm": 2.26,
+   "hours": "8:30〜21:30",
+   "sources": [
+    {
+     "kind": "shufoo",
+     "url": "https://www.shufoo.net/pntweb/shopDetail/890991/",
+     "label": "Shufoo!"
+    }
+   ],
+   "flyerNote": null,
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "high"
+  },
+  {
+   "id": "mybasket-89709",
+   "chain": "まいばすけっと",
+   "name": "まいばすけっと 新橋5丁目店",
+   "short": "まいばすけっと 新橋5丁目店",
+   "address": "東京都港区新橋5-15-5 交通ビル",
+   "lat": 35.662102,
+   "lng": 139.755859,
+   "distanceKm": 2.27,
+   "hours": "7:00〜23:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（店舗チラシなし）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "mybasket-261410",
+   "chain": "まいばすけっと",
+   "name": "まいばすけっと 芝4丁目店",
+   "short": "まいばすけっと 芝4丁目店",
+   "address": "東京都港区芝4-10-3住友生命三田ビル",
+   "lat": 35.648411,
+   "lng": 139.751785,
+   "distanceKm": 2.3,
+   "hours": "7:00－23:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（店舗チラシなし）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "aeon-6762",
+   "chain": "イオン",
+   "name": "イオン 東雲店",
+   "short": "イオン 東雲店",
+   "address": "東京都江東区東雲1丁目9番10号",
+   "lat": 35.645931,
+   "lng": 139.802155,
+   "distanceKm": 2.34,
+   "hours": "24時間営業",
+   "sources": [
+    {
+     "kind": "shufoo",
+     "url": "https://www.shufoo.net/pntweb/shopDetail/495/",
+     "label": "Shufoo!"
+    }
+   ],
+   "flyerNote": null,
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "high"
+  },
+  {
+   "id": "ricos-11090",
+   "chain": "スーパーマーケットリコス",
+   "name": "スーパーマーケットリコス 芝浦2丁目店",
+   "short": "リコス 芝浦2丁目店",
+   "address": "東京都港区芝浦2丁目14-4",
+   "lat": 35.643959,
+   "lng": 139.752258,
+   "distanceKm": 2.37,
+   "hours": "24時間営業",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（店舗チラシなし）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": null
+   },
+   "active": true,
+   "confidence": "medium"
+  },
+  {
+   "id": "maruetsu-petit-978",
+   "chain": "マルエツプチ",
+   "name": "マルエツプチ 芝四丁目店",
+   "short": "マルエツプチ 芝四丁目店",
+   "address": "東京都港区芝4-16-2カテリーナ三田イーストアーク101",
+   "lat": 35.648289,
+   "lng": 139.750854,
+   "distanceKm": 2.38,
+   "hours": "8:00〜23:00",
+   "sources": [],
+   "flyerNote": "チラシ自動取得なし（トクバイのみ掲載。トクバイは Claude の利用を拒否しているため使わない）",
+   "sns": {
+    "x": null,
+    "instagram": null,
+    "line": "https://www.maruetsu.co.jp/line/"
+   },
+   "active": true,
+   "confidence": "medium"
+  }
+ ]
+}

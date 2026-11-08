@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#d9480f"/>
+  <g fill="none" stroke="#fff" stroke-width="30" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M110 150h48l38 190h190l36-130H190"/>
+  </g>
+  <circle cx="220" cy="392" r="26" fill="#fff"/>
+  <circle cx="360" cy="392" r="26" fill="#fff"/>
+  <text x="300" y="300" font-family="Hiragino Sans, sans-serif" font-size="110" font-weight="900" fill="#fff" text-anchor="middle">特</text>
+</svg>

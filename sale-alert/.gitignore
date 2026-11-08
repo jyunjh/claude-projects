@@ -1,0 +1,4 @@
+# Apps Script の URL と合言葉（コミットしない）
+.secrets.json
+.venv/
+__pycache__/
