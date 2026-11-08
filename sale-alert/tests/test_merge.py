@@ -50,6 +50,10 @@ with tempfile.TemporaryDirectory() as tmp:
 
     rc, out = run([dict(base[0], validFrom=D(-400), validTo=D(-398))], "--check", "--flyer", "s1:test:1")
     check(rc == 2 and "許容範囲" in out, "年の取り違えを拒否")
+    rc, out = run([dict(base[0], validFrom=D(-30), validTo=D(0))], "--check", "--flyer", "s1:test:1")
+    check(rc == 0, "月初開始の月間チラシ（30日前開始）を通す: " + out)
+    rc, out = run([dict(base[0], validFrom=D(-41), validTo=D(0))], "--check", "--flyer", "s1:test:1")
+    check(rc == 2 and "許容範囲" in out, "41日前開始は拒否")
     rc, out = run([dict(base[0], price=98, priceTaxIncl=980)], "--check", "--flyer", "s1:test:1")
     check(rc == 2 and "税込" in out, "税込の桁違いを拒否")
     rc, out = run([dict(base[0], storeId="s2")], "--check", "--flyer", "s1:test:1")

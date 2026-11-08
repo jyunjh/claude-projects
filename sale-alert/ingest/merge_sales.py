@@ -39,6 +39,7 @@ FLYERS = DATA / "flyers.json"
 STORES = DATA / "stores.json"
 
 JST = dt.timezone(dt.timedelta(hours=9))
+FROM_PAST_DAYS = 40  # validFrom の許容下限（今日-40日）
 CATEGORIES = {"肉", "魚", "野菜", "果物", "卵・乳", "米・パン", "日配", "冷凍", "菓子",
               "飲料", "調味料", "日用品", "その他"}
 FIELDS = ("title", "brand", "spec", "price", "priceTaxIncl", "priceText", "validFrom",
@@ -90,7 +91,8 @@ def validate(records, store_ids: set, store_id: str | None) -> tuple[list[dict],
     if not isinstance(records, list):
         return [], ["入力は JSON 配列であること"], []
     t = today()
-    lo, hi = t - dt.timedelta(days=7), t + dt.timedelta(days=60)
+    # 下限は月初開始の月間チラシ（最大31日前）を通す幅。年の取り違え（±365日）は拒否できる
+    lo, hi = t - dt.timedelta(days=FROM_PAST_DAYS), t + dt.timedelta(days=60)
     for i, r in enumerate(records):
         lab = f"#{i + 1} {r.get('title', '?') if isinstance(r, dict) else '?'}"
         if not isinstance(r, dict):
