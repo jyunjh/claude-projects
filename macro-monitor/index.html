@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="no-referrer">
+<title>米国マクロ景況モニター</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="app-header">
+  <div class="hd-main">
+    <h1>米国マクロ景況モニター</h1>
+    <p class="hd-updated" id="updated">最終更新: 読み込み中…</p>
+  </div>
+  <div class="hd-actions">
+    <button type="button" class="btn" id="btnReload">🔄 最新を読み込む</button>
+    <button type="button" class="btn btn-primary" id="btnFetch">⚡ 今すぐ取得し直す</button>
+    <button type="button" class="btn" id="btnSettings">⚙ 設定</button>
+  </div>
+  <p class="hd-status" id="updateStatus" role="status" aria-live="polite"></p>
+</header>
+
+<nav class="tabs-wrap"><div class="tabs" id="tabs" role="tablist" aria-label="表示の切り替え"></div></nav>
+<main id="panel" class="panel" role="tabpanel" tabindex="-1"></main>
+<footer class="app-footer">学習・観測用のツールです。投資助言ではありません。</footer>
+
+<dialog id="tokenDialog" class="dialog">
+  <form method="dialog" id="tokenForm">
+    <h2>取得し直しの設定</h2>
+    <p>GitHubで fine-grained personal access token を作り、対象を jyunjh/claude-projects のみ、権限を Actions: Read and write だけにしてください。トークンはこの端末のブラウザにだけ保存され、GitHub以外には送られません。</p>
+    <label class="field">トークン
+      <input type="password" id="tokenInput" autocomplete="off" spellcheck="false">
+    </label>
+    <p class="muted" id="tokenState"></p>
+    <p><a href="https://github.com/jyunjh/claude-projects/actions/workflows/pages.yml" target="_blank" rel="noopener">GitHubの画面から実行する</a>（トークン不要）</p>
+    <div class="dlg-actions">
+      <button type="button" class="btn btn-primary" id="tokenSave">保存</button>
+      <button type="button" class="btn" id="tokenDelete">削除</button>
+      <button type="button" class="btn" id="tokenClose">閉じる</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="data/snapshot.js"></script>
+<script src="knowledge.js"></script>
+<script src="chart.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

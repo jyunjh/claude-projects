@@ -5,7 +5,13 @@ name: Deploy to GitHub Pages
 #   /mansion-finder/:  マンション検索（勝どき・晴海）
 #   /stock-analyzer/:  米国株アナライザー（閲覧のみ。保存は手元の serve.py）
 #   /sale-alert/:      特売アラート（PWA。品目の共有・LINE配信は Apps Script 側）
+#   /macro-monitor/:   米国マクロ景況モニター（データはこのワークフローが毎回取り直す）
 # main への push で自動デプロイ。手動実行も可。
+#
+# 平日の朝（日本時間）にも定時実行する。目的は macro-monitor のデータ更新だが、
+# Pages はサイト全体を丸ごと置き換える仕組みなので、他のツールも必ず一緒に組み立てて配信する
+# （macro-monitor だけを別のワークフローからデプロイすると、他のツールが消える）。
+# macro-monitor のデータは毎回すべての期間を取り直すので、main へのコミットはしない。
 on:
   push:
     branches: [main]
@@ -14,8 +20,14 @@ on:
       - "mansion-finder/**"
       - "stock-analyzer/**"
       - "sale-alert/**"
+      - "macro-monitor/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
+  schedule:
+    # 23:37 UTC（日〜木）= 08:37 JST（月〜金）= 米東部の前日夕方。
+    # 財務省の利回りやFRBのドル指数がその日の分まで出そろっている時刻。
+    # 毎時0分は混み合って遅延しやすいので外している。
+    - cron: "37 23 * * 0-4"
 
 permissions:
   contents: read
@@ -35,6 +47,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: macro-monitor のデータを取得（無料の公開データのみ・APIキー不要・LLM不使用）
+        run: |
+          python -m pip install --quiet xlrd
+          # 取れなかった指標を補うための「前回の値」。公開中のものを優先し、無ければリポジトリの控えを使う
+          curl -fsS -m 30 -o /tmp/prev.json \
+            "https://jyunjh.github.io/claude-projects/macro-monitor/data/snapshot.json" \
+            || cp macro-monitor/data/snapshot.json /tmp/prev.json
+          cd macro-monitor
+          if ! python tools/update.py --force --fallback /tmp/prev.json; then
+            # 全滅したときは前回のデータのまま配信する（サイト全体のデプロイは止めない）
+            echo "::warning::macro-monitor のデータ取得に失敗。前回のデータを配信します"
+            cp /tmp/prev.json data/snapshot.json
+            { printf 'window.MACRO_SNAPSHOT='; cat /tmp/prev.json; printf ';\n'; } > data/snapshot.js
+          fi
+          python tools/verify.py || echo "::warning::macro-monitor の自己検証に不合格の項目があります（上のログを参照）"
       - name: サイトを組み立て（ルート=児童館カレンダー, /mansion-finder/, /stock-analyzer/）
         run: |
           mkdir -p _site/mansion-finder _site/stock-analyzer
@@ -53,6 +83,11 @@ jobs:
              sale-alert/sw.js sale-alert/manifest.webmanifest sale-alert/icon.svg \
              sale-alert/icon-180.png sale-alert/icon-512.png _site/sale-alert/
           cp -r sale-alert/data _site/sale-alert/data
+          # 米国マクロ景況モニター: 画面とデータだけ（tools/ cache/ は配信しない）
+          mkdir -p _site/macro-monitor/data
+          cp macro-monitor/index.html macro-monitor/app.js macro-monitor/chart.js \
+             macro-monitor/styles.css macro-monitor/knowledge.js _site/macro-monitor/
+          cp macro-monitor/data/snapshot.json macro-monitor/data/snapshot.js _site/macro-monitor/data/
       - name: 配信物の検査（必要なファイルが揃い、サーバ用ファイルが混ざっていないこと）
         run: |
           set -e
@@ -72,6 +107,17 @@ jobs:
           done
           for f in data/stores.json data/sales.json manifest.webmanifest sw.js match.js; do
             test -f "_site/sale-alert/$f" || { echo "欠落: sale-alert/$f"; exit 1; }
+          done
+          for f in index.html app.js chart.js styles.css knowledge.js data/snapshot.json data/snapshot.js; do
+            test -s "_site/macro-monitor/$f" || { echo "欠落: macro-monitor/$f"; exit 1; }
+          done
+          for f in tools cache .venv; do
+            test ! -e "_site/macro-monitor/$f" || { echo "配信してはいけない: macro-monitor/$f"; exit 1; }
+          done
+          python -c "import json; s=json.load(open('_site/macro-monitor/data/snapshot.json')); assert s['schema']==1 and len(s['indicators'])==10"
+          # 他のツールが消えていないこと（定時実行でも毎回サイト全体を配信する）
+          for f in index.html mansion-finder/index.html stock-analyzer/index.html sale-alert/index.html; do
+            test -s "_site/$f" || { echo "欠落: $f"; exit 1; }
           done
           echo "配信物OK"
       - uses: actions/upload-pages-artifact@v3
