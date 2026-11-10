@@ -44,6 +44,18 @@
         "sale-alert"
       ],
       "port": 9020
+    },
+    {
+      "name": "macro-monitor",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "9030",
+        "--directory",
+        "macro-monitor"
+      ],
+      "port": 9030
     }
   ]
 }
