@@ -7,6 +7,8 @@
   const TOKEN_KEY = "macroMonitor.ghToken";
   const TAB_KEY = "macroMonitor.tab";
   const RANGE_KEY = "macroMonitor.range";
+  const CAL_MONTH_KEY = "macroMonitor.calMonth";
+  const CAL_FILTER_KEY = "macroMonitor.calFilter";
   const ACTIONS_URL = "https://github.com/jyunjh/claude-projects/actions/workflows/pages.yml";
   const POLL_MS = 10000;
   const MAX_WAIT_MS = 10 * 60 * 1000;
@@ -30,6 +32,9 @@
   let charts = [];          // 描画中のグラフ
   let rangeBtnSets = [];    // 期間ボタン群
   let busy = false;
+  let calMonth = null;      // 公表カレンダーで表示中の月 "YYYY-MM"
+  let calSel = null;        // 選択中の日 "YYYY-MM-DD"
+  let calFilter = null;     // {公表物id: bool}
 
   // ---- ユーティリティ ----
   function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
@@ -150,7 +155,7 @@
     data.tabs.forEach((t) => {
       const selected = t.id === currentTab;
       let dot = null;
-      if (t.id !== "summary" && t.id !== "sources") {
+      if (t.id !== "summary" && t.id !== "sources" && t.id !== "calendar") {
         const w = worstStatus(t.id);
         if (w) dot = h("span", { class: "dot s-" + w, "aria-hidden": "true" });
       }
@@ -192,6 +197,7 @@
     if (!data) { p.appendChild(h("p", { text: "データを読み込めませんでした。" })); return; }
     if (currentTab === "summary") renderSummary(p);
     else if (currentTab === "sources") renderSources(p);
+    else if (currentTab === "calendar") renderCalendarTab(p);
     else renderIndicatorTab(p, currentTab);
   }
 
@@ -203,6 +209,10 @@
 
   function renderSummary(p) {
     if (data.errors && data.errors.length) p.appendChild(errorsBand(data.errors));
+
+    // 0. 今週の公表予定
+    const wk = weekPanel();
+    if (wk) p.appendChild(wk);
 
     // 1. 景気局面
     const ph = data.phase;
@@ -260,14 +270,16 @@
         h("td", null, h("button", { type: "button", class: "rowbtn", text: ind.title, onclick: (e) => { e.stopPropagation(); go(); } })),
         h("td", { class: "num", text: ind.missing ? "—" : (ind.valueText || "—") }),
         h("td", { class: "hide-sm", text: ind.missing ? "取得できていない" : (ind.statusText || "") }),
-        h("td", { class: "hide-sm", text: ind.asOf || "" }));
+        h("td", { class: "hide-sm", text: ind.asOf || "" }),
+        calOf() ? h("td", { class: "hide-sm", text: nextShort(ind.id) }) : null);
       return tr;
     });
     p.appendChild(h("section", { class: "box" },
       h("h2", { text: "全指標の一覧" }),
       h("div", { class: "tbl-wrap" }, h("table", { class: "tbl" },
         h("thead", null, h("tr", null, h("th", { text: "状態" }), h("th", { text: "指標" }), h("th", { class: "num", text: "値" }),
-          h("th", { class: "hide-sm", text: "判定" }), h("th", { class: "hide-sm", text: "時点" }))),
+          h("th", { class: "hide-sm", text: "判定" }), h("th", { class: "hide-sm", text: "時点" }),
+          calOf() ? h("th", { class: "hide-sm", text: "次の更新" }) : null)),
         h("tbody", null, rows)))));
   }
 
@@ -289,6 +301,8 @@
       h("span", { class: "value", text: ind.valueText || "—" }),
       ind.asOf ? h("span", { class: "asof", text: ind.asOf + " 時点" }) : null,
       lamp(ind.status), h("span", { text: ind.statusText || "" })));
+    const nl = nextLine(ind.id);
+    if (nl) c.appendChild(nl);
     c.appendChild(h("div", null, oneLinerBlock(ind.id)));
 
     if (ind.components && ind.components.length) {
@@ -396,6 +410,269 @@
         h("li", { text: "過去のランプや線は、最新の改定後データで計算し直したもの（当時の速報値ではない）。" }),
         h("li", { text: "学習・観測用のツールで、投資助言ではない。" }),
         h("li", { text: "しきい値Bは当ツールが過去データで置いた目安。" }))));
+  }
+
+
+  // ---- 公表カレンダー ----
+  const WD = ["日", "月", "火", "水", "木", "金", "土"];
+  const REL_IDS = ["cpi", "jobs", "claims", "empire", "philly", "nahb", "fomc", "h10"];
+
+  function calOf() { return data && data.calendar && Array.isArray(data.calendar.events) ? data.calendar : null; }
+  function pad2(n) { return (n < 10 ? "0" : "") + n; }
+  function ymdParts(s) { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s || ""); return m ? [Number(m[1]), Number(m[2]), Number(m[3])] : null; }
+  function wdOf(s) { const p = ymdParts(s); return p ? new Date(p[0], p[1] - 1, p[2]).getDay() : 0; }
+  function fmtMD(s) {
+    const p = ymdParts(s);
+    return p ? p[1] + "/" + p[2] + "（" + WD[wdOf(s)] + "）" : String(s || "");
+  }
+  function addDays(s, n) {
+    const p = ymdParts(s);
+    const d = new Date(p[0], p[1] - 1, p[2] + n);
+    return d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate());
+  }
+  function monthLabel(mk) { const p = ymdParts(mk + "-01"); return p[0] + "年" + p[1] + "月"; }
+  function addMonth(mk, n) {
+    const p = ymdParts(mk + "-01");
+    const d = new Date(p[0], p[1] - 1 + n, 1);
+    return d.getFullYear() + "-" + pad2(d.getMonth() + 1);
+  }
+  function reflectText(e) {
+    if (!e.reflect) return "";
+    return fmtMD(e.reflect.slice(0, 10)) + e.reflect.slice(10).trim();
+  }
+  function relMeta(id) {
+    const c = calOf();
+    return (c && (c.releases || []).find((r) => r.id === id)) || null;
+  }
+  function relClass(id) { return REL_IDS.indexOf(id) >= 0 ? "rc-" + id : "rc-other"; }
+
+  function nextShort(id) {
+    const c = calOf();
+    const n = c && c.next && c.next[id];
+    if (!n) return "";
+    if (n.date) return fmtMD(n.date);
+    return String(n.text || "").split("（")[0];
+  }
+  function nextLine(id) {
+    const c = calOf();
+    const n = c && c.next && c.next[id];
+    if (!n || !n.text) return null;
+    const body = n.date
+      ? h("button", { type: "button", class: "linkbtn", title: "公表カレンダーで開く", onclick: () => goCalendar(n.date, n.release) }, n.text)
+      : h("span", { text: n.text });
+    return h("p", { class: "nextline small muted" }, "次の更新: ", body,
+      n.also ? h("span", { class: "also", text: "　" + n.also }) : null);
+  }
+
+  function loadCalFilter() {
+    const c = calOf();
+    let saved = null;
+    try { saved = JSON.parse(lsGet(CAL_FILTER_KEY) || "null"); } catch (e) { saved = null; }
+    calFilter = {};
+    ((c && c.releases) || []).forEach((r) => {
+      calFilter[r.id] = saved && typeof saved[r.id] === "boolean" ? saved[r.id] : !r.weekly;
+    });
+  }
+  function filterOn(id) { return !calFilter || calFilter[id] !== false; }
+
+  function clampMonth(mk) {
+    const c = calOf();
+    if (!c || !c.range) return mk;
+    const lo = c.range[0].slice(0, 7), hi = c.range[1].slice(0, 7);
+    return mk < lo ? lo : mk > hi ? hi : mk;
+  }
+  function initCalendarState() {
+    const c = calOf();
+    if (!c) return;
+    loadCalFilter();
+    const todayMk = clampMonth(c.today.slice(0, 7));
+    const saved = lsGet(CAL_MONTH_KEY);
+    const lo = c.range ? c.range[0].slice(0, 7) : "0000-00", hi = c.range ? c.range[1].slice(0, 7) : "9999-99";
+    calMonth = saved && /^\d{4}-\d{2}$/.test(saved) && saved >= lo && saved <= hi ? saved : todayMk;
+    calSel = c.today;
+  }
+  function goCalendar(date, relId) {
+    const c = calOf();
+    if (!c) return;
+    if (calFilter == null) initCalendarState();
+    if (relId && calFilter && calFilter[relId] === false) { calFilter[relId] = true; lsSet(CAL_FILTER_KEY, JSON.stringify(calFilter)); }
+    calMonth = clampMonth(date.slice(0, 7));
+    calSel = date;
+    lsSet(CAL_MONTH_KEY, calMonth);
+    setTab("calendar", true);
+    window.scrollTo(0, 0);
+  }
+
+  function indLinks(ids) {
+    const out = [];
+    (ids || []).forEach((id, i) => {
+      const ind = data.indicators[id];
+      if (!ind) return;
+      if (out.length) out.push("、");
+      out.push(h("button", { type: "button", class: "linkbtn", onclick: () => goTo(ind.tab, id) }, ind.title));
+    });
+    return out;
+  }
+
+  function eventRow(e, withDate) {
+    return h("li", { class: "ev-row " + relClass(e.id) + (e.weekly ? " weekly" : "") },
+      h("div", { class: "ev-when" },
+        withDate ? h("strong", { text: fmtMD(e.date) }) : null,
+        h("span", { text: e.timeJst ? e.timeJst : "時刻未定" })),
+      h("div", { class: "ev-body" },
+        h("div", { class: "ev-title" }, h("span", { class: "sw", "aria-hidden": "true" }), h("strong", { text: e.title }),
+          e.released ? h("span", { class: "ev-done", text: "公表済み" }) : null),
+        h("div", { class: "small" }, "関係する指標: ", indLinks(e.indicators)),
+        e.reflect ? h("div", { class: "small muted", text: e.reflected ? "画面に反映済み（" + reflectText(e) + "）" : "画面への反映: " + reflectText(e) }) : null,
+        e.note ? h("div", { class: "small muted", text: e.note }) : null));
+  }
+
+  function weekPanel() {
+    const c = calOf();
+    if (!c) return null;
+    const end = addDays(c.today, 7);
+    const evs = c.events.filter((e) => e.date >= c.today && e.date <= end && !e.reflected);
+    const monthly = evs.filter((e) => !e.weekly);
+    const weekly = [];
+    evs.filter((e) => e.weekly).forEach((e) => { if (weekly.indexOf(e.short) < 0) weekly.push(e.short); });
+    const items = monthly.map((e) => h("li", { class: "wk-row " + relClass(e.id) },
+      h("span", { class: "sw", "aria-hidden": "true" }),
+      h("strong", { text: fmtMD(e.date) }), " ",
+      h("span", { text: (e.timeJst || "") }), " ",
+      h("span", { text: e.short + (e.released ? "（公表済み・反映待ち）" : "") })));
+    if (weekly.length) items.push(h("li", { class: "wk-row muted" }, weekly.map((s) => s + "（週次）").join("・")));
+    return h("section", { class: "box" },
+      h("h2", { text: "今週の公表予定" }),
+      items.length ? h("ul", { class: "wk-list" }, items) : h("p", { class: "muted", text: "今日から7日以内の公表予定はありません。" }),
+      h("p", { class: "small muted", text: "日本時間" }),
+      h("button", { type: "button", class: "btn", onclick: () => goCalendar(c.today) }, "公表カレンダーを開く"));
+  }
+
+  function renderCalendarTab(p) {
+    const c = calOf();
+    if (!c) {
+      p.appendChild(h("section", { class: "box" }, h("h2", { text: "公表カレンダー" }),
+        h("p", { class: "muted", text: "公表予定を取得できていません。" })));
+      return;
+    }
+    if (calFilter == null || !calMonth) initCalendarState();
+
+    p.appendChild(h("section", { class: "box" }, h("h2", { text: "公表カレンダー" }),
+      h("p", { text: "日付・時刻はすべて日本時間。" + (c.runText || "") + "。" })));
+
+    const root = h("div", { class: "cal-root" });
+    p.appendChild(root);
+
+    const lo = c.range ? c.range[0].slice(0, 7) : null, hi = c.range ? c.range[1].slice(0, 7) : null;
+    const visible = () => c.events.filter((e) => filterOn(e.id));
+
+    function refresh(focusKey) {
+      root.textContent = "";
+      const evs = visible();
+      const byDate = {};
+      evs.forEach((e) => { (byDate[e.date] = byDate[e.date] || []).push(e); });
+
+      // 月の操作
+      const move = (n) => { calMonth = addMonth(calMonth, n); lsSet(CAL_MONTH_KEY, calMonth); calSel = calMonth === c.today.slice(0, 7) ? c.today : null; refresh(n < 0 ? "prev" : "next"); };
+      const head = h("div", { class: "cal-head" },
+        h("button", { type: "button", class: "btn", "data-fk": "prev", disabled: lo && calMonth <= lo, onclick: () => move(-1) }, "‹ 前月"),
+        h("h3", { class: "cal-title", "aria-live": "polite", text: monthLabel(calMonth) }),
+        h("button", { type: "button", class: "btn", "data-fk": "today", onclick: () => { calMonth = clampMonth(c.today.slice(0, 7)); lsSet(CAL_MONTH_KEY, calMonth); calSel = c.today; refresh("today"); } }, "今月"),
+        h("button", { type: "button", class: "btn", "data-fk": "next", disabled: hi && calMonth >= hi, onclick: () => move(1) }, "次月 ›"));
+
+      // 凡例 = 絞り込み
+      const legend = h("div", { class: "cal-legend", role: "group", "aria-label": "表示する公表物" },
+        (c.releases || []).map((r) => h("button", {
+          type: "button", class: "cal-tg " + relClass(r.id) + (r.weekly ? " weekly" : ""), "data-fk": "f:" + r.id,
+          "aria-pressed": String(filterOn(r.id)), title: r.title + "（" + r.freq + "）",
+          onclick: () => { calFilter[r.id] = !filterOn(r.id); lsSet(CAL_FILTER_KEY, JSON.stringify(calFilter)); refresh("f:" + r.id); }
+        }, h("span", { class: "sw", "aria-hidden": "true" }), r.short + (r.weekly ? "（週次）" : ""))));
+
+      // グリッド
+      const p0 = ymdParts(calMonth + "-01");
+      const first = new Date(p0[0], p0[1] - 1, 1).getDay();
+      const nDays = new Date(p0[0], p0[1], 0).getDate();
+      const total = Math.ceil((first + nDays) / 7) * 7;
+      const grid = h("div", { class: "cal-grid", role: "group", "aria-label": monthLabel(calMonth) });
+      WD.forEach((w, i) => grid.appendChild(h("div", { class: "cal-wd" + (i === 0 || i === 6 ? " we" : ""), text: w })));
+      for (let i = 0; i < total; i++) {
+        const dnum = i - first + 1;
+        const dow = i % 7;
+        if (dnum < 1 || dnum > nDays) { grid.appendChild(h("div", { class: "cal-cell out", "aria-hidden": "true" })); continue; }
+        const ds = calMonth + "-" + pad2(dnum);
+        const list = byDate[ds] || [];
+        const cls = "cal-cell" + (dow === 0 || dow === 6 ? " we" : "") + (ds === c.today ? " today" : "") + (ds === calSel ? " sel" : "");
+        const pick = () => { calSel = ds; refresh("d:" + ds); };
+        const label = p0[1] + "月" + dnum + "日（" + WD[dow] + "）" + (ds === c.today ? " 今日" : "") + (list.length ? " 予定" + list.length + "件" : " 予定なし");
+        const cell = h("div", { class: cls },
+          h("button", { type: "button", class: "cal-day", "data-fk": "d:" + ds, "aria-label": label, "aria-pressed": String(ds === calSel), onclick: pick, text: String(dnum) }),
+          h("div", { class: "cal-chips" }, list.map((e) => h("button", {
+            type: "button", class: "cal-chip " + relClass(e.id) + (e.weekly ? " weekly" : "") + (e.released ? " done" : ""),
+            title: e.title + (e.timeJst ? " " + e.timeJst : "") + (e.released ? "（公表済み）" : ""), onclick: pick
+          }, e.short + (e.timeJst ? " " + e.timeJst : "") + (e.released ? " 済" : "")))),
+          h("div", { class: "cal-dots", "aria-hidden": "true" }, list.map((e) =>
+            h("span", { class: "cal-dot " + relClass(e.id) + (e.weekly ? " weekly" : "") + (e.released ? " done" : "") }))));
+        grid.appendChild(cell);
+      }
+
+      // 選択日の予定
+      const dayBox = h("div", { class: "cal-day-list" });
+      if (calSel && calSel.slice(0, 7) === calMonth) {
+        const dl = byDate[calSel] || [];
+        dayBox.appendChild(h("h3", { text: fmtMD(calSel) + "の公表予定" }));
+        dayBox.appendChild(dl.length ? h("ul", { class: "ev-list" }, dl.map((e) => eventRow(e, false)))
+          : h("p", { class: "muted small", text: "この日の予定はありません（絞り込み中の公表物のみ）。" }));
+      } else {
+        dayBox.appendChild(h("p", { class: "muted small", text: "日付を押すと、その日の予定がここに出ます。" }));
+      }
+
+      // 範囲の注意
+      const monthFirst = calMonth + "-01";
+      const notes = [];
+      const missing = (c.releases || []).filter((r) => r.available && r.scheduledThrough && r.scheduledThrough < monthFirst).map((r) => r.short);
+      if (missing.length) notes.push(monthLabel(calMonth) + "の " + missing.join("・") + " の予定は、まだ発表元の予定表に載っていません。");
+      const na = (c.releases || []).filter((r) => !r.available).map((r) => r.short);
+      if (na.length) notes.push(na.join("・") + " の予定を取得できていません。");
+
+      root.appendChild(h("section", { class: "box" }, head, legend, grid, dayBox,
+        notes.length ? h("ul", { class: "plain cal-note" }, notes.map((t) => h("li", { text: t }))) : null));
+
+      // 今後の予定
+      const up = evs.filter((e) => e.date >= c.today && !e.reflected).slice(0, 20);
+      root.appendChild(h("section", { class: "box" }, h("h2", { text: "予定の一覧（今後）" }),
+        up.length ? h("ul", { class: "ev-list" }, up.map((e) => eventRow(e, true)))
+          : h("p", { class: "muted", text: "表示できる予定はありません（絞り込みを確認してください）。" }),
+        h("p", { class: "small muted", text: "未反映の予定を最大20件、日付順に表示しています。" })));
+
+      // 予定日の無い指標
+      const ns = c.notScheduled || [];
+      if (ns.length) {
+        root.appendChild(h("section", { class: "box" }, h("h2", { text: "毎日・不定期に動く指標" }),
+          h("ul", { class: "plain" }, ns.map((n) => h("li", null,
+            h("strong", { text: (n.indicators || []).map((id) => (data.indicators[id] ? data.indicators[id].title : id)).join("、") }),
+            "：" + (n.text || ""))))));
+      }
+
+      // 出典
+      const srcs = c.sources || [];
+      const errs = c.errors || [];
+      if (srcs.length || errs.length) {
+        root.appendChild(h("section", { class: "box" }, h("h2", { text: "出典" }),
+          errs.length ? h("ul", { class: "plain" }, errs.map((e) => h("li", { text: (e.source ? e.source + ": " : "") + (e.message || String(e)) }))) : null,
+          h("ul", { class: "plain small" }, srcs.map((s) => {
+            const u = safeUrl(s.url);
+            return h("li", null, u ? h("a", { href: u, target: "_blank", rel: "noopener", text: s.name }) : (s.name || ""),
+              "　取得: " + fmtDateTime(s.retrievedAt) + (s.stale ? "（古い：前回の値）" : ""));
+          }))));
+      }
+
+      if (focusKey) {
+        let t = root.querySelector('[data-fk="' + focusKey.replace(/"/g, "") + '"]');
+        if (!t || t.disabled) t = root.querySelector('[data-fk="today"]');
+        if (t) t.focus({ preventScroll: true });
+      }
+    }
+    refresh(null);
   }
 
   function renderAll() {
@@ -550,6 +827,7 @@
     const saved = lsGet(TAB_KEY);
     const valid = (id) => id && data.tabs.some((t) => t.id === id);
     currentTab = valid(fromHash) ? fromHash : valid(saved) ? saved : "summary";
+    initCalendarState();
     window.addEventListener("hashchange", () => {
       const id = location.hash.replace(/^#/, "");
       if (valid(id)) setTab(id);

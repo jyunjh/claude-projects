@@ -25,6 +25,7 @@ sys.path.insert(0, os.path.join(HERE, "sources"))
 
 import backtest  # noqa: E402
 import indicators as I  # noqa: E402
+import releases  # noqa: E402
 from loader import load_all  # noqa: E402
 
 DATA_DIR = os.path.join(BASE, "data")
@@ -43,7 +44,7 @@ def write_atomic(path, text):
     os.replace(tmp, path)
 
 
-def build_snapshot(raw, errors, fallback=None, now=None):
+def build_snapshot(raw, errors, fallback=None, now=None, calendar=None):
     now = now or datetime.now(timezone.utc).astimezone()
     today = now.strftime("%Y-%m-%d")
     errors = list(errors)
@@ -87,6 +88,7 @@ def build_snapshot(raw, errors, fallback=None, now=None):
         "turningPoints": I.turning_points(ind),
         "phase": ph,
         "recessions": rec,
+        "calendar": calendar if calendar is not None else (fallback or {}).get("calendar"),
         "backtest": {k: {"hits": r["hits"], "of": r["of"], "false": len(r["false"]), "leads": r["leads"]}
                      for k, r in bt.items() if k != "newOrdersAlt"},
         "errors": errors,
@@ -111,7 +113,13 @@ def main():
 
     print("取得中…")
     raw, errors = load_all(use_cache=not a.force)
-    snap = build_snapshot(raw, errors, fallback)
+    try:
+        cal = releases.build(use_cache=not a.force)
+        errors = errors + cal["errors"]
+    except Exception as e:  # noqa: BLE001 — カレンダーが作れなくても指標は出す
+        cal = None
+        errors = errors + [{"source": "公表カレンダー", "message": f"{type(e).__name__}: {e}"}]
+    snap = build_snapshot(raw, errors, fallback, calendar=cal)
 
     os.makedirs(DATA_DIR, exist_ok=True)
     text = json.dumps(snap, ensure_ascii=False, separators=(",", ":"))
@@ -127,6 +135,11 @@ def main():
     for k in snap["order"]:
         i = snap["indicators"][k]
         print(f"  [{i['status']:7}] {i['title']}: {i['valueText']}（{i['asOf']}） {i['statusText']}")
+    if snap.get("calendar"):
+        for k in snap["order"]:
+            n = snap["calendar"]["next"].get(k)
+            if n:
+                print(f"  次の更新 {k}: {n['text']}")
     for e in snap["errors"]:
         print(f"  ! {e['source']}: {e['message']}")
     print(f"書き出し: data/snapshot.json（{len(text) / 1024:.0f} KB）")
