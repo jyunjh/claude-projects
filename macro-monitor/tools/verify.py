@@ -18,7 +18,7 @@ from datetime import datetime, timedelta
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EXPECTED = ["yieldCurve", "cpi", "laborQuality", "nahb", "pmi", "newOrders",
             "clock18", "per", "cbDiffusion", "twd"]
-TAB_IDS = {"summary", "cycle", "headline", "rates", "global", "dollar", "sources"}
+TAB_IDS = {"summary", "calendar", "cycle", "headline", "rates", "global", "dollar", "sources"}
 # 鮮度の目安（日）。月次統計は公表が翌月半ば〜、BISは月末値が翌月に出る
 MAX_AGE_DAYS = {"yieldCurve": 10, "twd": 14, "clock18": 10, "cpi": 80, "laborQuality": 70,
                 "nahb": 50, "pmi": 60, "newOrders": 60, "per": 45, "cbDiffusion": 120}
@@ -63,7 +63,7 @@ def main():
             continue
         check(f"{key}: 値が有限の数", isinstance(i["value"], (int, float)) and math.isfinite(i["value"]))
         check(f"{key}: status が既知", i["status"] in ("safe", "caution", "warning", "info"))
-        check(f"{key}: タブが既知", i["tab"] in TAB_IDS - {"summary", "sources"})
+        check(f"{key}: タブが既知", i["tab"] in TAB_IDS - {"summary", "calendar", "sources"})
         check(f"{key}: 根拠の種別が A か B で、説明がある", i["basis"] in ("A", "B") and len(i["basisText"]) > 10)
         check(f"{key}: asOf が日付で、生成時刻より未来でない",
               bool(DATE_RE.match(i["asOf"])) and as_date(i["asOf"]) <= gen + timedelta(days=1), i["asOf"])
@@ -146,6 +146,24 @@ def main():
     rec = snap["recessions"]
     check("景気後退期: 1件以上あり、開始≦終了で昇順",
           len(rec) >= 8 and all(a <= b for a, b in rec) and all(x[1] < y[0] for x, y in zip(rec, rec[1:])))
+    # --- 公表カレンダー ---
+    cal = snap.get("calendar")
+    check("公表カレンダーがある", bool(cal))
+    if cal:
+        evs = cal["events"]
+        check("カレンダー: 予定が1件以上あり、日付順", len(evs) > 0
+              and all((a["date"], a["timeJst"] or "99") <= (b["date"], b["timeJst"] or "99") for a, b in zip(evs, evs[1:])))
+        check("カレンダー: 日付・時刻の形式", all(DATE_RE.match(e["date"]) and len(e["date"]) == 10
+              and (e["timeJst"] is None or re.match(r"^\d{2}:\d{2}$", e["timeJst"])) for e in evs))
+        check("カレンダー: 各予定の指標が実在する", all(set(e["indicators"]) <= set(EXPECTED) for e in evs))
+        check("カレンダー: 画面への反映は公表より後",
+              all(e["reflect"] is None or e["reflect"] >= f"{e['date']} {e['timeJst'] or '00:00'}" for e in evs))
+        check("カレンダー: 反映済みなら公表済み", all(e["released"] for e in evs if e["reflected"]))
+        check("カレンダー: 全指標に「次の更新」がある", set(cal["next"]) == set(EXPECTED),
+              f"欠落 {set(EXPECTED) - set(cal['next'])}")
+        ids = {r["id"] for r in cal["releases"]}
+        check("カレンダー: 予定の種類が一覧と一致", {e["id"] for e in evs} <= ids)
+        check("カレンダー: 今月か来月に予定が1件以上", any(e["date"][:7] in (cal["today"][:7], (datetime.strptime(cal["today"][:7] + "-28", "%Y-%m-%d") + timedelta(days=7)).strftime("%Y-%m")) and not e["released"] for e in evs))
     check("取得エラーなし", not snap["errors"], "; ".join(f"{e['source']}: {e['message']}" for e in snap["errors"]))
 
     bad = [r for r in results if not r[1]]

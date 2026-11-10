@@ -19,6 +19,7 @@ from seriesutil import (NBER_PEAKS, diff, fill_gaps, ma, monthly, monthly_avg, m
 
 TABS = [
     {"id": "summary", "label": "総合"},
+    {"id": "calendar", "label": "公表カレンダー"},
     {"id": "cycle", "label": "景気循環のサイン"},
     {"id": "headline", "label": "ヘッドライン"},
     {"id": "rates", "label": "金利の先取り"},
