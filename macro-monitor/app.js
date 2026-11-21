@@ -34,6 +34,7 @@
   let busy = false;
   let calMonth = null;      // 公表カレンダーで表示中の月 "YYYY-MM"
   let calSel = null;        // 選択中の日 "YYYY-MM-DD"
+  let calSelToday = null;   // calSel を決めたときの「今日」。データを読み直して日付が進んだら選び直す
   let calFilter = null;     // {公表物id: bool}
 
   // ---- ユーティリティ ----
@@ -554,6 +555,12 @@
       p.appendChild(h("section", { class: "box" }, h("h2", { text: "公表カレンダー" }),
         h("p", { class: "muted", text: "公表予定を取得できていません。" })));
       return;
+    }
+    if (calSelToday !== c.today) {
+      // 初回、または「最新を読み込む」で日付が進んだとき: 古い「今日」が選ばれたまま残らないようにする
+      if (calSel === null || calSel === calSelToday) calSel = c.today;
+      if (calSelToday && calMonth === clampMonth(calSelToday.slice(0, 7))) calMonth = clampMonth(c.today.slice(0, 7));
+      calSelToday = c.today;
     }
     if (calFilter == null || !calMonth) initCalendarState();
 
