@@ -439,7 +439,8 @@
   }
   function reflectText(e) {
     if (!e.reflect) return "";
-    return fmtMD(e.reflect.slice(0, 10)) + e.reflect.slice(10).trim();
+    // 時刻は出さない。GitHub の定時実行は数時間遅れることが多く、08:37 と書くと誤解を招くため
+    return fmtMD(e.reflect.slice(0, 10)) + "の定時更新";
   }
   function relMeta(id) {
     const c = calOf();

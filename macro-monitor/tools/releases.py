@@ -155,7 +155,9 @@ def build(now=None, cache_dir=None, use_cache=True, log=print):
                      for r in RELEASES],
         "notScheduled": NOT_SCHEDULED,
         "range": [first.isoformat(), events[-1]["date"] if events else first.isoformat()],
-        "runText": "公表のあと最初の定時更新（平日 08:37 JST）で画面に反映される",
+        # GitHub の定時実行は混み合うと遅れる。実測（2026-11-18〜27）では 08:37 予定に対し 12:58〜16:05 に動いた
+        "runText": "公表のあと最初の定時更新で画面に反映される。定時更新は平日 08:37 の予定だが、"
+                   "GitHub 側の混雑で数時間遅れることが多い（実績では昼〜夕方）",
         "errors": errors,
         "sources": sources,
     }
@@ -210,7 +212,7 @@ def _next_item(e):
     reflect = ""
     if e["reflect"]:
         rd = datetime.strptime(e["reflect"], "%Y-%m-%d %H:%M")
-        reflect = f"、画面への反映は {rd.month}/{rd.day}（{WD[rd.weekday()]}）{rd:%H:%M}"
+        reflect = f"、画面への反映は {rd.month}/{rd.day}（{WD[rd.weekday()]}）の定時更新"
     return {"date": e["date"], "timeJst": e["timeJst"], "release": e["id"], "reflect": e["reflect"],
             "released": e["released"],
             "text": f"{e['short']} {_md(e)}{t}（日本時間）{'に公表済み' if e['released'] else 'に公表予定'}{reflect}"}

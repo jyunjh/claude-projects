@@ -6,6 +6,7 @@ CFA Level 3 PSM Macro の講義の読み方に沿って、指標ごとに「一�
 - 公開ページ: https://jyunjh.github.io/claude-projects/macro-monitor/
 - 使うのは**無料・APIキー不要の公開データだけ**。取得・計算・判定はすべて Python で、LLM は使わない。
 - 平日の朝 08:37（日本時間）に GitHub Actions が全データを取り直して配信する。
+  ただし GitHub の定時実行は混み合うと遅れ、実績では昼〜夕方（12:58〜16:05）に動いている。
 
 ## 画面の構成
 

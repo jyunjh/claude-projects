@@ -39,11 +39,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  # 組み立て（build）と配信（deploy）を別のジョブに分ける。
+  # 同じジョブ内で upload の直後に deploy すると、GitHub 側で配信物の登録が間に合わず
+  # 「No artifacts named "github-pages" were found」で落ちることがある（2026-11-24/25/27 に発生）。
+  # ジョブを分けるのは GitHub 公式の Pages ワークフローと同じ形。
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
@@ -123,5 +124,13 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - id: deployment
         uses: actions/deploy-pages@v4
